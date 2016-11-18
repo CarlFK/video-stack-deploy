@@ -1,0 +1,4 @@
+---
+
+# Override the default user config
+user_password: please_change_me_please

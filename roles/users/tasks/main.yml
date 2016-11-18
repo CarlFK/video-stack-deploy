@@ -1,0 +1,13 @@
+- name: create our main user
+  user:
+    name: {{ user_name }}
+    group: {{ user_group }}
+    groups: sudo
+    password: {{ user_password |password_hash('sha512') }}
+
+- name: manage ssh authorized_keys
+  authorized_key:
+    user: {{ user_name }}
+    key: {{ item }}
+  with_fileglob:
+    - "public_keys/{{ group_names }}}/*"
