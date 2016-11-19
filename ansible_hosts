@@ -11,4 +11,10 @@
 [onsite]
 localhost     ansible_connection=local
 
+[voctomix]
+localhost     ansible_connection=local
+
+[opsis]
+localhost     ansible_connection=local
+
 [offsite]

@@ -1,7 +1,14 @@
 ---
-- hosts: all
+- hosts: onsite
   roles:
-  - apt
-  - motd
-  - users
-  - voctomix
+    - apt
+    - motd
+    - users
+
+- hosts: voctomix
+  roles:
+    - voctomix
+
+- hosts: opsis
+  roles:
+    - opsis
