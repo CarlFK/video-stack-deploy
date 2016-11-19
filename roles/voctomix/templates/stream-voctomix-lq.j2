@@ -1,0 +1,13 @@
+#!/bin/bash -x
+
+exec ffmpeg \
+    -i tcp://{{ voctomix_hostname }}:15000 \
+    -vf scale={{ icecast_scale_lq }} \
+    -f webm \
+    -cluster_size_limit 10M \
+    -cluster_time_limit 5100 \
+    -content_type video/webm \
+    -c:a libvorbis -b:a {{ icecast_abr_lq }} \
+    -c:v libvpx -b:v {{ icecast_vbr_lq }} -crf {{ icecast_quality_lq }} -g 10 \
+    -deadline good -threads 4 \
+    icecast://{{ icecast_source }}/{{ room_name }}-low.webm

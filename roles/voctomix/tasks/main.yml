@@ -1,3 +1,32 @@
+---
+## Wait for stretch
+#- name: install voctomix & related packages
+#  apt:
+#    name: "{{ item }}"
+#    state: present
+#  with_items:
+#    - voctomix
+#    - voctomix-outcasts
+#
+#- name: configure voctomix
+#  copy:
+#    src: files/voctomix.ini
+#    dest: /etc/voctomix/voctomix.ini
+#    owner: root
+#    group: root
+#    mode: 644
+
+- name: push the streaming scripts
+  template:
+    src: "templates/{{ item.src }}"
+    dest: "/usr/local/bin/{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 755
+  with_items:
+    - { src: 'stream-voctomix-hq.j2', dest: 'stream-voctomix-hq' }
+    - { src: 'stream-voctomix-lq.j2', dest: 'stream-voctomix-lq' }
+
 - name: push ingest systemd unit file
   copy:
     src: "files/{{ item.src }}"

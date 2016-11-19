@@ -1,0 +1,17 @@
+---
+room_name: change-me
+voctomix_hostname: localhost
+
+icecast_quality_hq: 18
+icecast_quality_lq: 20
+
+icecast_scale_hq: 720:-1
+icecast_scale_lq: 480:-1
+
+icecast_abr_hq: 96K
+icecast_abr_lq: 64k
+
+icecast_vbr_hq: 1.5M
+icecast_vbr_lq: 200k
+
+icecast_source: source:password@change.me:8000
