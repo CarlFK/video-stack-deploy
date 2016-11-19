@@ -4,6 +4,11 @@
     groups: sudo
     password: "{{ user_password |password_hash('sha512') }}"
 
+- name: install sudo
+  apt:
+    name: sudo
+    state: present
+
 - name: manage onsite ssh authorized_keys
   authorized_key:
     user: "{{ user_name }}"
