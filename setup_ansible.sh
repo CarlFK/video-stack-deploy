@@ -11,8 +11,8 @@ apt update
 
 # We then install the packages we need
 
-apt install -t jessie-backports ansible
-apt install git
+apt install -y -t jessie-backports ansible
+apt install -y git
 
 # We clone our ansible repository and copy the ansible config files
 
