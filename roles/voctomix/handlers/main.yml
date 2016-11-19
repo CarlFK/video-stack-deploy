@@ -1,0 +1,3 @@
+---
+- name: systemd ingest
+  command: /bin/systemctl enable ingest

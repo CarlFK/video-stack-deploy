@@ -1,0 +1,12 @@
+[Unit]
+Description=Ingest video and sling it at voctomix
+After=network-online.target
+StartLimitInterval=0
+
+[Service]
+ExecStart=/home/odroid/voctomix-outcasts/ingest.py --host 10.21.1.151 --video-source hdmi2usb
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
