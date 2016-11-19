@@ -8,13 +8,13 @@
     mode: 0644
   notify: apt update
 
-- name: set apt preferences
+- name: set apt configuration
   copy:
     src: "{{ item }}"
-    dest: /etc/apt/preferences.d/
+    dest: /etc/apt/apt.conf.d/
     owner: root
     group: root
     mode: 0644
   with_fileglob:
-    - files/preferences.d/*
+    - files/apt.conf.d/*
 
