@@ -1,0 +1,3 @@
+---
+debian_source: "http://deb.debian.org/debian/"
+debian_version: jessie
