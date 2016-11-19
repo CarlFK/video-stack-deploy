@@ -1,0 +1,13 @@
+---
+- name: install nodm
+  apt:
+    name: nodm
+    state: present
+
+- name: configure nodm
+  template:
+    src: templates/nodm.j2
+    dest: /etc/default/nodm
+    owner: root
+    group: root
+    mode: 755
