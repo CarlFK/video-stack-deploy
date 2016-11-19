@@ -1,5 +1,5 @@
 ---
-voctomix_hostname: localhost
+room_name: change-me
 
 icecast_quality_hq: 18
 icecast_quality_lq: 20

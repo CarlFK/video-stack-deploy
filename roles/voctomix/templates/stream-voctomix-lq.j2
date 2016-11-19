@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 exec ffmpeg \
-    -i tcp://{{ voctomix_hostname }}:15000 \
+    -i tcp://localhost:15000 \
     -vf scale={{ icecast_scale_lq }} \
     -f webm \
     -cluster_size_limit 10M \
