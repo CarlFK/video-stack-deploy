@@ -1,0 +1,13 @@
+---
+- name: install picocom
+  apt:
+    name: picocom
+    state: present
+
+- name: push the script to connect to the opsis
+  copy:
+    src: files/opsis
+    dest: /usr/local/bin/opsis
+    owner: root
+    group: root
+    mode: 755
