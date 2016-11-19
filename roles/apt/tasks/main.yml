@@ -7,3 +7,14 @@
     group: root
     mode: 0644
   notify: apt update
+
+- name: set apt preferences
+  copy:
+    src: "{{ item }}"
+    dest: /etc/apt/preferences.d/
+    owner: root
+    group: root
+    mode: 0644
+  with_fileglob:
+    - files/preferences.d/*
+
