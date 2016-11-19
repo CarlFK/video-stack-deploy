@@ -1,0 +1,13 @@
+---
+- name: install useful common packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - emacs
+    - htop
+    - lshw
+    - screen
+    - strace
+    - tree
+    - vim
