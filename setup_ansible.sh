@@ -21,4 +21,4 @@ cp /root/debconf-ansible/ansible.cfg /etc/ansible/ansible.cfg
 
 # Aaaand we run ansible
 
-ansible-playbook /root/debconf-ansible/site.yml
+ansible-playbook -i /root/debconf-ansible/inventory/hosts /root/debconf-ansible/site.yml
