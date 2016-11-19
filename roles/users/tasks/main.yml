@@ -1,7 +1,6 @@
 - name: create our main user
   user:
     name: "{{ user_name }}"
-    group: "{{ user_group }}"
     groups: sudo
     password: "{{ user_password |password_hash('sha512') }}"
 
