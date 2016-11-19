@@ -17,7 +17,7 @@ apt install -y git
 # We clone our ansible repository and copy the ansible config files
 
 git clone https://anonscm.debian.org/git/debconf-video/ansible.git /root/debconf-ansible
-cp /root/debconf-ansible/ansible_hosts /etc/ansible/hosts
+cp /root/debconf-ansible/ansible.cfg /etc/ansible/ansible.cfg
 
 # Aaaand we run ansible
 

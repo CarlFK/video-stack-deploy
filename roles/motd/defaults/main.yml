@@ -1,4 +1,3 @@
 ---
-debconf_number: XX
 debconf_town: Change me
 debconf_country: Change me
