@@ -1,0 +1,14 @@
+---
+- name: install a desktop manager (xfce)
+  apt:
+    name: xfce4
+    state: present
+
+- name: install desktop tools
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - xchat
+    - xscreensaver
+    - xul-ext-ublock-origin

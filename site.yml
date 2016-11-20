@@ -20,10 +20,12 @@
 
 - hosts: opsis
   roles:
-    - nodm
     - opsis
+    - nodm
+    - xorg
 
 - hosts: voctomix
   roles:
     - nodm
     - voctomix
+    - xorg
