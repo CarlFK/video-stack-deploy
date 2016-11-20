@@ -17,6 +17,7 @@
 
 - hosts: opsis
   roles:
+    - nodm
     - opsis
 
 - hosts: icecast2

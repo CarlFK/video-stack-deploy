@@ -1,20 +1,19 @@
 ---
-## Wait for stretch
-#- name: install voctomix & related packages
-#  apt:
-#    name: "{{ item }}"
-#    state: present
-#  with_items:
-#    - voctomix
-#    - voctomix-outcasts
-#
-#- name: configure voctomix
-#  copy:
-#    src: files/voctomix.ini
-#    dest: /etc/voctomix/voctomix.ini
-#    owner: root
-#    group: root
-#    mode: 644
+- name: install voctomix & related packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - voctomix
+    - voctomix-outcasts
+
+- name: configure voctomix
+  copy:
+    src: files/voctomix.ini
+    dest: /etc/voctomix/voctomix.ini
+    owner: root
+    group: root
+    mode: 644
 
 - name: push the streaming scripts
   template:
