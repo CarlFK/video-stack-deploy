@@ -5,7 +5,7 @@ Requires=videoteam-voctocore.service
 StartLimitIntervalSec=0
 
 [Service]
-ExecStart=/home/videoteam/monitor-stdout 2 /usr/bin/record-timestamp
+ExecStart=/home/videoteam/monitor-stdout 2 /usr/bin/voctomix-record-timestamp
 Restart=always
 RestartSec=1s
 
