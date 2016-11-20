@@ -11,3 +11,15 @@
     owner: root
     group: root
     mode: 755
+
+- name: push ingest systemd unit file
+  copy:
+    src: "files/{{ item.src }}"
+    dest: "/etc/systemd/system/{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 644
+  with_items:
+    - { src: 'ingest.service', dest: 'ingest.service' }
+    - { src: 'ingest.path',    dest: 'ingest.path' }
+  notify: systemd ingest
