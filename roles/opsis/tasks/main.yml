@@ -9,6 +9,11 @@
     name: picocom
     state: present
 
+- name: install voctomix-outcasts
+  apt:
+    name: voctomix-outcasts
+    state: present
+
 - name: push the script to connect to the opsis
   copy:
     src: files/opsis
