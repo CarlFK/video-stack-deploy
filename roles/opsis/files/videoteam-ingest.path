@@ -1,2 +1,2 @@
 [Path]
-PathExists=/dev/video0
+PathExists=/dev/hdmi2usb/by-num/all0/video
