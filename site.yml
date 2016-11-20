@@ -4,22 +4,26 @@
     - system-software
     - users
 
+- hosts: dhcp-server
+  roles:
+    - dhcp-server
+
+- hosts: icecast2
+  roles:
+    - icecast2
+
 - hosts: onsite
   roles:
     - apt
     - bash
     - motd
 
-- hosts: voctomix
-  roles:
-    - nodm
-    - voctomix
-
 - hosts: opsis
   roles:
     - nodm
     - opsis
 
-- hosts: icecast2
+- hosts: voctomix
   roles:
-    - icecast2
+    - nodm
+    - voctomix

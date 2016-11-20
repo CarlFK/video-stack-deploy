@@ -1,0 +1,8 @@
+## {{ ansible_managed }}
+
+interface=eth-builtin
+dhcp-range={{ dhcp_range }}
+dhcp-option-force=210,/srv/tftp/
+dhcp-boot=pxelinux.0
+enable-tftp
+tftp-root=/srv/tftp

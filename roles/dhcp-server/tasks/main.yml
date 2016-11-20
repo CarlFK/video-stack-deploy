@@ -1,0 +1,42 @@
+---
+- name: install the dhcp server
+  apt:
+    name: dnsmasq
+    state: present
+
+- name: set udev rule to name the network interfaces
+  template:
+    src: templates/76-netnames.rules.j2
+    dest: /etc/udev/rules.d/76-netnames.rules
+    owner: root
+    group: root
+    mode: 644
+
+- name: configure network interfaces (static)
+  template:
+    src: templates/interfaces-static.j2
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: 644
+  when: use_static_ip == "yes"
+  notify: restart networking
+
+- name: configure network interfaces (dhcp)
+  template:
+    src: templates/interfaces-dhcp.j2
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: 644
+  when: use_static_ip == "no"
+  notify: restart networking
+
+- name: configure the dhcp server
+  template:
+    src: templates/local.conf.j2
+    dest: /etc/dnsmasq/dnsmasq.d/local.conf
+    owner: root
+    group: root
+    mode: 644
+  notify: restart dhcp
