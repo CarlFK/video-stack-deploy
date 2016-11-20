@@ -4,32 +4,32 @@ files - files and templates for use in playbooks/tasks
       - subdirs for specific tasks/dirs highly recommended
 
 inventory - where the inventory and additional vars is stored
-          - All files in this directory in ini format 
+          - All files in this directory in ini format
           - added together for total inventory
-  group_vars: 
-          - per group variables set here in a file per group 
-  host_vars: 
-          - per host variables set here in a file per host 
+  group_vars:
+          - per group variables set here in a file per group
+  host_vars:
+          - per host variables set here in a file per host
 
 library - library of custom local ansible modules
 
 playbooks - collections of plays we want to run on systems
 
   groups: groups of hosts configured from one playbook.
-  
-  hosts: playbooks for single hosts. 
+
+  hosts: playbooks for single hosts.
 
   manual: playbooks that are only run manually by an admin as needed.
 
 tasks - snippets of tasks that should be included in plays
 
-roles - specific roles to be use in playbooks. 
+roles - specific roles to be use in playbooks.
         Each role has it's own files/templates/vars
 
-master.yml - This is the master playbook, consisting of all 
+master.yml - This is the master playbook, consisting of all
              current group and host playbooks. This playbook
              is usefull for making changes over multiple
-             groups/hosts usually with -t (tag). 
+             groups/hosts usually with -t (tag).
 
 == How to run a playbook ==
 
@@ -39,7 +39,7 @@ ansible-playbook site.yml
 
 == Idempotency ==
 
-All playbooks should be idempotent. Ie, if run once they should bring the 
+All playbooks should be idempotent. Ie, if run once they should bring the
 machine(s) to the desired state, and if run again N times after that they should
-make 0 changes (because the machine(s) are in the desired state). 
-Please make sure your playbooks are idempotent. 
+make 0 changes (because the machine(s) are in the desired state).
+Please make sure your playbooks are idempotent.

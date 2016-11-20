@@ -1,5 +1,5 @@
 ---
 - hosts: all
   user: root
-  tasks: 
+  tasks:
   - include users.yml

@@ -7,13 +7,13 @@
         <client-timeout>30</client-timeout>
         <header-timeout>15</header-timeout>
         <source-timeout>10</source-timeout>
-        <!-- If enabled, this will provide a burst of data when a client 
-             first connects, thereby significantly reducing the startup 
+        <!-- If enabled, this will provide a burst of data when a client
+             first connects, thereby significantly reducing the startup
              time for listeners that do substantial buffering. However,
              it also significantly increases latency between the source
              client and listening client.  For low-latency setups, you
              might want to disable this. -->
-	<burst-size>131072</burst-size>
+        <burst-size>131072</burst-size>
     </limits>
 
     <authentication>
@@ -50,7 +50,7 @@
     {% endfor %}
 
     <paths>
-		<!-- basedir is only used if chroot is enabled -->
+        <!-- basedir is only used if chroot is enabled -->
         <basedir>/usr/share/icecast2</basedir>
 
         <!-- Note that if <chroot> is turned on below, these paths must both
@@ -69,9 +69,9 @@
     <logging>
         <accesslog>access.log</accesslog>
         <errorlog>error.log</errorlog>
-      	<loglevel>4</loglevel> <!-- 4 Debug, 3 Info, 2 Warn, 1 Error -->
-      	<logsize>100000</logsize> <!-- Max size of a logfile -->
-	<logarchive>1</logarchive>
+        <loglevel>4</loglevel> <!-- 4 Debug, 3 Info, 2 Warn, 1 Error -->
+        <logsize>100000</logsize> <!-- Max size of a logfile -->
+        <logarchive>1</logarchive>
     </logging>
 
     <security>
