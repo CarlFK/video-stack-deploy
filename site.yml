@@ -18,3 +18,7 @@
 - hosts: opsis
   roles:
     - opsis
+
+- hosts: icecast2
+  roles:
+    - icecast2
