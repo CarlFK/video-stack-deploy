@@ -1,4 +1,9 @@
 ---
+- name: install cu
+  apt:
+    name: cu
+    state: present
+
 - name: install picocom
   apt:
     name: picocom
