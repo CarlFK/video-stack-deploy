@@ -8,13 +8,26 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
-[onsite]
-localhost     ansible_connection=local
+[dhcp-server]
+encodercube1    ansible_connection=local
 
-[voctomix]
-localhost     ansible_connection=local
-
-[opsis]
-localhost     ansible_connection=local
+[icecast2]
+encodercube1    ansible_connection=local
 
 [offsite]
+
+[onsite:children]
+dhcp-server
+opsis
+icecast2
+voctomix
+
+[opsis]
+turbot1         ansible_connection=local
+turbot2         ansible_connection=local
+turbot3         ansible_connection=local
+
+[voctomix]
+voctomix1       ansible_connection=local
+voctomix2       ansible_connection=local
+voctomix3       ansible_connection=local
