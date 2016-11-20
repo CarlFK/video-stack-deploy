@@ -5,7 +5,7 @@ Requires=videoteam-voctocore.service
 StartLimitIntervalSec=0
 
 [Service]
-ExecStart=/home/videoteam/monitor-stdout 2 /home/videoteam/stream-voctomix-lq
+ExecStart=/usr/local/bin/monitor-stdout 2 /home/videoteam/stream-voctomix-lq
 Restart=always
 RestartSec=1s
 
