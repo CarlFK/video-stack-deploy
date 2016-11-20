@@ -4,10 +4,20 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - ack-grep
+    - curl
     - emacs
+    - gdb
     - htop
+    - iftop
+    - iotop
+    - ipython
     - lshw
+    - moreutils
     - screen
     - strace
+    - tcpdump
+    - tmux
     - tree
-    - vim
+    - vim-nox
+    - vnstat
