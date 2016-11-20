@@ -1,0 +1,10 @@
+[Unit]
+Description=Voctomix core Daemon
+
+[Service]
+ExecStart=/usr/bin/voctocore -v
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=default.target

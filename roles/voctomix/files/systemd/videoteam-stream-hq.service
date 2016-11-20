@@ -1,0 +1,13 @@
+[Unit]
+Description=Voctomix stream HQ
+After=videoteam-voctocore.service
+Requires=videoteam-voctocore.service
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart=/home/videoteam/monitor-stdout 2 /home/videoteam/stream-voctomix-hq
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,15 @@
+[Unit]
+Description=Voctomix source SDI blackmagic from card %I
+After=videoteam-voctocore.service
+Requires=videoteam-voctocore.service
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart=/usr/bin/ingest -v --video-source blackmagic --video-attribs 'device-number=%I connection=1' --port 1000%I
+Restart=always
+RestartSec=1s
+
+
+[Install]
+WantedBy=default.target
+

@@ -27,3 +27,22 @@
   with_items:
     - { src: 'stream-voctomix-hq.j2', dest: 'stream-voctomix-hq' }
     - { src: 'stream-voctomix-lq.j2', dest: 'stream-voctomix-lq' }
+
+- name: push the monitoring script
+  template:
+    src: files/monitor-stdout
+    dest: /usr/local/bin/monitor-stdout
+    owner: root
+    group: root
+    mode: 755
+
+- name: install systemd unit files
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/user/
+    owner: root
+    group: root
+    mode: 644
+  with_fileglob:
+    - files/systemd/*
+  #  notify: 

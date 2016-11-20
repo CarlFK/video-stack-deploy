@@ -1,0 +1,38 @@
+#!/usr/bin/python3
+
+import select
+import subprocess
+import sys
+
+def flush_fds(fds, size=None):
+    """Flush the fds in the given list to the arguments"""
+    for fdin, fdout in fds.values():
+        fdout.write(fdin.read(size))
+        fdout.flush()
+
+if __name__ == '__main__':
+    timeout = float(sys.argv[1])
+    cmdline = sys.argv[2:]
+
+    with subprocess.Popen(cmdline, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=0) as process:
+    
+        fd_map = {
+            process.stdout.fileno(): (process.stdout, sys.stdout.buffer),
+            process.stderr.fileno(): (process.stderr, sys.stderr.buffer),
+        }
+        while True:
+            retcode = process.poll()
+            if retcode is not None:
+                flush_fds(fd_map)
+                sys.exit(retcode)
+            r_fds, _, _ = select.select(list(fd_map.keys()), [], [], timeout)
+            if not r_fds:
+                print("Process didn't send any output for %s seconds, terminating" % timeout, file=sys.stderr)
+                process.kill()
+                flush_fds(fd_map)
+                sys.exit(128)
+            else:
+                flush_fds({fileno: fd_map[fileno] for fileno in r_fds}, 1024)
+        
+
+

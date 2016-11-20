@@ -1,0 +1,13 @@
+[Unit]
+Description=Voctomix cutlist
+After=videoteam-voctocore.service
+Requires=videoteam-voctocore.service
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart=/home/videoteam/wrap-generate-cutlist /home/%u/Videos/cutlist
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=default.target
