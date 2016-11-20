@@ -15,7 +15,7 @@ if __name__ == '__main__':
     cmdline = sys.argv[2:]
 
     with subprocess.Popen(cmdline, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=0) as process:
-    
+
         fd_map = {
             process.stdout.fileno(): (process.stdout, sys.stdout.buffer),
             process.stderr.fileno(): (process.stderr, sys.stderr.buffer),
@@ -33,6 +33,6 @@ if __name__ == '__main__':
                 sys.exit(128)
             else:
                 flush_fds({fileno: fd_map[fileno] for fileno in r_fds}, 1024)
-        
+
 
 
