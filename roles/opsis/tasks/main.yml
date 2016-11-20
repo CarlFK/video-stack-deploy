@@ -7,7 +7,6 @@
     - cu
     - hdmi2usb-mode-switch
     - hdmi2usb-udev
-    - picocom
     - voctomix-outcasts
 
 - name: push the script to connect to the opsis
