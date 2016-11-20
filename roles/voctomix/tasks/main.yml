@@ -36,6 +36,14 @@
     group: root
     mode: 755
 
+- name: push the cutlist script
+  template:
+    src: files/wrap-generate-cutlist
+    dest: /usr/local/bin/wrap-generate-cutlist
+    owner: root
+    group: root
+    mode: 755
+
 - name: install systemd unit files
   copy:
     src: "{{ item }}"

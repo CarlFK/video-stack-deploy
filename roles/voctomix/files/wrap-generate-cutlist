@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/bin/voctomix-generate-cut-list | /usr/bin/tee -a "$1"
