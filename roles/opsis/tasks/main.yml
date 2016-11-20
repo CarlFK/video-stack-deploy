@@ -25,6 +25,6 @@
     group: root
     mode: 644
   with_items:
-    - { src: 'ingest.service', dest: 'ingest.service' }
-    - { src: 'ingest.path',    dest: 'ingest.path' }
-  notify: systemd ingest
+    - { src: 'videoteam-ingest.service', dest: 'videoteam-ingest.service' }
+    - { src: 'videoteam-ingest.path',    dest: 'videoteam-ingest.path' }
+  notify: systemd videoteam-ingest
