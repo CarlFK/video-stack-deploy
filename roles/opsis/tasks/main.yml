@@ -13,17 +13,12 @@
   copy:
     src: files/opsis
     dest: /usr/local/bin/opsis
-    owner: root
-    group: root
-    mode: 755
+    mode: 0755
 
 - name: push ingest systemd unit file
   copy:
     src: "files/{{ item.src }}"
     dest: "/etc/systemd/system/{{ item.dest }}"
-    owner: root
-    group: root
-    mode: 644
   with_items:
     - { src: 'videoteam-ingest.service', dest: 'videoteam-ingest.service' }
     - { src: 'videoteam-ingest.path',    dest: 'videoteam-ingest.path' }
