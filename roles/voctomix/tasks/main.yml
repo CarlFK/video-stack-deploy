@@ -9,6 +9,11 @@
     - voctomix
     - voctomix-outcasts
 
+- name: create voctomix config dir
+  file:
+    path: /etc/voctomix
+    state: directory
+
 - name: configure voctomix
   copy:
     src: files/voctomix.ini
