@@ -2,7 +2,7 @@
   user:
     name: "{{ user_name }}"
     groups: sudo
-    password: "{{ user_password |password_hash('sha512') }}"
+    password: "{{ user_password |password_hash('sha512', pw_salt) }}"
 
 - name: install sudo
   apt:
