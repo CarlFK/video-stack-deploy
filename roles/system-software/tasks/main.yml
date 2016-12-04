@@ -8,12 +8,15 @@
     - curl
     - emacs-nox
     - gdb
+    - git
     - htop
     - iftop
     - iotop
     - ipython
+    - less
     - lshw
     - moreutils
+    - rsync
     - screen
     - strace
     - tcpdump
