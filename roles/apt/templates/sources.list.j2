@@ -2,9 +2,12 @@
 
 deb {{ debian_source }} {{ debian_version }} main contrib non-free
 
+{# stretch backports don't exist yet... #}
+{% if debian_version != 'stretch' %}
 # Backports!!
 
-deb {{ debian_source }} jessie-backports main contrib non-free
+deb {{ debian_source }} {{ debian_version }}-backports main contrib non-free
+{% endif %}
 
 # Sid, because it can always be useful
 
