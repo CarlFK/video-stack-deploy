@@ -6,11 +6,9 @@
   notify: apt update
 
 - name: set apt preferences
-  copy:
-    src: "{{ item }}"
-    dest: /etc/apt/preferences.d/
-  with_fileglob:
-    - files/preferences.d/*
+  template:
+    src: templates/default-release.j2
+    dest: /etc/apt/preferences.d/10-default-release
 
 - name: set apt configuration
   copy:

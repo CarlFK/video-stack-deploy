@@ -1,8 +1,8 @@
-# Ansible managed
+# {{ ansible_managed }}
 
-Explanation: Debian stable
+Explanation: Debian {{ debian_version }}
 Package: *
-Pin: release a=stable
+Pin: release a={{ debian_version }}
 Pin-Priority: 990
 
 Explanation: Debian sid
