@@ -1,18 +1,28 @@
 ---
-- name: push the sources.list
+- name: push the debian apt sources.list
   template:
     src: templates/sources.list.j2
     dest: /etc/apt/sources.list
   notify: apt update
+  when: ansible_distribution == 'Debian'
 
-- name: set apt preferences
+- name: set debian apt preferences
   template:
     src: templates/default-release.j2
     dest: /etc/apt/preferences.d/10-default-release
+  when: ansible_distribution == 'Debian'
+
+- name: add timvideos ppas
+  apt_repository:
+    repo: "ppa:timvideos/{{ item }}"
+  with_items:
+  - fpga-support
+  - voctomix
+  when: ansible_distribution == 'Ubuntu'
 
 - name: set apt configuration
   copy:
     src: "{{ item }}"
     dest: /etc/apt/apt.conf.d/
   with_fileglob:
-    - files/apt.conf.d/*
+  - files/apt.conf.d/*
