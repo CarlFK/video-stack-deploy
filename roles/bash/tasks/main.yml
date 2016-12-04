@@ -3,6 +3,3 @@
   copy:
     src: files/bash.bashrc
     dest: /etc/bash.bashrc
-    owner: root
-    group: root
-    mode: 644
