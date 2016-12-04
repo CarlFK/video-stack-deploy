@@ -1,7 +1,7 @@
 - name: create our main user
   user:
     name: "{{ user_name }}"
-    groups: sudo
+    groups: sudo,video
     password: "{{ user_password |password_hash('sha512', pw_salt) }}"
 
 - name: install sudo
