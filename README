@@ -1,3 +1,17 @@
+== setup and testing the setup ==
+
+AFAIK, the "setup_ansible.sh" script works fine (we tested it), it's the
+ansible calls that it runs that causes problems :D
+
+As for the dhcp problem, your machine needs to be called "encodercube1"
+for the right ansible roles to be ran. This is specified in the
+"inventory/hosts" file.
+
+This file should be modified to represent your actual setup and is there
+only as an example. The important part of the ansible code we wrote is
+in the "roles" directory. You want to craft your "hosts" file to put
+your machines in the right groups (you can have a look at them in site.yml)
+
 == ansible repository/structure ==
 
 files - files and templates for use in playbooks/tasks
