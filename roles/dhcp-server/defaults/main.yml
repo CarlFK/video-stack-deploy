@@ -1,5 +1,5 @@
 ---
-eth_builtin_ip_address: 10.20.0.1/26
+eth_builtin_ip_address: 10.20.0.1/24
 
 eth_builtin_mac_address: 38:d5:47:19:09:d0
 eth_pci_mac_address: a8:f7:e0:0f:57:53
