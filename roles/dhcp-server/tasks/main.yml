@@ -8,17 +8,11 @@
   template:
     src: templates/76-netnames.rules.j2
     dest: /etc/udev/rules.d/76-netnames.rules
-    owner: root
-    group: root
-    mode: 644
 
 - name: configure network interfaces (static)
   template:
     src: templates/interfaces-static.j2
     dest: /etc/network/interfaces
-    owner: root
-    group: root
-    mode: 644
   when: use_static_ip
   notify: restart networking
 
@@ -26,9 +20,6 @@
   template:
     src: templates/interfaces-dhcp.j2
     dest: /etc/network/interfaces
-    owner: root
-    group: root
-    mode: 644
   when: not use_static_ip
   notify: restart networking
 
@@ -41,7 +32,4 @@
   template:
     src: templates/local.conf.j2
     dest: /etc/dnsmasq.d/local.conf
-    owner: root
-    group: root
-    mode: 644
   notify: restart dnsmasq
