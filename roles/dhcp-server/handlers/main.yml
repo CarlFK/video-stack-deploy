@@ -4,3 +4,6 @@
 
 - name: restart dnsmasq
   command: "/bin/systemctl restart dnsmasq.service"
+
+- name: restart network-manager
+  command: "/bin/systemctl restart NetworkManager.service"

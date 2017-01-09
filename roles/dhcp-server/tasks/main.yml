@@ -23,6 +23,13 @@
   when: not use_static_ip
   notify: restart networking
 
+- name: ensure network-manager doesn't run its own dnsmasq
+  lineinfile:
+    dest: /etc/NetworkManager/NetworkManager.conf
+    regexp: "^#?dns=dnsmasq$"
+    line: "#dns=dnsmasq"
+  notify: restart network-manager
+
 - name: create the TFTP root directory
   file:
     path: /srv/tftp
