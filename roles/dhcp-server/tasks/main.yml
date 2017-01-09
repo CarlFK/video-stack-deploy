@@ -19,7 +19,7 @@
     owner: root
     group: root
     mode: 644
-  when: use_static_ip == "yes"
+  when: use_static_ip
   notify: restart networking
 
 - name: configure network interfaces (dhcp)
@@ -29,7 +29,7 @@
     owner: root
     group: root
     mode: 644
-  when: use_static_ip == "no"
+  when: not use_static_ip
   notify: restart networking
 
 - name: configure the dhcp server
