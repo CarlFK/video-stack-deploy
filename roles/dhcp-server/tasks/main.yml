@@ -35,7 +35,7 @@
 - name: configure the dhcp server
   template:
     src: templates/local.conf.j2
-    dest: /etc/dnsmasq/dnsmasq.d/local.conf
+    dest: /etc/dnsmasq.d/local.conf
     owner: root
     group: root
     mode: 644
