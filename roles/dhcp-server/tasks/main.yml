@@ -32,6 +32,11 @@
   when: not use_static_ip
   notify: restart networking
 
+- name: create the TFTP root directory
+  file:
+    path: /srv/tftp
+    state: directory
+
 - name: configure the dhcp server
   template:
     src: templates/local.conf.j2
