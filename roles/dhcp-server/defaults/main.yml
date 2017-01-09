@@ -1,11 +1,11 @@
 ---
-eth_builtin_ip_address: 10.20.0.1/24
+eth_local_ip_address: 10.20.0.1/24
 
-eth_builtin_mac_address: 00:00:00:00:00:01
-eth_pci_mac_address: 00:00:00:00:00:02
+eth_local_mac_address: 00:00:00:00:00:01
+eth_uplink_mac_address: 00:00:00:00:00:02
 
 use_static_ip: no
-eth_pci_static_ip_address: 192.0.2.10
-eth_pci_static_ip_gateway: 192.0.2.1
+eth_uplink_static_ip_address: 192.0.2.10
+eth_uplink_static_ip_gateway: 192.0.2.1
 
 dhcp_range: 10.20.1.1,10.20.1.254,21d

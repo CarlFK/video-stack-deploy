@@ -6,13 +6,13 @@ source /etc/network/interfaces.d/*
 auto lo
 iface lo inet loopback
 
-auto eth-builtin
-iface eth-builtin inet static
-     address {{ eth_builtin_ip_address }}
+auto eth-local
+iface eth-local inet static
+     address {{ eth_local_ip_address }}
      pre-up ethtool -K $IFACE gso off gro off tso off
 
-allow-hotplug eth-pci
-iface eth-pci inet dhcp
+allow-hotplug eth-uplink
+iface eth-uplink inet dhcp
      up sysctl -w net.ipv4.ip_forward=1
      up iptables -t nat -A POSTROUTING -o $IFACE -j MASQUERADE 
      down iptables -t nat -D POSTROUTING -o $IFACE -j MASQUERADE 

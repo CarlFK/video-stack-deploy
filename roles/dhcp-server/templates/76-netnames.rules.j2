@@ -1,2 +1,2 @@
-SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="{{ eth_builtin_mac_address }}", NAME="eth-builtin"
-SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="{{ eth_pci_mac_address }}", NAME="eth-pci"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="{{ eth_local_mac_address }}", NAME="eth-local"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="{{ eth_uplink_mac_address }}", NAME="eth-uplink"
