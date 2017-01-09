@@ -2,5 +2,5 @@
 - name: restart networking
   command: "/bin/systemctl restart networking.service"
 
-- name: restart dhcp
+- name: restart dnsmasq
   command: "/bin/systemctl restart dnsmasq.service"
