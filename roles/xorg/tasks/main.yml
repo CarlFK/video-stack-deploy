@@ -1,4 +1,8 @@
 ---
+- name: install X
+  apt:
+    name: xserver-xorg
+
 - name: install a desktop manager (xfce)
   apt:
     name: xfce4
