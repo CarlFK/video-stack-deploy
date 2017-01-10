@@ -7,7 +7,6 @@
 - name: install sudo
   apt:
     name: sudo
-    state: present
 
 - name: manage onsite ssh authorized_keys
   authorized_key:

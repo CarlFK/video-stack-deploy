@@ -2,7 +2,6 @@
 - name: install the dhcp server
   apt:
     name: dnsmasq
-    state: present
 
 - name: set udev rule to name the network interfaces
   template:

@@ -2,7 +2,6 @@
 - name: install useful common packages
   apt:
     name: "{{ item }}"
-    state: present
   with_items:
     - ack-grep
     - curl

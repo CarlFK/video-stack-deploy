@@ -2,20 +2,13 @@
 - name: install icecast
   apt:
     name: icecast2
-    state: present
 
 - name: push icecast default file
   copy:
     src: files/icecast2
     dest: /etc/default/icecast2
-    owner: root
-    group: root
-    mode: 644
 
 - name: push icecast configuration file
   template:
     src: templates/icecast.xml.j2
     dest: /etc/icecast2/icecast.xml
-    owner: root
-    group: root
-    mode: 644
