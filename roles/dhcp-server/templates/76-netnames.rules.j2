@@ -1,2 +1,3 @@
+# {{ ansible_managed }}
 SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="{{ eth_local_mac_address }}", NAME="eth-local"
 SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="{{ eth_uplink_mac_address }}", NAME="eth-uplink"
