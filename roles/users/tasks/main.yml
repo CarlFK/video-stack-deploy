@@ -11,15 +11,19 @@
 - name: manage onsite ssh authorized_keys
   authorized_key:
     user: "{{ user_name }}"
-    key: "{{ lookup('file', item) }}"
-  with_fileglob:
-    - "public_keys/onsite/*"
+    key: "{{ item }}"
+  with_items: "{{public_keys_onsite}}"
   when: "'onsite' in group_names"
 
 - name: manage offsite ssh authorized_keys
   authorized_key:
     user: "{{ user_name }}"
-    key: "{{ lookup('file', item) }}"
-  with_fileglob:
-    - "public_keys/offsite/*"
+    key: "{{ item }}"
+  with_items: "{{public_keys_offsite}}"
   when: "'offsite' in group_names"
+
+- name: manage root ssh authorized_keys
+  authorized_key:
+    user: root
+    key: "{{ item }}"
+  with_items: "{{public_keys_root}}"
