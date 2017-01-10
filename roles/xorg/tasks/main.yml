@@ -5,8 +5,11 @@
 
 - name: install a desktop manager (xfce)
   apt:
-    name: xfce4
-    state: present
+    name: "{{ item }}"
+  with_items:
+    - xfce4
+    - xfce4-notifyd
+    - xfce4-terminal
 
 - name: install desktop tools
   apt:
