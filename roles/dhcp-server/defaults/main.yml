@@ -9,3 +9,4 @@ eth_uplink_static_ip_address: 192.0.2.10
 eth_uplink_static_ip_gateway: 192.0.2.1
 
 dhcp_range: 10.20.0.128,10.20.0.254,21d
+domain: video.debconf.org
