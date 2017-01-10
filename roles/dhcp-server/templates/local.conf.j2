@@ -4,5 +4,6 @@ interface=eth-local
 dhcp-range={{ dhcp_range }}
 dhcp-option-force=210,/srv/tftp/
 dhcp-boot=pxelinux.0
+dhcp-authoritative
 enable-tftp
 tftp-root=/srv/tftp
