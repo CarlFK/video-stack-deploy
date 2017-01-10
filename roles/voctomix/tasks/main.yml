@@ -28,13 +28,13 @@
     - { src: 'stream-voctomix-lq.j2', dest: 'stream-voctomix-lq' }
 
 - name: push the monitoring script
-  template:
+  copy:
     src: files/monitor-stdout
     dest: /usr/local/bin/monitor-stdout
     mode: 0755
 
 - name: push the cutlist script
-  template:
+  copy:
     src: files/wrap-generate-cutlist
     dest: /usr/local/bin/wrap-generate-cutlist
     mode: 0755
