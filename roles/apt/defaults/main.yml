@@ -1,3 +1,4 @@
 ---
 debian_source: "http://deb.debian.org/debian/"
 debian_version: stretch
+apt_proxy: ""
