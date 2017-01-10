@@ -1,0 +1,9 @@
+- name: install squid-deb-proxy
+  apt:
+    name: squid-deb-proxy
+
+- name: allow squid-deb-proxy to hit PPAs
+  copy:
+    src: files/20-ppa
+    dest: /etc/squid-deb-proxy/mirror-dstdomain.acl.d/20-ppa
+  notify: restart squid-deb-proxy

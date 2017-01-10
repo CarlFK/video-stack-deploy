@@ -8,6 +8,7 @@
   roles:
     - dhcp-server
     - tftp-server
+    - squid-deb-proxy
 
 - hosts: icecast2
   roles:
