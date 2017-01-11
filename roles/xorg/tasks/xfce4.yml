@@ -1,0 +1,18 @@
+- name: install a desktop manager (xfce)
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - xfce4
+  - xfce4-notifyd
+  - xfce4-terminal
+
+- name: copy xfce4 configuration script
+  copy:
+    src: files/xfce4-debconfvideo-config
+    dest: /usr/local/bin/xfce4-debconfvideo-config
+    mode: 0755
+
+- name: run xfce4 configuration script
+  command: /usr/local/bin/xfce4-debconfvideo-config
+  become: true
+  become_user: "{{ user_name }}"

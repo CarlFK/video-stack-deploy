@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+from copy import deepcopy
+from pathlib import Path
+import xml.etree.ElementTree as ET
+
+
+def keyboard_config():
+    keyboard_fn = Path('xfce4/xfconf/xfce-perchannel-xml'
+                       '/xfce4-keyboard-shortcuts.xml')
+    conf = Path('~/.config').expanduser() / keyboard_fn
+    src = conf
+    if not src.exists():
+        conf.parent.mkdir(parents=True, exist_ok=True)
+        src = Path('/etc/xdg') / keyboard_fn
+
+    tree = ET.parse(str(src))
+    root = tree.getroot()
+    commands = root.find('property[@name="commands"]')
+
+    # All user config lives in the custom block
+    custom = commands.find('property[@name="custom"]')
+    if custom is None:
+        default = commands.find('property[@name="default"]')
+        custom = deepcopy(default)
+        custom.set('name', 'custom')
+        commands.append(custom)
+
+        override = ET.Element('property', {
+            'name': 'override',
+            'type': 'bool',
+            'value': 'true',
+        })
+        custom.append(override)
+
+    # Map Ctrl-Alt-T => xfce4-terminal
+    if custom.find('property[@name="<Primary><Alt>t"]') is None:
+        bind = ET.Element('property', {
+            'name': '<Primary><Alt>t',
+            'type': 'string',
+            'value': 'xfce4-terminal',
+        })
+        custom.append(bind)
+
+    tree.write(str(conf))
+
+
+if __name__ == '__main__':
+    keyboard_config()
