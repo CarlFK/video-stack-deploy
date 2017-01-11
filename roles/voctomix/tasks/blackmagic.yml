@@ -1,0 +1,10 @@
+---
+- name: install blackmagic capture systemd units
+  copy:
+    src: "files/systemd/videoteam-{{ item }}.service"
+    dest: /etc/systemd/user/
+  with_items:
+    - capture-blackmagic-hdmi@
+    - capture-blackmagic-sdi@
+    - capture-blackmagic-sdi-audio@
+  notify: reload-systemd

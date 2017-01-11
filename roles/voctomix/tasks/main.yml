@@ -8,5 +8,6 @@
     - vlc
 
 - include: voctomix.yml
+- include: blackmagic.yml
 - include: icecast.yml
   when: streaming == 'icecast'
