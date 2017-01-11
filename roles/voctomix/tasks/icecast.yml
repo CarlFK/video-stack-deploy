@@ -1,0 +1,17 @@
+---
+- name: push the streaming scripts
+  template:
+    src: "templates/{{ item.src }}"
+    dest: "/usr/local/bin/{{ item.dest }}"
+    mode: 0755
+  with_items:
+    - { src: 'stream-voctomix-hq.j2', dest: 'stream-voctomix-hq' }
+    - { src: 'stream-voctomix-lq.j2', dest: 'stream-voctomix-lq' }
+
+- name: install streaming systemd units
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/user/
+  with_items:
+    - files/systemd/videoteam-stream-hq.service
+    - files/systemd/videoteam-stream-lq.service

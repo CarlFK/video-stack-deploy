@@ -1,49 +1,12 @@
 ---
-- name: install voctomix & related packages
+- name: install useful video packages
   apt:
     name: "{{ item }}"
   with_items:
     - ffmpeg
     - mplayer
     - vlc
-    - voctomix
-    - voctomix-outcasts
 
-- name: create voctomix config dir
-  file:
-    path: /etc/voctomix
-    state: directory
-
-- name: configure voctomix
-  copy:
-    src: files/voctomix.ini
-    dest: /etc/voctomix/voctomix.ini
-
-- name: push the streaming scripts
-  template:
-    src: "templates/{{ item.src }}"
-    dest: "/usr/local/bin/{{ item.dest }}"
-    mode: 0755
-  with_items:
-    - { src: 'stream-voctomix-hq.j2', dest: 'stream-voctomix-hq' }
-    - { src: 'stream-voctomix-lq.j2', dest: 'stream-voctomix-lq' }
-
-- name: push the monitoring script
-  copy:
-    src: files/monitor-stdout
-    dest: /usr/local/bin/monitor-stdout
-    mode: 0755
-
-- name: push the cutlist script
-  copy:
-    src: files/wrap-generate-cutlist
-    dest: /usr/local/bin/wrap-generate-cutlist
-    mode: 0755
-
-- name: install systemd unit files
-  copy:
-    src: "{{ item }}"
-    dest: /etc/systemd/user/
-  with_fileglob:
-    - files/systemd/*
-  #  notify:
+- include: voctomix.yml
+- include: icecast.yml
+  when: streaming == 'icecast'

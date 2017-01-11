@@ -1,0 +1,38 @@
+---
+- name: install voctomix & related packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - voctomix
+    - voctomix-outcasts
+
+- name: create voctomix config dir
+  file:
+    path: /etc/voctomix
+    state: directory
+
+- name: configure voctomix
+  copy:
+    src: files/voctomix.ini
+    dest: /etc/voctomix/voctomix.ini
+
+- name: push the monitoring script
+  copy:
+    src: files/monitor-stdout
+    dest: /usr/local/bin/monitor-stdout
+    mode: 0755
+
+- name: push the cutlist script
+  copy:
+    src: files/wrap-generate-cutlist
+    dest: /usr/local/bin/wrap-generate-cutlist
+    mode: 0755
+
+- name: install voctomix systemd units
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/user/
+  with_items:
+    - files/systemd/videoteam-cutlist.service
+    - files/systemd/videoteam-record.service
+    - files/systemd/videoteam-voctocore.service
