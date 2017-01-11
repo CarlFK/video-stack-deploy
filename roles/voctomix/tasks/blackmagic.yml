@@ -8,3 +8,11 @@
     - capture-blackmagic-sdi@
     - capture-blackmagic-sdi-audio@
   notify: reload-systemd
+
+- name: enable voctomix systemd units
+  file:
+    state: link
+    src: "/etc/systemd/user/videoteam-capture-blackmagic-{{ item.connection }}@.service"
+    dest: "/home/{{ user_name }}/.config/systemd/user/default.target.wants/videoteam-capture-blackmagic-{{ item.connection }}@{{ item.card }}.service"
+    owner: "{{ user_name }}"
+  with_items: "{{ blackmagic_sources }}"

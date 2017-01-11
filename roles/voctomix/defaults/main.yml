@@ -18,3 +18,5 @@ icecast_vbr_hq: 1.5M
 icecast_vbr_lq: 200k
 
 icecast_source: source:password@change.me:8000
+
+blackmagic_sources: []
