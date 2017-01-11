@@ -1,4 +1,6 @@
 ---
+user_name: videoteam
+
 room_name: change-me
 
 streaming: icecast

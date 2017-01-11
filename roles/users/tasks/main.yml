@@ -27,3 +27,10 @@
     user: root
     key: "{{ item }}"
   with_items: "{{public_keys_root}}"
+
+- name: ensure systemd wants directory exists
+  file:
+    state: directory
+    owner: "{{ user_name }}"
+    path: "/home/{{ user_name }}/.config/systemd/user/default.target.wants"
+    recurse: true

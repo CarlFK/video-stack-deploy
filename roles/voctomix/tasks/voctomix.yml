@@ -30,9 +30,21 @@
 
 - name: install voctomix systemd units
   copy:
-    src: "{{ item }}"
+    src: "files/systemd/videoteam-{{ item }}.service"
     dest: /etc/systemd/user/
   with_items:
-    - files/systemd/videoteam-cutlist.service
-    - files/systemd/videoteam-record.service
-    - files/systemd/videoteam-voctocore.service
+    - cutlist
+    - record
+    - voctocore
+  notify: reload-systemd
+
+- name: enable voctomix systemd units
+  file:
+    state: link
+    src: "/etc/systemd/user/videoteam-{{ item }}.service"
+    dest: "/home/{{ user_name }}/.config/systemd/user/default.target.wants/videoteam-{{ item }}.service"
+    owner: "{{ user_name }}"
+  with_items:
+    - cutlist
+    - record
+    - voctocore
