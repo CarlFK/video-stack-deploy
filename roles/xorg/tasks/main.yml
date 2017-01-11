@@ -16,5 +16,6 @@
     name: "{{ item }}"
   with_items:
     - hexchat
+    - vim-gtk3
     - xscreensaver
     - xul-ext-ublock-origin
