@@ -3,6 +3,7 @@
   apt:
     name: "{{ item }}"
   with_items:
+    - ffmpeg
     - mplayer
     - vlc
     - voctomix
