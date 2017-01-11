@@ -1,3 +1,6 @@
 ---
 - name: systemd videoteam-ingest
-  command: /bin/systemctl enable videoteam-ingest
+  command: "/bin/systemctl {{ item }}"
+  with_items:
+  - daemon-reload
+  - enable videoteam-ingest
