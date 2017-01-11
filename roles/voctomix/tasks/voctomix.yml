@@ -13,8 +13,11 @@
 
 - name: configure voctomix
   copy:
-    src: files/voctomix.ini
-    dest: /etc/voctomix/voctomix.ini
+    src: "files/{{ item }}"
+    dest: "/etc/voctomix/{{ item }}"
+  with_items:
+  - voctocore.ini
+  - voctogui.ini
 
 - name: push the monitoring script
   copy:
