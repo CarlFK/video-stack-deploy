@@ -30,4 +30,5 @@
   roles:
     - nodm
     - voctomix
+    - blackmagic
     - xorg

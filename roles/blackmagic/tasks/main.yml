@@ -1,0 +1,16 @@
+---
+
+- name: Install Blackmagic Desktop Video package
+  apt:
+    deb: "{{ blackmagic_desktopvideo_location }}"
+  when: blackmagic_desktopvideo_location != ''
+
+- name: Install Blackmagic Desktop Video GUI package
+  apt:
+    deb: "{{ blackmagic_desktopvideo_gui_location }}"
+  when: blackmagic_desktopvideo_gui_location != ''
+
+- name: Install Blackmagic Media Express
+  apt:
+    deb: "{{ blackmagic_mediaexpress_location }}"
+  when: blackmagic_mediaexpress_location != ''
