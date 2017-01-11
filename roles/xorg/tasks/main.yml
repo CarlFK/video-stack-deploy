@@ -7,15 +7,15 @@
   apt:
     name: "{{ item }}"
   with_items:
-    - xfce4
-    - xfce4-notifyd
-    - xfce4-terminal
+  - xfce4
+  - xfce4-notifyd
+  - xfce4-terminal
 
 - name: install desktop tools
   apt:
     name: "{{ item }}"
   with_items:
-    - hexchat
-    - vim-gtk3
-    - xscreensaver
-    - xul-ext-ublock-origin
+  - hexchat
+  - vim-gtk3
+  - xscreensaver
+  - xul-ext-ublock-origin

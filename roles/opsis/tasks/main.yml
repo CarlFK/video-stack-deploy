@@ -3,10 +3,10 @@
   apt:
     name: "{{ item }}"
   with_items:
-    - cu
-    - hdmi2usb-mode-switch
-    - hdmi2usb-udev
-    - voctomix-outcasts
+  - cu
+  - hdmi2usb-mode-switch
+  - hdmi2usb-udev
+  - voctomix-outcasts
 
 - name: push the script to connect to the opsis
   copy:
@@ -19,6 +19,6 @@
     src: "files/{{ item.src }}"
     dest: "/etc/systemd/system/{{ item.dest }}"
   with_items:
-    - { src: 'videoteam-ingest.service', dest: 'videoteam-ingest.service' }
-    - { src: 'videoteam-ingest.path',    dest: 'videoteam-ingest.path' }
+  - { src: 'videoteam-ingest.service', dest: 'videoteam-ingest.service' }
+  - { src: 'videoteam-ingest.path',    dest: 'videoteam-ingest.path' }
   notify: systemd videoteam-ingest

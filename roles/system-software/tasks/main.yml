@@ -3,23 +3,23 @@
   apt:
     name: "{{ item }}"
   with_items:
-    - ack-grep
-    - curl
-    - emacs-nox
-    - gdb
-    - git
-    - htop
-    - iftop
-    - iotop
-    - ipython
-    - less
-    - lshw
-    - moreutils
-    - rsync
-    - screen
-    - strace
-    - tcpdump
-    - tmux
-    - tree
-    - vim-nox
-    - vnstat
+  - ack-grep
+  - curl
+  - emacs-nox
+  - gdb
+  - git
+  - htop
+  - iftop
+  - iotop
+  - ipython
+  - less
+  - lshw
+  - moreutils
+  - rsync
+  - screen
+  - strace
+  - tcpdump
+  - tmux
+  - tree
+  - vim-nox
+  - vnstat

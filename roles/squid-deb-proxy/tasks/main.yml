@@ -1,3 +1,4 @@
+---
 - name: install squid-deb-proxy
   apt:
     name: squid-deb-proxy

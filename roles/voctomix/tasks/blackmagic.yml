@@ -4,10 +4,10 @@
     src: "files/systemd/videoteam-{{ item }}.service"
     dest: /etc/systemd/user/
   with_items:
-    - capture-blackmagic-hdmi@
-    - capture-blackmagic-hdmi-audio@
-    - capture-blackmagic-sdi@
-    - capture-blackmagic-sdi-audio@
+  - capture-blackmagic-hdmi@
+  - capture-blackmagic-hdmi-audio@
+  - capture-blackmagic-sdi@
+  - capture-blackmagic-sdi-audio@
   notify: reload-systemd
 
 - name: enable voctomix systemd units

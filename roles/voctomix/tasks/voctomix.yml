@@ -3,8 +3,8 @@
   apt:
     name: "{{ item }}"
   with_items:
-    - voctomix
-    - voctomix-outcasts
+  - voctomix
+  - voctomix-outcasts
 
 - name: create voctomix config dir
   file:
@@ -36,9 +36,9 @@
     src: "files/systemd/videoteam-{{ item }}.service"
     dest: /etc/systemd/user/
   with_items:
-    - cutlist
-    - record
-    - voctocore
+  - cutlist
+  - record
+  - voctocore
   notify: reload-systemd
 
 - name: enable voctomix systemd units
@@ -48,6 +48,6 @@
     dest: "/home/{{ user_name }}/.config/systemd/user/default.target.wants/videoteam-{{ item }}.service"
     owner: "{{ user_name }}"
   with_items:
-    - cutlist
-    - record
-    - voctocore
+  - cutlist
+  - record
+  - voctocore
