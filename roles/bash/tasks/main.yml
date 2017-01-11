@@ -1,4 +1,8 @@
 ---
+- name: install bash-completion
+  apt:
+    name: bash-completion
+
 - name: set up bash.bashrc
   copy:
     src: files/bash.bashrc
