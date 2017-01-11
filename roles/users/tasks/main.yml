@@ -28,6 +28,10 @@
     key: "{{ item }}"
   with_items: "{{public_keys_root}}"
 
+- name: configure locale
+  command: update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
+  when: ansible_env.LANG != 'en_US.UTF-8'
+
 - name: ensure systemd wants directory exists
   file:
     state: directory
