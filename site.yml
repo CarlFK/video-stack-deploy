@@ -23,12 +23,10 @@
 - hosts: opsis
   roles:
     - opsis
-    - nodm
     - xorg
 
 - hosts: voctomix
   roles:
-    - nodm
     - voctomix
     - blackmagic
     - xorg

@@ -1,0 +1,13 @@
+---
+- name: configure lightdm autologin
+  template:
+    src: templates/autologin.conf.j2
+    dest: /etc/lightdm/lightdm.conf.d/autologin.conf
+  when: autologin
+
+- name: install lightdm
+  apt:
+    pkg: "{{ item }}"
+  with_items:
+  - lightdm-gtk-greeter
+  - lightdm

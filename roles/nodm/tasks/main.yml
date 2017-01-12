@@ -1,9 +1,0 @@
----
-- name: install nodm
-  apt:
-    name: nodm
-
-- name: configure nodm
-  template:
-    src: templates/nodm.j2
-    dest: /etc/default/nodm
