@@ -12,3 +12,4 @@ irc:
   - "#debconf-video"
   - "#debconf"
 irc_room_channel: ""
+irc_nick: videoteam
