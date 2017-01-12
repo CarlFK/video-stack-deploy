@@ -12,8 +12,8 @@
     state: directory
 
 - name: configure voctomix
-  copy:
-    src: "files/{{ item }}"
+  template:
+    src: "templates/{{ item }}.j2"
     dest: "/etc/voctomix/{{ item }}"
   with_items:
   - voctocore.ini
