@@ -2,9 +2,13 @@
 netboot_image: https://deb.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/netboot.tar.gz
 late_command_url: https://anonscm.debian.org/cgit/debconf-video/ansible.git/plain/setup_ansible.sh
 
-apt_proxy: ""
-domain: video.debconf.org
 time_zone: Europe/Paris
+domain: video.debconf.org
+
+apt_proxy: ""
+# Defaults to deb.debian.org | archive.ubuntu.com
+#mirror: deb.debian.org
+
 user_name: videoteam
 user_password: RedPill
 pw_salt: U1ESiTXUQE0tFh2r4LRl
