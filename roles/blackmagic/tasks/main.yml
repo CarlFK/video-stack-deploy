@@ -7,20 +7,20 @@
 - name: Download Blackmagic Destkop Video package
   get_url:
     dest: /var/cache/debconf-video-blackmagic/desktopvideo.deb
-    url: "{{ blackmagic_desktopvideo_location }}"
-  when: blackmagic_desktopvideo_location != ''
+    url: "{{ blackmagic.desktopvideo }}"
+  when: blackmagic.desktopvideo is defined
   notify: Install desktopvideo
 
 - name: Download Blackmagic Destkop Video GUI package
   get_url:
     dest: /var/cache/debconf-video-blackmagic/desktopvideo-gui.deb
-    url: "{{ blackmagic_desktopvideo_gui_location }}"
-  when: blackmagic_desktopvideo_gui_location != ''
+    url: "{{ blackmagic.desktopvideo_gui }}"
+  when: blackmagic.desktopvideo_gui is defined
   notify: Install desktopvideo-gui
 
 - name: Download Blackmagic Media Express package
   get_url:
     dest: /var/cache/debconf-video-blackmagic/mediaexpress.deb
-    url: "{{ blackmagic_desktopvideo_location }}"
-  when: blackmagic_mediaexpress_location != ''
+    url: "{{ blackmagic.desktopvideo }}"
+  when: blackmagic.mediaexpress is defined
   notify: Install mediaexpress

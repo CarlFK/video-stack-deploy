@@ -1,5 +1,7 @@
 ---
 # This is non-free enough to not be publicly redistributable
 # So, if you have one you want to use, you need to provide a URL to it
-blackmagic_desktopvideo_location: ''
-blackmagic_desktopvideo_gui_location: ''
+blackmagic:
+  #desktopvideo: http://example.net/desktopvideo.deb
+  #desktopvideo_gui: http://example.net/desktopvideo-gui.deb
+  #mediaexpress: http://example.net/mediaexpress.deb
