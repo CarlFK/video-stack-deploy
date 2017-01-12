@@ -37,5 +37,6 @@
   file:
     state: directory
     owner: "{{ user_name }}"
+    group: "{{ user_name }}"
     path: "/home/{{ user_name }}/.config/systemd/user/default.target.wants"
     recurse: true

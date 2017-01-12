@@ -9,6 +9,7 @@
     path: "/home/{{ user_name }}/Videos"
     state: directory
     owner: "{{ user_name }}"
+    group: "{{ user_name }}"
     recurse: true
 
 - name: Configure video partition
