@@ -2,7 +2,7 @@
 netboot_image: https://deb.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/netboot.tar.gz
 late_command_url: https://anonscm.debian.org/cgit/debconf-video/ansible.git/plain/setup_ansible.sh
 
-time_zone: Europe/Paris
+time_zone: UTC
 domain: video.debconf.org
 
 apt_proxy: ""
