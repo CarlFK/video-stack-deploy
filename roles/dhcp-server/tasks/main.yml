@@ -28,6 +28,7 @@
     regexp: "^#?dns=dnsmasq$"
     line: "#dns=dnsmasq"
   notify: restart network-manager
+  ignore_errors: yes
 
 - name: create the TFTP root directory
   file:
