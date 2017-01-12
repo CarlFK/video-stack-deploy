@@ -11,3 +11,4 @@
   with_items:
   - lightdm-gtk-greeter
   - lightdm
+  - policykit-1
