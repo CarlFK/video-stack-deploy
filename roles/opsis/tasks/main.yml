@@ -14,11 +14,14 @@
     dest: /usr/local/bin/opsis
     mode: 0755
 
-- name: push ingest systemd unit file
+- name: push systemd video-ingest.service
+  template:
+    src: templates/videoteam-ingest.service.j2
+    dest: /etc/systemd/system/videoteam-ingest.service
+  notify: systemd videoteam-ingest
+
+- name: push systemd video-ingest.path
   copy:
-    src: "files/{{ item.src }}"
-    dest: "/etc/systemd/system/{{ item.dest }}"
-  with_items:
-  - { src: 'videoteam-ingest.service', dest: 'videoteam-ingest.service' }
-  - { src: 'videoteam-ingest.path',    dest: 'videoteam-ingest.path' }
+    src: files/videoteam-ingest.path
+    dest: /etc/systemd/system/videoteam-ingest.path
   notify: systemd videoteam-ingest

@@ -4,7 +4,7 @@ After=network-online.target
 StartLimitInterval=0
 
 [Service]
-ExecStart=/usr/bin/voctomix-ingest --host 10.20.0.1 --port 10002 --video-source hdmi2usb --video-attribs device=/dev/hdmi2usb/by-num/all0/video
+ExecStart=/usr/bin/voctomix-ingest --host {{ voctomix.host }} --port {{ (10000 + voctomix.source) }} --video-source hdmi2usb --video-attribs device=/dev/hdmi2usb/by-num/all0/video
 Restart=always
 RestartSec=1
 
