@@ -17,8 +17,8 @@
     name: "/home/{{ user_name }}/Videos"
     fstype: ext4
     opts: defaults
-    dump: 0
-    passno: 2
+    dump: '0'
+    passno: '2'
     state: mounted
 
 - name: Configure video partition root ownership
