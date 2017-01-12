@@ -11,3 +11,5 @@
 - include: blackmagic.yml
 - include: icecast.yml
   when: streaming == 'icecast'
+- include: video_disk.yml
+  when: video_disk is defined
