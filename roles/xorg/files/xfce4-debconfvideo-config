@@ -5,19 +5,26 @@
 
 from copy import deepcopy
 from pathlib import Path
+import shutil
 import xml.etree.ElementTree as ET
 
 
-def keyboard_config():
-    keyboard_fn = Path('xfce4/xfconf/xfce-perchannel-xml'
-                       '/xfce4-keyboard-shortcuts.xml')
-    conf = Path('~/.config').expanduser() / keyboard_fn
-    src = conf
-    if not src.exists():
-        conf.parent.mkdir(parents=True, exist_ok=True)
-        src = Path('/etc/xdg') / keyboard_fn
+def initialise_xfconf(filename):
+    relative_path = Path('xfce4/xfconf/xfce-perchannel-xml') / filename
 
-    tree = ET.parse(str(src))
+    user = Path('~/.config').expanduser() / relative_path
+    if not user.exists():
+        user.parent.mkdir(parents=True, exist_ok=True)
+        world = Path('/etc/xdg') / relative_path
+        shutil.copy(str(world), str(user))
+
+    return user
+
+
+def keyboard_config():
+    conf_p = initialise_xfconf('xfce4-keyboard-shortcuts.xml')
+
+    tree = ET.parse(str(conf_p))
     root = tree.getroot()
     commands = root.find('property[@name="commands"]')
 
@@ -45,7 +52,7 @@ def keyboard_config():
         })
         custom.append(bind)
 
-    tree.write(str(conf))
+    tree.write(str(conf_p))
 
 
 if __name__ == '__main__':
