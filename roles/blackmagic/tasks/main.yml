@@ -1,16 +1,26 @@
 ---
+- name: Create cache directory
+  file:
+    path: /var/cache/debconf-video-blackmagic
+    state: directory
 
-- name: Install Blackmagic Desktop Video package
-  apt:
-    deb: "{{ blackmagic_desktopvideo_location }}"
+- name: Download Blackmagic Destkop Video package
+  get_url:
+    dest: /var/cache/debconf-video-blackmagic/desktopvideo.deb
+    url: "{{ blackmagic_desktopvideo_location }}"
   when: blackmagic_desktopvideo_location != ''
+  notify: Install desktopvideo
 
-- name: Install Blackmagic Desktop Video GUI package
-  apt:
-    deb: "{{ blackmagic_desktopvideo_gui_location }}"
+- name: Download Blackmagic Destkop Video GUI package
+  get_url:
+    dest: /var/cache/debconf-video-blackmagic/desktopvideo-gui.deb
+    url: "{{ blackmagic_desktopvideo_gui_location }}"
   when: blackmagic_desktopvideo_gui_location != ''
+  notify: Install desktopvideo-gui
 
-- name: Install Blackmagic Media Express
-  apt:
-    deb: "{{ blackmagic_mediaexpress_location }}"
+- name: Download Blackmagic Media Express package
+  get_url:
+    dest: /var/cache/debconf-video-blackmagic/mediaexpress.deb
+    url: "{{ blackmagic_desktopvideo_location }}"
   when: blackmagic_mediaexpress_location != ''
+  notify: Install mediaexpress

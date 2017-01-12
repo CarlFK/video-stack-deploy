@@ -1,5 +1,5 @@
 ---
 # This is non-free enough to not be publicly redistributable
-# So, if you have one you want to use, you need to provide a path / URL to it
+# So, if you have one you want to use, you need to provide a URL to it
 blackmagic_desktopvideo_location: ''
 blackmagic_desktopvideo_gui_location: ''
