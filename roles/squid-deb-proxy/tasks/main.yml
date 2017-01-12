@@ -2,9 +2,16 @@
 - name: install squid-deb-proxy
   apt:
     name: squid-deb-proxy
+  notify: disable squid
 
 - name: allow squid-deb-proxy to hit PPAs
   copy:
     src: files/20-ppa
     dest: /etc/squid-deb-proxy/mirror-dstdomain.acl.d/20-ppa
   notify: restart squid-deb-proxy
+
+# This hangs forever, and makes restarting dnsmasq a pain
+- name: remove squid resolvconf hook
+  file:
+    name: /etc/resolvconf/update-libc.d/squid
+    state: absent

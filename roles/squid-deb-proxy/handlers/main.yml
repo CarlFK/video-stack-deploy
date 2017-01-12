@@ -1,3 +1,6 @@
 ---
 - name: restart squid-deb-proxy
-  command: "/bin/systemctl restart squid-deb-proxy.service"
+  command: systemctl restart squid-deb-proxy.service
+
+- name: disable squid
+  command: systemctl disable squid
