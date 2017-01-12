@@ -12,3 +12,4 @@
   - lightdm-gtk-greeter
   - lightdm
   - policykit-1
+  - x11-xserver-utils
