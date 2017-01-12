@@ -2,3 +2,7 @@
 voctomix:
   host: localhost
   source: 0
+
+# For USB audio capture:
+# alsa_device: hw:1,0
+# audio_delay: 1000
