@@ -1,0 +1,15 @@
+v=2.10.2
+
+N={{ irc.network }}
+L=6
+E=UTF-8 (Unicode)
+F=31
+D=0
+S={{ irc.server }}/+{{ irc.ssl_port }}
+S={{ irc.server }}
+{% for channel in irc.global_channels -%}
+J={{ channel }}
+{% endfor %}
+{% if irc_room_channel -%}
+J={{ irc_room_channel }}
+{%- endif %}
