@@ -9,6 +9,11 @@
   - xfce4-notifyd
   - xfce4-terminal
 
+- name: install an XFCE icon pack (Ubuntu)
+  apt:
+    name: xubuntu-icon-theme
+  when: ansible_distribution == 'Ubuntu'
+
 - name: copy xfce4 configuration script
   copy:
     src: files/xfce4-debconfvideo-config
