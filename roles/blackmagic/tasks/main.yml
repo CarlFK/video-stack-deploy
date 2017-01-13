@@ -32,3 +32,4 @@
   with_items:
   - blackmagic
   - blackmagic-io
+  when: blackmagic.dkms_version is defined
