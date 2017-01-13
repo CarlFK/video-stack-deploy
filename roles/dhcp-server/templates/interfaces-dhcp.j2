@@ -11,7 +11,7 @@ iface eth-local inet static
      address {{ eth_local_ip_address }}
      pre-up ethtool -K $IFACE gso off gro off tso off || true
 
-allow-hotplug eth-uplink
+auto eth-uplink
 iface eth-uplink inet dhcp
      pre-up ethtool -K $IFACE gso off gro off tso off || true
      up sysctl -w net.ipv4.ip_forward=1
