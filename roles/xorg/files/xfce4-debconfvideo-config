@@ -137,6 +137,7 @@ def panels():
         add_item(2, 'separator')
         add_item(2, 'launcher', ['voctogui.desktop'])
         add_item(2, 'launcher', ['hexchat.desktop'])
+        add_item(2, 'launcher', ['videoteam-cutlist.desktop'])
 
     tree.write(str(conf_p))
 

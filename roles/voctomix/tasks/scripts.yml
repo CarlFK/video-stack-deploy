@@ -6,3 +6,8 @@
   with_items:
   - stop
   - start
+
+- name: Desktop File to follow the cut list
+  template:
+    src: templates/videoteam-cutlist.desktop.j2
+    dest: /usr/share/applications/videoteam-cutlist.desktop
