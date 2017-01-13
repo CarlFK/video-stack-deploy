@@ -4,6 +4,7 @@ set -euf
 
 systemctl list-unit-files --state=enabled \
 	| sed -nre 's/^(videoteam-.*.service).*/\1/ p' \
+	        -e 's/@\./@0./' \
 	| while read service; do
 	echo sudo systemctl {{ item }} $service
 	sudo systemctl {{ item }} $service || true
