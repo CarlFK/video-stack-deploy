@@ -5,19 +5,27 @@
 
 from copy import deepcopy
 from pathlib import Path
+import shutil
 import xml.etree.ElementTree as ET
 
 
-def keyboard_config():
-    keyboard_fn = Path('xfce4/xfconf/xfce-perchannel-xml'
-                       '/xfce4-keyboard-shortcuts.xml')
-    conf = Path('~/.config').expanduser() / keyboard_fn
-    src = conf
-    if not src.exists():
-        conf.parent.mkdir(parents=True, exist_ok=True)
-        src = Path('/etc/xdg') / keyboard_fn
+def initialise_xfconf(filename, world=None):
+    relative_path = Path('xfce4/xfconf/xfce-perchannel-xml') / filename
+    if not world:
+        world = Path('/etc/xdg') / relative_path
 
-    tree = ET.parse(str(src))
+    user = Path('~/.config').expanduser() / relative_path
+    if not user.exists():
+        user.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(str(world), str(user))
+
+    return user
+
+
+def keyboard_shortcuts():
+    conf_p = initialise_xfconf('xfce4-keyboard-shortcuts.xml')
+
+    tree = ET.parse(str(conf_p))
     root = tree.getroot()
     commands = root.find('property[@name="commands"]')
 
@@ -45,8 +53,50 @@ def keyboard_config():
         })
         custom.append(bind)
 
-    tree.write(str(conf))
+    tree.write(str(conf_p))
+
+
+def panel_applets():
+    conf_p = initialise_xfconf(
+        'xfce4-panel.xml',
+        world='/etc/xdg/xfce4/panel/default.xml')
+
+    tree = ET.parse(str(conf_p))
+    root = tree.getroot()
+    plugins = root.find('property[@name="plugins"]')
+    panels = root.find('property[@name="panels"]')
+    panel_1 = panels.find('property[@name="panel-1"]')
+
+    max_id = 0
+    for plugin in plugins.findall('property'):
+        name = plugin.get('name')
+        id_ = int(name.split('-')[1])
+        max_id = max(id_, max_id)
+
+    if plugins.find('property[@value="pulseaudio"]') is None:
+        max_id += 1
+        plugin = ET.Element('property', {
+            'name': 'plugin-%i' % (max_id),
+            'type': 'string',
+            'value': 'pulseaudio',
+        })
+        shortcuts = ET.Element('property', {
+            'name': 'enable-keyboard-shortcuts',
+            'type': 'bool',
+            'value': 'true',
+        })
+        plugin.append(shortcuts)
+        plugins.append(plugin)
+
+        value = ET.Element('value', {
+            'type': 'int',
+            'value': str(max_id),
+        })
+        panel_1.find('property[@name="plugin-ids"]').append(value)
+
+    tree.write(str(conf_p))
 
 
 if __name__ == '__main__':
-    keyboard_config()
+    keyboard_shortcuts()
+    panel_applets()

@@ -2,9 +2,17 @@
   apt:
     name: "{{ item }}"
   with_items:
+  - pavucontrol
+  - pulseaudio
   - xfce4
+  - xfce4-pulseaudio-plugin
   - xfce4-notifyd
   - xfce4-terminal
+
+- name: install an XFCE icon pack (Ubuntu)
+  apt:
+    name: xubuntu-icon-theme
+  when: ansible_distribution == 'Ubuntu'
 
 - name: copy xfce4 configuration script
   copy:

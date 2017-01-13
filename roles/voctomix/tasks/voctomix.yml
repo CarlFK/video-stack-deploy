@@ -5,6 +5,7 @@
   with_items:
   - voctomix
   - voctomix-outcasts
+  - gstreamer1.0-pulseaudio
 
 - name: create voctomix config dir
   file:

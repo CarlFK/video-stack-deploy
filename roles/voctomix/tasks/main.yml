@@ -9,6 +9,7 @@
 
 - include: voctomix.yml
 - include: blackmagic.yml
+- include: scripts.yml
 - include: icecast.yml
   when: streaming == 'icecast'
 - include: video_disk.yml
