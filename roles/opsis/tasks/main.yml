@@ -3,14 +3,17 @@
   apt:
     name: "{{ item }}"
   with_items:
-  - cu
   - hdmi2usb-mode-switch
   - hdmi2usb-udev
   - voctomix-outcasts
 
+- name: install serial terminal
+  apt:
+    name: "{{ serial_terminal }}"
+
 - name: push the script to connect to the opsis
-  copy:
-    src: files/opsis
+  template:
+    src: templates/opsis.j2
     dest: /usr/local/bin/opsis
     mode: 0755
 

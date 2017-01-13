@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec cu -l /dev/hdmi2usb/by-num/all0/tty -s 115200

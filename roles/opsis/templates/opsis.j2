@@ -1,0 +1,7 @@
+#!/bin/sh
+
+{% if serial_terminal == 'cu' %}
+exec cu -l /dev/hdmi2usb/by-num/all0/tty -s 115200
+{% elif serial_terminal == 'flterm' %}
+exec flterm --port /dev/hdmi2usb/by-num/all0/tty --speed 115200
+{% endif %}

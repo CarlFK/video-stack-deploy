@@ -1,4 +1,5 @@
 ---
+serial_terminal: cu
 voctomix:
   host: localhost
   port: 10000
