@@ -1,16 +1,6 @@
 ---
-- name: install X
-  apt:
-    name: xserver-xorg
-
-- name: install desktop tools
-  apt:
-    name: "{{ item }}"
-  with_items:
-  - vim-gtk3
-  - xul-ext-ublock-origin
-
 - include: lightdm.yml
 - include: xfce4.yml
 - include: xscreensaver.yml
 - include: hexchat.yml
+- include: packages.yml
