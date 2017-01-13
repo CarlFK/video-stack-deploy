@@ -56,7 +56,7 @@ def keyboard_shortcuts():
     tree.write(str(conf_p))
 
 
-def panel_applets():
+def panels():
     conf_p = initialise_xfconf(
         'xfce4-panel.xml',
         world='/etc/xdg/xfce4/panel/default.xml')
@@ -65,7 +65,6 @@ def panel_applets():
     root = tree.getroot()
     plugins = root.find('property[@name="plugins"]')
     panels = root.find('property[@name="panels"]')
-    panel_1 = panels.find('property[@name="panel-1"]')
 
     max_id = 0
     for plugin in plugins.findall('property'):
@@ -73,30 +72,75 @@ def panel_applets():
         id_ = int(name.split('-')[1])
         max_id = max(id_, max_id)
 
-    if plugins.find('property[@value="pulseaudio"]') is None:
+    def next_id(panel_id):
+        nonlocal max_id
         max_id += 1
-        plugin = ET.Element('property', {
-            'name': 'plugin-%i' % (max_id),
-            'type': 'string',
-            'value': 'pulseaudio',
-        })
-        shortcuts = ET.Element('property', {
-            'name': 'enable-keyboard-shortcuts',
-            'type': 'bool',
-            'value': 'true',
-        })
-        plugin.append(shortcuts)
-        plugins.append(plugin)
-
         value = ET.Element('value', {
             'type': 'int',
             'value': str(max_id),
         })
-        panel_1.find('property[@name="plugin-ids"]').append(value)
+        panel = panels.find('property[@name="panel-%i"]' % panel_id)
+        panel.find('property[@name="plugin-ids"]').append(value)
+        return max_id
+
+    def serialize(value):
+        if isinstance(value, bool):
+            return 'bool', str(value).lower()
+        elif isinstance(value, int):
+            return 'int', str(value)
+        elif isinstance(value, str):
+            return 'string', value
+        else:
+            raise NotImplemented("Can't serialize %r" % value)
+
+    def add_item(panel_id, value, options=None):
+        id_ = next_id(panel_id=panel_id)
+        plugin = ET.Element('property', {
+            'name': 'plugin-%i' % (id_),
+            'type': 'string',
+            'value': value,
+        })
+        plugins.append(plugin)
+
+        if options is None:
+            pass
+        elif isinstance(options, dict):
+            for key, value in options.items():
+                type_, value = serialize(value)
+                option = ET.Element('property', {
+                    'name': key,
+                    'type': type_,
+                    'value': value,
+                })
+                plugin.append(option)
+
+        elif isinstance(options, list):
+            items = ET.Element('property', {
+                'name': 'items',
+                'type': 'array',
+            })
+            plugin.append(items)
+            for value in options:
+                type_, value = serialize(value)
+                option = ET.Element('value', {
+                    'type': type_,
+                    'value': value,
+                })
+                items.append(option)
+        else:
+            raise ValueError("Options must be a dict, list, or None")
+
+    if plugins.find('property[@value="pulseaudio"]') is None:
+        add_item(1, 'pulseaudio', {'enable-keyboard-shortcuts': True})
+
+    if plugins.find('value[@string="voctogui.desktop"]') is None:
+        add_item(2, 'separator')
+        add_item(2, 'launcher', ['voctogui.desktop'])
+        add_item(2, 'launcher', ['hexchat.desktop'])
 
     tree.write(str(conf_p))
 
 
 if __name__ == '__main__':
     keyboard_shortcuts()
-    panel_applets()
+    panels()
