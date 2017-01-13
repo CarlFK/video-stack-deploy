@@ -24,3 +24,11 @@
     url: "{{ blackmagic.desktopvideo }}"
   when: blackmagic.mediaexpress is defined
   notify: Install mediaexpress
+
+- name: Install blackmagic DKMS driver
+  command: dkms install {{ item }}/{{ blackmagic.dkms_version }}
+  args:
+    creates: /lib/modules/{{ ansible_kernel }}/updates/dkms/{{ item }}.ko
+  with_items:
+  - blackmagic
+  - blackmagic-io
