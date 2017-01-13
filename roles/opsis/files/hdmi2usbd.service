@@ -1,0 +1,11 @@
+[Unit]
+Description= Simple serial to network interface suitable for use with hdmi2usb devices
+StartLimitInterval=0
+
+[Service]
+ExecStart=/usr/bin/hdmi2usbd --listen 0.0.0.0:8501
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
