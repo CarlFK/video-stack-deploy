@@ -2,3 +2,9 @@
   copy:
     src: files/90-videoteam-disable-blanking.conf
     dest: /usr/share/X11/xorg.conf.d/90-videoteam-disable-blanking.conf
+
+- name: Disable Suspend on lid close
+  lineinfile:
+    dest: /etc/systemd/logind.conf
+    regexp: (^|\s*#\s*)HandleLidSwitch=
+    line: HandleLidSwitch=ignore
