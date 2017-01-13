@@ -3,3 +3,4 @@
 - include: xfce4.yml
 - include: hexchat.yml
 - include: packages.yml
+- include: xorg.yml

@@ -1,0 +1,4 @@
+- name: Disable X Screen Blanking
+  copy:
+    src: files/90-videoteam-disable-blanking.conf
+    dest: /usr/share/X11/xorg.conf.d/90-videoteam-disable-blanking.conf
