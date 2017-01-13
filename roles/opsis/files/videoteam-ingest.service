@@ -1,0 +1,12 @@
+[Unit]
+Description=Ingest video and sling it at voctomix
+After=network-online.target
+StartLimitInterval=0
+
+[Service]
+ExecStart=/usr/local/bin/videoteam-ingest
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

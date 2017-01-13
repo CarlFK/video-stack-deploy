@@ -17,13 +17,19 @@
     dest: /usr/local/bin/opsis
     mode: 0755
 
-- name: push systemd video-ingest.service
+- name: push videoteam-ingest script
   template:
-    src: templates/videoteam-ingest.service.j2
+    src: templates/videoteam-ingest.j2
+    dest: /usr/local/bin/videoteam-ingest
+    mode: 0755
+
+- name: push systemd videoteam-ingest.service
+  copy:
+    src: files/videoteam-ingest.service
     dest: /etc/systemd/system/videoteam-ingest.service
   notify: systemd videoteam-ingest
 
-- name: push systemd video-ingest.path
+- name: push systemd videoteam-ingest.path
   copy:
     src: files/videoteam-ingest.path
     dest: /etc/systemd/system/videoteam-ingest.path
