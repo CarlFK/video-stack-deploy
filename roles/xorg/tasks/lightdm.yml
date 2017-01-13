@@ -13,3 +13,8 @@
   - lightdm
   - policykit-1
   - x11-xserver-utils
+
+- name: kill pulseaudio with fire on logout
+  file:
+    src: templates/kill-pulseaudio.conf
+    dest: /etc/lightdm/lightdm.conf.d/kill-pulseaudio.conf
