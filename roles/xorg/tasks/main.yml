@@ -1,6 +1,5 @@
 ---
 - include: lightdm.yml
 - include: xfce4.yml
-- include: xscreensaver.yml
 - include: hexchat.yml
 - include: packages.yml

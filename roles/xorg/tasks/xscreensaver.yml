@@ -1,9 +1,0 @@
----
-- name: install XScreenSaver
-  apt:
-    name: xscreensaver
-
-- name: xscreensaver config
-  copy:
-    src: files/xscreensaver
-    dest: "/home/{{ user_name }}/.xscreensaver"
