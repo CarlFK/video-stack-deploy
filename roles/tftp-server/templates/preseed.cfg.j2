@@ -435,9 +435,9 @@ d-i finish-install/reboot_in_progress note
 # directly, or use the apt-install and in-target commands to easily install
 # packages and run commands in the target system.
 {% if late_command_url.startswith('tftp://') %}
-d-i preseed/late_command string in-target sh -c "curl -o penultimate_setup.sh '{{ late_command_url }}' && sh penultimate_setup.sh && rm penultimate_setup.sh"
+d-i preseed/late_command string in-target ANSIBLE_UNDER_DI=1 sh -c "curl -o penultimate_setup.sh '{{ late_command_url }}' && sh penultimate_setup.sh && rm penultimate_setup.sh"
 {% else %}
-d-i preseed/late_command string in-target sh -c "wget -O penultimate_setup.sh '{{ late_command_url }}' && sh penultimate_setup.sh && rm penultimate_setup.sh"
+d-i preseed/late_command string in-target ANSIBLE_UNDER_DI=1 sh -c "wget -O penultimate_setup.sh '{{ late_command_url }}' && sh penultimate_setup.sh && rm penultimate_setup.sh"
 {% endif %}
 
 # don't ask for extra firmare
