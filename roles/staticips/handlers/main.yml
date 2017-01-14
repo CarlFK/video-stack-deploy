@@ -3,5 +3,5 @@
   command: "{{ item }}"
   with_items:
   # We've rewritten interfaces to not be dhcp any more, so ifdown won't stop the dhclient
-  - killall dhclient
+  - killall -q dhclient
   - systemctl restart networking
