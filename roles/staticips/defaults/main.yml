@@ -1,0 +1,5 @@
+---
+# static_ips:
+# - hostname: r1mix
+#   ip: 10.20.0.10
+#   mac: 12:34:56:78:90:ab

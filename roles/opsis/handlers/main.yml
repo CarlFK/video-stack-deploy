@@ -4,3 +4,9 @@
   with_items:
   - daemon-reload
   - enable videoteam-ingest
+
+- name: systemd hdmi2usbd
+  command: "/bin/systemctl {{ item }}"
+  with_items:
+  - daemon-reload
+  - enable hdmi2usbd

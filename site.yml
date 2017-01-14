@@ -19,6 +19,7 @@
     - apt
     - bash
     - motd
+    - staticips
 
 - hosts: opsis
   roles:

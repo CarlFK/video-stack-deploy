@@ -1,0 +1,30 @@
+#!/bin/sh
+set -euf
+
+# Sometimes the uvcvideo driver gets stuck waiting for the HDMI2USB firmware to
+# respond but it never will. Removing the module and adding it back will reset
+# these timeouts getting things working again faster.
+# https://github.com/xfxf/lca2017-av/issues/33
+if [ $(id -u) -eq 0 ]; then
+	rmmod uvcvideo || true
+	modprobe uvcvideo
+fi
+
+CMD="voctomix-ingest
+	--host {{ voctomix.host }}
+	--port {{ voctomix.port }}
+	--video-source hdmi2usb
+	--video-attribs device=/dev/hdmi2usb/by-num/all0/video
+{% if video_delay is defined %}
+	--video-delay {{ video_delay }}
+{% endif %}
+{% if alsa_device is defined %}
+	--audio-source alsa
+	--audio-attribs device={{ alsa_device }}
+{% if audio_delay is defined %}
+	--audio-delay {{ audio_delay }}
+{% endif %}
+{% endif %}
+"
+
+exec $CMD

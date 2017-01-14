@@ -9,7 +9,8 @@
 
 - name: install serial terminal
   apt:
-    name: "{{ serial_terminal }}"
+    name: "{{ item }}"
+  with_items: "{{ serial_terminal }}"
 
 - name: push the script to connect to the opsis
   template:
@@ -17,14 +18,34 @@
     dest: /usr/local/bin/opsis
     mode: 0755
 
-- name: push systemd video-ingest.service
+- name: push videoteam-ingest script
   template:
-    src: templates/videoteam-ingest.service.j2
+    src: templates/videoteam-ingest.j2
+    dest: /usr/local/bin/videoteam-ingest
+    mode: 0755
+
+- name: push systemd videoteam-ingest.service
+  copy:
+    src: files/videoteam-ingest.service
     dest: /etc/systemd/system/videoteam-ingest.service
   notify: systemd videoteam-ingest
 
-- name: push systemd video-ingest.path
+- name: push systemd videoteam-ingest.path
   copy:
     src: files/videoteam-ingest.path
     dest: /etc/systemd/system/videoteam-ingest.path
   notify: systemd videoteam-ingest
+
+- name: push systemd hdmi2usbd.service
+  copy:
+    src: files/hdmi2usbd.service
+    dest: /etc/systemd/system/hdmi2usbd.service
+  notify: systemd hdmi2usbd
+  when: "'hdmi2usbd' in serial_terminal"
+
+- name: push systemd hdmi2usbd.path
+  copy:
+    src: files/hdmi2usbd.path
+    dest: /etc/systemd/system/hdmi2usbd.path
+  notify: systemd hdmi2usbd
+  when: "'hdmi2usbd' in serial_terminal"

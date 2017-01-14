@@ -1,5 +1,13 @@
 ---
-serial_terminal: cu
+# You can list multiple terminal options, to get them installed.
+# The first one gets the "opsis" command
+# Options:
+# - cu
+# - flterm
+# - hdmi2usbd
+serial_terminal:
+- cu
+
 voctomix:
   host: localhost
   port: 10000
