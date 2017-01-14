@@ -20,20 +20,33 @@
   - voctocore.ini
   - voctogui.ini
 
+- name: create recording directory
+  file:
+    state: directory
+    dest: /srv/video/{{ org }}/{{ show }}/dv/{{ room_name }}
+    recurse: true
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+
 - name: push the monitoring script
   copy:
     src: files/monitor-stdout
     dest: /usr/local/bin/monitor-stdout
     mode: 0755
 
-- name: install voctomix systemd units
+- name: install voctocore systemd unit
   copy:
-    src: "files/systemd/videoteam-{{ item }}.service"
-    dest: /etc/systemd/user/
+    src: files/systemd/videoteam-voctocore.service
+    dest: /etc/systemd/user/videoteam-voctocore.service
+  notify: reload-systemd
+
+- name: install voctomix recording systemd units
+  template:
+    src: templates/videoteam-{{ item }}.service.j2
+    dest: /etc/systemd/user/videoteam-{{ item }}.service
   with_items:
   - cutlist
   - record
-  - voctocore
   notify: reload-systemd
 
 - name: enable voctomix systemd units

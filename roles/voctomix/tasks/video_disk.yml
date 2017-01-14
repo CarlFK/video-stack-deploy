@@ -6,7 +6,7 @@
 
 - name: Create video partition mountpoint
   file:
-    path: "/home/{{ user_name }}/Videos"
+    path: /srv/video
     state: directory
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
@@ -15,7 +15,7 @@
 - name: Configure video partition
   mount:
     src: "{{ video_disk }}"
-    name: "/home/{{ user_name }}/Videos"
+    name: /srv/video
     fstype: ext4
     opts: defaults
     dump: '0'
@@ -24,6 +24,6 @@
 
 - name: Configure video partition root ownership
   file:
-    path: "/home/{{ user_name }}/Videos"
+    path: /srv/video
     state: directory
     owner: "{{ user_name }}"

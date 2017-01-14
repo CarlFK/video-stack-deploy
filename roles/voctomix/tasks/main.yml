@@ -1,8 +1,8 @@
 ---
+- include: video_disk.yml
+  when: video_disk is defined
 - include: voctomix.yml
 - include: blackmagic.yml
 - include: scripts.yml
 - include: icecast.yml
   when: streaming == 'icecast'
-- include: video_disk.yml
-  when: video_disk is defined

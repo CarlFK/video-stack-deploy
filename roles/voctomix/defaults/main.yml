@@ -1,7 +1,10 @@
 ---
 user_name: videoteam
 
+org: debian
+show: debconf
 room_name: change-me
+
 sources:
 - Cam1
 - Cam2
