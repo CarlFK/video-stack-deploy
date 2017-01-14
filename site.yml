@@ -1,37 +1,37 @@
 ---
 - hosts: all
   roles:
-    - system-software
-    - users
+  - system-software
+  - users
 
 - hosts: dhcp-server
   roles:
-    - dhcp-server
-    - tftp-server
-    - squid-deb-proxy
+  - dhcp-server
+  - tftp-server
+  - squid-deb-proxy
 
 - hosts: icecast2
   roles:
-    - icecast2
+  - icecast2
 
 - hosts: onsite
   roles:
-    - apt
-    - bash
-    - motd
-    - staticips
+  - apt
+  - bash
+  - motd
+  - staticips
 
 - hosts: opsis
   roles:
-    - opsis
-    - xorg
+  - opsis
+  - xorg
 
 - hosts: voctomix
   roles:
-    - voctomix
-    - blackmagic
-    - xorg
+  - voctomix
+  - blackmagic
+  - xorg
 
 - hosts: veyepar-encoder
   roles:
-    - veyepar-encoder
+  - veyepar-encoder
