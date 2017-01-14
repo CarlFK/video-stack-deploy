@@ -1,0 +1,27 @@
+---
+- name: Install nfs-common
+  apt:
+    name: nfs-common
+
+- name: Create NFS mountpoints
+  file:
+    state: directory
+    path: /srv/{{ nfs_server }}/{{ item }}
+  with_items:
+  - veyepar
+  - video
+
+- name: Mount NFS mounts
+  mount:
+    name: /srv/{{ nfs_server }}/{{ item.name }}
+    src: "{{ nfs_server }}:/srv/{{ nfs_server }}/{{ item.name }}"
+    state: mounted
+    fstype: nfs
+    opts: "{{ item.opts }}"
+    dump: 0
+    passno: 2
+  with_items:
+  - name: veyepar
+    opts: ro,async
+  - name: video
+    opts: rw,sync

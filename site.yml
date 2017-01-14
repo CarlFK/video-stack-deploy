@@ -10,6 +10,10 @@
   - tftp-server
   - squid-deb-proxy
 
+- hosts: nfs-server
+  roles:
+  - nfs-server
+
 - hosts: icecast2
   roles:
   - icecast2
@@ -34,3 +38,4 @@
 
 - hosts: veyepar-encoder
   roles:
+  - nfs-client
