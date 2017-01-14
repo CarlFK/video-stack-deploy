@@ -1,0 +1,12 @@
+# {{ ansible_managed }}
+
+auto lo
+iface lo inet loopback
+
+{# FIXME: This is hacky, just taking what we got from DHCP and making it static #}
+auto {{ ansible_default_ipv4.interface }}
+iface {{ ansible_default_ipv4.interface }} inet static
+	address {{ ansible_default_ipv4.address }}
+	netmask {{ ansible_default_ipv4.netmask }}
+	gateway {{ ansible_default_ipv4.gateway }}
+	dns-nameserver {{ ansible_dns.nameservers.0 }}

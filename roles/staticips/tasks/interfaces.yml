@@ -1,1 +1,8 @@
 ---
+# We can't just use a .d file because d-i will have written a DHCP entry into interfaces
+- name: Write static /etc/network/interfaces
+  template:
+    src: templates/interfaces.j2
+    dest: /etc/network/interfaces
+  when: static_ips is defined
+  notify: restart networking
