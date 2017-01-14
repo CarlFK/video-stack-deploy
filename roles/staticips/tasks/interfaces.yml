@@ -5,4 +5,6 @@
     src: templates/interfaces.j2
     dest: /etc/network/interfaces
   when: static_ips is defined
-  notify: restart networking
+  notify:
+  - kill lingering dhclients
+  - restart networking

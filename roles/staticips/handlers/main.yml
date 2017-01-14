@@ -1,7 +1,7 @@
 ---
+# We've rewritten interfaces to not be dhcp any more, so ifdown won't stop the dhclient
+- name: kill lingering dhclients
+  command: killall dhclient
+  ignore_errors: yes
 - name: restart networking
-  command: "{{ item }}"
-  with_items:
-  # We've rewritten interfaces to not be dhcp any more, so ifdown won't stop the dhclient
-  - killall -q dhclient
-  - systemctl restart networking
+  command: systemctl restart networking
