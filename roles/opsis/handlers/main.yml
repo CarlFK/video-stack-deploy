@@ -1,12 +1,12 @@
 ---
-- name: systemd videoteam-ingest
-  command: "/bin/systemctl {{ item }}"
-  with_items:
-  - daemon-reload
-  - enable videoteam-ingest
+- name: systemctl daemon-reload
+  command: systemctl daemon-reload
 
-- name: systemd hdmi2usbd
-  command: "/bin/systemctl {{ item }}"
-  with_items:
-  - daemon-reload
-  - enable hdmi2usbd
+- name: systemctl enable videoteam-ingest
+  command: systemctl enable videoteam-ingest
+
+- name: systemctl enable hdmi2usbd
+  command: systemctl enable hdmi2usbd
+
+- name: systemctl enable hdmi2usbmond
+  command: systemctl enable hdmi2usbmond

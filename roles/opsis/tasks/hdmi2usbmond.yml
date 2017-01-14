@@ -1,0 +1,28 @@
+---
+- name: Clone hdmi2usbmond
+  git:
+    repo: https://github.com/xfxf/hdmi2usbmon.git
+    dest: /usr/local/hdmi2usbmon
+    recursive: no
+
+- name: Create a hdmi2usbmond user
+  user:
+    name: hdmi2usbmond
+    createhome: false
+    system: true
+
+- name: Create /var/log/hdmi2usb
+  file:
+    state: directory
+    path: /var/log/hdmi2usb
+    owner: hdmi2usbmond
+    group: adm
+    mode: 0755
+
+- name: Install hdmi2usbmond.service
+  copy:
+    src: files/hdmi2usbmond.service
+    dest: /etc/systemd/system/hdmi2usbmond.service
+  notify:
+  - systemctl daemon-reload
+  - systemctl enable hdmi2usbmond

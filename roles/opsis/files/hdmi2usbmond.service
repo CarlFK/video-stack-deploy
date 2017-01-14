@@ -1,0 +1,14 @@
+[Unit]
+Description=Monitor opsis via hdmi2usbd
+StartLimitInterval=0
+After=hdmi2usbd.service
+Requires=hdmi2usbd.service
+
+[Service]
+User=hdmi2usbmond
+ExecStart=/usr/bin/python3 /usr/local/hdmi2usbmon/logger_basic.py
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
