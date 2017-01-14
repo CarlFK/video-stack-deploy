@@ -34,4 +34,3 @@
 
 - hosts: veyepar-encoder
   roles:
-  - veyepar-encoder
