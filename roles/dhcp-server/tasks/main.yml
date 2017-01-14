@@ -40,3 +40,10 @@
     src: templates/local.conf.j2
     dest: /etc/dnsmasq.d/local.conf
   notify: restart dnsmasq
+
+- name: configure static hosts
+  template:
+    src: templates/machines.conf.j2
+    dest: /etc/dnsmasq.d/machines.conf
+  when: static_ips is defined
+  notify: restart dnsmasq
