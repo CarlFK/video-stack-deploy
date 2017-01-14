@@ -1,4 +1,5 @@
 #!/bin/sh
+# {{ ansible_managed }}
 
 {% if serial_terminal[0] == 'cu' %}
 exec cu -l /dev/hdmi2usb/by-num/all0/tty -s 115200
