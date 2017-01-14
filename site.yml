@@ -30,3 +30,7 @@
     - voctomix
     - blackmagic
     - xorg
+
+- hosts: veyepar-encoder
+  roles:
+    - veyepar-encoder

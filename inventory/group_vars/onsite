@@ -1,2 +1,3 @@
 ---
 debconf_number: XX
+nfs_server: storage
