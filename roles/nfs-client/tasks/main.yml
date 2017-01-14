@@ -18,8 +18,8 @@
     state: mounted
     fstype: nfs
     opts: "{{ item.opts }}"
-    dump: 0
-    passno: 2
+    dump: '0'
+    passno: '2'
   with_items:
   - name: veyepar
     opts: ro,async
