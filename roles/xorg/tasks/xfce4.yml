@@ -2,11 +2,14 @@
   apt:
     name: "{{ item }}"
   with_items:
+  - gvfs
+  - nautilus
   - pavucontrol
   - pulseaudio
+  - thunar-volman
   - xfce4
-  - xfce4-pulseaudio-plugin
   - xfce4-notifyd
+  - xfce4-pulseaudio-plugin
   - xfce4-terminal
 
 - name: install an XFCE icon pack (Ubuntu)
