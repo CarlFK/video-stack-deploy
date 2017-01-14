@@ -7,7 +7,13 @@
   - stop
   - start
 
-- name: Desktop File to follow the cut list
+- name: Desktop file to follow the cut list
   template:
     src: templates/videoteam-cutlist.desktop.j2
     dest: /usr/share/applications/videoteam-cutlist.desktop
+
+- name: Script to move video to the server
+  template:
+    src: templates/videoteam-copy-recordings.j2
+    dest: /usr/local/bin/videoteam-copy-recordings
+    mode: 0755

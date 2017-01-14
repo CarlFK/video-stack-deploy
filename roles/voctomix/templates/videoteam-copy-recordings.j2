@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -euf
+
+exec rsync --archive --progress --partial \
+	/srv/video/{{ org }}/{{ show }}/dv/{{ room_name }}/ \
+	{{ nfs_server }}:/srv/{{ nfs_server }}/video/{{ org }}/{{ show }}/dv/{{ room_name }}/
