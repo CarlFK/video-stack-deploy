@@ -24,3 +24,5 @@
   - mplayer
   - totem
   - vlc
+  - mediainfo
+  - v4l-utils
