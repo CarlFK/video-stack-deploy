@@ -1,0 +1,27 @@
+---
+- name: install useful common packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - ack-grep
+  - alsa-utils
+  - curl
+  - emacs-nox
+  - gdb
+  - git
+  - htop
+  - iftop
+  - iotop
+  - ipython
+  - less
+  - lshw
+  - moreutils
+  - python3-software-properties
+  - rsync
+  - screen
+  - strace
+  - tcpdump
+  - tmux
+  - tree
+  - vim-nox
+  - vnstat

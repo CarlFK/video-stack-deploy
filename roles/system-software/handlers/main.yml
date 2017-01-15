@@ -1,0 +1,3 @@
+---
+- name: restart systemd-journald
+  command: systemctl restart systemd-journald
