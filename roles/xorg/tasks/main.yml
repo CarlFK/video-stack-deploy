@@ -4,3 +4,4 @@
 - include: hexchat.yml
 - include: packages.yml
 - include: xorg.yml
+- include: scripts.yml
