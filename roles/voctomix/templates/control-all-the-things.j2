@@ -3,6 +3,11 @@
 
 set -euf
 
+{% if 'hdmi2usbd' in serial_terminal|default({}) %}
+	echo sudo systemctl {{ item }} hdmi2usmbond
+	sudo systemctl {{ item }} hdmi2usbmond || true
+{% endif %}
+
 systemctl list-unit-files --state=enabled \
 	| sed -nre 's/^(videoteam-.*.service).*/\1/ p' \
 	| while read service; do
