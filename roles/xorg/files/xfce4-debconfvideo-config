@@ -142,6 +142,33 @@ def panels():
     tree.write(str(conf_p))
 
 
+def disable_workspaces():
+    relative_path = Path('xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml')
+    user = Path('~/.config').expanduser() / relative_path
+
+    if not user.exists():
+        with user.open('w') as f:
+            f.write('''
+<channel name="xfwm4" version="1.0">
+  <property name="general" type="empty">
+    <property name="workspace_count" type="int" value="1" />
+    <property name="workspace_names" type="array">
+      <value type="string" value="Workspace 1" />
+    </property>
+  </property>
+</channel>
+''')
+        return
+
+    tree = ET.parse(str(user))
+    root = tree.getroot()
+    general = root.find('property[@name="general"]')
+    count = general.find('property[@name="workspace_count"]')
+    count.set('value', '1')
+    tree.write(str(user))
+
+
 if __name__ == '__main__':
     keyboard_shortcuts()
     panels()
+    disable_workspaces()
