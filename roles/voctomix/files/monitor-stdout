@@ -32,7 +32,6 @@ def main():
                 print("Process didn't send any output for %s seconds, "
                       "terminating" % timeout, file=sys.stderr)
                 process.kill()
-                flush_fds(fd_map)
                 sys.exit(128)
             else:
                 flush_fds({fileno: fd_map[fileno] for fileno in r_fds}, 1024)
