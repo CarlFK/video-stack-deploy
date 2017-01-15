@@ -133,7 +133,7 @@ def panels():
     if plugins.find('property[@value="pulseaudio"]') is None:
         add_item(1, 'pulseaudio', {'enable-keyboard-shortcuts': True})
 
-    if plugins.find('value[@string="voctogui.desktop"]') is None:
+        # There's no good way to detect these
         add_item(2, 'separator')
         add_item(2, 'launcher', ['voctogui.desktop'])
         add_item(2, 'launcher', ['hexchat.desktop'])
