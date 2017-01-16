@@ -7,7 +7,7 @@ exec gst-launch-1.0 \
 	tcpclientsrc "host=localhost" port=15000 \
 	! matroskademux name=demux \
 	! queue \
-	! x264enc bitrate=2000 byte-stream=false key-int-max=60 bframes=0 aud=true tune=zerolatency ! "video/x-h264,profile=main" \
+	! x264enc bitrate=2000 byte-stream=false key-int-max=60 bframes=0 aud=true tune=zerolatency threads=1 ! "video/x-h264,profile=main" \
 	! flvmux streamable=true name=mux \
 	! rtmpsink location="rtmp://a.rtmp.youtube.com/live2/x/{{ youtube_auth }} app=live2" demux. \
 	! queue \
