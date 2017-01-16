@@ -26,6 +26,9 @@ icecast_vbr_lq: 200k
 
 icecast_source: source:password@change.me:8000
 
+# streaming: youtube
+# youtube_auth: SUPER_SECRET_KEY
+
 blackmagic_sources: []
 
 #video_disk: /dev/sdb1

@@ -6,3 +6,5 @@
 - include: scripts.yml
 - include: icecast.yml
   when: streaming == 'icecast'
+- include: youtube.yml
+  when: streaming == 'youtube'
