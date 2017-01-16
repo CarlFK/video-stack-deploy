@@ -51,9 +51,10 @@
 
 - name: link to local raw files (where Vocto is saving to)
   file:
+    state: link
     src: "/srv/video/{{ org }}/{{ show }}/dv"
     dest: "/home/{{ user_name }}/Videos/veyepar/{{ org }}/{{ show }}/dv"
-    state: link
+    force: yes
     owner:  "{{ user_name }}"
     group:  "{{ user_name }}"
 
