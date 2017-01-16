@@ -63,6 +63,7 @@
     state: link
     src: "/srv/{{ nfs_server }}/video/{{ org }}/{{ show }}/{{ item }}"
     dest: "/home/{{ user_name }}/Videos/veyepar/{{ org }}/{{ show }}/{{ item }}"
+    force: yes
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   with_items:
