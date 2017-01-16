@@ -28,6 +28,7 @@ icecast_source: source:password@change.me:8000
 
 # streaming: youtube
 # youtube_auth: SUPER_SECRET_KEY
+youtube_threads: auto
 
 blackmagic_sources: []
 
