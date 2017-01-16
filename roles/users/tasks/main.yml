@@ -4,6 +4,7 @@
     name: "{{ user_name }}"
     groups: audio,plugdev,sudo,video
     password: "{{ user_password |password_hash('sha512', pw_salt) }}"
+    shell: /bin/bash
 
 - name: install sudo
   apt:
