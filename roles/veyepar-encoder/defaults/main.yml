@@ -1,0 +1,6 @@
+---
+org: debian
+show: dcX
+room_name: room_1
+
+nfs_server: storage1

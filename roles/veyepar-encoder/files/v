@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -exf
+
+cd /srv/gw1/veyepar/
+. ve/bin/activate
+cd dj/scripts 
+
+exec bash

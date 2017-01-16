@@ -39,3 +39,4 @@
 - hosts: veyepar-encoder
   roles:
   - nfs-client
+  - veyepar-encoder
