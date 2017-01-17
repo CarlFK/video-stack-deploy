@@ -17,6 +17,8 @@
   - mediainfo
   - mplayer
   - python3-gi
+  - tesseract-ocr
+  - tesseract-ocr-eng
 
 # - name: git clone veyepar
 #  become: true
