@@ -4,7 +4,7 @@
 set -euf
 
 {% if 'hdmi2usbd' in serial_terminal|default({}) %}
-	echo sudo systemctl {{ item }} hdmi2usmbond
+	echo sudo systemctl {{ item }} hdmi2usbmond
 	sudo systemctl {{ item }} hdmi2usbmond || true
 {% endif %}
 
