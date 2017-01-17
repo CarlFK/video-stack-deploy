@@ -1,4 +1,14 @@
 ---
+
+- name: Install VAAPI Packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - gstreamer1.0-vaapi
+  - i965-va-driver
+  - vainfo
+  when: youtube_threads == 'vaapi'
+
 - name: YouTube streaming script
   template:
     src: templates/videoteam-stream.j2
