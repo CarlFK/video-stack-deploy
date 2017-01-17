@@ -14,11 +14,6 @@
   - policykit-1
   - x11-xserver-utils
 
-- name: remove "kill pulseaudio with fire on logout"
-  file:
-    state: absent
-    dest: /etc/lightdm/lightdm.conf.d/kill-pulseaudio.conf
-
 - name: Create xlogin|out.target
   copy:
     src: files/{{ item }}.target
