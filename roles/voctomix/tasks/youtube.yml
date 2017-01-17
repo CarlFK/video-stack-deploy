@@ -15,6 +15,6 @@
   file:
     state: link
     src: /etc/systemd/user/videoteam-stream.service
-    dest: "/home/{{ user_name }}/.config/systemd/user/default.target.wants/videoteam-stream.service"
+    dest: "/home/{{ user_name }}/.config/systemd/user/xlogin.target.wants/videoteam-stream.service"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"

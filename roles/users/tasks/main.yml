@@ -34,10 +34,15 @@
   command: update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
   when: ansible_env.LANG != 'en_US.UTF-8'
 
+- name: ensure the old systemd wants directory is gone
+  file:
+    state: absent
+    path: "/home/{{ user_name }}/.config/systemd/user/default.target.wants"
+
 - name: ensure systemd wants directory exists
   file:
     state: directory
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    path: "/home/{{ user_name }}/.config/systemd/user/default.target.wants"
+    path: "/home/{{ user_name }}/.config/systemd/user/xlogin.target.wants"
     recurse: true

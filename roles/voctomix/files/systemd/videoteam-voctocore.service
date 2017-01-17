@@ -1,5 +1,6 @@
 [Unit]
 Description=Voctomix core Daemon
+Conflicts=xlogout.target
 
 [Service]
 ExecStart=/usr/bin/voctocore -v
@@ -7,4 +8,4 @@ Restart=always
 RestartSec=1s
 
 [Install]
-WantedBy=default.target
+WantedBy=xlogin.target

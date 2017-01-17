@@ -3,6 +3,7 @@ Description=Voctomix stream HQ
 After=videoteam-voctocore.service
 Requires=videoteam-voctocore.service
 StartLimitIntervalSec=0
+Conflicts=xlogout.target
 
 [Service]
 ExecStart=/usr/local/bin/monitor-stdout 2 /home/videoteam/stream-voctomix-hq
@@ -10,4 +11,4 @@ Restart=always
 RestartSec=1s
 
 [Install]
-WantedBy=default.target
+WantedBy=xlogin.target

@@ -3,6 +3,7 @@ Description=Voctomix stream to YouTube
 After=videoteam-voctocore.service
 Requires=videoteam-voctocore.service
 StartLimitIntervalSec=0
+Conflicts=xlogout.target
 
 [Service]
 ExecStart=/usr/local/bin/videoteam-stream
@@ -11,4 +12,4 @@ RestartSec=1s
 Nice=10
 
 [Install]
-WantedBy=default.target
+WantedBy=xlogin.target

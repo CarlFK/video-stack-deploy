@@ -53,7 +53,7 @@
   file:
     state: link
     src: "/etc/systemd/user/videoteam-{{ item }}.service"
-    dest: "/home/{{ user_name }}/.config/systemd/user/default.target.wants/videoteam-{{ item }}.service"
+    dest: "/home/{{ user_name }}/.config/systemd/user/xlogin.target.wants/videoteam-{{ item }}.service"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   with_items:

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+systemctl --user start xlogin.target
+
+lightdm-session
+
+systemctl --user start xlogout.target

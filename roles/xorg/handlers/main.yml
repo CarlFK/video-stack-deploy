@@ -2,3 +2,9 @@
   command: /usr/local/bin/xfce4-debconfvideo-config
   become: true
   become_user: "{{ user_name }}"
+
+- name: systemctl restart lightdm
+  command: systemctl restart lightdm
+
+- name: systemctl daemon-reload
+  command: systemctl daemon-reload

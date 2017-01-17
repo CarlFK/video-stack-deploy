@@ -14,7 +14,28 @@
   - policykit-1
   - x11-xserver-utils
 
-- name: kill pulseaudio with fire on logout
-  copy:
-    src: files/kill-pulseaudio.conf
+- name: remove "kill pulseaudio with fire on logout"
+  file:
+    state: absent
     dest: /etc/lightdm/lightdm.conf.d/kill-pulseaudio.conf
+
+- name: Create xlogin|out.target
+  copy:
+    src: files/{{ item }}.target
+    dest: /etc/systemd/user/{{ item }}.target
+  notify: systemctl daemon-reload
+  with_items:
+  - xlogin
+  - xlogout
+
+- name: Drive xlogin|out.target
+  copy:
+    src: files/debconfvideo-session-wrapper
+    dest: /usr/local/bin/debconfvideo-session-wrapper
+    mode: 0755
+
+- name: Hook our session wrapper into lightdm
+  copy:
+    src: files/xlogin.conf
+    dest: /etc/lightdm/lightdm.conf.d/xlogin.conf
+  notify: systemctl restart lightdm

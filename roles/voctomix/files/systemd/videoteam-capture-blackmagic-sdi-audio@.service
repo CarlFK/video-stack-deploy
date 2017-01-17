@@ -3,6 +3,7 @@ Description=Voctomix source SDI + audio blackmagic from card %I
 After=videoteam-voctocore.service
 Requires=videoteam-voctocore.service
 StartLimitIntervalSec=0
+Conflicts=xlogout.target
 
 [Service]
 ExecStart=/usr/bin/voctomix-ingest -v --video-source blackmagic --video-attribs 'device-number=%I connection=1' --audio-source blackmagic --audio-attribs 'device-number=%I connection=1' --port 1000%I
@@ -10,4 +11,4 @@ Restart=always
 RestartSec=1s
 
 [Install]
-WantedBy=default.target
+WantedBy=xlogin.target
