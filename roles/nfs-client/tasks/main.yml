@@ -24,4 +24,4 @@
   - name: veyepar
     opts: ro,async
   - name: video
-    opts: rw,sync
+    opts: rw,async

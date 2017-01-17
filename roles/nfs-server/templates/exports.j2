@@ -1,4 +1,4 @@
 # {{ ansible_managed }}
 # fsid=X is needed for XFS filesystems with 64bit inodes
-/srv/{{ nfs_server }}/veyepar {{ eth_local_ip_address|default(ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) }}(ro,async,no_subtree_check,fsid=0)
+/srv/{{ nfs_server }}/veyepar {{ eth_local_ip_address|default(ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) }}(ro,sync,no_subtree_check,fsid=0)
 /srv/{{ nfs_server }}/video {{ eth_local_ip_address|default(ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) }}(rw,sync,no_subtree_check,fsid=1)
