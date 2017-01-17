@@ -59,7 +59,7 @@
 - name: link to local raw files (where Vocto is saving to)
   file:
     state: link
-    src: "/srv/video/{{ org }}/{{ show }}/dv"
+    src: "/srv/{% if room_name is not defined %}{{ nfs_server }}/{% endif %}video/{{ org }}/{{ show }}/dv"
     dest: "/home/{{ user_name }}/Videos/veyepar/{{ org }}/{{ show }}/dv"
     force: yes
     owner:  "{{ user_name }}"
