@@ -10,3 +10,5 @@ systemctl --user start xlogin.target
 lightdm-session
 
 systemctl --user start xlogout.target
+killall pulseaudio
+killall gpg-agent
