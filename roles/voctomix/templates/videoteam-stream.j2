@@ -9,6 +9,7 @@ exec gst-launch-1.0 \
 	! queue \
 {% if youtube_threads == 'vaapi' %}
 	! vaapih264enc keyframe-period=60 max-bframes=0 bitrate=2000 \
+	! h264parse config-interval=2 \
 {% else %}
 	! x264enc bitrate=2000 byte-stream=false key-int-max=60 bframes=0 aud=true tune=zerolatency threads={{ youtube_threads }} \
 {% endif %}
