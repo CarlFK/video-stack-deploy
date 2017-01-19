@@ -32,4 +32,6 @@ youtube_threads: auto
 
 blackmagic_sources: []
 
+rsync_excludes: []
+
 #video_disk: /dev/sdb1
