@@ -8,6 +8,8 @@ apt_proxy: false
 # Defaults to deb.debian.org | archive.ubuntu.com
 #mirror: deb.debian.org
 
+web_root: /var/www/html
+
 user_name: videoteam
 # Defaults to not setting a password
 #user_password_crypted: changeme

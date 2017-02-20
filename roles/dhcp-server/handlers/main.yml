@@ -1,6 +1,7 @@
 ---
 - name: restart networking
   command: "/bin/systemctl restart networking.service"
+  ignore_errors: yes
 
 - name: restart dnsmasq
   command: "/bin/systemctl restart dnsmasq.service"
