@@ -3,6 +3,7 @@
   apt:
     name: "{{ item }}"
   with_items:
+  - build-essential
   - ffmpeg
   - gir1.2-gst-plugins-base-1.0
   - gir1.2-gstreamer-1.0
@@ -14,32 +15,58 @@
   - gstreamer1.0-x
   - imagemagick
   - inkscape
+  - libpq-dev
   - libpq5
   - mediainfo
   - mplayer
+  - python-psycopg2
+  - python3-dev
   - python3-gi
+  - python3-venv
   - tesseract-ocr
   - tesseract-ocr-eng
+  - tmux
 
-# - name: git clone veyepar
-#  become: true
-#become_user:  "{{ user_name }}"
-# git:
-#     # repo: git://github.com/CarlFK/veyepar.git
-#   repo: git://github.com/CarlFK/clocky.git
-#  dest: /home/{{ user_name }}/veyepar
-# Things done to the server to this work:
-#  git clone and nfs export
-#  scp dj/local_settings.py videoteam@gw1:/srv/gw1/veyepar/dj/dj
-#  scp scripts/pw.py videoteam@gw1:/srv/gw1/veyepar/dj/scripts
-#  carl@twist:~/src/veyepar/dj/scripts/bling$ rsync -rtvP lca2017 videoteam@gw1:/srv/gw1/veyepar/dj/scripts/bling
-#  ~/src/veyepar/dj/scripts$ scp client_secrets.json videoteam@gw1:/srv/gw1/veyepar/dj/scripts
-#  apt install inkscape mplayer python3-venv
-#    build-essential python3-dev libpq-dev
 #  pip install --upgrade pip
 #
 # 2to3 -w /srv/gw1/veyepar/ve/lib/python3.5/site-packages/steve
 # 2to3 -w /srv/gw1/veyepar/ve/lib/python3.5/site-packages/vidscraper
+
+- name: git clone veyepar
+  git:
+    repo: https://github.com/CarlFK/veyepar.git
+    dest: "/home/{{ user_name }}/veyepar"
+    depth: 1
+  become: true
+  become_user: "{{ user_name }}"
+
+- name: copy local secret files to encoder node
+  copy:
+    src: "{{ veyepar_confs }}/{{ item }}"
+    dest: "/home/{{ user_name }}/veyepar/{{ item }}"
+  become: true
+  become_user:  "{{ user_name }}"
+  # owner:  "{{ user_name }}"
+  # group:  "{{ user_name }}"
+  with_items:
+  - dj/dj/local_settings.py
+  - dj/scripts/veyepar.cfg
+  - dj/scripts/pw.py
+  - dj/scripts/bling/{{ org }}/
+  - dj/scripts/bling/ndv-169.png
+    # - dj/scripts/client_secrets.json # only needed for yt upload
+    # - dj/scripts/oauth2-{{ org }}.json
+
+- name: veyepar ve py pip requirements
+  pip:
+    requirements: "/home/{{ user_name }}/veyepar/setup/nodes/encode/requirements.txt"
+    virtualenv: "/home/{{ user_name }}/.virtualenvs/veyepar"
+    virtualenv_command: pyvenv
+    virtualenv_site_packages: true
+    # extra_args: --upgrade
+    state: forcereinstall
+  become: true
+  become_user:  "{{ user_name }}"
 
 - name: configure veyepar
   template:
