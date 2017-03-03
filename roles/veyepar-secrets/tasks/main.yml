@@ -1,0 +1,16 @@
+---
+- name: copy local secret files
+  copy:
+    src: "{{ veyepar_confs }}/{{ item }}"
+    dest: "/home/{{ user_name }}/veyepar/{{ item }}"
+  become: true
+  become_user:  "{{ user_name }}"
+  # owner:  "{{ user_name }}"
+  # group:  "{{ user_name }}"
+  with_items:
+  - dj/dj/local_settings.py # db pw, smtp
+  - dj/scripts/pw.py # conf site, twitter, swift ...
+  - dj/scripts/client_secrets.json # youtube
+    # - dj/scripts/oauth2-{{ org }}.json # youtube (not really needed?)
+  - dj/scripts/bling/{{ org }}/ # secret title.svg :p
+  - dj/scripts/bling/ndv-169.png

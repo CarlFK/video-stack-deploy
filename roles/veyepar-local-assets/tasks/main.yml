@@ -1,0 +1,15 @@
+---
+- name: configure veyepar
+  template:
+    src: "templates/veyepar.cfg.j2"
+    dest: "/home/{{ user_name }}/veyepar.cfg"
+    owner:  "{{ user_name }}"
+    group:  "{{ user_name }}"
+
+- name: create veyepar show dir
+  file:
+    path: "/home/{{ user_name }}/Videos/veyepar/{{ org }}/{{ show }}"
+    state: directory
+    recurse: true
+    owner:  "{{ user_name }}"
+    group:  "{{ user_name }}"
