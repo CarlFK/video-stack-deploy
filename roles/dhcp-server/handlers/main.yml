@@ -7,3 +7,20 @@
 
 - name: restart network-manager
   command: "/bin/systemctl restart NetworkManager.service"
+
+- name: reboot
+  when: ansible_connection != 'local'
+  command: shutdown -r now "Reboot triggered by Ansible"
+  async: 0
+  poll: 0
+  ignore_errors: true
+
+- name: wait for reboot
+  when: ansible_connection != 'local'
+  local_action:
+    module: wait_for
+    host: "{{ inventory_hostname }}"
+    port: "{{ ansible_port | default(22) }}"
+    delay: 1
+    timeout: 300
+  sudo: false
