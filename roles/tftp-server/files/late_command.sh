@@ -9,8 +9,10 @@ apt install -y ansible git eatmydata
 
 # We clone our ansible repository and copy the ansible config files
 
-git clone https://anonscm.debian.org/git/debconf-video/ansible.git /root/debconf-ansible
-git clone https://github.com/xfxf/lca2017-av.git /root/lca2017-av
+# git clone https://anonscm.debian.org/git/debconf-video/ansible.git /root/debconf-ansible
+git clone https://github.com/CarlFK/video-stack-deploy.git /root/debconf-ansible
+
+git clone https://github.com/xfxf/av-foss-stack.git /root/lca2017-av
 
 ln -s /root/lca2017-av/inventory/ansible-up.sh /usr/local/sbin/ansible-up
 
