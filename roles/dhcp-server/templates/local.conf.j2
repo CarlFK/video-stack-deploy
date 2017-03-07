@@ -10,3 +10,4 @@ enable-tftp
 tftp-root=/srv/tftp
 no-hosts
 host-record={{ inventory_hostname }},{{ eth_local_ip_address }}
+host-record={{ inventory_hostname }}.{{ domain }},{{ eth_local_ip_address }}
