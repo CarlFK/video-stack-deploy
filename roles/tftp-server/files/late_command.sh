@@ -15,7 +15,7 @@ apt install -y ansible git eatmydata
 
 # git clone https://anonscm.debian.org/git/debconf-video/ansible.git /root/debconf-ansible
 git clone https://github.com/CarlFK/video-stack-deploy.git /root/debconf-ansible
-cd /root/debconf-ans
+cd /root/debconf-ansible
 git branch pxe-toucheup
 cd -
 
