@@ -1,9 +1,13 @@
 #!/bin/sh
 
-set -euf
+set -eufx
 
 # This script setups ansible and runs it
 # It should be ran at the end of the basic installation of a machine
+
+apt install -y software-properties-common
+# apt-add-repository --yes --update "deb http://ppa.launchpad.net/ansible/ansible/ubuntu xenial main"
+apt-add-repository --yes --update ppa:ansible/ansible
 
 apt install -y ansible git eatmydata
 
@@ -11,6 +15,9 @@ apt install -y ansible git eatmydata
 
 # git clone https://anonscm.debian.org/git/debconf-video/ansible.git /root/debconf-ansible
 git clone https://github.com/CarlFK/video-stack-deploy.git /root/debconf-ansible
+cd /root/debconf-ans
+git branch pxe-toucheup
+cd -
 
 git clone https://github.com/xfxf/av-foss-stack.git /root/lca2017-av
 
