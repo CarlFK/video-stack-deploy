@@ -24,7 +24,6 @@
     repo: "ppa:timvideos/{{ item }}"
   with_items:
   - fpga-support
-  - hdmi2usb
   - voctomix
   when: ansible_distribution == 'Ubuntu'
 
