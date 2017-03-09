@@ -24,8 +24,8 @@ git clone https://github.com/xfxf/av-foss-stack.git /root/lca2017-av
 ln -s /root/lca2017-av/inventory/ansible-up.sh /usr/local/sbin/ansible-up
 
 # Aaaand we run ansible
-eatmydata ansible-playbook --inventory-file=/root/lca2017-av/inventory/hosts \
+eatmydata ansible-playbook \
 	--connection=local \
 	--limit=$(hostname) \
-	/root/lca2017-av/site.yml \
+    --inventory-file=/root/lca2017-av/inventory/hosts \
 	/root/debconf-ansible/site.yml
