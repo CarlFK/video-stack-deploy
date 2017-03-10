@@ -23,7 +23,7 @@
     dest: "{{ item.path }}"
     regexp: (\s+append vga=.*\s+initrd=\S+)\s+(?!auto=true)(.*)
     backrefs: true
-    line: \1 auto=true interface=auto url={{ inventory_hostname }} DEBCONF_DEBUG=5 partman-auto/disk="/dev/hda" \2
+    line: \1 auto=true interface=auto url={{ inventory_hostname }} DEBCONF_DEBUG=5 partman-auto/disk="/dev/sda" \2
   with_items: "{{ menus.files }}"
 
 - name: create d-i directory
