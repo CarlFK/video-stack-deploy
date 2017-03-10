@@ -165,7 +165,7 @@ d-i clock-setup/ntp boolean true
 # name must be given in traditional, non-devfs format (so e.g. /dev/hda or
 # /dev/sda, and not e.g. /dev/discs/disc0/disc).
 # For example, to use the first SCSI/SATA hard disk:
-d-i partman-auto/disk string /dev/sda
+# d-i partman-auto/disk string /dev/sda
 # In addition, you'll need to specify the method to use.
 # The presently available methods are:
 # - regular: use the usual partition types for your architecture
@@ -365,9 +365,9 @@ d-i grub-installer/with_other_os boolean true
 
 # Due notably to potential USB sticks, the location of the MBR can not be
 # determined safely in general, so this needs to be specified:
-d-i grub-installer/bootdev  string /dev/sda
+# d-i grub-installer/bootdev  string /dev/sda
 # To install to the first device (assuming it is not a USB stick):
-#d-i grub-installer/bootdev  string default
+d-i grub-installer/bootdev  string default
 
 # Alternatively, if you want to install to a location other than the mbr,
 # uncomment and edit these lines:
