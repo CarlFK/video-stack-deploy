@@ -11,7 +11,8 @@ wget -N http://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/$iso
 wget -N http://cdimage.debian.org/cdimage/release/current/amd64/iso-cd/SHA512SUMS
 
 
-# zcat boot.img.gz|sudo dcfldd of=/dev/$dev conv=fdatasync
+zcat boot.img.gz|sudo dcfldd of=/dev/$dev
+# conv=fdatasync
 
 pmount /dev/$dev
 cp $iso syslinux.cfg preseed.cfg /media/$dev
