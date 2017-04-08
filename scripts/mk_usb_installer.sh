@@ -15,7 +15,10 @@ zcat boot.img.gz|sudo dcfldd of=/dev/$dev
 # conv=fdatasync
 
 pmount /dev/$dev
-cp $iso syslinux.cfg preseed.cfg /media/$dev
+cp $iso syslinux.cfg d-i/jessie/preseed.cfg /media/$dev
+
+# set the default so we can have special boot disks and such passed as boot parameters
+sed -i "/^DEFAULT.*/s/^.*$/DEFAULT $1/" /media/$dev/syslinux.cfg
 
 cd /media/$dev
 sha512sum --check <(grep $iso $OLDPWD/SHA512SUMS)
