@@ -12,9 +12,9 @@ d-i debian-installer/locale string en_US
 #d-i localechooser/supported-locales multiselect en_US.UTF-8, nl_NL.UTF-8
 
 # Keyboard selection.
-{% if ansible_distribution == 'Debian' %}
+{% if distro == 'Debian' %}
 d-i keyboard-configuration/xkb-keymap select us
-{% elif ansible_distribution == 'Ubuntu' %}
+{% elif distro == 'Ubuntu' %}
 d-i keyboard-configuration/layoutcode string us
 {% endif %}
 # d-i keyboard-configuration/toggle select No toggling
@@ -102,10 +102,10 @@ d-i netcfg/wireless_wep string
 # If you select ftp, the mirror/country string does not need to be set.
 #d-i mirror/protocol string ftp
 d-i mirror/country string manual
-{% if ansible_distribution == 'Debian' %}
+{% if distro == 'Debian' %}
 d-i mirror/http/hostname string {{ mirror | default('deb.debian.org') }}
 d-i mirror/http/directory string /debian
-{% elif ansible_distribution == 'Ubuntu' %}
+{% elif distro == 'Ubuntu' %}
 d-i mirror/http/hostname string {{ mirror | default('archive.ubuntu.com') }}
 d-i mirror/http/directory string /ubuntu
 {% endif %}
@@ -132,7 +132,7 @@ d-i passwd/username string {{ user_name }}
 {% if user_password_crypted is defined %}
 d-i passwd/user-password-crypted password {{ user_password_crypted }}
 {% endif %}
-{% if ansible_distribution == 'Ubuntu' %}
+{% if distro == 'Ubuntu' %}
 # Ubuntu offers encrypted home directories
 d-i user-setup/encrypt-home boolean false
 {% endif %}
@@ -183,7 +183,7 @@ d-i partman-md/device_remove_md boolean true
 d-i partman-lvm/confirm boolean true
 d-i partman-lvm/confirm_nooverwrite boolean true
 
-{% if ansible_distribution == 'Ubuntu' %}
+{% if distro == 'Ubuntu' %}
 # Use all the space on LVM
 d-i partman-auto-lvm/guided_size string max
 {% endif %}
@@ -309,7 +309,7 @@ d-i apt-setup/contrib boolean true
 #d-i apt-setup/services-select multiselect security, updates
 #d-i apt-setup/security_host string security.debian.org
 
-{% if ansible_distribution == 'Ubuntu' %}
+{% if distro == 'Ubuntu' %}
 d-i pkgsel/update-policy string unattended-upgrades
 {% endif %}
 
