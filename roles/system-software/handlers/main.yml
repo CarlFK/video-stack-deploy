@@ -1,3 +1,4 @@
 ---
 - name: restart systemd-journald
   command: systemctl restart systemd-journald
+  when: ansible_env.ANSIBLE_UNDER_DI is undefined
