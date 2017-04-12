@@ -1,6 +1,4 @@
 ---
 user_name: videoteam
-# The video user's password. It can be set during install, by preseed, so you
-# don't have to set it here
-#user_password: please_change_me
-#pw_salt: please_change_me
+# crypt(3)ed password. e.g. echo -e redPill | mkpasswd -s -m SHA-512
+user_password_crypted: $6$8HM7EZ2Uf73ekI$dtCsm0VMP68M0uR5Kbf/9MoNhuXmoiVgOkcq0miFn64EFWqG79z6spWb1SKegu7ft937bHHe5SA9wYErUr60G0
