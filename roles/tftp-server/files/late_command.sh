@@ -5,9 +5,9 @@ set -eufx
 # This script setups ansible and runs it
 # It should be ran at the end of the basic installation of a machine
 
-apt install -y software-properties-common
+# apt install -y software-properties-common
 # apt-add-repository --yes --update "deb http://ppa.launchpad.net/ansible/ansible/ubuntu xenial main"
-apt-add-repository --yes --update ppa:ansible/ansible
+# apt-add-repository --yes --update ppa:ansible/ansible
 
 apt install -y ansible git eatmydata
 
