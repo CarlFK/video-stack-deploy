@@ -1,10 +1,4 @@
 ---
-- name: configure lightdm autologin
-  template:
-    src: templates/autologin.conf.j2
-    dest: /etc/lightdm/lightdm.conf.d/autologin.conf
-  when: autologin
-
 - name: install lightdm
   apt:
     pkg: "{{ item }}"
@@ -13,6 +7,18 @@
   - lightdm
   - policykit-1
   - x11-xserver-utils
+
+- name: create dir for configs
+  file:
+    path: /etc/lightdm/lightdm.conf.d
+    state: directory
+
+- name: configure lightdm autologin
+  template:
+    src: templates/autologin.conf.j2
+    dest: /etc/lightdm/lightdm.conf.d/autologin.conf
+  when: autologin
+  notify: systemctl restart lightdm
 
 - name: Create xlogin|out.target
   copy:
