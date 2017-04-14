@@ -5,6 +5,7 @@
 # - cu
 # - flterm
 # - hdmi2usbd
+# - minicom
 serial_terminal:
 - cu
 
