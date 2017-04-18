@@ -23,9 +23,16 @@ git clone https://github.com/xfxf/av-foss-stack.git /root/lca2017-av
 
 ln -s /root/lca2017-av/inventory/ansible-up.sh /usr/local/sbin/ansible-up
 
+# not sure why sometimes this is only needed when I run from a prompt in the installer shell,
+# but the istaller doesn't.  or something.  I'm not sure when it is needed.
+mkdir /dev/shm
+echo "none /dev/shm tmpfs rw,nosuid,nodev,noexec,noauto 0 0" >> /etc/fstab
+mount /dev/shm
+
 # Aaaand we run ansible
 eatmydata ansible-playbook \
+    -vvvv \
 	--connection=local \
-	--limit=$(hostname) \
+    --limit=$(hostname) \
     --inventory-file=/root/lca2017-av/inventory/hosts \
 	/root/debconf-ansible/site.yml
