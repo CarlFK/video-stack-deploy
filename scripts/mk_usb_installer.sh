@@ -2,41 +2,79 @@
 
 # build a usb installer: debian, preseed, ansible
 
-# iso=debian-stretch-DI-rc3-amd64-netinst.iso
-iso=ubuntu-17.04-server-amd64.iso
-
+# dev of usb stick (like sdc, no /dev/ prefex)
+# warning it gets clobbered.
 dev=sdc
 
+# use the supplied ./http_server.sh
+preseed="url=$(hostname):8000"
 
-# wget -N http://ftp.debian.org/debian/dists/stretch/main/installer-amd64/current/images/hd-media/boot.img.gz
-# wget -N http://cdimage.debian.org/cdimage/stretch_di_rc3/amd64/iso-cd/$iso
-# wget -N http://cdimage.debian.org/cdimage/stretch_di_rc3/amd64/iso-cd/SHA512SUMS
+# host the file on some other server hostname dc10b.
+# your problem to setup the server, hostname whatever you want.
+# preseed="url=dc10b"
 
-wget -N http://archive.ubuntu.com/ubuntu/dists/zesty/main/installer-amd64/current/images/hd-media/boot.img.gz
-wget -N http://releases.ubuntu.com/zesty/$iso
-wget -N http://releases.ubuntu.com/zesty/SHA256SUMS
+# to use the file on the usb stick
+# (early/late_command will need to be adjusted too)
+# preseed="file=preseed.cfg"
 
-sha256sum --check <(grep $iso SHA256SUMS)
+# per box changes can be done by passing parameter to the kernel
+# from the syslinux on the usb stick:
+# example: to install to an SSD that doesn't come up as /dev/sda:
+# (don't forget to escape the slasses because bash)
+# appends='partman-auto\/disk=\/dev\/nvme0n1'
 
-echo pumount /dev/$dev
-sudo dcfldd if=$iso of=/dev/$dev
-exit
+# where to get what:
 
-zcat boot.img.gz|sudo dcfldd of=/dev/$dev
-# conv=fdatasync
+suite=stretch
+bootimg_loc=http://ftp.debian.org/debian/dists/$suite/main/installer-amd64/current/images
+iso=debian-stretch-DI-rc3-amd64-netinst.iso
+iso_loc=http://cdimage.debian.org/cdimage/stretch_di_rc3/amd64/iso-cd
+
+# suite=xenial
+# bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/$suite/main/installer-amd64/current/images/
+# iso=ubuntu-16.04.2-server-amd64.iso
+# iso_loc=http://releases.ubuntu.com/$suite
+
+# the rest should just work.
+
+# get and veriy the boot image
+# (hd-media dir because that is bunred into the SHA256SUMS file)
+wget -N --directory-prefi hd-media $bootimg_loc/hd-media/boot.img.gz
+curl -OJ $bootimg_loc/SHA256SUMS
+# pull the line out for the 1 file and verify it
+grep hd-media/boot.img.gz SHA256SUMS > boot.img.gz.SHA256SUM
+sha256sum --check boot.img.gz.SHA256SUM
+
+# cd so most of the .deb's are local
+wget -N $iso_loc/$iso
+curl -OJ $iso_loc/SHA256SUMS
+grep $iso SHA256SUMS > $iso.SHA256SUM
+sha256sum --check $iso.SHA256SUM
+
+zcat hd-media/boot.img.gz|sudo dcfldd of=/dev/$dev
+# or good ol dd
+# zcat boot.img.gz|sudo dd of=/dev/$dev conv=fdatasync
 
 pmount /dev/$dev
-cp $iso syslinux.cfg d-i/jessie/preseed.cfg /media/$dev
 
-# set the default so we can have special boot disks and such passed as boot parameters
-sed -i "/^DEFAULT.*/s/^.*$/DEFAULT $1/" /media/$dev/syslinux.cfg
+# append appends to append, preseed location too.
+sed '/^APPEND/s/$/ ${preseed} ${appends}/' syslinux.cfg > /media/$dev/syslinux.cfg
+
+# copy the preseed files in case of problems serving them over the net.
+# 'just' fis the APPAND line and the early/late stuff and off you go.
+cp -a d-i/$suite/* /media/$dev
+
+# this doesn't work for Ubuntu.
+# The .iso is too big and sometimes boot is an iso9660 fs so RO?!!
+# boot.img only has 782M of free space.
+# so put it on a 2nd usb stick, or the unused space on the 8gig usb stick.
+cp $iso $iso.SHA256SUM /media/$dev
 
 cd /media/$dev
-# sha512sum --check <(grep $iso $OLDPWD/SHA512SUMS)
-sha256sum --check <(grep $iso $OLDPWD/SHA256SUMS)
+
+# check the iso image again, make sure it copied ok.
+sha256sum --check $iso.SHA256SUM
+
 cd -
-
-pumount $dev
-
-
+pumount /dev/$dev
 
