@@ -5,6 +5,7 @@
 # dev of usb stick (like sdc, no /dev/ prefex)
 # warning it gets clobbered.
 dev=sdc
+dev=$1
 
 # use the supplied ./http_server.sh
 preseed="url=$(hostname):8000"
@@ -79,3 +80,4 @@ sha256sum --check ${iso}.SHA256SUM
 cd -
 pumount /dev/${dev}
 
+./http_server.sh
