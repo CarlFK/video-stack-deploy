@@ -2,20 +2,43 @@
 
 # build a usb installer: debian, preseed, ansible
 
-# dev of usb stick (like sdc, no /dev/ prefex)
-# warning it gets clobbered.
-dev=sdc
+# Do this:
+# sudo apt install git pmount dcfldd
+# clone this repo
+# adjust ansible inventory file, commit and push back to public repo
+# adjust this script (maybe, see below)
+# run this script to
+# 1. setup bootable usb stick
+# 2. run a web server to serve up the preseed, early, late_command.sh
+# boot target machine from stick.
+# late_command.sh will clone the repo and run ansible
+
+# things that may need tweeking:
+# summary:
+# $1 - dev of usb stick to clobber (like sdc, no /dev/ prefex)
+# preseed - how the installer gets the file (defaults to http from this box)
+# preseed.cfg d-i preseed/late_command - gets/runs late_command.sh
+# late_command.sh - gets ansible playbook
+# appends='partman-auto\/disk=\/dev\/nvme0n1' target other than /dev/sda
+# URLs and versions of installer and iso.
+
+# details:
+
 dev=$1
+# dev=sdc
 
 # use the supplied ./http_server.sh
 preseed="url=$(hostname):8000"
+
+# or depending on local dns:
+# preseed="url=$(hostname).local:8000"
 
 # host the file on some other server hostname dc10b.
 # your problem to setup the server, hostname whatever you want.
 # preseed="url=dc10b"
 
 # to use the file on the usb stick
-# (early/late_command will need to be adjusted too)
+# preseed may need to be adjusted to get from install media.
 # preseed="file=preseed.cfg"
 
 # per box changes can be done by passing parameter to the kernel
@@ -36,17 +59,17 @@ iso_loc=http://cdimage.debian.org/cdimage/stretch_di_rc3/amd64/iso-cd
 # iso=ubuntu-16.04.2-server-amd64.iso
 # iso_loc=http://releases.ubuntu.com/${suite}
 
-# the rest should just work.
+# The rest should just work.
 
 # get and veriy the boot image
 # (hd-media dir because that is bunred into the SHA256SUMS file)
-wget -N --directory-prefi hd-media ${bootimg_loc}/hd-media/boot.img.gz
+wget -N --directory-prefix hd-media ${bootimg_loc}/hd-media/boot.img.gz
 curl -OJ ${bootimg_loc}/SHA256SUMS
 # pull the line out for the 1 file and verify it
 grep hd-media/boot.img.gz SHA256SUMS > boot.img.gz.SHA256SUM
 sha256sum --check boot.img.gz.SHA256SUM
 
-# cd so most of the .deb's are local
+# cd of local .deb's
 wget -N ${iso_loc}/${iso}
 curl -OJ ${iso_loc}/SHA256SUMS
 grep ${iso} SHA256SUMS > ${iso}.SHA256SUM
