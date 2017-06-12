@@ -1,7 +1,9 @@
 == setup and testing the setup ==
 
 There are a few setup workflows that try to share common files.
-That has not been achived yet, but it is close.
+there are different preseed and late_comand.sh files for
+Debian/Ubuntu and usb/pxe.
+they are all very similar, maybe they can be merged later.
 
 1. clone repo to your local machine.
 2. edit inventory/hosts
