@@ -79,6 +79,9 @@ zcat hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
 # or good ol dd
 # zcat boot.img.gz|sudo dd of=/dev/${dev} conv=fdatasync
 
+# make room for the 800mb ubuntu iso
+# sudo fatresize -p -s 2G /dev/${dev}
+
 pmount /dev/${dev}
 
 # append appends to append, preseed location too.
