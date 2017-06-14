@@ -31,11 +31,12 @@ ln -s /root/lca2017-av/inventory/ansible-up.sh /usr/local/sbin/ansible-up
 # whach hack to allow ansible to run
 # running with python3 might fix this.
 # http://stackoverflow.com/questions/3314031/django-celery-implementation-oserror-errno-38-function-not-implemented#comment7543003_3699231
-# added noauto so we can just leave it there for eternity. 
+# added noauto so we can just leave it there for eternity.
 
 mkdir /dev/shm
 echo "none /dev/shm tmpfs rw,nosuid,nodev,noexec,noauto 0 0" >> /etc/fstab
 mount /dev/shm
+# mount -t tmpfs none /dev/shm
 
 
 # Aaaand we run ansible
