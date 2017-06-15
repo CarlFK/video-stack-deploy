@@ -21,3 +21,7 @@ playbook_branch: master
 # To replace the stock inventory with your own, point at your own github repo
 #inventory_repo: https://gitlab.com/yourname/ansible-inventory
 #inventory_branch: master
+
+# What Distro to install?
+# Debian or Ubuntu
+distro: Debian
