@@ -7,7 +7,6 @@
 
 # def of usb stick
 dev=$1
-dev=sdc
 
 # blank disk to install to
 qemu-img create -f qcow2 disk.cow 8G
