@@ -86,7 +86,7 @@ pmount /dev/${dev}
 
 # append appends to append, preseed location too.
 # tee so I can see what gets written out.
-sed "/^APPEND/s/$/ ${preseed} ${appends}/" syslinux.cfg | tee /media/${dev}/syslinux.cfg
+sed "/^APPEND/s/$/ fb=false ${preseed} ${appends}/" syslinux.cfg | tee /media/${dev}/syslinux.cfg
 
 # copy the preseed files in case of problems serving them over the net.
 # 'just' fis the APPAND line and the early/late stuff and off you go.
