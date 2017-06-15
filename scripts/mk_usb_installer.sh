@@ -49,15 +49,15 @@ preseed="url=$(hostname):8000"
 
 # where to get what:
 
-suite=stretch
-bootimg_loc=http://ftp.debian.org/debian/dists/${suite}/main/installer-amd64/current/images
-iso=debian-stretch-DI-rc3-amd64-netinst.iso
-iso_loc=http://cdimage.debian.org/cdimage/stretch_di_rc3/amd64/iso-cd
+# suite=stretch
+# bootimg_loc=http://ftp.debian.org/debian/dists/${suite}/main/installer-amd64/current/images
+# iso=debian-stretch-DI-rc3-amd64-netinst.iso
+# iso_loc=http://cdimage.debian.org/cdimage/stretch_di_rc3/amd64/iso-cd
 
-# suite=xenial
-# bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}/main/installer-amd64/current/images/
-# iso=ubuntu-16.04.2-server-amd64.iso
-# iso_loc=http://releases.ubuntu.com/${suite}
+suite=xenial
+bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}/main/installer-amd64/current/images/
+iso=ubuntu-16.04.2-server-amd64.iso
+iso_loc=http://releases.ubuntu.com/${suite}
 
 # The rest should just work.
 
@@ -87,6 +87,10 @@ pmount /dev/${dev}
 # append appends to append, preseed location too.
 # tee so I can see what gets written out.
 sed "/^APPEND/s/$/ fb=false ${preseed} ${appends}/" syslinux.cfg | tee /media/${dev}/syslinux.cfg
+
+# bail here becuase the ubuntu iso doen't fit
+pumount /dev/${dev}
+exit
 
 # copy the preseed files in case of problems serving them over the net.
 # 'just' fis the APPAND line and the early/late stuff and off you go.
