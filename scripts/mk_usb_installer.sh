@@ -2,30 +2,37 @@
 
 # build a usb installer: debian, preseed, ansible
 
+# $1 - dev of usb stick to clobber (like sdc, no /dev/ prefex)
+dev=$1
+
 # Do this:
-# sudo apt install git pmount dcfldd
-# clone this repo
-# adjust ansible inventory file, commit and push back to public repo
-# adjust this script (maybe, see below)
-# run this script to
-# 1. setup bootable usb stick
-# 2. run a web server to serve up the preseed, early, late_command.sh
-# boot target machine from stick.
-# late_command.sh will clone the repo and run ansible
+# 1. sudo apt install git pmount dcfldd
+# 2. clone this repo
+# 3. adjust ansible inventory file, commit and push back to public repo
+# 4. adjust this script (maybe, see below)
+# 5. run it:
+# ./mk_usb_installer.sh sdb
+# it will do this:
+#  a. setup bootable usb stick
+#  b. run a web server to serve up the preseed, early, late_command.sh
+
+# 6. boot target machine from stick.  It will do this:
+#  a. install the OS
+#  b. wget/run late_command.sh
+#  c. late_command.sh will clone the repo and run
+#  d. ansible --local --limit=$(hostname)
+
 
 # things that may need tweeking:
-# summary:
-# $1 - dev of usb stick to clobber (like sdc, no /dev/ prefex)
+
 # preseed - how the installer gets the file (defaults to http from this box)
 # preseed.cfg d-i preseed/late_command - gets/runs late_command.sh
 # late_command.sh - gets ansible playbook
-# appends='partman-auto\/disk=\/dev\/nvme0n1' target other than /dev/sda
-# URLs and versions of installer and iso.
 
-# details:
+# To install to a target other than /dev/sda
+# install full desktop
+# appends='partman-auto\/disk=\/dev\/nvme0n1 tasks=ubuntu-desktop'
 
-dev=$1
-# dev=sdc
 
 # use the supplied ./http_server.sh
 preseed="url=$(hostname):8000"
@@ -55,7 +62,8 @@ preseed="url=$(hostname):8000"
 # iso_loc=http://cdimage.debian.org/cdimage/stretch_di_rc3/amd64/iso-cd
 
 suite=xenial
-bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}/main/installer-amd64/current/images/
+# bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}/main/installer-amd64/current/images/
+bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}-updates/main/installer-amd64/current/images/
 iso=ubuntu-16.04.2-server-amd64.iso
 iso_loc=http://releases.ubuntu.com/${suite}
 
