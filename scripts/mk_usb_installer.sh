@@ -74,7 +74,7 @@ iso_loc=http://releases.ubuntu.com/${suite}
 wget -N --directory-prefix hd-media ${bootimg_loc}/hd-media/boot.img.gz
 curl -OJ ${bootimg_loc}/SHA256SUMS
 # pull the line out for the 1 file and verify it
-grep hd-media/boot.img.gz SHA256SUMS > boot.img.gz.SHA256SUM
+grep ./hd-media/boot.img.gz SHA256SUMS > boot.img.gz.SHA256SUM
 sha256sum --check boot.img.gz.SHA256SUM
 
 # cd of local .deb's
@@ -98,10 +98,12 @@ sed "/^APPEND/s/$/ fb=false ${preseed} ${appends}/" syslinux.cfg | tee /media/${
 
 # bail here becuase the ubuntu iso doen't fit
 pumount /dev/${dev}
+./http_server.sh
 exit
 
 # copy the preseed files in case of problems serving them over the net.
-# 'just' fis the APPAND line and the early/late stuff and off you go.
+# just fis the APPEND line and the early/late stuff and off you go.
+# (good luck, it is hard.)
 cp -a d-i/${suite}/* /media/${dev}
 
 # this doesn't work for Ubuntu.
