@@ -96,28 +96,32 @@ pmount /dev/${dev}
 # tee so I can see what gets written out.
 sed "/^APPEND/s/$/ fb=false ${preseed} ${appends}/" syslinux.cfg | tee /media/${dev}/syslinux.cfg
 
-# bail here becuase the ubuntu iso doen't fit
-pumount /dev/${dev}
-./http_server.sh
-exit
-
 # copy the preseed files in case of problems serving them over the net.
 # just fis the APPEND line and the early/late stuff and off you go.
 # (good luck, it is hard.)
 cp -a d-i/${suite}/* /media/${dev}
 
-# this doesn't work for Ubuntu.
-# The .iso is too big and sometimes boot is an iso9660 fs so RO?!!
-# boot.img only has 782M of free space.
-# so put it on a 2nd usb stick, or the unused space on the 8gig usb stick.
-cp ${iso} ${iso}.SHA256SUM /media/${dev}
+case $suite in
 
-cd /media/${dev}
+    xenial|zenial)
+        # bail here becuase the ubuntu iso doen't fit
+        # boot.img only has 782M of free space.
+        # The .iso is too big and sometimes boot is an iso9660 fs so RO?!!
+        # so put it on a 2nd usb stick, or the unused space on the 8gig usb stick.
+        echo "Your problem to get ${iso} on the target box."
+        ;;
 
-# check the iso image again, make sure it copied ok.
-sha256sum --check ${iso}.SHA256SUM
+    *)
 
-cd -
+        cp ${iso} ${iso}.SHA256SUM /media/${dev}
+        cd /media/${dev}
+        # check the iso image again, make sure it copied ok.
+        sha256sum --check ${iso}.SHA256SUM
+        cd -
+        ;;
+
+esac
+
 pumount /dev/${dev}
 
 ./http_server.sh
