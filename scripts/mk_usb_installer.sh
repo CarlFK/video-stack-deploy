@@ -32,7 +32,7 @@ dev=$1
 # To install to a target other than /dev/sda
 # install full desktop
 # appends='partman-auto\/disk=\/dev\/nvme0n1 tasks=ubuntu-desktop'
-
+appends='partman-auto\/disk=\/dev\/sda tasks='
 
 # use the supplied ./http_server.sh
 preseed="url=$(hostname):8000"
@@ -56,16 +56,24 @@ preseed="url=$(hostname):8000"
 
 # where to get what:
 
-# suite=stretch
-# bootimg_loc=http://ftp.debian.org/debian/dists/${suite}/main/installer-amd64/current/images
+# suite=xenial
+# suite=zesty
+suite=artful
+bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}/main/installer-amd64/current/images/
+# bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}-updates/main/installer-amd64/current/images/
+# iso=ubuntu-16.04.2-server-amd64.iso
+# iso_loc=http://releases.ubuntu.com/${suite}
+# http://cdimage.ubuntu.com/ubuntu-server/daily/current/artful-server-amd64.iso
+iso=artful-server-amd64.iso
+iso_loc=http://cdimage.ubuntu.com/ubuntu-server/daily/current
+
+suite=stretch
+bootimg_loc=http://ftp.debian.org/debian/dists/${suite}/main/installer-amd64/current/images
 # iso=debian-stretch-DI-rc3-amd64-netinst.iso
 # iso_loc=http://cdimage.debian.org/cdimage/stretch_di_rc3/amd64/iso-cd
+iso=debian-9.0.0-amd64-netinst.iso
+iso_loc=https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/
 
-suite=xenial
-# bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}/main/installer-amd64/current/images/
-bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}-updates/main/installer-amd64/current/images/
-iso=ubuntu-16.04.2-server-amd64.iso
-iso_loc=http://releases.ubuntu.com/${suite}
 
 # The rest should just work.
 
