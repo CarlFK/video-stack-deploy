@@ -1,13 +1,15 @@
 #!/bin/bash -ex
 
 # build a usb installer: debian, preseed, ansible
+# note: not self contained.
+# expects networking to get preseed, deb repos, late_command, ansible
 
 # $1 - dev of usb stick to clobber (like sdc, no /dev/ prefex)
 dev=$1
 
 # Do this:
 # 1. sudo apt install git pmount dcfldd
-# 2. clone this repo
+# 2. git clone this repo
 # 3. adjust ansible inventory file, commit and push back to public repo
 # 4. adjust this script (maybe, see below)
 # 5. run it:
@@ -22,19 +24,14 @@ dev=$1
 #  c. late_command.sh will clone the repo and run
 #  d. ansible --local --limit=$(hostname)
 
-
-# things that may need tweeking:
+# things easy to tweek:
 
 # preseed - how the installer gets the file (defaults to http from this box)
-# preseed.cfg d-i preseed/late_command - gets/runs late_command.sh
-# late_command.sh - gets ansible playbook
+# appends - more stuff to append to kernel append
+# source urls and file names of boot image
 
-# To install to a target other than /dev/sda
-# install full desktop
-# appends='partman-auto\/disk=\/dev\/nvme0n1 tasks=ubuntu-desktop'
-appends='partman-auto\/disk=\/dev\/sda tasks='
-
-# use the supplied ./http_server.sh
+# easy: leave this as is.
+# it will use the server run at the end of this script.
 preseed="url=$(hostname):8000"
 
 # or depending on local dns:
@@ -45,7 +42,7 @@ preseed="url=$(hostname):8000"
 # preseed="url=dc10b"
 
 # to use the file on the usb stick
-# preseed may need to be adjusted to get from install media.
+# early and late_command use $url, so do something about it.
 # preseed="file=preseed.cfg"
 
 # per box changes can be done by passing parameter to the kernel
@@ -53,27 +50,26 @@ preseed="url=$(hostname):8000"
 # example: to install to an SSD that doesn't come up as /dev/sda:
 # (don't forget to escape the slasses because bash)
 # appends='partman-auto\/disk=\/dev\/nvme0n1'
+appends='partman-auto\/disk=\/dev\/sda tasks='
 
 # where to get what:
 
-# suite=xenial
-# suite=zesty
-suite=artful
-bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}/main/installer-amd64/current/images/
+suite=stretch
+bootimg_loc=http://ftp.debian.org/debian/dists/${suite}/main/installer-amd64/current/images
+iso=debian-9.0.0-amd64-netinst.iso
+iso_loc=https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/
+
+# Ubuntu:
+# suite=xenial # tested, put the iso on a 2nd usb stick.
+# suite=zesty # not tested
+# suite=artful # enough testing to make a machine boot
+# bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}/main/installer-amd64/current/images/
 # bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}-updates/main/installer-amd64/current/images/
 # iso=ubuntu-16.04.2-server-amd64.iso
 # iso_loc=http://releases.ubuntu.com/${suite}
 # http://cdimage.ubuntu.com/ubuntu-server/daily/current/artful-server-amd64.iso
-iso=artful-server-amd64.iso
-iso_loc=http://cdimage.ubuntu.com/ubuntu-server/daily/current
-
-suite=stretch
-bootimg_loc=http://ftp.debian.org/debian/dists/${suite}/main/installer-amd64/current/images
-# iso=debian-stretch-DI-rc3-amd64-netinst.iso
-# iso_loc=http://cdimage.debian.org/cdimage/stretch_di_rc3/amd64/iso-cd
-iso=debian-9.0.0-amd64-netinst.iso
-iso_loc=https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/
-
+# iso=artful-server-amd64.iso
+# iso_loc=http://cdimage.ubuntu.com/ubuntu-server/daily/current
 
 # The rest should just work.
 
