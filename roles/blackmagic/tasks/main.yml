@@ -9,21 +9,33 @@
     dest: /var/cache/debconf-video-blackmagic/desktopvideo.deb
     url: "{{ blackmagic.desktopvideo }}"
   when: blackmagic.desktopvideo is defined
-  notify: Install desktopvideo
+
+- name: Install desktopvideo
+  apt:
+    deb: /var/cache/debconf-video-blackmagic/desktopvideo.deb
+  when: blackmagic.desktopvideo is defined
 
 - name: Download Blackmagic Destkop Video GUI package
   get_url:
     dest: /var/cache/debconf-video-blackmagic/desktopvideo-gui.deb
     url: "{{ blackmagic.desktopvideo_gui }}"
   when: blackmagic.desktopvideo_gui is defined
-  notify: Install desktopvideo-gui
+
+- name: Install desktopvideo-gui
+  apt:
+    deb: /var/cache/debconf-video-blackmagic/desktopvideo-gui.deb
+  when: blackmagic.desktopvideo_gui is defined
 
 - name: Download Blackmagic Media Express package
   get_url:
     dest: /var/cache/debconf-video-blackmagic/mediaexpress.deb
     url: "{{ blackmagic.desktopvideo }}"
   when: blackmagic.mediaexpress is defined
-  notify: Install mediaexpress
+
+- name: Install mediaexpress
+  apt:
+    deb: /var/cache/debconf-video-blackmagic/mediaexpress.deb
+  when: blackmagic.mediaexpress is defined
 
 - name: Install blackmagic DKMS driver
   command: dkms install {{ item }}/{{ blackmagic.dkms_version }}
@@ -32,4 +44,4 @@
   with_items:
   - blackmagic
   - blackmagic-io
-  when: blackmagic.dkms_version is defined and ansible_env.ANSIBLE_UNDER_DI is undefined
+  when: blackmagic.desktopvideo is defined and ansible_env.ANSIBLE_UNDER_DI is undefined
