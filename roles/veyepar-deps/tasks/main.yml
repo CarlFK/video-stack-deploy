@@ -9,6 +9,7 @@
   - gir1.2-gstreamer-1.0
   - google-api-python-client
   - gstreamer1.0-plugins-good
+  - gstreamer1.0-plugins-bad
   - gstreamer1.0-plugins-ugly
   - gstreamer1.0-tools
   - imagemagick
@@ -16,6 +17,7 @@
   - internetarchive
   - libpq-dev
   - libpq5
+  - melt
   - python3-dev
   - python3-gi
   - python3-venv
