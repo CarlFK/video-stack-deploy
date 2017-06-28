@@ -20,7 +20,7 @@ apt install -y ansible git eatmydata
 # git clone https://anonscm.debian.org/git/debconf-video/ansible.git /root/debconf-ansible
 git clone https://github.com/CarlFK/video-stack-deploy.git /root/debconf-ansible
 cd /root/debconf-ansible
-git checkout pxe-toucheup
+git checkout veyeparsetup
 cd -
 
 git clone https://github.com/xfxf/av-foss-stack.git /root/lca2017-av
@@ -34,9 +34,7 @@ ln -s /root/lca2017-av/inventory/ansible-up.sh /usr/local/sbin/ansible-up
 # added noauto so we can just leave it there for eternity.
 
 mkdir /dev/shm
-echo "none /dev/shm tmpfs rw,nosuid,nodev,noexec,noauto 0 0" >> /etc/fstab
-mount /dev/shm
-# mount -t tmpfs none /dev/shm
+mount -t tmpfs none /dev/shm
 
 
 # Aaaand we run ansible
