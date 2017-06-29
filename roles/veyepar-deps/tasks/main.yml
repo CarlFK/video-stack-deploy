@@ -29,7 +29,5 @@
     virtualenv: "/home/{{ user_name }}/.virtualenvs/veyepar"
     virtualenv_command: pyvenv
     virtualenv_site_packages: true
-    # extra_args: --upgrade
-    state: forcereinstall
   become: true
   become_user:  "{{ user_name }}"
