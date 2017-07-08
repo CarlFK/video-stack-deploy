@@ -6,11 +6,18 @@
   notify: apt update
   when: ansible_distribution == 'Debian' and update_apt_sources
 
-- name: set debian apt preferences
+- name: add sid to sources.list.d
+  template:
+    src: templates/sid.list.j2
+    dest: /etc/apt/sources.list.d/sid.list
+  notify: apt update
+  when: ansible_distribution == 'Debian' and enable_sid
+
+- name: set apt preferences that prefer non-sid
   template:
     src: templates/default-release.j2
     dest: /etc/apt/preferences.d/10-default-release
-  when: ansible_distribution == 'Debian' and update_apt_sources
+  when: ansible_distribution == 'Debian' and enable_sid
 
 - name: add timvideos ppas
   apt_repository:

@@ -5,8 +5,3 @@ deb {{ debian_source }} {{ debian_version }} main contrib non-free
 # Backports!!
 
 deb {{ debian_source }} {{ debian_version }}-backports main contrib non-free
-
-# Sid, because it can always be useful
-
-deb {{ debian_source }} sid main contrib non-free
-deb-src {{ debian_source }} sid main contrib non-free
