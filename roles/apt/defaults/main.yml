@@ -2,3 +2,5 @@
 debian_source: "http://deb.debian.org/debian/"
 debian_version: stretch
 apt_proxy: ""
+update_apt_sources: false
+enable_sid: false
