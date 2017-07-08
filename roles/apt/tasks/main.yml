@@ -4,13 +4,13 @@
     src: templates/sources.list.j2
     dest: /etc/apt/sources.list
   notify: apt update
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and update_apt_sources
 
 - name: set debian apt preferences
   template:
     src: templates/default-release.j2
     dest: /etc/apt/preferences.d/10-default-release
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and update_apt_sources
 
 - name: add timvideos ppas
   apt_repository:
