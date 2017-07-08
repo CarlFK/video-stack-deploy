@@ -14,4 +14,4 @@
     # - dj/scripts/oauth2-{{ org }}.json # youtube (not really needed?)
   - dj/scripts/bling/{{ org }}/ # secret title.svg :p
   - dj/scripts/bling/ndv-169.png
-  when: ansible_env.ANSIBLE_UNDER_DI is undefined
+  when: veyepar_confs is defined
