@@ -10,5 +10,5 @@ apt_proxy: ""
 #mirror: deb.debian.org
 
 user_name: videoteam
-user_password: RedPill
+user_password: null
 pw_salt: U1ESiTXUQE0tFh2r4LRl

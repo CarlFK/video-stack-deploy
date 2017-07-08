@@ -5,6 +5,7 @@
     groups: audio,plugdev,sudo,video
     password: "{{ user_password |password_hash('sha512', pw_salt) }}"
     shell: /bin/bash
+  when: user_password
 
 - name: install sudo
   apt:
