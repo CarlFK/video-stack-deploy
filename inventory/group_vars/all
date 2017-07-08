@@ -1,2 +1,6 @@
 ---
 user_name: videoteam
+# The video user's password. It can be set during install, by preseed, so you
+# don't have to set it here
+#user_password: please_change_me
+#pw_salt: please_change_me
