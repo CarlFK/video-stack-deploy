@@ -36,7 +36,18 @@
   - blackmagic
   - xorg
 
-- hosts: veyepar-encoder
+  # everything on one box
+  # secrets copied from ansible master
+- hosts: veyepar-basic
+  roles:
+  - veyepar-code
+  - veyepar-deps
+  - veyepar-local-assets
+  - veyepar-secrets
+
+  # veyepar, secrets, assets on nfs server
+  # dependences installed locally
+- hosts: veyepar-encoder-nfs-storage
   roles:
   - nfs-client
-  - veyepar-encoder
+  - veyepar-deps

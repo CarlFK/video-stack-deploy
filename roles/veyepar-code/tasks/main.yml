@@ -1,0 +1,8 @@
+---
+- name: git clone veyepar
+  git:
+    repo: https://github.com/CarlFK/veyepar.git
+    dest: "/home/{{ user_name }}/veyepar"
+    depth: 1
+  become: true
+  become_user: "{{ user_name }}"
