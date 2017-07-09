@@ -1,59 +1,28 @@
 == setup and testing the setup ==
 
-AFAIK, the "setup_ansible.sh" script works fine (we tested it), it's the
-ansible calls that it runs that causes problems :D
+There are a few setup workflows that try to share common files.
+there are different preseed and late_comand.sh files for
+Debian/Ubuntu and usb/pxe.
+they are all very similar, maybe they can be merged later.
 
-As for the dhcp problem, your machine needs to be called "encodercube1"
-for the right ansible roles to be ran. This is specified in the
-"inventory/hosts" file.
+1. clone repo to your local machine.
+2. edit inventory/hosts
+3. decide where the files will be hosted.
+Choices:
+a. local machine using http server
+b. some other machine using http, either local or the cloud
+c. copy to usb stick (only makes sense for usb stick install)
+d. copy to pxe server (only make sense for pxe installs)
 
-This file should be modified to represent your actual setup and is there
-only as an example. The important part of the ansible code we wrote is
-in the "roles" directory. You want to craft your "hosts" file to put
-your machines in the right groups (you can have a look at them in site.yml)
+4. Debian Stretch or Ubuntu LTS.
 
-== ansible repository/structure ==
+5. Make a usb stick
+Even if you are going to do pxe installs, you need to build the pxe server.
 
-files - files and templates for use in playbooks/tasks
-      - subdirs for specific tasks/dirs highly recommended
+6. Boot a target machine from usb stick.
+The installer will ask for a hostname.
 
-inventory - where the inventory and additional vars is stored
-          - All files in this directory in ini format
-          - added together for total inventory
-  group_vars:
-          - per group variables set here in a file per group
-  host_vars:
-          - per host variables set here in a file per host
+That will install OS and run ansible for that $hostname.
+Result is a machine ready to be used in production.
 
-library - library of custom local ansible modules
 
-playbooks - collections of plays we want to run on systems
-
-  groups: groups of hosts configured from one playbook.
-
-  hosts: playbooks for single hosts.
-
-  manual: playbooks that are only run manually by an admin as needed.
-
-tasks - snippets of tasks that should be included in plays
-
-roles - specific roles to be use in playbooks.
-        Each role has it's own files/templates/vars
-
-master.yml - This is the master playbook, consisting of all
-             current group and host playbooks. This playbook
-             is usefull for making changes over multiple
-             groups/hosts usually with -t (tag).
-
-== How to run a playbook ==
-
-In general to run any ansible playbook you will want to run:
-
-ansible-playbook site.yml
-
-== Idempotency ==
-
-All playbooks should be idempotent. Ie, if run once they should bring the
-machine(s) to the desired state, and if run again N times after that they should
-make 0 changes (because the machine(s) are in the desired state).
-Please make sure your playbooks are idempotent.
