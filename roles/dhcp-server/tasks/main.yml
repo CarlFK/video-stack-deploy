@@ -7,6 +7,9 @@
   template:
     src: templates/76-netnames.rules.j2
     dest: /etc/udev/rules.d/76-netnames.rules
+  notify:
+  - reboot
+  - wait for reboot
 
 - name: configure network interfaces (static)
   template:
