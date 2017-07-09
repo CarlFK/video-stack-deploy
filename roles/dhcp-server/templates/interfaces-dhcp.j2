@@ -8,7 +8,7 @@ iface lo inet loopback
 
 auto eth-local
 iface eth-local inet static
-     address {{ eth_local_ip_address }}
+     address {{ eth_local_ip_address }}/{{ eth_local_ip_netmask }}
      pre-up ethtool -K $IFACE gso off gro off tso off || true
 
 auto eth-uplink
