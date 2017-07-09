@@ -3,7 +3,6 @@
   apt:
     name: "{{ item }}"
   with_items:
-  - boto
   - build-essential
   - gir1.2-gst-plugins-base-1.0
   - gir1.2-gstreamer-1.0
