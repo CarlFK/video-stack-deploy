@@ -40,6 +40,12 @@
   - systemctl daemon-reload
   - systemctl enable videoteam-ingest
 
+- name: configure minicom for hdmi2usb
+  copy:
+    src: files/minirc.dfl
+    dest: /home/{{ user_name }}/.minirc.dfl
+  when: "'minicom' in serial_terminal"
+
 - name: push systemd hdmi2usbd.service
   copy:
     src: files/hdmi2usbd.service
