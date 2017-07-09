@@ -1,5 +1,6 @@
 ---
-eth_local_ip_address: 10.20.0.1/24
+eth_local_ip_address: 10.20.0.1
+eth_local_ip_netmask: 24
 
 eth_local_mac_address: 00:00:00:00:00:01
 eth_uplink_mac_address: 00:00:00:00:00:02
