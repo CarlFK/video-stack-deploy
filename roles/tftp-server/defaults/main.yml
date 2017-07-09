@@ -5,7 +5,7 @@ late_command_url: https://anonscm.debian.org/cgit/debconf-video/ansible.git/plai
 time_zone: UTC
 domain: video.debconf.org
 
-apt_proxy: ""
+apt_proxy: false
 # Defaults to deb.debian.org | archive.ubuntu.com
 #mirror: deb.debian.org
 
