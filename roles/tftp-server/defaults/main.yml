@@ -10,4 +10,5 @@ apt_proxy: false
 #mirror: deb.debian.org
 
 user_name: videoteam
-user_password_crypted: null
+# Defaults to not setting a password
+#user_password_crypted: changeme

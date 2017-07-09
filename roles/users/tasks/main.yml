@@ -4,7 +4,7 @@
     name: "{{ user_name }}"
     groups: audio,plugdev,sudo,video
     password: "{{ user_password_crypted }}"
-  when: user_password_crypted
+  when: user_password_crypted is defined
 
 - name: install sudo
   apt:

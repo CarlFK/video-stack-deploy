@@ -129,7 +129,7 @@ d-i passwd/make-user boolean true
 d-i passwd/user-fullname string Video Team User
 d-i passwd/username string {{ user_name }}
 # or encrypted.
-{% if user_password_crypted %}
+{% if user_password_crypted is defined %}
 d-i passwd/user-password-crypted password {{ user_password_crypted }}
 {% endif %}
 {% if ansible_distribution == 'Ubuntu' %}
