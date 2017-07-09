@@ -128,8 +128,10 @@ d-i passwd/make-user boolean true
 # To create a normal user account.
 d-i passwd/user-fullname string Video Team User
 d-i passwd/username string {{ user_name }}
-# or encrypted using an MD5 hash.
-d-i passwd/user-password-crypted password {{ user_password |password_hash('sha512', pw_salt) }}
+# or encrypted.
+{% if user_password_crypted %}
+d-i passwd/user-password-crypted password {{ user_password_crypted }}
+{% endif %}
 {% if ansible_distribution == 'Ubuntu' %}
 # Ubuntu offers encrypted home directories
 d-i user-setup/encrypt-home boolean false

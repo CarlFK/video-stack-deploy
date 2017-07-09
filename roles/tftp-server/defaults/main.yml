@@ -10,5 +10,4 @@ apt_proxy: false
 #mirror: deb.debian.org
 
 user_name: videoteam
-user_password: null
-pw_salt: U1ESiTXUQE0tFh2r4LRl
+user_password_crypted: null
