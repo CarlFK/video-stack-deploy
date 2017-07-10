@@ -335,7 +335,7 @@ d-i apt-setup/local0/key string file:///hd-media/ac583520.asc
 tasksel tasksel/first multiselect standard
 
 # Individual additional packages to install
-d-i pkgsel/include string openssh-server curl
+d-i pkgsel/include string openssh-server
 # Whether to upgrade packages after debootstrap.
 # Allowed values: none, safe-upgrade, full-upgrade
 #d-i pkgsel/upgrade select none
@@ -438,7 +438,7 @@ d-i finish-install/reboot_in_progress note
 # still a usable /target directory. You can chroot to /target and use it
 # directly, or use the apt-install and in-target commands to easily install
 # packages and run commands in the target system.
-d-i preseed/late_command string in-target sh -c "curl -o late_command.sh 'http://{{ inventory_hostname }}/d-i/late_command.sh' && ANSIBLE_UNDER_DI=1 sh late_command.sh && rm late_command.sh"
+d-i preseed/late_command string in-target sh -c "wget -O late_command.sh 'http://{{ inventory_hostname }}/d-i/late_command.sh' && ANSIBLE_UNDER_DI=1 sh late_command.sh && rm late_command.sh"
 
 # don't ask for extra firmare
 d-i hw-detect/load_firmware boolean false
