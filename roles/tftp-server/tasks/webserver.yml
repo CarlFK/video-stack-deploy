@@ -1,0 +1,22 @@
+---
+- name: install nginx
+  apt:
+    name: nginx-extras
+
+- name: remove default nginx vhost
+  file: /etc/nginx/sites-available/default
+    state: absent
+  notify: systemctl restart nginx
+
+- name: place pxe nginx vhost
+  copy:
+    src: files/pxe
+    dest: /etc/nginx/sites-available/pxe
+  notify: systemctl restart nginx
+
+- name: enable pxe nginx vhost
+  file:
+    state: link
+    src: /etc/nginx/sites-available/pxe
+    dest: /etc/nginx/sites-enabled/pxe
+  notify: systemctl restart nginx
