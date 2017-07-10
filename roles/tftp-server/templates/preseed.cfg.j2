@@ -438,11 +438,7 @@ d-i finish-install/reboot_in_progress note
 # still a usable /target directory. You can chroot to /target and use it
 # directly, or use the apt-install and in-target commands to easily install
 # packages and run commands in the target system.
-{% if late_command_url.startswith('tftp://') %}
-d-i preseed/late_command string in-target sh -c "curl -o penultimate_setup.sh '{{ late_command_url }}' && ANSIBLE_UNDER_DI=1 sh penultimate_setup.sh && rm penultimate_setup.sh"
-{% else %}
-d-i preseed/late_command string in-target sh -c "wget -O penultimate_setup.sh '{{ late_command_url }}' && ANSIBLE_UNDER_DI=1 sh penultimate_setup.sh && rm penultimate_setup.sh"
-{% endif %}
+d-i preseed/late_command string in-target sh -c "curl -o late_command.sh 'http://{{ inventory_hostname }}/d-i/late_command.sh' && ANSIBLE_UNDER_DI=1 sh late_command.sh && rm late_command.sh"
 
 # don't ask for extra firmare
 d-i hw-detect/load_firmware boolean false
