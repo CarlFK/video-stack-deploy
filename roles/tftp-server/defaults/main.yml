@@ -1,6 +1,5 @@
 ---
 netboot_image: https://deb.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/netboot.tar.gz
-late_command_url: https://anonscm.debian.org/cgit/debconf-video/ansible.git/plain/setup_ansible.sh
 
 time_zone: UTC
 domain: video.debconf.org
@@ -12,3 +11,11 @@ apt_proxy: false
 user_name: videoteam
 # Defaults to not setting a password
 #user_password_crypted: changeme
+
+# Git repos:
+playbook_repo: https://anonscm.debian.org/cgit/debconf-video/ansible.git
+playbook_branch: master
+
+# To replace the stock inventory with your own, point at your own github repo
+#inventory_repo: https://gitlab.com/yourname/ansible-inventory
+#inventory_branch: master

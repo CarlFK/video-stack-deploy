@@ -1,0 +1,3 @@
+---
+- name: systemctl restart nginx
+  command: systemctl restart nginx
