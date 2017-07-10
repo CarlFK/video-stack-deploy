@@ -7,7 +7,11 @@ fi
 
 systemctl --user start xlogin.target
 
+{% if ansible_distribution == 'Ubuntu' %}
 lightdm-session
+{% else %}
+/etc/X11/Xsession
+{% endif %}
 
 systemctl --user start xlogout.target
 killall pulseaudio

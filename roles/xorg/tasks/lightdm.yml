@@ -30,8 +30,8 @@
   - xlogout
 
 - name: Drive xlogin|out.target
-  copy:
-    src: files/debconfvideo-session-wrapper
+  template:
+    src: debconfvideo-session-wrapper.j2
     dest: /usr/local/bin/debconfvideo-session-wrapper
     mode: 0755
 
