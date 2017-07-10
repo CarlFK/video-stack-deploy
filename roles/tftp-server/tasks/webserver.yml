@@ -4,7 +4,8 @@
     name: nginx-extras
 
 - name: remove default nginx vhost
-  file: /etc/nginx/sites-available/default
+  file:
+    path: /etc/nginx/sites-available/default
     state: absent
   notify: systemctl restart nginx
 
