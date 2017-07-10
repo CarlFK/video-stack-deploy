@@ -49,8 +49,8 @@ preseed="url=$(hostname):8000"
 # from the syslinux on the usb stick:
 # example: to install to an SSD that doesn't come up as /dev/sda:
 # (don't forget to escape the slasses because bash)
-# appends='partman-auto\/disk=\/dev\/nvme0n1'
-appends='partman-auto\/disk=\/dev\/sda tasks='
+appends='partman-auto\/disk=\/dev\/nvme0n1 grub-installer\/bootdev=\/dev\/nvme0n1 hostname=gator domain=lan'
+appends='partman-auto\/disk=\/dev\/sda grub-installer\/bootdev=\/dev\/sda'
 
 # where to get what:
 
