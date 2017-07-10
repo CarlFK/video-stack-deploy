@@ -11,11 +11,6 @@
     remote_src: true
     creates: /srv/tftp/pxelinux.0
 
-- name: write preseed.cfg
-  template:
-    src: preseed.cfg.j2
-    dest: /srv/tftp/preseed.cfg
-
 - name: inject preseed into menu (find files)
   find:
     paths: /srv/tftp
@@ -28,7 +23,7 @@
     dest: "{{ item.path }}"
     regexp: (\s+append\s+.*\s+initrd=\S+)\s+(?!auto=true)(.*)
     backrefs: true
-    line: \1 auto=true interface=auto url=tftp://10.20.0.1/preseed.cfg \2
+    line: \1 auto=true interface=auto url={{ inventory_hostname }} \2
   with_items: "{{ menus.files }}"
 
 - name: create d-i directory
@@ -36,6 +31,11 @@
     path: /srv/pxe/d-i/{{ debian_version }}
     state: directory
     recurse: true
+
+- name: write preseed.cfg
+  template:
+    src: preseed.cfg.j2
+    dest: /srv/pxe/d-i/{{ debian_version }}/preseed.cfg
 
 - name: generate late_command.sh
   template:
