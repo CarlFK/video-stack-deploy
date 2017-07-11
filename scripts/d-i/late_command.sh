@@ -40,10 +40,6 @@ exec ansible-playbook \\
 EOF
 chmod +x /usr/local/sbin/ansible-up
 
-# make ansible (or some anoying apt get packages) work under di
-mkdir /dev/shm
-mount -t tmpfs none /dev/shm
-
 eatmydata ansible-playbook \
 	-vvvv \
 	--inventory-file=$INVENTORY \
