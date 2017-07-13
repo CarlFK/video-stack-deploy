@@ -32,7 +32,8 @@ dev=$1
 
 # easy: leave this as is.
 # it will use the server run at the end of this script.
-preseed="url=$(hostname):8000"
+# preseed="url=$(hostname):8000"
+preseed="url=10.100.7.247:8000"
 
 # or depending on local dns:
 # preseed="url=$(hostname).local:8000"
@@ -49,8 +50,9 @@ preseed="url=$(hostname):8000"
 # from the syslinux on the usb stick:
 # example: to install to an SSD that doesn't come up as /dev/sda:
 # (don't forget to escape the slasses because bash)
-# appends='partman-auto\/disk=\/dev\/nvme0n1 grub-installer\/bootdev=\/dev\/nvme0n1 hostname=gator domain=lan'
-appends='partman-auto\/disk=\/dev\/sda grub-installer\/bootdev=\/dev\/sda'
+# appends='partman-auto\/disk=\/dev\/sda grub-installer\/bootdev=\/dev\/sda'
+
+appends='partman-auto\/disk=\/dev\/sda grub-installer\/bootdev=\/dev\/sda hostname=testme domain=lan lc\/playbook_repo=https:\/\/github.com\/CarlFK\/video-stack-deploy.git lc\/playbook_branch=master lc\/inventory_repo=https:\/\/github.com\/xfxf\/av-foss-stack.git lc\/inventory_branch=master hw-detect\/load_firmware=false'
 
 # where to get what:
 
