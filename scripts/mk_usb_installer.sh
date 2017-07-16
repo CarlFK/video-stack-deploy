@@ -41,7 +41,7 @@ curl -OJ ${iso_loc}/SHA256SUMS
 grep ${iso} SHA256SUMS > ${iso}.SHA256SUM
 sha256sum --check ${iso}.SHA256SUM
 
-# zcat hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
+zcat hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
 # or good ol dd
 # zcat boot.img.gz|sudo dd of=/dev/${dev} conv=fdatasync
 
