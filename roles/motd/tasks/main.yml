@@ -3,3 +3,12 @@
   template:
     src: templates/motd.j2
     dest: /etc/motd
+- name: motd system stats
+  copy:
+    src: files/{{ item }}
+    dest: /etc/profile.d
+  with_items:
+    - showcpu.sh
+    - showrelease.sh
+    - uptime.sh
+
