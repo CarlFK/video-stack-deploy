@@ -20,33 +20,11 @@ playbook_branch=$5
 inventory_repo=$6
 inventory_branch=$7
 
-# provide current ansible
-# apt install -y software-properties-common
-# case $suite in
-#    stretch|stable)
-#        apt install dirmngr
-#        apt-key adv --recv-keys 93C4A3FD7BB9C367
-#        apt-add-repository --yes --update "deb http://ppa.launchpad.net/ansible/ansible/ubuntu xenial main"
-#    ;;
-#    xenial)
-#        apt-add-repository --yes --update ppa:ansible/ansible
-#    ;;
-#esac
-
 apt install -y ansible git eatmydata
 
 # We clone our ansible repository and copy the ansible config files
 
 cd /home/$user
-
-# unset http_proxy
-# wget --recursive --level=0 --no-host-directories --no-parent \
-    # --reject "*.iso","*.gz",".*","*.swp","*.efi" \
-    # --reject-regex "carl/.*" \
-    # --default-page=.hideme \
-    # http://$server:8000/
-# #    --reject-regex ".*\.git/.*" \
-
 
 git clone $playbook_repo /root/playbook-repo
 (cd /root/playbook-repo; git checkout $playbook_branch)
