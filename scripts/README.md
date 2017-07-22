@@ -1,4 +1,3 @@
-
 mk_usb_installer.sh
 
 Make a usb installer:  
@@ -18,7 +17,7 @@ config-filename: settings to build the machine and run ansible
   - nonfree firmware setting that I am affraid to hardcode  
   - ansible playbook and inventory repos
 
-How to use:
+## How to use:
 
 1. sudo apt install git pmount dcfldd
 2. fork and clone the inventory repo
@@ -40,7 +39,7 @@ It will do this:
   * late_command.sh will clone the repos
   * and run something like: ansible --local --limit=$(hostname)
 
-cfg file settings:
+## cfg file settings:
 
 preseed - how the installer gets the file (defaults to http from this box)
 
