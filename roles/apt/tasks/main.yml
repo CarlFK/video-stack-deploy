@@ -13,6 +13,13 @@
   notify: apt update
   when: ansible_distribution == 'Debian' and enable_sid
 
+- name: add oldstable to sources.list.d
+  template:
+    src: templates/oldstable.j2
+    dest: /etc/apt/sources.list.d/oldstable.list
+  notify: apt update
+  when: ansible_distribution == 'Debian' and enable_oldstable
+
 - name: set apt preferences that prefer non-sid
   template:
     src: templates/default-release.j2

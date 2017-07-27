@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+
+# Add oldstable as an optional source
+# Pinned to a lower priority, of course
+
+deb {{ debian_source }} oldstable main # contrib non-free
+deb-src {{ debian_source }} oldstable main # contrib non-free
