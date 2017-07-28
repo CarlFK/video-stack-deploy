@@ -18,6 +18,7 @@
   - lldpd
   - lshw
   - moreutils
+  - psmisc
   - python3-software-properties
   - rsync
   - screen
