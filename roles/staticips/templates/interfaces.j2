@@ -10,7 +10,7 @@ auto {{ ansible_default_ipv4.interface }}
 iface {{ ansible_default_ipv4.interface }} inet static
 	address {{ ansible_default_ipv4.address }}
 	netmask {{ ansible_default_ipv4.netmask }}
- {% if ansible_default_ipv4.gateway != "???" %}
-    gateway {{ ansible_default_ipv4.gateway }}
- {% endif %}
+{% if ansible_default_ipv4.gateway != "???" %}
+	gateway {{ ansible_default_ipv4.gateway }}
+{% endif %}
 	dns-nameserver {{ ansible_dns.nameservers.0 }}
