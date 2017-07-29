@@ -8,6 +8,7 @@
     name: "{{ item }}"
   with_items:
   - vim-gtk3
+  - mesa-utils
   - xul-ext-ublock-origin
 
 - name: install useful video packages
