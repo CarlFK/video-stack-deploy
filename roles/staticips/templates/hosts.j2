@@ -1,7 +1,7 @@
 # {{ ansible_managed }}
 127.0.0.1 localhost
 
-{% for host in static_ips %}
+{% for host in staticips.hosts %}
 {{ host.ip }} {{ host.hostname }}.{{ domain }} {{ host.hostname }}
 {% endfor %}
 

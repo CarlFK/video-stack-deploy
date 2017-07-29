@@ -12,5 +12,6 @@ eth_uplink_static_ip_gateway: 192.0.2.1
 dhcp_range: 10.20.0.128,10.20.0.254,6h
 domain: video.debconf.org
 
-# For the layout of the static_ips variable, see the staticips role
-#static_ips:
+#staticips:
+#  hosts:
+#  - For the layout of the staticips.hosts variable, see the staticips role

@@ -1,5 +1,5 @@
 # {{ ansible_managed }}
-{% for host in static_ips %}
+{% for host in staticips.hosts %}
 {% if host.mac is defined %}
 dhcp-host={{ host.mac }},{{ host.ip }},{{ host.hostname }}
 {% endif %}
