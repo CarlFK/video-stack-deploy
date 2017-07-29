@@ -11,7 +11,7 @@ sources:
 - Grabber
 
 videodisplay:
-    system: gl
+  system: gl
 
 streaming: icecast
 
