@@ -34,6 +34,12 @@ icecast_source: source:password@change.me:8000
 youtube_threads: auto
 
 blackmagic_sources: []
+# Syntax:
+# - card: 0
+#   connection: SDI
+#   audio: true
+# Optional parameters:
+#   mode: 18
 
 rsync_excludes: []
 

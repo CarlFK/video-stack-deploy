@@ -1,20 +1,16 @@
 ---
 - name: install blackmagic capture systemd units
-  copy:
-    src: "files/systemd/videoteam-{{ item }}.service"
-    dest: /etc/systemd/user/
-  with_items:
-  - capture-blackmagic-hdmi@
-  - capture-blackmagic-hdmi-audio@
-  - capture-blackmagic-sdi@
-  - capture-blackmagic-sdi-audio@
+  template:
+    src: templates/videoteam-capture-blackmagic.service.j2
+    dest: /etc/systemd/user/videoteam-capture-blackmagic-{{ item.0 }}.service
+  with_indexed_items: "{{ blackmagic_sources }}"
   notify: reload-systemd
 
 - name: enable voctomix systemd units
   file:
     state: link
-    src: "/etc/systemd/user/videoteam-capture-blackmagic-{{ item.connection }}@.service"
-    dest: "/home/{{ user_name }}/.config/systemd/user/xlogin.target.wants/videoteam-capture-blackmagic-{{ item.connection }}@{{ item.card }}.service"
+    src: /etc/systemd/user/videoteam-capture-blackmagic-{{ item.0 }}.service
+    dest: /home/{{ user_name }}/.config/systemd/user/xlogin.target.wants/videoteam-capture-blackmagic-{{ item.0 }}.service
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-  with_items: "{{ blackmagic_sources }}"
+  with_indexed_items: "{{ blackmagic_sources }}"
