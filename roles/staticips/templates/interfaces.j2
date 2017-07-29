@@ -11,6 +11,9 @@ iface {{ ansible_default_ipv4.interface }} inet static
 	address {{ ansible_default_ipv4.address }}
 	netmask {{ ansible_default_ipv4.netmask }}
 {% if ansible_default_ipv4.gateway != "???" %}
+{# We don't know why this happens, and staticips.gateway is the best workaround we have #}
 	gateway {{ ansible_default_ipv4.gateway }}
+{% elif staticips.gateway is defined %}
+	gateway {{ staticips.gateway }}
 {% endif %}
 	dns-nameserver {{ ansible_dns.nameservers.0 }}
