@@ -24,4 +24,6 @@ dhcp_range: 10.18.0.128,10.18.0.254,6h
 domain: video.dc17.debconf.org
 
 staticips:
-# TODO
+  hosts:
+  - ip: 10.18.0.3
+    hostname: gw
