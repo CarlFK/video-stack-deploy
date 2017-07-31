@@ -7,6 +7,7 @@ domain: video.debconf.org
 apt_proxy: false
 # Defaults to deb.debian.org | archive.ubuntu.com
 #mirror: deb.debian.org
+debian_version: stretch
 
 user_name: videoteam
 # Defaults to not setting a password
