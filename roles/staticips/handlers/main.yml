@@ -7,3 +7,5 @@
   command: systemctl restart networking
 - name: systemctl restart dnsmasq
   command: systemctl restart dnsmasq
+  # Don't worry about this on machines without dnsmasq. TODO: don't just ignore errors
+  ignore_errors: yes
