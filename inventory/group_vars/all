@@ -2,6 +2,7 @@
 user_name: videoteam
 # crypt(3)ed password. e.g. echo -e redPill | mkpasswd -s -m SHA-512
 user_password_crypted: $6$8HM7EZ2Uf73ekI$dtCsm0VMP68M0uR5Kbf/9MoNhuXmoiVgOkcq0miFn64EFWqG79z6spWb1SKegu7ft937bHHe5SA9wYErUr60G0
+autologin: true
 
 public_keys_onsite:
 - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDx5S7e7wrMsvH1LhtnImcWa2OLV+U4T323Ke7rLujSJ7GmnPa/kiAcJxpwOHvxZAK4lSOKSQlViH/t+FlEDJ762qQ27nAMAQ/6/uYbeEXFdUJki1yO+wxBAv5WFLRIZz4XSh/4r22AUTLPWQXoS7c7Wxqx8IbYNSzi4e84G6G29wUJTQ1KbDQx06ZEO6b7zS2ekdPwk7tZrYzwPuM2a8QwUWJWL89T77oNEUBwNoSZVBydbPfJlDRXpby+7GAsHTux3Ed3gnj/lg4N1LV7DL+uOZTfEkSMPVj7twNpiqWLsCLIu8h0Io7u8dtNc1uWPYLRCZGWAPUGnNenzesT81uj olasd.1
