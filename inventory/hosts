@@ -9,6 +9,7 @@
 #   - A hostname/ip can be a member of multiple groups
 
 [dhcp-server]
+gw	ansible_connection=local
 encodercube1    ansible_connection=local
 
 [icecast2]

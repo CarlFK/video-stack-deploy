@@ -1,3 +1,6 @@
 ---
-debconf_number: XX
+debconf_number: 17
+debconf_town: Montreal
+debconf_country: Canada
+
 nfs_server: storage
