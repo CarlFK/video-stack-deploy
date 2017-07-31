@@ -21,9 +21,9 @@
 - name: inject preseed into menu (do injection)
   lineinfile:
     dest: "{{ item.path }}"
-    regexp: (\s+append\s+.*\s+initrd=\S+)\s+(?!auto=true)(.*)
+    regexp: (\s+append\s+.*\s+initrd=\S+)\s+(.*)(---.*)
     backrefs: true
-    line: \1 auto=true interface=auto url={{ inventory_hostname }} \2
+    line: \1 auto=true interface=auto url={{ inventory_hostname }} \3
   with_items: "{{ menus.files }}"
 
 - name: create d-i directory
