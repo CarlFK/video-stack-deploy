@@ -25,5 +25,8 @@ domain: video.dc17.debconf.org
 
 staticips:
   hosts:
-  - ip: 10.18.0.3
-    hostname: gw
+  - hostname: gw
+    ip: 10.18.0.3
+  - hostname: voctomix1
+    ip: 10.18.0.10
+    mac: 00:24:7e:0a:ca:2b
