@@ -5,3 +5,5 @@
   ignore_errors: yes
 - name: restart networking
   command: systemctl restart networking
+- name: systemctl restart dnsmasq
+  command: systemctl restart dnsmasq
