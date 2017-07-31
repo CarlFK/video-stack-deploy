@@ -111,6 +111,8 @@ d-i mirror/http/directory string /ubuntu
 {% endif %}
 {% if apt_proxy %}
 d-i mirror/http/proxy string http://{{ inventory_hostname }}:8000/
+{% else %}
+d-i mirror/http/proxy string
 {% endif %}
 
 # Suite to install.
