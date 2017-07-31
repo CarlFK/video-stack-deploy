@@ -10,8 +10,8 @@
   notify: systemctl restart nginx
 
 - name: place pxe nginx vhost
-  copy:
-    src: files/pxe
+  template:
+    src: templates/pxe.j2
     dest: /etc/nginx/sites-available/pxe
   notify: systemctl restart nginx
 
