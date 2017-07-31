@@ -9,11 +9,11 @@
 #   - A hostname/ip can be a member of multiple groups
 
 [dhcp-server]
-gw	ansible_connection=local
-encodercube1    ansible_connection=local
+gw
+encodercube1
 
 [icecast2]
-encodercube1    ansible_connection=local
+encodercube1
 
 [offsite]
 
@@ -24,11 +24,11 @@ icecast2
 voctomix
 
 [opsis]
-turbot1         ansible_connection=local
-turbot2         ansible_connection=local
-turbot3         ansible_connection=local
+turbot1
+turbot2
+turbot3
 
 [voctomix]
-voctomix1       ansible_connection=local
-voctomix2       ansible_connection=local
-voctomix3       ansible_connection=local
+voctomix1
+voctomix2
+voctomix3
