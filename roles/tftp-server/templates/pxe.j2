@@ -4,7 +4,7 @@ server {
 
 	root /srv/pxe;
 
-	server_name {{ inventory_hostname }}.{{ video.debconf.org }};
+	server_name {{ ansible_fqdn }};
 
 	location / {
 		fancyindex on;
