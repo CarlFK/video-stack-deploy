@@ -15,3 +15,9 @@
   file:
     name: /etc/resolvconf/update-libc.d/squid
     state: absent
+
+- name: shorten squid shutdown time
+  lineinfile:
+    dest: /etc/squid-deb-proxy/squid-deb-proxy.conf
+    line: shutdown_lifetime 5 seconds
+  notify: restart squid-deb-proxy
