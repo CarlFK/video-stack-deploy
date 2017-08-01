@@ -8,3 +8,8 @@ dhcp-boot=pxelinux.0
 dhcp-authoritative
 enable-tftp
 tftp-root=/srv/tftp
+{% if eth_uplink_mac_address is defined %}
+dhcp-option=option:router,{{ eth_local_ip_address }}
+{% else %}
+dhcp-option=option:router,{{ eth_local_ip_gateway }}
+{% endif %}

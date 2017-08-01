@@ -10,10 +10,15 @@ auto eth-local
 iface eth-local inet static
      address {{ eth_local_ip_address }}/{{ eth_local_ip_netmask }}
      pre-up ethtool -K $IFACE gso off gro off tso off || true
+{% if eth_local_ip_gateway is defined %}
+     gateway {{ eth_local_ip_gateway }}
+{% endif %}
 
+{% if eth_uplink_mac_address is defined %}
 auto eth-uplink
 iface eth-uplink inet dhcp
      pre-up ethtool -K $IFACE gso off gro off tso off || true
      up sysctl -w net.ipv4.ip_forward=1
      up iptables -t nat -A POSTROUTING -o $IFACE -j MASQUERADE
      down iptables -t nat -D POSTROUTING -o $IFACE -j MASQUERADE
+{% endif %}
