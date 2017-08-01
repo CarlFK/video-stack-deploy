@@ -32,3 +32,17 @@ staticips:
   - hostname: voctomix1
     ip: 10.18.0.10
     mac: 00:24:7e:0a:ca:2b
+  - hostname: opsis1
+    ip: 10.18.0.11
+  - hostname: voctomix2
+    ip: 10.18.0.20
+  - hostname: opsis2
+    ip: 10.18.0.21
+  - hostname: voctomix3
+    ip: 10.18.0.30
+  - hostname: opsis3
+    ip: 10.18.0.31
+  - hostname: voctomix4
+    ip: 10.18.0.40
+  - hostname: opsis4
+    ip: 10.18.0.41
