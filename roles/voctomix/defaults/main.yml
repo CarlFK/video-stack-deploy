@@ -10,6 +10,9 @@ sources:
 - Cam2
 - Grabber
 
+videodisplay:
+    system: gl
+
 streaming: icecast
 
 icecast_quality_hq: 18

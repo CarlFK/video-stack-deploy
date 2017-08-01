@@ -4,3 +4,4 @@ debian_version: stretch
 apt_proxy: false
 update_apt_sources: false
 enable_sid: false
+enable_oldstable: false
