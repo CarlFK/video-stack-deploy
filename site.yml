@@ -50,3 +50,9 @@
   roles:
   - nfs-client
   - veyepar-deps
+
+- hosts: encoder
+  roles:
+  - nfs-client
+  - gridengine-exec
+  - sreview
