@@ -1,0 +1,27 @@
+---
+- name: install packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+  - git
+  - ffmpeg
+  - libmojolicious-perl
+  - libdbd-pg-perl
+
+- name: create sreview user
+  user: name=sreview state=present uid=20000
+
+- name: clone git repository
+  become: true
+  become_user: sreview
+  git:
+    repo: https://github.com/yoe/sreview
+    dest: /home/sreview/sreview 
+
+- name: write config file
+  template:
+    dest: /home/sreview/sreview/scripts/config.pl
+    owner: sreview
+    group: sreview
+    mode: 0600
+    src: config.pl.j2
+    force: no
