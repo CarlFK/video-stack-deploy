@@ -30,7 +30,7 @@
   - tmpfree
 
 - name: create admin hosts
-  command: qconf -ah {{ item }}.{{ domain }}
+  command: qconf -ah {{ item }}
   ignore_errors: yes
   with_items:
   - "{{ ge.exechosts }}"
