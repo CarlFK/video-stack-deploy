@@ -56,3 +56,8 @@
   - nfs-client
   - gridengine-exec
   - sreview
+
+- hosts: ge-master
+  roles:
+  - gridengine-master
+  - gridengine-config
