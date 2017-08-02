@@ -32,4 +32,4 @@
 - name: create admin hosts
   command: qconf -ah {{ item }}.{{ domain }}
   with_items:
-  - "{{ exechosts }}"
+  - "{{ ge.exechosts }}"

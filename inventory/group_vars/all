@@ -74,3 +74,18 @@ blackmagic:
 videodisplay:
   system: x
 
+ge:
+  master:
+    noc1st0.dc17.debconf.org
+  exechosts:
+    - encoder0.video.dc17.debconf.org
+    - encoder1.video.dc17.debconf.org
+    - encoder2.video.dc17.debconf.org
+    - encoder3.video.dc17.debconf.org
+    - encoder4.video.dc17.debconf.org
+    - encoder5.video.dc17.debconf.org
+    - encoder6.video.dc17.debconf.org
+    - encoder7.video.dc17.debconf.org
+    - encoder8.video.dc17.debconf.org
+    - encoder9.video.dc17.debconf.org
+    - encoder10.video.dc17.debconf.org
