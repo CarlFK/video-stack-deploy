@@ -25,5 +25,5 @@
   file:
     path: "/srv/{{ nfs_server }}/sreview"
     state: directory
-    owner: sreview
-    group: sreview
+    owner: videoteam
+    group: videoteam
