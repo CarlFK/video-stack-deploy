@@ -3,4 +3,4 @@ debconf_number: 17
 debconf_town: Montreal
 debconf_country: Canada
 
-nfs_server: storage
+nfs_server: noc1st0
