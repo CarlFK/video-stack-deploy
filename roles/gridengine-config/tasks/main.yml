@@ -1,0 +1,35 @@
+---
+- name: create PE
+  script: create_pe.sh
+  when: ansible_local.gridengine.pes.smp is undefined
+
+# TODO: replace the hardcoded list of encoder nodes below by something that is
+# dynamically generated from somewhere. My ansible-fu is not advanced enough
+# for that though.
+- name: create hostgroup
+  script: create_hgrp.sh {{ domain }} encoder0 encoder1 encoder2 encoder3 encoder4 encoder5 encoder6 encoder7 encoder8 encoder9 encoder10
+  when: ansible_local.gridengine.hgrp.allhosts is undefined
+
+- name: create queue lowprio.q
+  script: create_queue.sh lowprio.q {{ ansible_processor_count }}
+  when: ansible_local.gridengine.queues.lowprio_q is undefined
+
+- name: create queue hiprio.q
+  script: create_queue.sh hiprio.q {{ ansible_processor_count }}
+  when: ansible_local.gridengine.queues.hiprio_q is undefined
+
+- name: create complex
+  script: create_complex.sh pubip BOOL == YES NO 0 0
+  when: ansible_local.gridengine.complex.pubip is undefined
+
+- name: create free complexes
+  script: create_complex.sh {{ item }} "MEMORY <= YES YES 0 0"
+  when: ansible_local.gridengine.complex.{{ item }} is undefined
+  with_items:
+  - srvfree
+  - tmpfree
+
+- name: create admin hosts
+  command: qconf -ah {{ item }}.{{ domain }}
+  with_items:
+  - "{{ exechosts }}"
