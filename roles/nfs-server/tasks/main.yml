@@ -3,6 +3,17 @@
   apt:
     name: nfs-kernel-server
 
+- name: Create mount points
+  file:
+    path: /srv/{{ nfs_server }}/{{ item }}
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+  with_items:
+  - sreview
+  - veyepar
+  - video
+
 - name: Write /etc/exports
   template:
     src: templates/exports.j2
