@@ -1,0 +1,17 @@
+---
+- name: install gridengine-exec package
+  apt: pkg={{ item }} state=latest
+  with_items:
+  - gridengine-exec
+
+- name: set master address
+  register: act_qmaster
+  template:
+    dest: /var/lib/gridengine/default/common/act_qmaster
+    src: act_qmaster.j2
+
+- name: restart gridengine-exec if needed
+  service:
+    name: gridengine-exec
+    state: restarted
+  when: act_qmaster.changed
