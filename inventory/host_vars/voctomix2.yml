@@ -1,0 +1,21 @@
+---
+# todo name
+room_name: room2
+
+blackmagic_sources:
+- card: 0
+  connection: SDI
+  audio: true
+  # 720p59.94
+  # list of mode IDs: check 'gst-inspect-1.0 decklinkvideosrc'
+  mode: 18
+- card: 1
+  connection: SDI
+  audio: true
+  mode: 18
+
+sources:
+- Camera1
+- Camera2
+- Grabber
+
