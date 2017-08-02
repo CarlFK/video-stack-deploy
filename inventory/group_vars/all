@@ -78,6 +78,7 @@ ge:
   master:
     noc1st0.dc17.debconf.org
   exechosts:
+    - noc1st0.dc17.debconf.org
     - encoder0.video.dc17.debconf.org
     - encoder1.video.dc17.debconf.org
     - encoder2.video.dc17.debconf.org

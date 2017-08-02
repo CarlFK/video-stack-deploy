@@ -61,3 +61,4 @@
   roles:
   - gridengine-master
   - gridengine-config
+  - gridengine-exec
