@@ -1,0 +1,115 @@
+#!/usr/bin/perl -w
+
+use strict;
+use warnings;
+
+use JSON;
+
+my %facts;
+
+sub ge_to_hash($) {
+	my $fh = shift;
+	my $curr;
+	my $hash = {};
+	while(my $line = readline($fh)) {
+		chomp $line;
+		while($line =~ s/\\$//) {
+			$line .= readline($fh);
+			chomp $line;
+		}
+		die "$line does not match" unless $line =~ /^(\w+)\s+(\S.*)$/;
+		my $title = $1;
+		my $vals = $2;
+		my @vals = split /,\s*/,$vals;
+		my $values = {};
+		foreach my $val(@vals) {
+			if($val =~ /^\[(.+)=(.+)\]$/) {
+				$values->{$1} = $2;
+			} elsif ($val =~ /^(.+)=(.+)$/) {
+				$values->{$1} = $2;
+			} else {
+				$values->{default} = $val;
+			}
+		}
+		$hash->{$title} = $values;
+	}
+	return $hash;
+}
+
+open PES, "qconf -spl 2>/dev/null|";
+$facts{pes} = {};
+while(my $pe = <PES>) {
+	chomp $pe;
+	open my $pefh, "qconf -sp $pe|";
+	$facts{pes}{$pe} = ge_to_hash($pefh);
+	close $pefh;
+}
+close PES;
+
+open QUEUES, "qconf -sql 2>/dev/null|";
+$facts{queues} = {};
+while(my $queue = <QUEUES>) {
+	chomp $queue;
+	my $queue_clean = $queue;
+	$queue_clean =~ s/\./_/g;
+	open my $queuefh, "qconf -sq $queue|";
+	$facts{queues}{$queue_clean} = ge_to_hash($queuefh);
+	close $queuefh;
+}
+close QUEUES;
+
+open AH, "qconf -sh 2>/dev/null|";
+$facts{adminhosts} = {};
+while(my $ah = <AH>) {
+	chomp $ah;
+	$facts{adminhosts}{$ah} = 1;
+}
+close AH;
+
+open EHS, "qconf -sel 2>/dev/null|";
+$facts{exechosts} = {};
+while(my $eh = <EHS>) {
+	chomp $eh;
+	my @ehparts = split /\./, $eh;
+	my $eh_clean = $ehparts[0];
+	open my $ehfh, "qconf -se $eh|";
+	$facts{exechosts}{$eh_clean} = ge_to_hash($ehfh);
+	close $ehfh;
+}
+close EHS;
+
+open HGRPL, "qconf -shgrpl 2>/dev/null|";
+$facts{hgrp} = {};
+while(my $hgrp = <HGRPL>) {
+	chomp $hgrp;
+	my $hgrp_clean = $hgrp;
+	$hgrp_clean =~ s/\@//;
+	open HGRP, "qconf -shgrp $hgrp|";
+	while(my $line = <HGRP>) {
+		chomp $line;
+		while($line =~ s/\\$//) {
+			$line .= <HGRP>;
+		}
+		if($line =~ /^hostlist (.*)$/) {
+			$facts{hgrp}{$hgrp_clean} = [split / +/, $1];
+		}
+	}
+}
+
+open COMPLEX, "qconf -sc 2>/dev/null|";
+$facts{complex} = {};
+while(my $complex = <COMPLEX>) {
+	chomp $complex;
+	my @arr = split /\s+/, $complex;
+	$facts{complex}{$arr[0]} = {};
+	$facts{complex}{$arr[0]}{shortcut} = $arr[1];
+	$facts{complex}{$arr[0]}{type} = $arr[2];
+	$facts{complex}{$arr[0]}{relop} = $arr[3];
+	$facts{complex}{$arr[0]}{requestable} = $arr[4];
+	$facts{complex}{$arr[0]}{consumable} = $arr[5];
+	$facts{complex}{$arr[0]}{default} = $arr[6];
+	$facts{complex}{$arr[0]}{urgency} = $arr[7];
+}
+close COMPLEX;
+
+print to_json(\%facts);

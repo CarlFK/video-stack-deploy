@@ -1,0 +1,29 @@
+---
+- name: install packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+  - gridengine-master
+  - libjson-perl
+
+- name: create ansible directory
+  file:
+    path: /etc/ansible
+    state: directory
+
+- name: create facts directory
+  file:
+    path: /etc/ansible/facts.d
+    state: directory
+
+- name: copy gridengine fact into ansible facts directory
+  copy:
+    dest: /etc/ansible/facts.d/gridengine.fact
+    src: gridengine.fact
+    mode: 0755
+
+- name: create sreview srv directory
+  file:
+    path: "/srv/{{ nfs_server }}/sreview"
+    state: directory
+    owner: sreview
+    group: sreview
