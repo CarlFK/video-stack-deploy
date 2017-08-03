@@ -62,6 +62,12 @@ staticips:
     ip: 10.18.0.50
   - hostname: opsis5
     ip: 10.18.0.51
+  - hostname: encoder0
+    ip: 10.18.0.90
+    mac: 00:16:41:3c:eb:a6
+  - hostname: encoder1
+    ip: 10.18.0.91
+    mac: 00:16:41:ee:f5:19
 
 enable_oldstable: true
 
