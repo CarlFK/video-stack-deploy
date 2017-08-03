@@ -1,0 +1,45 @@
+# {{ ansible_managed }}
+#
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root {{ streaming_data_root }}/hls;
+
+	index index.html;
+
+	server_name _;
+
+	location / {
+		# From http://enable-cors.org/server_nginx.html
+		if ($request_method = 'OPTIONS') {
+			add_header 'Access-Control-Allow-Origin' '*';
+			add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+			add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+			add_header 'Access-Control-Max-Age' 1728000;
+			add_header 'Content-Type' 'text/plain charset=UTF-8';
+			add_header 'Content-Length' 0;
+			return 204;
+		}
+		if ($request_method = 'POST') {
+			add_header 'Access-Control-Allow-Origin' '*';
+			add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+			add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+		}
+		if ($request_method = 'GET') {
+			add_header 'Access-Control-Allow-Origin' '*';
+			add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+			add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+		}
+	}
+
+	location /dump/ {
+		alias {{ streaming_data_root }}/dump/;
+		fancyindex on;
+		fancyindex_exact_size off;
+
+		mp4;
+		mp4_buffer_size		1m;
+		mp4_max_buffer_size	100m;
+	}
+}

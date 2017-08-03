@@ -1,0 +1,65 @@
+---
+- name: install nginx packages
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    default_release: "{{ debian_version }}-backports"
+  with_items:
+    - nginx-extras
+    - libnginx-mod-rtmp
+    - libnginx-mod-http-fancyindex
+  notify: restart nginx
+
+- name: create nginx content directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0755
+  with_items:
+  - "{{ streaming_data_root }}"
+  - "{{ streaming_data_root }}/hls"
+  - "{{ streaming_data_root }}/dump"
+
+- name: create nginx dump directories for rooms
+  file:
+    path: "{{ streaming_data_root }}/dump/{{ item }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0755
+  with_items: "{{ streaming_rooms }}"
+
+- name: remove default html directory
+  file:
+    path: /var/www/html
+    state: absent
+
+- name: disable nginx default configuration
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: reload nginx
+
+- name: install nginx streaming backend site configuration
+  template:
+    src: nginx/sites-enabled/streaming-backend.conf.j2
+    dest: /etc/nginx/sites-enabled/streaming-backend.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload nginx
+
+- name: install nginx streaming backend rtmp configuration
+  template:
+    src: nginx/nginx-rtmp.conf.j2
+    dest: /etc/nginx/nginx-rtmp.conf
+  notify: reload nginx
+
+- name: patch nginx.conf to include the rtmp configuration
+  lineinfile:
+    dest: /etc/nginx/nginx.conf
+    line: "include /etc/nginx/nginx-rtmp.conf;"
+    state: present
+  notify: reload nginx

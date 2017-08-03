@@ -50,3 +50,6 @@ noc1st0
 encoder0
 encoder1
 encoder2
+
+[streaming-backends]
+noc1st0

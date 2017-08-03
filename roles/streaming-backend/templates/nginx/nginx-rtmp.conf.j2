@@ -1,0 +1,37 @@
+# {{ ansible_managed }}
+#
+
+rtmp_auto_push on;
+
+rtmp {
+	# Only allow publishing from trusted sources
+{% for address in streaming.rtmp_publishers %}
+	allow publish {{ address }};
+{% endfor %}
+	deny publish all;
+
+	server {
+		listen 1935;
+
+		application stream {
+			record all;
+
+			record_path {{ streaming_data_root }}/dump;
+			record_suffix /%Y%m%d%H%M%S.flv;
+
+			# Needed in case something goes wrong during the conversion. As long as this
+			# isn't wrapped in a script, ffmpeg will terminate properly without the
+			# default SIGKILL. Otherwise see nginx-rtmp wiki for a clean example.
+			exec_kill_signal term;
+			exec_record_done ffmpeg -y -i $path -codec copy -movflags +faststart $path.mp4;
+
+			live on;
+
+			hls on;
+			hls_path {{ streaming_data_root }}/hls;
+			hls_fragment_naming system;
+
+			drop_idle_publisher 20s;
+		}
+	}
+}

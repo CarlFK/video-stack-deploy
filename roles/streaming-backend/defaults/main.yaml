@@ -1,0 +1,7 @@
+---
+debian_version: stretch
+streaming_data_root: /srv/streaming
+streaming_rooms:
+  - buzz
+  - rex
+  - bo

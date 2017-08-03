@@ -104,3 +104,7 @@ ge:
 sreview:
   wwwhostname:
     sreview.debian.net
+
+streaming:
+  rtmp_publishers:
+    - 10.18.0.0/24

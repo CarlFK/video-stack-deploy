@@ -64,3 +64,7 @@
   - gridengine-config
   - gridengine-exec
   - sreview
+
+- hosts: streaming-backends
+  roles:
+  - streaming-backend
