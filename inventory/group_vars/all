@@ -33,8 +33,12 @@ time_zone: US/Eastern
 
 staticips:
   hosts:
+  - hostname: noc0gw0
+    ip: 10.18.0.2
   - hostname: gw
     ip: 10.18.0.3
+  - hostname: noc1st0
+    ip: 206.167.36.195
   - hostname: voctomix1
     ip: 10.18.0.10
     mac: 00:24:7e:0a:ae:27
