@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+
+# Add backports source
+
+deb {{ debian_source }} {{ debian_version }}-backports main contrib non-free
+deb-src {{ debian_source }} {{ debian_version }}-backports main contrib non-free

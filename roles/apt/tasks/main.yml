@@ -46,3 +46,10 @@
     path: /etc/apt/apt.conf.d/30apt-proxy
     state: absent
   when: not apt_proxy
+
+- name: add Debian Backports repository
+  template:
+    src: templates/backports.j2
+    dest: /etc/apt/sources.list.d/backports.list
+  notify: apt update
+  when: ansible_distribution == 'Debian'
