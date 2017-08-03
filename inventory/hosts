@@ -19,10 +19,12 @@ encodercube1
 
 [onsite:children]
 dhcp-server
-opsis
+encoder
+ge-master
 icecast2
-voctomix
 nfs-server
+opsis
+voctomix
 
 [opsis]
 opsis1
