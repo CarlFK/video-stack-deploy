@@ -8,6 +8,7 @@
   - libdbd-pg-perl
   - libglib-perl
   - gir1.2-gstreamer-1.0
+  - libglib-object-introspection-perl
 
 - name: clone git repository
   become: true
