@@ -1,7 +1,7 @@
 
 our $config;
 
-$config->{dbistring} = "dbi:Pg:dbname=sreview;host={{ ge.master }}.{{ domain }};sslmode=require;user=sreview;password={{ sreviewdbpw }}";
+$config->{dbistring} = "dbi:Pg:dbname=sreview;host={{ ge.master }};sslmode=require;user=sreview;password={{ sreviewdbpw }}";
 
 # Where the gridengine stdout/stderr files should be stored
 my $output_dir = "/srv/{{ nfs_server }}/sreview/gridengine-io";
@@ -93,7 +93,7 @@ $config->{pubdir} = "/srv/sreview";
 # Note that these are not sanity-checked. You may want to do so yourself.
 $config->{outputdir} = sub($$$) {my ($event, $room, $day) = @_; $event =~ s/\W/_/g; $room =~ s/\W/_/g; return "/srv/sreview/output/$event/$room/$day"};
 
-$config->{urlbase} = "https://{{ wwwhostname }}/";
+$config->{urlbase} = "https://{{ sreview.wwwhostname }}/";
 
 $config->{preroll_template} = "/srv/sreview/assets/video_front.svg";
 $config->{postroll_template} = "/srv/sreview/assets/video_logos.svg";

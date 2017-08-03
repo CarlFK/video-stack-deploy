@@ -6,6 +6,8 @@
   - ffmpeg
   - libmojolicious-perl
   - libdbd-pg-perl
+  - libglib-perl
+  - gir1.2-gstreamer-1.0
 
 - name: clone git repository
   become: true
@@ -17,8 +19,8 @@
 - name: write config file
   template:
     dest: /home/videoteam/sreview/scripts/config.pl
-    owner: sreview
-    group: sreview
+    owner: videoteam
+    group: videoteam
     mode: 0600
     src: config.pl.j2
     force: no

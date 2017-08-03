@@ -100,3 +100,7 @@ ge:
     - encoder8.video.dc17.debconf.org
     - encoder9.video.dc17.debconf.org
     - encoder10.video.dc17.debconf.org
+
+sreview:
+  wwwhostname:
+    sreview.debian.net
