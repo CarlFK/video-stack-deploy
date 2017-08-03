@@ -10,6 +10,7 @@
   - gir1.2-gstreamer-1.0
   - libglib-object-introspection-perl
   - gir1.2-gst-plugins-base-1.0
+  - bs1770gain
 
 - name: clone git repository
   become: true
