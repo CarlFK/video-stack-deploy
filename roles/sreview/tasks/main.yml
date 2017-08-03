@@ -11,6 +11,8 @@
   - libglib-object-introspection-perl
   - gir1.2-gst-plugins-base-1.0
   - gstreamer1.0-plugins-base
+  - gstreamer1.0-plugins-bad
+  - gstreamer1.0-plugins-ugly
   - bs1770gain
 
 - name: clone git repository
