@@ -10,8 +10,8 @@ sources:
 - Cam2
 - Grabber
 
-videodisplay:
-  system: gl
+voctomix:
+  display_system: gl
 
 streaming: icecast
 

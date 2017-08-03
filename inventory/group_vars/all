@@ -81,8 +81,8 @@ blackmagic:
   mediaexpress: http://10.18.0.3/blackmagic/Blackmagic_Desktop_Video_Linux_10.9.5a4/deb/amd64/mediaexpress_3.5.3a1_amd64.deb
   dkms_version: 10.9.5a4
 
-videodisplay:
-  system: x
+voctomix:
+  display_system: x
 
 ge:
   master:
