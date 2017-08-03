@@ -1,6 +1,7 @@
 ---
-# todo name
-room_name: room1
+irc_room_channel: "#debconf-buzz"
+irc_nick: videoteam_buzz
+room_name: buzz
 
 blackmagic_sources:
 - card: 0
@@ -18,4 +19,3 @@ sources:
 - Camera1
 - Camera2
 - Grabber
-
