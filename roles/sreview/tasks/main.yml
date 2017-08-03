@@ -9,6 +9,7 @@
   - libglib-perl
   - gir1.2-gstreamer-1.0
   - libglib-object-introspection-perl
+  - gir1.2-gst-plugins-base-1.0
 
 - name: clone git repository
   become: true
