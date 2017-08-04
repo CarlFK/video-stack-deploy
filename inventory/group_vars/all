@@ -106,9 +106,18 @@ sreview:
   wwwhostname:
     sreview.debian.net
 
+room_name: change-me
+
 streaming:
   rtmp_publishers:
     - 10.18.0.0/24
+  backend:
+    server_name: dc17-backend.video.debconf.org
+    data_root: /srv/streaming
+  rooms:
+    - buzz
+    - rex
+    - bo
   method: rtmp
   rtmp:
     threads: vaapi

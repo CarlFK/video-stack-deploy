@@ -18,18 +18,19 @@
     group: www-data
     mode: 0755
   with_items:
-  - "{{ streaming_data_root }}"
-  - "{{ streaming_data_root }}/hls"
-  - "{{ streaming_data_root }}/dump"
+  - "{{ streaming.backend.data_root }}"
+  - "{{ streaming.backend.data_root }}/www"
+  - "{{ streaming.backend.data_root }}/hls"
+  - "{{ streaming.backend.data_root }}/dump"
 
 - name: create nginx dump directories for rooms
   file:
-    path: "{{ streaming_data_root }}/dump/{{ item }}"
+    path: "{{ streaming.backend.data_root }}/dump/{{ item }}"
     state: directory
     owner: www-data
     group: www-data
     mode: 0755
-  with_items: "{{ streaming_rooms }}"
+  with_items: "{{ streaming.rooms }}"
 
 - name: remove default html directory
   file:
@@ -63,3 +64,11 @@
     line: "include /etc/nginx/nginx-rtmp.conf;"
     state: present
   notify: reload nginx
+
+- name: create index.html for streaming backend
+  template:
+    src: index.html.j2
+    dest: "{{ streaming.backend.data_root }}/www/index.html"
+    owner: www-data
+    group: www-data
+    mode: 0644
