@@ -16,6 +16,12 @@ encodercube1
 encodercube1
 
 [offsite]
+fra1.video.debconf.org
+tor1.video.debconf.org
+sgp1.video.debconf.org
+
+[onsite]
+noc0stream0
 
 [onsite:children]
 dhcp-server
@@ -56,3 +62,7 @@ noc1st0
 
 [streaming-frontends]
 noc1st0
+noc0stream0
+fra1.video.debconf.org
+tor1.video.debconf.org
+sgp1.video.debconf.org
