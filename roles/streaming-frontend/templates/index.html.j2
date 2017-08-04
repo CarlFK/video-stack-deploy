@@ -3,6 +3,13 @@
 <title>DebConf17 streaming frontend on {{ inventory_hostname }}</title>
 </head>
 <body>
-<p>Hello, I'm {{ inventory_hostname }}, a streaming frontend for DebConf17.</p>
+  <p>Hello, I'm {{ inventory_hostname }}, a streaming frontend for DebConf17.</p>
+  <p>I know of the following rooms:
+    <ul>
+      {% for room in streaming.rooms %}
+      <li>{{ room }}: <a href='/live/{{ room }}.m3u8'>Stream for {{ room }}</a></li>
+      {% endfor %}
+    </ul>
+  </p>
 </body>
 </html>
