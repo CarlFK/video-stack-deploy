@@ -1,7 +1,7 @@
 ---
 - name: install X
   apt:
-    name: xserver-xorg
+    name: xorg
 
 - name: install desktop tools
   apt:

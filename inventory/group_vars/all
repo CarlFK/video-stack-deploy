@@ -83,7 +83,7 @@ blackmagic:
   dkms_version: 10.9.5a4
 
 voctomix:
-  display_system: x
+  display_system: gl
   framerate: 30
 
 ge:
