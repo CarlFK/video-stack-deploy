@@ -2,3 +2,8 @@
 voctomix:
   host: voctomix2
   port: 10002
+
+irc_room_channel: "#debconf-rex"
+irc_nick: videoteam_rex_front
+room_name: rex
+

@@ -2,3 +2,8 @@
 voctomix:
   host: voctomix3
   port: 10002
+
+irc_room_channel: "#debconf-bo"
+irc_nick: videoteam_bo_front
+room_name: bo
+
