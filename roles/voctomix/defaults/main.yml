@@ -12,6 +12,7 @@ sources:
 
 voctomix:
   display_system: gl
+  framerate: 25
 
 streaming: icecast
 

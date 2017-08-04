@@ -83,6 +83,7 @@ blackmagic:
 
 voctomix:
   display_system: x
+  framerate: 30
 
 ge:
   master:
