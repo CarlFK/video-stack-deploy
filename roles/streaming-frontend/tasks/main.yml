@@ -20,6 +20,29 @@
   - "{{ streaming.frontend.data_root }}/www"
   - "{{ streaming.frontend.data_root }}/hls"
 
+- name: create letsencrypt directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+  with_items:
+    - /etc/letsencrypt
+    - /etc/letsencrypt/live
+    - /etc/letsencrypt/archive
+
+- name: copy certificates from main storage server
+  synchronize:
+    src: "/etc/letsencrypt/{{ item }}/{{ streaming.frontend.server_names|first }}/"
+    dest: "/etc/letsencrypt/{{ item }}/{{ streaming.frontend.server_names|first }}/"
+    archive: yes
+  with_items:
+    - live
+    - archive
+  delegate_to: "{{ streaming.backend.inventory_name }}"
+  notify: restart nginx
+
 - name: remove default html directory
   file:
     path: /var/www/html
