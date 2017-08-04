@@ -23,4 +23,4 @@
     port: "{{ ansible_port | default(22) }}"
     delay: 1
     timeout: 300
-  sudo: false
+  become: false
