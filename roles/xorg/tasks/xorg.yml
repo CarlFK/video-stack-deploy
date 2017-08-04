@@ -3,6 +3,11 @@
     src: files/90-videoteam-disable-blanking.conf
     dest: /usr/share/X11/xorg.conf.d/90-videoteam-disable-blanking.conf
 
+- name: Re-Enable Ctrl-Alt-Backspace
+  copy:
+    src: file/90-enable-ctrl-alt-backspace.conf
+    dest: /usr/share/X11/xorg.conf.d/files/90-enable-ctrl-alt-backspace.conf
+
 - name: Disable Suspend on lid close
   lineinfile:
     dest: /etc/systemd/logind.conf
