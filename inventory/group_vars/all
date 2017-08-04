@@ -109,3 +109,11 @@ sreview:
 streaming:
   rtmp_publishers:
     - 10.18.0.0/24
+  method: rtmp
+  rtmp:
+    threads: vaapi
+    location: "rtmp://noc1st0.video.dc17.debconf.org:1935/stream/{{ room_name }} live=1"
+  hq_config:
+    video_bitrate: 2000 # kbps
+    audio_bitrate: 128000 # bps
+    keyframe_period: 60 # seconds

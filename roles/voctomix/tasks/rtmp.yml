@@ -7,21 +7,21 @@
   - gstreamer1.0-vaapi
   - i965-va-driver
   - vainfo
-  when: youtube_threads == 'vaapi'
+  when: streaming.rtmp.threads == 'vaapi'
 
-- name: YouTube streaming script
+- name: RTMP streaming script
   template:
     src: templates/videoteam-stream.j2
     dest: /usr/local/bin/videoteam-stream
     mode: 0755
 
-- name: YouTube streaming systemd service
+- name: RTMP streaming systemd service
   copy:
     src: files/systemd/videoteam-stream.service
     dest: /etc/systemd/user/videoteam-stream.service
   notify: reload-systemd
 
-- name: Enable YouTube streaming service
+- name: Enable RTMP streaming service
   file:
     state: link
     src: /etc/systemd/user/videoteam-stream.service
