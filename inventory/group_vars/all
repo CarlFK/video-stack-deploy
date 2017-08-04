@@ -74,6 +74,7 @@ staticips:
     mac: 00:16:41:ee:f5:19
 
 enable_oldstable: true
+enable_sid: true
 
 blackmagic:
   desktopvideo: http://10.18.0.3/blackmagic/Blackmagic_Desktop_Video_Linux_10.9.5a4/deb/amd64/desktopvideo_10.9.5a4_amd64.deb
