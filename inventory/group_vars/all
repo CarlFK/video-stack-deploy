@@ -112,8 +112,16 @@ streaming:
   rtmp_publishers:
     - 10.18.0.0/24
   backend:
+    inventory_name: noc1st0
     server_name: dc17-backend.video.debconf.org
     data_root: /srv/streaming
+  frontend:
+    server_names:
+      - video.debconf.org
+      - as.video.debconf.org
+      - eu.video.debconf.org
+      - na.video.debconf.org
+    data_root: /srv/streaming-frontend
   rooms:
     - buzz
     - rex

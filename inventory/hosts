@@ -53,3 +53,6 @@ encoder2
 
 [streaming-backends]
 noc1st0
+
+[streaming-frontends]
+noc1st0

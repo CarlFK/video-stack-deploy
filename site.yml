@@ -68,3 +68,7 @@
 - hosts: streaming-backends
   roles:
   - streaming-backend
+
+- hosts: streaming-frontends
+  roles:
+  - streaming-frontend

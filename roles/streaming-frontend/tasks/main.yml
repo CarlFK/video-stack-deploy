@@ -1,0 +1,49 @@
+---
+- name: install nginx packages
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    default_release: "{{ debian_version }}-backports"
+  with_items:
+    - nginx-extras
+  notify: restart nginx
+
+- name: create nginx content directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0755
+  with_items:
+  - "{{ streaming.frontend.data_root }}"
+  - "{{ streaming.frontend.data_root }}/www"
+  - "{{ streaming.frontend.data_root }}/hls"
+
+- name: remove default html directory
+  file:
+    path: /var/www/html
+    state: absent
+
+- name: disable nginx default configuration
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: reload nginx
+
+- name: install nginx streaming frontend site configuration
+  template:
+    src: nginx/sites-enabled/streaming-frontend.conf.j2
+    dest: /etc/nginx/sites-enabled/streaming-frontend.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload nginx
+
+- name: create index.html for streaming frontend
+  template:
+    src: index.html.j2
+    dest: "{{ streaming.frontend.data_root }}/www/index.html"
+    owner: www-data
+    group: www-data
+    mode: 0644
