@@ -15,6 +15,7 @@
   - gstreamer1.0-plugins-ugly
   - gstreamer1.0-plugins-good
   - bs1770gain
+  - inkscape
 
 - name: clone git repository
   become: true
