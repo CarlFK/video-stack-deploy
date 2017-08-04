@@ -47,10 +47,10 @@ staticips:
     mac: 00:24:7e:0a:c9:6d
   - hostname: voctomix2
     ip: 10.18.0.20
-    mac: 00:24:7e:0a:ad:9a
+    mac: 00:24:7e:0a:ae:09
   - hostname: opsis2
     ip: 10.18.0.21
-    mac: 00:24:7e:0a:ae:09
+    mac: 00:24:7e:0a:ad:9a
   - hostname: voctomix3
     ip: 10.18.0.30
     mac: 00:24:7e:0a:c9:62
