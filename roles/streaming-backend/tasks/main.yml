@@ -9,6 +9,8 @@
     - libnginx-mod-rtmp
     - libnginx-mod-http-fancyindex
   notify: restart nginx
+  tags:
+    - streaming
 
 - name: create nginx content directories
   file:
@@ -22,6 +24,8 @@
   - "{{ streaming.backend.data_root }}/www"
   - "{{ streaming.backend.data_root }}/hls"
   - "{{ streaming.backend.data_root }}/dump"
+  tags:
+    - streaming
 
 - name: create nginx dump directories for rooms
   file:
@@ -31,17 +35,23 @@
     group: www-data
     mode: 0755
   with_items: "{{ streaming.rooms }}"
+  tags:
+    - streaming
 
 - name: remove default html directory
   file:
     path: /var/www/html
     state: absent
+  tags:
+    - streaming
 
 - name: disable nginx default configuration
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
   notify: reload nginx
+  tags:
+    - streaming
 
 - name: install nginx streaming backend site configuration
   template:
@@ -51,12 +61,16 @@
     group: root
     mode: 0644
   notify: reload nginx
+  tags:
+    - streaming
 
 - name: install nginx streaming backend rtmp configuration
   template:
     src: nginx/nginx-rtmp.conf.j2
     dest: /etc/nginx/nginx-rtmp.conf
   notify: reload nginx
+  tags:
+    - streaming
 
 - name: patch nginx.conf to include the rtmp configuration
   lineinfile:
@@ -64,6 +78,8 @@
     line: "include /etc/nginx/nginx-rtmp.conf;"
     state: present
   notify: reload nginx
+  tags:
+    - streaming
 
 - name: create index.html for streaming backend
   template:
@@ -72,3 +88,5 @@
     owner: www-data
     group: www-data
     mode: 0644
+  tags:
+    - streaming
