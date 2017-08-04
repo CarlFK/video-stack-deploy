@@ -31,6 +31,7 @@
     - /etc/letsencrypt
     - /etc/letsencrypt/live
     - /etc/letsencrypt/archive
+  when: inventory_hostname != streaming.backend.inventory_hostname
 
 - name: copy certificates from main storage server
   synchronize:
@@ -40,7 +41,8 @@
   with_items:
     - live
     - archive
-  delegate_to: "{{ streaming.backend.inventory_name }}"
+  when: inventory_hostname != streaming.backend.inventory_hostname
+  delegate_to: "{{ streaming.backend.inventory_hostname }}"
   notify: restart nginx
 
 - name: remove default html directory

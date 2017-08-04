@@ -118,7 +118,7 @@ streaming:
   rtmp_publishers:
     - 10.18.0.0/24
   backend:
-    inventory_name: noc1st0
+    inventory_hostname: noc1st0
     server_name: dc17-backend.video.debconf.org
     data_root: /srv/streaming
   frontend:
