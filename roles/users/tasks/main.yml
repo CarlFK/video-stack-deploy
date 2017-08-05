@@ -16,6 +16,8 @@
     key: "{{ item }}"
   with_items: "{{public_keys_onsite}}"
   when: "'onsite' in group_names"
+  tags:
+    - authorized_keys
 
 - name: manage offsite ssh authorized_keys
   authorized_key:
@@ -23,12 +25,16 @@
     key: "{{ item }}"
   with_items: "{{public_keys_offsite}}"
   when: "'offsite' in group_names"
+  tags:
+    - authorized_keys
 
 - name: manage root ssh authorized_keys
   authorized_key:
     user: root
     key: "{{ item }}"
   with_items: "{{public_keys_root}}"
+  tags:
+    - authorized_keys
 
 - name: configure locale
   command: update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
