@@ -15,7 +15,3 @@ blackmagic_sources:
   audio: true
   mode: 18
 
-sources:
-- Camera1
-- Camera2
-- Grabber

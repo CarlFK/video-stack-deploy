@@ -92,6 +92,11 @@ voctomix:
   framerate: 30
   loop_url: http://10.18.0.3/loop/dc17-simpleloop.tar.xz
 
+sources:
+- Cam1
+- Cam2
+- Grabber
+
 ge:
   master:
     noc1st0.video.dc17.debconf.org
