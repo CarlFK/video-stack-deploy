@@ -11,7 +11,7 @@ ConditionPathExists=/var/cache/voctomix/loop
 [Service]
 ExecStart=/usr/bin/voctomix-ingest \
   --video-source png \
-  --video-attribs "location=/var/cache/voctomix/loop/dc17-simpleloop_%05d.png start-index=1 stop-index=720" \
+  --video-attribs "location=/var/cache/voctomix/loop/dc17-simpleloop_%05d.png start-index=1 stop-index=720 loop=1" \
   --port 17000
 Restart=always
 RestartSec=1s
