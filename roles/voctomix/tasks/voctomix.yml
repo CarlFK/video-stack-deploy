@@ -7,6 +7,15 @@
   - voctomix-outcasts
   - gstreamer1.0-pulseaudio
 
+# we need 0.4.2-1, which is in unstable
+- name: install voctomix-outcasts from unstable for now
+  apt:
+    name: "{{ item }}"
+    state: latest
+    default_release: "unstable"
+  with_items:
+  - voctomix-outcasts
+
 - name: create voctomix config dir
   file:
     path: /etc/voctomix
