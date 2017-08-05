@@ -2,6 +2,14 @@
 #
 proxy_cache_path {{ streaming.frontend.data_root }}/hls levels=1:2 keys_zone=hls-cache:8m max_size=1000m inactive=600m;
 
+geoip_country /usr/share/GeoIP/GeoIP.dat;
+geoip_city /usr/share/GeoIP/GeoLiteCity.dat;
+
+geo $local {
+    default 0;
+    10.0.0.0/8 1;
+}
+
 server {
 	listen 80;
 	listen [::]:80;
@@ -11,6 +19,14 @@ server {
 	index index.html;
 
 	server_name {{ streaming.frontend.server_names|join(' ') }};
+
+	if ($local) {
+		rewrite ^/redir/(.*) https://local.video.debconf.org/$1 redirect;
+	}
+	if ($geoip_city_continent_code) {
+	rewrite ^/redir/(.*) https://$geoip_city_continent_code.video.debconf.org/$1 redirect;
+	}
+	rewrite ^/redir/(.*) https://eu.video.debconf.org/$1 redirect;
 
 	location /live {
     # From http://enable-cors.org/server_nginx.html

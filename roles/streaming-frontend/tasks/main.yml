@@ -10,6 +10,16 @@
   tags:
     - streaming
 
+- name: install geoip from contrib
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    default_release: "{{ debian_version }}-backports"
+  with_items:
+    - geoip-database-contrib
+  tags:
+    - streaming
+
 - name: create nginx content directories
   file:
     path: "{{ item }}"
