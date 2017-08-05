@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Voctomix Sponsor Loop
+After=videoteam-voctocore.service
+Requires=videoteam-voctocore.service
+StartLimitIntervalSec=0
+Conflicts=xlogout.target
+ConditionPathExists=/var/cache/voctomix/loop
+
+[Service]
+ExecStart=/usr/bin/voctomix-ingest \
+  --video-source png \
+  --video-attribs "location=/var/cache/voctomix/loop/dc17-simpleloop_%05d.png start-index=1 stop-index=720" \
+  --port 17000
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=xlogin.target

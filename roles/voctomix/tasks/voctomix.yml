@@ -40,6 +40,21 @@
     dest: /etc/systemd/user/videoteam-voctocore.service
   notify: reload-systemd
 
+- name: Create loop directory
+  file:
+    path: /var/cache/voctomix/loop
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: 0775
+    recurse: yes
+
+- name: Unpack the loop tarball
+  unarchive:
+    src: http://10.18.0.3/loop/dc17-simpleloop.tar.xz
+    dest: /var/cache/voctomix/loop
+    remote_src: yes
+
 - name: install voctomix recording systemd units
   template:
     src: templates/videoteam-{{ item }}.service.j2
@@ -47,6 +62,7 @@
   with_items:
   - cutlist
   - record
+  - loop
   notify: reload-systemd
 
 - name: enable voctomix systemd units
@@ -60,3 +76,4 @@
   - cutlist
   - record
   - voctocore
+  - loop
