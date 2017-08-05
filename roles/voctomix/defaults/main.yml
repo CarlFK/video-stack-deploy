@@ -16,31 +16,14 @@ voctomix:
   # loop_url: http://example.net/loop.tar.xz
 
 streaming:
-  method: icecast
+  method: none
   hq_config:
     video_bitrate: 2000 # kbps
     audio_bitrate: 128000 # bps
     keyframe_period: 60 # seconds
-
-icecast_quality_hq: 18
-icecast_quality_lq: 20
-
-icecast_scale_hq: 720:-1
-icecast_scale_lq: 480:-1
-
-icecast_abr_hq: 96K
-icecast_abr_lq: 64k
-
-icecast_vbr_hq: 1.5M
-icecast_vbr_lq: 200k
-
-icecast_source: source:password@change.me:8000
-
-# streaming:
-#   method: rtmp
-#   rtmp:
-#     threads: auto / vaapi
-#     location: rtmp://a.rtmp.youtube.com/live2/x/SUPER_SECRET_KEY app=live2
+# rtmp:
+#   threads: auto / vaapi
+#   location: rtmp://a.rtmp.youtube.com/live2/x/SUPER_SECRET_KEY app=live2
 
 blackmagic_sources: []
 # Syntax:

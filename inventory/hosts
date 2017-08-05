@@ -12,9 +12,6 @@
 gw
 encodercube1
 
-[icecast2]
-encodercube1
-
 [offsite]
 fra1.video.debconf.org
 tor1.video.debconf.org
@@ -27,7 +24,6 @@ noc0stream0
 dhcp-server
 encoder
 ge-master
-icecast2
 nfs-server
 opsis
 voctomix

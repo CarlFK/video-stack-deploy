@@ -4,7 +4,5 @@
 - include: voctomix.yml
 - include: blackmagic.yml
 - include: scripts.yml
-- include: icecast.yml
-  when: streaming.method == 'icecast'
 - include: rtmp.yml
   when: streaming.method == 'rtmp'

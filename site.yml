@@ -15,10 +15,6 @@
   roles:
   - nfs-server
 
-- hosts: icecast2
-  roles:
-  - icecast2
-
 - hosts: onsite
   roles:
   - bash
