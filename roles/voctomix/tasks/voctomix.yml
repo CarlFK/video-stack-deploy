@@ -44,8 +44,6 @@
   file:
     path: /var/cache/voctomix/loop
     state: directory
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
     mode: 0775
     recurse: true
 
