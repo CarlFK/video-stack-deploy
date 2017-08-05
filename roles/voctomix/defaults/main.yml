@@ -13,6 +13,7 @@ sources:
 voctomix:
   display_system: gl
   framerate: 25
+  # loop_url: http://example.net/loop.tar.xz
 
 streaming:
   method: icecast

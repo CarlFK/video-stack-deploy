@@ -90,6 +90,7 @@ blackmagic:
 voctomix:
   display_system: gl
   framerate: 30
+  loop_url: http://10.18.0.3/loop/dc17-simpleloop.tar.xz
 
 ge:
   master:

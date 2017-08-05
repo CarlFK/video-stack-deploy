@@ -42,18 +42,24 @@
 
 - name: Create loop directory
   file:
-    path: /var/cache/voctomix/loop
+    path: /var/cache/voctomix
     state: directory
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
     mode: 0775
-    recurse: yes
+
+- name: Download the loop tarball
+  get_url:
+    url: "{{ voctomix.loop_url }}"
+    dest: /var/cache/voctomix/loop.tar
+  when: voctomix.loop_url is defined
 
 - name: Unpack the loop tarball
   unarchive:
-    src: http://10.18.0.3/loop/dc17-simpleloop.tar.xz
+    src: /var/cache/voctomix/loop.tar
     dest: /var/cache/voctomix/loop
-    remote_src: yes
+    remote_src: true
+  when: voctomix.loop_url is defined
 
 - name: install voctomix recording systemd units
   template:
