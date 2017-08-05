@@ -54,13 +54,7 @@
     url: "{{ voctomix.loop_url }}"
     dest: /var/cache/voctomix/loop.tar
   when: voctomix.loop_url is defined
-
-- name: Unpack the loop tarball
-  unarchive:
-    src: /var/cache/voctomix/loop.tar
-    dest: /var/cache/voctomix/loop
-    remote_src: true
-  when: voctomix.loop_url is defined
+  notify: Unpack the loop tarball
 
 - name: install voctomix recording systemd units
   template:

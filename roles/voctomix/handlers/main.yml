@@ -1,3 +1,9 @@
 ---
 - name: reload-systemd
   command: systemctl daemon-reload
+
+- name: Unpack the loop tarball
+  unarchive:
+    src: /var/cache/voctomix/loop.tar
+    dest: /var/cache/voctomix/loop
+    remote_src: true
