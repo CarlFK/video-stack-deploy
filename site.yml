@@ -52,7 +52,7 @@
   roles:
   - nfs-client
   - gridengine-exec
-  - sreview
+  #- sreview
   - xorg
 
 - hosts: ge-master
