@@ -17,6 +17,8 @@
     dest: /home/{{ user_name }}/.config/hexchat/servlist.conf
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
+  tags:
+  - irc_channels
 
 - name: Create more HexChat config
   template:
