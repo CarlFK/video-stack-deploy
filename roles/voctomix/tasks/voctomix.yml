@@ -42,11 +42,12 @@
 
 - name: Create loop directory
   file:
-    path: /var/cache/voctomix
+    path: /var/cache/voctomix/loop
     state: directory
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
     mode: 0775
+    recurse: true
 
 - name: Download the loop tarball
   get_url:
