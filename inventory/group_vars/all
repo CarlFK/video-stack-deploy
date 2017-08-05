@@ -138,9 +138,13 @@ streaming:
     server_names:
       - video.debconf.org
       - local.video.debconf.org
+      - af.video.debconf.org
+      - an.video.debconf.org
       - as.video.debconf.org
       - eu.video.debconf.org
       - na.video.debconf.org
+      - oc.video.debconf.org
+      - sa.video.debconf.org
     data_root: /srv/streaming-frontend
   rooms:
     - buzz
