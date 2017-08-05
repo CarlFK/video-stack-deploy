@@ -57,6 +57,7 @@
   - nfs-client
   - gridengine-exec
   - sreview
+  - xorg
 
 - hosts: ge-master
   roles:
