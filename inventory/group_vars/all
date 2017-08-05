@@ -84,6 +84,9 @@ staticips:
   - hostname: encoder1
     ip: 10.18.0.91
     mac: 00:16:41:ee:f5:19
+  - hostname: encoder2
+    ip: 10.18.0.92
+    mac: 00:24:7e:0a:c9:76
 
 enable_oldstable: true
 enable_sid: true

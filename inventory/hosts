@@ -47,6 +47,7 @@ noc1st0
 [encoder]
 encoder0
 encoder1
+encoder2
 
 [streaming-backends]
 noc1st0
