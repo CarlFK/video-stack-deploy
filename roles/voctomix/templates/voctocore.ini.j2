@@ -6,6 +6,9 @@ audiocaps=audio/x-raw,format=S16LE,channels=2,layout=interleaved,rate=48000
 
 ; tcp-ports will be 10000,10001,etc.
 sources={{ sources|join(",") }}
+{% if audiosource is defined %}
+audiosource={{ audiosource }}
+{% endif %}
 
 [side-by-side-equal]
 ; defaults to 1% of the video width

@@ -14,8 +14,3 @@ blackmagic_sources:
   connection: SDI
   audio: true
   mode: 18
-
-sources:
-- Camera1
-- Camera2
-- Grabber
