@@ -2,7 +2,7 @@
 
 set -euf
 
-exec rsync --archive --progress --partial \
+exec rsync --archive --progress --partial --stats \
 {% for item in rsync_excludes %}
 	--exclude '{{ item }}' \
 {% endfor %}
