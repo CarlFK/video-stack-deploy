@@ -2,7 +2,7 @@
 - name: create our main user
   user:
     name: "{{ user_name }}"
-    groups: audio,plugdev,sudo,video
+    groups: audio,dialout,plugdev,sudo,video
     password: "{{ user_password_crypted }}"
   when: user_password_crypted is defined
 
