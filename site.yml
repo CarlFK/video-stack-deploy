@@ -53,7 +53,7 @@
   roles:
   - nfs-client
   - gridengine-exec
-  #- sreview
+  - sreview
   - xorg
 
 - hosts: ge-master
@@ -61,7 +61,7 @@
   - gridengine-master
   - gridengine-config
   - gridengine-exec
-  #- sreview
+  - sreview
 
 - hosts: streaming-backends
   roles:
