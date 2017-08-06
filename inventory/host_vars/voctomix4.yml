@@ -7,6 +7,7 @@ blackmagic_sources:
 - card: 0
   connection: HDMI
   audio: true
+  mode: 19
 
 voctomix:
   host: voctomix4
