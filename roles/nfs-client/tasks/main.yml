@@ -10,6 +10,7 @@
   with_items:
   - veyepar
   - video
+  - sreview
 
 - name: Mount NFS mounts
   mount:
@@ -24,4 +25,6 @@
   - name: veyepar
     opts: ro,async
   - name: video
+    opts: rw,async
+  - name: sreview
     opts: rw,async
