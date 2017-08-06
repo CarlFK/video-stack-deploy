@@ -25,6 +25,7 @@
     dest: /home/videoteam/sreview 
 
 - name: write config file
+  when: sreviewdbpw is defined
   template:
     dest: /home/videoteam/sreview/scripts/config.pl
     owner: videoteam
