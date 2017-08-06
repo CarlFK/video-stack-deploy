@@ -24,6 +24,13 @@
     repo: https://github.com/yoe/sreview
     dest: /home/videoteam/sreview 
 
+- name: create working directory
+  file:
+    path: /home/videoteam/tmp
+    state: directory
+    owner: videoteam
+    group: videoteam
+
 - name: write config file
   when: sreviewdbpw is defined
   template:
