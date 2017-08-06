@@ -8,6 +8,12 @@ blackmagic_sources:
   connection: HDMI
   audio: true
 
+voctomix:
+  host: voctomix4
+  framerate: 30
+  display_system: gl
+  port: 10002
+
 voctolights:
 - camera: Cam1
   port: /dev/ttyUSB0
