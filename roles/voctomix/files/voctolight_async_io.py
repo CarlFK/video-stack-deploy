@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Based upon https://github.com/voc/voctomix/tree/voctopanel/example-scripts/voctolight
 
 import asyncio
 import argparse
@@ -25,14 +26,21 @@ class Config(configparser.ConfigParser, object):
     os.path.expanduser('~/.voctolight.ini'),
   ]
 
-  def __init__(self):
+  def __init__(self, cmd_line_config=None):
     super(Config,self).__init__()
+    self.cmd_line_config = cmd_line_config
+    self._read_config()
+
+  def _read_config(self):
     self.read(self.config_files)
+    if self.cmd_line_config:
+      self.read_file(self.cmd_line_config)
+      self.cmd_line_config.seek(0)
 
   def setup_with_server_config(self, server_config):
     self.clear()
+    self._read_config()
     self.read_dict(server_config)
-    self.read(self.config_files)
 
   def getlist(self, section, option):
     return [x.strip() for x in self.get(section, option).split(',')]
@@ -72,6 +80,7 @@ class CompositeModes(Enum):
 
 class Interpreter(object):
   a_or_b = False
+  primary = False
   composite_mode = CompositeModes.fullscreen
 
   def __init__(self, actor, config):
@@ -81,7 +90,7 @@ class Interpreter(object):
 
   def compute_state(self):
     if self.composite_mode == CompositeModes.fullscreen:
-      actor.enable_tally(self.a_or_b and self.primary)
+      actor.enable_tally(self.primary)
     else:   
       actor.enable_tally(self.a_or_b)
 
@@ -92,8 +101,8 @@ class Interpreter(object):
     try:
       self.__getattribute__("handle_"+signal)(args)
       interpreter.compute_state()
-    except:
-      print("Ignoring signal", signal)
+    except Exception as e:
+      print("Ignoring signal", signal, e)
 
   def handle_video_status(self, cams):
     mycam = self.config.get('light', 'cam')
@@ -113,6 +122,8 @@ class Interpreter(object):
       self.composite_mode = CompositeModes.side_by_side_equal
     elif mode == "side_by_side_preview":
       self.composite_mode = CompositeModes.side_by_side_preview
+    elif mode == "picture_in_picture":
+      self.composite_mode = CompositeModes.picture_in_picture
     else:
       print("Cannot handle", mode, "of type", type(mode))
 
@@ -142,6 +153,7 @@ class LedActor:
     else:
       GPIO.output(self.gpio_red, GPIO.HIGH)
 
+
 class FakeLedActor:
   def __init__(self, config):
     pass
@@ -155,15 +167,41 @@ class FakeLedActor:
     else:
       print("tally off!")
 
+
+class SerialDTRActor:
+  def __init__(self, config):
+    self.fn = config.get('light', 'port')
+    print("Using:", self.fn)
+    self.fd = None
+
+  def reset_led(self):
+    if self.fd:
+      self.fd.close()
+    print("LED has been reset to off")
+
+  def enable_tally(self, enable):
+    if enable == True:
+      self.fd = open(self.fn)
+      print("tally on!")
+    else:
+      if self.fd:
+        self.fd.close()
+      self.fd = None
+      print("tally off!")
+
+
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Tallylight controlling daemon for voctomix.')
+  parser.add_argument("--config", type=open, help="Use a specific config file")
   parser.add_argument("--debug", action="store_true", help="Show what would be done instead of toggling lights")
   args = parser.parse_args()
-  config = Config()
-  if (not isArm() or args.debug):
+  config = Config(cmd_line_config=args.config)
+  if args.debug:
     actor = FakeLedActor(config)
-  else:
+  elif isArm():
     actor = LedActor(config)
+  else:
+    actor = SerialDTRActor(config)
   interpreter = Interpreter(actor, config)
   conn = Connection(interpreter)
   conn.connect(config.get('server', 'host'))
