@@ -38,3 +38,8 @@ rsync_excludes: []
 rsync_sshopts: ""
 
 #video_disk: /dev/sdb1
+
+# voctolights:
+# - camera: Cam1
+#   port: /dev/ttyUSB0
+#   host: localhost

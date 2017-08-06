@@ -14,3 +14,7 @@ blackmagic_sources:
   connection: SDI
   audio: true
   mode: 18
+
+voctolights:
+- camera: Cam2
+  port: /dev/ttyUSB0

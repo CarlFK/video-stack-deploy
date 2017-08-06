@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+[server]
+host={{ item.host|default('localhost') }}
+
+[light]
+cam={{ item.camera }}
+port={{ item.port }}

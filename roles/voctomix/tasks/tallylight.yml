@@ -1,0 +1,28 @@
+---
+- name: Install /usr/local/bin/voctolight
+  copy:
+    src: files/voctolight_async_io.py
+    dest: /usr/local/bin/voctolight
+    mode: 0755
+
+- name: Write tally light config
+  template:
+    src: templates/voctolight.ini.j2
+    dest: /etc/voctomix/voctolight-{{ item.camera|lower }}.ini
+  with_items: "{{ voctolights }}"
+
+- name: Write tally light systemd units
+  template:
+    src: templates/voctolight.service.j2
+    dest: /etc/systemd/user/videoteam-voctolight-{{ item.camera|lower }}.service
+  with_items: "{{ voctolights }}"
+  notify: reload-systemd
+
+- name: Enable tally light systemd units
+  file:
+    state: link
+    src: "/etc/systemd/user/videoteam-voctolight-{{ item.camera|lower }}.service"
+    dest: "/home/{{ user_name }}/.config/systemd/user/xlogin.target.wants/videoteam-voctolight-{{ item.camera|lower }}.service"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+  with_items: "{{ voctolights }}"

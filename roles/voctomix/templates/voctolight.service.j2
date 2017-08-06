@@ -1,0 +1,14 @@
+[Unit]
+Description=Voctomix tally light for {{ item.camera }}
+After=videoteam-voctocore.service
+Requires=videoteam-voctocore.service
+StartLimitIntervalSec=0
+Conflicts=xlogout.target
+
+[Service]
+ExecStart=/usr/local/bin/voctolight --config /etc/voctomix/voctolight-{{ item.camera | lower }}.ini
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=xlogin.target

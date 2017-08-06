@@ -16,3 +16,9 @@ blackmagic_sources:
   mode: 18
 
 audiosource: Cam2
+
+voctolights:
+- camera: Cam1
+  port: /dev/ttyUSB1
+- camera: Cam2
+  port: /dev/ttyUSB0
