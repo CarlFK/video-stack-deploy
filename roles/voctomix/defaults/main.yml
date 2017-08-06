@@ -1,5 +1,6 @@
 ---
 user_name: videoteam
+storage_username: videodata
 
 org: debian
 show: debconf
@@ -34,5 +35,6 @@ blackmagic_sources: []
 #   mode: 18
 
 rsync_excludes: []
+rsync_sshopts: ""
 
 #video_disk: /dev/sdb1
