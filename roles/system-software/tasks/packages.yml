@@ -18,6 +18,7 @@
   - lldpd
   - lshw
   - moreutils
+  - mtr-tiny
   - net-tools
   - psmisc
   - python3-software-properties
