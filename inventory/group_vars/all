@@ -148,7 +148,7 @@ streaming:
     - 206.167.36.0/22
     - 206.167.40.0/21
   backend:
-    inventory_hostname: noc1st0
+    inventory_hostname: noc0stream1
     server_name: dc17-backend.video.debconf.org
     data_root: /srv/streaming
   frontend:
@@ -172,7 +172,7 @@ streaming:
   method: rtmp
   rtmp:
     threads: vaapi
-    location: "rtmp://noc1st0.video.dc17.debconf.org:1935/stream/{{ room_name }} live=1"
+    location: "rtmp://noc0stream1.video.dc17.debconf.org:1935/stream/{{ room_name }} live=1"
   hq_config:
     hls_bandwidth: 2176000
     video_bitrate: 2000 # kbps

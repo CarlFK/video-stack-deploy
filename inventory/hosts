@@ -51,11 +51,9 @@ encoder1
 encoder2
 
 [streaming-backends]
-noc1st0
 noc0stream1
 
 [streaming-frontends]
-noc1st0
 noc0stream0
 noc0stream1
 fra1.video.debconf.org
