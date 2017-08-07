@@ -48,7 +48,7 @@ rtmp {
       hls on;
       hls_path {{ streaming.backend.data_root }}/hls/multi;
       hls_fragment_naming system;
-{% for variant_name, variant in streaming.adaptive.variants.items() %}
+{% for variant_name, variant in streaming.adaptive.variants.items() | sort(attribute='1.hls_bandwidth') %}
       hls_variant _{{ variant_name }} BANDWIDTH={{ variant.hls_bandwidth }};
 {% endfor %}
       hls_variant _src BANDWIDTH={{ streaming.hq_config.hls_bandwidth }};

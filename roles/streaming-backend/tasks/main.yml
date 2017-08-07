@@ -71,6 +71,7 @@
   notify: reload nginx
   tags:
     - streaming
+    - streaming-backend_config
 
 - name: patch nginx.conf to include the rtmp configuration
   lineinfile:
@@ -80,6 +81,7 @@
   notify: reload nginx
   tags:
     - streaming
+    - streaming-backend_config
 
 - name: create index.html for streaming backend
   template:
