@@ -152,8 +152,10 @@ streaming:
     server_name: dc17-backend.video.debconf.org
     data_root: /srv/streaming
   frontend:
-    server_names:
+    certificate_name: video.debconf.org
+    redirect_names:
       - video.debconf.org
+    server_names:
       - local.video.debconf.org
       - af.video.debconf.org
       - an.video.debconf.org
