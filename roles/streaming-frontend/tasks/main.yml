@@ -88,6 +88,7 @@
   notify: reload nginx
   tags:
     - streaming
+    - streaming_frontend_config
 
 - name: create index.html for streaming frontend
   template:

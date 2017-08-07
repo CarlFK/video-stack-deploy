@@ -7,7 +7,9 @@ geoip_city /usr/share/GeoIP/GeoLiteCity.dat;
 
 geo $local {
     default 0;
-    10.0.0.0/8 1;
+{% for host in streaming.local_hosts %}
+    {{ host }} 1;
+{% endfor %}
 }
 
 server {
@@ -24,47 +26,50 @@ server {
 		rewrite ^/redir/(.*) https://local.video.debconf.org/$1 redirect;
 	}
 	if ($geoip_city_continent_code) {
-	rewrite ^/redir/(.*) https://$geoip_city_continent_code.video.debconf.org/$1 redirect;
+    rewrite ^/redir/(.*) https://$geoip_city_continent_code.video.debconf.org/$1 redirect;
 	}
 	rewrite ^/redir/(.*) https://eu.video.debconf.org/$1 redirect;
 
 	location /live {
     # From http://enable-cors.org/server_nginx.html
-		if ($request_method = 'OPTIONS') {
-			add_header 'Access-Control-Allow-Origin' '*';
-			add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-			add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-			add_header 'Access-Control-Max-Age' 1728000;
-			add_header 'Content-Type' 'text/plain charset=UTF-8';
-			add_header 'Content-Length' 0;
-			return 204;
-		}
-		if ($request_method = 'POST') {
-			add_header 'Access-Control-Allow-Origin' '*';
-			add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-			add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-		}
-		if ($request_method = 'GET') {
-			add_header 'Access-Control-Allow-Origin' '*';
-			add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-			add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-		}
-}
+    if ($request_method = 'OPTIONS') {
+      add_header 'Access-Control-Allow-Origin' '*';
+      add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+      add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+      add_header 'Access-Control-Max-Age' 1728000;
+      add_header 'Content-Type' 'text/plain charset=UTF-8';
+      add_header 'Content-Length' 0;
+      return 204;
+    }
+    if ($request_method = 'POST') {
+      add_header 'Access-Control-Allow-Origin' '*';
+      add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+      add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+    }
+    if ($request_method = 'GET') {
+      add_header 'Access-Control-Allow-Origin' '*';
+      add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+      add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+    }
+  }
 
+  location ~ /live/(?<room>.*)-(?<segment>.*).ts$ {
+    proxy_pass https://{{ streaming.backend.server_name }}/live/$room-$segment.ts;
+    proxy_cache hls-cache;
+    proxy_cache_valid 200 5m;
+    proxy_cache_valid 404 5s;
+  }
 
-{% for room in streaming.rooms %}
-	location ~ /live/{{ room }}-(?<segment>.*).ts$ {
-		proxy_pass https://{{ streaming.backend.server_name }}/live/{{ room }}-$segment.ts;
-		proxy_cache hls-cache;
-		proxy_cache_valid 200 5m;
-		proxy_cache_valid 404 5s;
-	}
+  location ~ /live/(?<room>.*).m3u8$ {
+    proxy_pass https://{{ streaming.backend.server_name }}/live/$room.m3u8;
+  }
 
-	location =/live/{{ room }}.m3u8 {
-		proxy_pass https://{{ streaming.backend.server_name }}/live/{{ room }}.m3u8;
-	}
-
-{% endfor %}
+  # XXX HACK (olasd): Add a static proxy for nginx to actually resolve the
+  # backend name on startup instead of barfing for lack of resolver
+  location = /live/.resolver_hack {
+    return 404;
+    proxy_pass https://{{ streaming.backend.server_name }}/live/.resolver_hack;
+  }
 
   listen 443 ssl;
   ssl_certificate /etc/letsencrypt/live/{{ streaming.frontend.server_names|first }}/fullchain.pem;

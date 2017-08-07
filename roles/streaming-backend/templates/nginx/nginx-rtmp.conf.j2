@@ -4,34 +4,56 @@
 rtmp_auto_push on;
 
 rtmp {
-	# Only allow publishing from trusted sources
+  # Only allow publishing from trusted sources
 {% for address in streaming.rtmp_publishers %}
-	allow publish {{ address }};
+  allow publish {{ address }};
 {% endfor %}
-	deny publish all;
+  allow publish ::1;
+  allow publish 127.0.0.1;
+  deny publish all;
 
-	server {
-		listen 1935;
+  server {
+    listen 1935;
 
-		application stream {
-			record all;
+    application stream {
+      record all;
 
-			record_path {{ streaming.backend.data_root }}/dump;
-			record_suffix /%Y%m%d%H%M%S.flv;
+      record_path {{ streaming.backend.data_root }}/dump;
+      record_suffix /%Y%m%d%H%M%S.flv;
 
-			# Needed in case something goes wrong during the conversion. As long as this
-			# isn't wrapped in a script, ffmpeg will terminate properly without the
-			# default SIGKILL. Otherwise see nginx-rtmp wiki for a clean example.
-			exec_kill_signal term;
-			exec_record_done ffmpeg -y -i $path -codec copy -movflags +faststart $path.mp4;
+      # Needed in case something goes wrong during the conversion. As long as this
+      # isn't wrapped in a script, ffmpeg will terminate properly without the
+      # default SIGKILL. Otherwise see nginx-rtmp wiki for a clean example.
+      exec_kill_signal term;
+      exec_record_done ffmpeg -y -i $path -codec copy -movflags +faststart $path.mp4;
 
-			live on;
+      exec ffmpeg -i rtmp://localhost/$app/$name -async 1 -vsync -1
+{% for variant_name, variant in streaming.adaptive.variants.items() %}
+        -c:v {{ streaming.adaptive.video_codec }} -c:a {{ streaming.adaptive.audio_codec }} -b:v {{ variant.video_bitrate }} -b:a {{ variant.audio_bitrate }} -vf "scale={{ variant.width }}:trunc(ow/a/2)*2" {{ variant.extra_settings }} -f flv rtmp://localhost/show/$name_{{ variant_name }}
+{% endfor %}
+        -c copy -f flv rtmp://localhost/show/$name_src;
 
-			hls on;
-			hls_path {{ streaming.backend.data_root }}/hls;
-			hls_fragment_naming system;
+      live on;
 
-			drop_idle_publisher 20s;
-		}
-	}
+      hls on;
+      hls_path {{ streaming.backend.data_root }}/hls/source;
+      hls_fragment_naming system;
+
+      drop_idle_publisher 20s;
+    }
+
+    application show {
+      live on;
+
+      hls on;
+      hls_path {{ streaming.backend.data_root }}/hls/multi;
+      hls_fragment_naming system;
+{% for variant_name, variant in streaming.adaptive.variants.items() %}
+      hls_variant _{{ variant_name }} BANDWIDTH={{ variant.hls_bandwidth }};
+{% endfor %}
+      hls_variant _src BANDWIDTH={{ streaming.hq_config.hls_bandwidth }};
+
+      drop_idle_publisher 20s;
+    }
+  }
 }
