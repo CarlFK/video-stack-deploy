@@ -55,6 +55,11 @@ staticips:
     ip: 10.18.0.3
   - hostname: noc1st0
     ip: 206.167.36.195
+  - hostname: noc0stream0
+    ip: 206.167.36.197
+  - hostname: noc0stream1
+    ip: 206.167.36.198
+    mac: cc:52:af:4b:5d:1c
   - hostname: voctomix1
     ip: 10.18.0.10
     mac: 00:24:7e:0a:ae:27
@@ -82,9 +87,6 @@ staticips:
     ip: 10.18.0.50
   - hostname: opsis5
     ip: 10.18.0.51
-  - hostname: noc0stream1
-    ip: 10.18.0.80
-    mac: cc:52:af:4b:5d:1c
   - hostname: encoder0
     ip: 10.18.0.90
     mac: 00:16:41:3c:eb:a6
