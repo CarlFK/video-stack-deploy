@@ -38,6 +38,16 @@
   tags:
     - streaming
 
+- name: create nginx rtmp socket directory
+  file:
+    path: /var/lib/nginx/rtmp
+    state: directory
+    owner: www-data
+    group: root
+    mode: 0700
+  tags:
+    - streaming
+
 - name: remove default html directory
   file:
     path: /var/www/html
