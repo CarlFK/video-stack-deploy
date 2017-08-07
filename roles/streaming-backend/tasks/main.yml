@@ -93,6 +93,18 @@
     - streaming
     - streaming-backend_config
 
+- name: patch nginx.conf to use 1 worker
+  # https://github.com/arut/nginx-rtmp-module/issues/849
+  lineinfile:
+    dest: /etc/nginx/nginx.conf
+    line: "worker_processes 1;"
+    regexp: "^worker_processes"
+    state: present
+  notify: reload nginx
+  tags:
+    - streaming
+    - streaming-backend_config
+
 - name: create index.html for streaming backend
   template:
     src: index.html.j2
