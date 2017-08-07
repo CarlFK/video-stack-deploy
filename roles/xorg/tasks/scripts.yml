@@ -7,3 +7,9 @@
   with_items:
   - stop
   - start
+
+- name: Script to show streams
+  template:
+    src: templates/videoteam-show-streams.j2
+    dest: /usr/local/bin/videoteam-show-streams
+    mode: 0755
