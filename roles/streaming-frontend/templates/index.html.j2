@@ -7,7 +7,7 @@
   <p>I know of the following rooms:
     <ul>
       {% for room in streaming.rooms %}
-      <li>{{ room }}: <a href='/live/{{ room }}.m3u8'>Stream for {{ room }}</a></li>
+      <li>{{ room }}: <a href='/redir/live/{{ room }}.m3u8'>Stream for {{ room }}</a></li>
       {% endfor %}
     </ul>
     If you click on the links your browser will download a useless playlist; You
