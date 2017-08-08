@@ -56,6 +56,10 @@
   - sreview
   - xorg
 
+- hosts: review
+  roles:
+  - xorg
+
 - hosts: ge-master
   roles:
   - gridengine-master

@@ -86,6 +86,9 @@ staticips:
     ip: 10.18.0.50
   - hostname: opsis5
     ip: 10.18.0.51
+  - hostname: review0
+    ip: 10.18.0.80
+    mac: 00:24:7e:0a:ad:63
   - hostname: encoder0
     ip: 10.18.0.90
     mac: 00:16:41:3c:eb:a6
