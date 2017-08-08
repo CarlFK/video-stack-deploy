@@ -51,8 +51,8 @@
 
 - name: copy certificates from main storage server
   synchronize:
-    src: "/etc/letsencrypt/{{ item }}/{{ streaming.frontend.certificate_name }}/"
-    dest: "/etc/letsencrypt/{{ item }}/{{ streaming.frontend.certificate_name }}/"
+    src: "/etc/letsencrypt/{{ item }}/{{ streaming.frontend.server_names|first }}/"
+    dest: "/etc/letsencrypt/{{ item }}/{{ streaming.frontend.server_names|first }}/"
     archive: yes
   with_items:
     - live
