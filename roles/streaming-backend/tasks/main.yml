@@ -12,6 +12,12 @@
   tags:
     - streaming
 
+- name: install ffmpeg
+  apt:
+    pkg: ffmpeg
+  tags:
+    - streaming
+
 - name: create nginx content directories
   file:
     path: "{{ item }}"
