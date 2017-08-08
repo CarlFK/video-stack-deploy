@@ -20,7 +20,7 @@ my $count = 0;
 foreach my $stream (@streams) {
 	my $location = "+".($count * $width)."+".0;
 	# TODO don't hardcode
-my $cmd = "bash -c \"while true; do mpv https://video.debconf.org/live/$stream.m3u8 -geometry ${width}x${heigth}${location} --screen $screen; sleep 5 ; done \" < /dev/null > /dev/null 2>&1";
+my $cmd = "bash -c \"while true; do mpv -ao null https://video.debconf.org/live/$stream.m3u8 -geometry ${width}x${heigth}${location} --screen $screen; sleep 5 ; done \" < /dev/null > /dev/null 2>&1";
 	print "$cmd\n";
 	system("$cmd&");
 	$count++;
