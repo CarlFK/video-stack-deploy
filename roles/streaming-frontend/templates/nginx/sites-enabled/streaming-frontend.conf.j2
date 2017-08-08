@@ -71,6 +71,17 @@ server {
     proxy_pass https://{{ streaming.backend.server_name }}/live/.resolver_hack;
   }
 
+  location = /local-server {
+    if ($local) {
+      return 200 local;
+    }
+    if ($local = 0) {
+      return 200 $geoip_city_continent_code;
+    }
+    add_header 'Content-Type' 'text/plain';
+    add_header 'Access-Control-Allow-Origin' '*';
+  }
+
   listen 443 ssl;
   ssl_certificate /etc/letsencrypt/live/{{ streaming.frontend.server_names|first }}/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/{{ streaming.frontend.server_names|first }}/privkey.pem;
