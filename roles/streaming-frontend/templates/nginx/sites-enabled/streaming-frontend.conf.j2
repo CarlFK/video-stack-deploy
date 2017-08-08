@@ -6,31 +6,31 @@ geoip_country /usr/share/GeoIP/GeoIP.dat;
 geoip_city /usr/share/GeoIP/GeoLiteCity.dat;
 
 geo $local {
-    default 0;
+  default 0;
 {% for host in streaming.local_hosts %}
-    {{ host }} 1;
+  {{ host }} 1;
 {% endfor %}
 }
 
 server {
-	listen 80;
-	listen [::]:80;
+  listen 80;
+  listen [::]:80;
 
-	root {{ streaming.frontend.data_root }}/www;
+  root {{ streaming.frontend.data_root }}/www;
 
-	index index.html;
+  index index.html;
 
-	server_name {{ streaming.frontend.server_names|join(' ') }};
+  server_name {{ streaming.frontend.server_names|join(' ') }};
 
-	if ($local) {
-		rewrite ^/redir/(.*) https://local.video.debconf.org/$1 redirect;
-	}
-	if ($geoip_city_continent_code) {
+  if ($local) {
+    rewrite ^/redir/(.*) https://local.video.debconf.org/$1 redirect;
+  }
+  if ($geoip_city_continent_code) {
     rewrite ^/redir/(.*) https://$geoip_city_continent_code.video.debconf.org/$1 redirect;
-	}
-	rewrite ^/redir/(.*) https://eu.video.debconf.org/$1 redirect;
+  }
+  rewrite ^/redir/(.*) https://eu.video.debconf.org/$1 redirect;
 
-	location /live {
+  location /live {
     # From http://enable-cors.org/server_nginx.html
     if ($request_method = 'OPTIONS') {
       add_header 'Access-Control-Allow-Origin' '*';
@@ -84,6 +84,6 @@ server {
 
   # Redirect non-https traffic to https
   if ($scheme != "https") {
-      return 301 https://$host$request_uri;
+    return 301 https://$host$request_uri;
   }
 }
