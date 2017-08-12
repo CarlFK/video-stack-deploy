@@ -1,0 +1,62 @@
+---
+- name: install R&D related packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - git
+  - vim
+  - vizzini-dkms
+
+- name: install serial terminal
+  apt:
+    name: "{{ item }}"
+  with_items:
+      # - flterm
+  - minicom
+
+- name: configure minicom for hdmi2usb
+  copy:
+    src: files/minirc.dfl
+    dest: /home/{{ user_name }}/.minirc.dfl
+
+- name: git clone litex-firmware
+  git:
+    repo: "https://github.com/timvideos/{{ item }}.git"
+    dest: "/home/{{ user_name }}/{{ item }}"
+    depth: 1
+    force: yes
+  become: true
+  become_user: "{{ user_name }}"
+  with_items:
+  - HDMI2USB-litex-firmware
+
+- name: download-env-root
+  shell: ./download-env-root.sh
+  args:
+    chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware/scripts
+
+- name: download-env
+  shell: ./download-env.sh
+  args:
+    chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware/scripts
+    creates: /home/{{ user_name }}/HDMI2USB-litex-firmware/build
+  become: true
+  become_user: "{{ user_name }}"
+
+- name: Create .Xilinx dir
+  file:
+    state: directory
+    path: /home/{{ user_name }}/.Xilinx
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+
+- name: copy Xilinx.lic
+  copy:
+    src: "{{ xilinx_lic }}"
+    dest: /home/{{ user_name }}/.Xilinx/Xilinx.lic
+  become: true
+  become_user:  "{{ user_name }}"
+  when: xilinx_lic is defined
+
+
+

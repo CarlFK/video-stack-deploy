@@ -1,0 +1,2 @@
+pu port         /dev/hdmi2usb/by-num/all0/tty0
+pu addcarreturn Yes
