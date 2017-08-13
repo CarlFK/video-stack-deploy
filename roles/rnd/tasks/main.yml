@@ -6,6 +6,8 @@
   - git
   - vim
   - vizzini-dkms
+  - grub-ipxe
+
 
 - name: install serial terminal
   apt:
