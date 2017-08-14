@@ -7,7 +7,7 @@
   - vim
   - vizzini-dkms
   - grub-ipxe
-
+  - python-wxgtk3.0
 
 - name: install serial terminal
   apt:
@@ -21,16 +21,18 @@
     src: files/minirc.dfl
     dest: /home/{{ user_name }}/.minirc.dfl
 
-- name: git clone litex-firmware
+- name: git clone bunch of things
   git:
-    repo: "https://github.com/timvideos/{{ item }}.git"
-    dest: "/home/{{ user_name }}/{{ item }}"
+    repo: "https://github.com/{{ item[0] }}/{{ item[1] }}.git"
+    dest: "/home/{{ user_name }}/{{ item[1] }}"
     depth: 1
     force: yes
   become: true
   become_user: "{{ user_name }}"
-  with_items:
-  - HDMI2USB-litex-firmware
+  with_list:
+  - [timvideos, HDMI2USB-litex-firmware]
+  - [CarlFK, clocky]
+  - [CarlFK, voctomix-outcasts]
 
 - name: download-env-root
   shell: ./download-env-root.sh
@@ -59,6 +61,4 @@
   become: true
   become_user:  "{{ user_name }}"
   when: xilinx_lic is defined
-
-
 
