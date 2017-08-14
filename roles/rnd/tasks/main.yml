@@ -7,7 +7,6 @@
   - vim
   - vizzini-dkms
   - grub-ipxe
-  - python-wxgtk3.0
 
 - name: install serial terminal
   apt:
