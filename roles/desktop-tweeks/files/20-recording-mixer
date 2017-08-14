@@ -1,0 +1,31 @@
+[org/gnome/desktop/screensaver]
+idle-activation-enabled=false
+lock-enabled=false
+
+[org/gnome/desktop/session]
+idle-delay=uint32 0
+
+[org/gnome/settings-daemon/plugins/power]
+lid-close-ac-action='nothing'
+lid-close-battery-action='nothing'
+idle-dim-ac=false
+idle-dim=false
+sleep-display-ac=uint32 0
+sleep-display-battery=uint32 0
+
+[com/ubuntu/update-manager]
+check-dist-upgrades=false
+
+[com/canonical/indicator/power]
+show-time=true
+
+[com/canonical/indicator/datetime]
+show-date=true
+show-day=true
+time-format='24-hour'
+show-locations=true
+show-seconds=true
+
+[org/gnome/desktop/interface]
+clock-show-seconds=true
+
