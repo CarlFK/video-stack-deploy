@@ -6,7 +6,20 @@
   - git
   - vim
   - vizzini-dkms
+    # help carl reimage
   - grub-ipxe
+    # deps to build crelay
+  - libftdi1
+  - libftdi-dev
+  - libhidapi-libusb0
+  - libhidapi-dev
+  - libusb-1.0-0
+  - libusb-1.0-0-dev
+
+# Blacklist the ftdi_sio driver module
+- kernel_blacklist:
+    name: ftdi_sio
+    state: present
 
 - name: install serial terminal
   apt:
@@ -67,5 +80,13 @@
   copy:
     src: files/51-sainsmart-usb.rules
     dest: /etc/udev/rules.d/51-sainsmart-usb.rules
+
+- name: build crelay
+  shell: make
+  args:
+    chdir: /home/{{ user_name }}/crelay/src
+    creates: /home/{{ user_name }}/crelay/src/crelay
+  become: true
+  become_user: "{{ user_name }}"
 
 
