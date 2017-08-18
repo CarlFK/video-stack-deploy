@@ -1,0 +1,8 @@
+# udev rules to allow write access to all users
+# for Sainsmart USB devices
+
+# Orginal line for something else
+SUBSYSTEM=="usb", ATTR{idVendor}=="0416", MODE="0666"
+
+# Bus 004 Device 008: ID 0403:6001 Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
+SUBSYSTEM=="usb", ATTR{idVendor}=="0403", MODE="0666"

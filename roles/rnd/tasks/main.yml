@@ -32,7 +32,9 @@
   - [timvideos, HDMI2USB-litex-firmware]
   - [CarlFK, clocky]
   - [CarlFK, voctomix-outcasts]
+  - [ondrej1024, crelay] # turns usb relay's on and off
 
+# scripts to dowload, install, build? firmware
 - name: download-env-root
   shell: ./download-env-root.sh
   args:
@@ -60,4 +62,10 @@
   become: true
   become_user:  "{{ user_name }}"
   when: xilinx_lic is defined
+
+- name: udev rule for relay board
+  copy:
+    src: files/51-sainsmart-usb.rules
+    dest: /etc/udev/rules.d/51-sainsmart-usb.rules
+
 
