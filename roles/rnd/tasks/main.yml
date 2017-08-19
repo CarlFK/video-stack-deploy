@@ -1,4 +1,5 @@
 ---
+
 - name: install R&D related packages
   apt:
     name: "{{ item }}"
@@ -20,6 +21,13 @@
 - kernel_blacklist:
     name: ftdi_sio
     state: present
+
+- name: Create ~/bin dir
+  file:
+    state: directory
+    path: /home/{{ user_name }}/bin
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
 
 - name: install serial terminal
   apt:
@@ -88,5 +96,13 @@
     creates: /home/{{ user_name }}/crelay/src/crelay
   become: true
   become_user: "{{ user_name }}"
+
+- name: add crelay exe to path
+  file:
+    state: link
+    src: /home/{{ user_name }}/crelay/src/crelay
+    dest: /home/{{ user_name }}/bin/crelay
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
 
 
