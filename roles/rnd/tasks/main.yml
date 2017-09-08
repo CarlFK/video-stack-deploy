@@ -7,6 +7,8 @@
   - git
   - vim
   - vizzini-dkms
+  # hwinfo --monitor shows   Model: "HDMI2USB-2"
+  - hwinfo
     # help carl reimage
   - grub-ipxe
     # deps to build crelay
