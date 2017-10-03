@@ -15,6 +15,7 @@
     default_release: "unstable"
   with_items:
   - voctomix-outcasts
+  when: ansible_distribution == 'Debian'
 
 - name: create voctomix config dir
   file:
