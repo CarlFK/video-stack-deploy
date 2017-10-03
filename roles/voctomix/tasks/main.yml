@@ -5,7 +5,7 @@
 - include: blackmagic.yml
 - include: scripts.yml
 - include: rtmp.yml
-  when: streaming.method == 'rtmp'
+  when: streaming and streaming.method == 'rtmp'
 - include: tallylight.yml
   when: voctolights is defined
   tags:
