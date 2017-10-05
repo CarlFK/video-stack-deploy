@@ -10,6 +10,8 @@
   notify:
   - reboot
   - wait for reboot
+  tags:
+  - staticips
 
 - name: configure network interfaces (static)
   template:
@@ -17,6 +19,8 @@
     dest: /etc/network/interfaces
   when: use_static_ip
   notify: restart networking
+  tags:
+  - staticips
 
 - name: configure network interfaces (dhcp)
   template:
@@ -24,6 +28,8 @@
     dest: /etc/network/interfaces
   when: not use_static_ip
   notify: restart networking
+  tags:
+  - staticips
 
 - name: ensure network-manager doesn't run its own dnsmasq
   lineinfile:
@@ -43,6 +49,8 @@
     src: templates/local.conf.j2
     dest: /etc/dnsmasq.d/local.conf
   notify: restart dnsmasq
+  tags:
+  - staticips
 
 - name: configure static hosts
   template:
@@ -50,3 +58,5 @@
     dest: /etc/dnsmasq.d/machines.conf
   when: staticips.hosts is defined
   notify: restart dnsmasq
+  tags:
+  - staticips

@@ -8,3 +8,5 @@
   notify:
   - kill lingering dhclients
   - restart networking
+  tags:
+  - staticips
