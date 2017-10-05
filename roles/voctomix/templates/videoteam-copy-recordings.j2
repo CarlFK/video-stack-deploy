@@ -2,7 +2,26 @@
 
 set -euf
 
-exec rsync --archive --progress --partial --stats \
+pause=0
+while [ $# -gt 0 ]; do
+	case $1 in
+	--pause)
+		pause=1
+		;;
+	*)
+		echo "Unknown argument $1"
+		exit 1
+		;;
+	esac
+	shift
+done
+
+if [ $pause = 1 ]; then
+	systemctl --user stop videoteam-record.service
+	trap "systemctl --user start videoteam-record.service" EXIT
+fi
+
+rsync --archive --progress --partial --stats \
 {% for item in rsync_excludes %}
 	--exclude '{{ item }}' \
 {% endfor %}
