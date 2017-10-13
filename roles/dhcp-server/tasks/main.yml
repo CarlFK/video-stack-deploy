@@ -60,3 +60,10 @@
   notify: restart dnsmasq
   tags:
   - staticips
+
+- name: boxes
+  template:
+    src: templates/boxes.conf.j2
+    dest: /etc/dnsmasq.d/boxes.conf
+  when: boxes is defined
+  notify: restart dnsmasq
