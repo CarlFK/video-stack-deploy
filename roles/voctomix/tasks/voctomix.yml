@@ -11,8 +11,8 @@
 - name: install voctomix-outcasts from unstable for now
   apt:
     name: "{{ item }}"
-    state: latest
-    default_release: "unstable"
+    # state: latest
+    # default_release: "unstable"
   with_items:
   - voctomix-outcasts
 

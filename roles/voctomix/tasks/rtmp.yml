@@ -1,5 +1,4 @@
 ---
-
 - name: Install VAAPI Packages
   apt:
     name: "{{ item }}"
