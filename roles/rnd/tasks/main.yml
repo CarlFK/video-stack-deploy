@@ -7,6 +7,9 @@
   - git
   - vim
   - vizzini-dkms
+  # for mode-switch:
+  - openocd
+  - flterm
   # hwinfo --monitor shows   Model: "HDMI2USB-2"
   - hwinfo
     # help carl reimage
@@ -18,6 +21,8 @@
   - libhidapi-dev
   - libusb-1.0-0
   - libusb-1.0-0-dev
+  # for testing
+  - mplayer
 
 # Blacklist the ftdi_sio driver module
 - kernel_blacklist:
@@ -52,16 +57,27 @@
   become: true
   become_user: "{{ user_name }}"
   with_list:
+  - [timvideos, HDMI2USB-mode-switch]
   - [timvideos, HDMI2USB-litex-firmware]
+  - [timvideos, HDMI2USB-firmware-prebuilt]
   - [CarlFK, clocky]
   - [CarlFK, voctomix-outcasts]
   - [ondrej1024, crelay] # turns usb relay's on and off
 
+- name: build mode-switch
+  shell: make conda
+  args:
+    chdir: /home/{{ user_name }}/HDMI2USB-mode-switch
+    # creates: /home/{{ user_name }}/crelay/src/crelay
+  become: true
+  become_user: "{{ user_name }}"
+
+
 # scripts to dowload, install, build? firmware
 - name: download-env-root
-  shell: ./download-env-root.sh
+  shell: ./scripts/download-env-root.sh
   args:
-    chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware/scripts
+    chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware #/scripts
 
 - name: download-env
   shell: ./download-env.sh
