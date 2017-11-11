@@ -4,6 +4,7 @@ use X11::Protocol;
 use Data::Dumper;
 
 my $screen = 0;
+my $host = "{{ streaming.frontend.server_names.0 }}";
 my @streams = ();
 {% for room in streaming.rooms %}
 push @streams, "{{ room }}";
@@ -19,12 +20,9 @@ my $heigth = int $width*9/16;
 my $count = 0;
 foreach my $stream (@streams) {
 	my $location = "+".($count * $width)."+".0;
-	# TODO don't hardcode
-	my $cmd = "bash -c \"while true; do mpv -ao null https://video.debconf.org/live/$stream.m3u8 -geometry ${width}x${heigth}${location} --screen $screen; sleep 5 ; done \" < /dev/null > /dev/null 2>&1";
+	# TODO: Ewwwwwwww
+	my $cmd = "bash -c \"while true; do mpv -ao null https://$host/live/$stream.m3u8 -geometry ${width}x${heigth}${location} --screen $screen; sleep 5 ; done \" < /dev/null > /dev/null 2>&1";
 	print "$cmd\n";
 	system("$cmd&");
 	$count++;
 }
-
-
-
