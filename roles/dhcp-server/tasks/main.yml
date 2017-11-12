@@ -56,7 +56,7 @@
   template:
     src: templates/machines.conf.j2
     dest: /etc/dnsmasq.d/machines.conf
-  when: staticips.hosts is defined
+  when: staticips is defined
   notify: restart dnsmasq
   tags:
   - staticips
