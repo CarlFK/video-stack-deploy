@@ -1,0 +1,65 @@
+# /srv/tftp/grub/grub.cfg
+
+timeout=5
+
+# get extra appends from dhcp
+# allows per host config options
+net_get_dhcp_option appends ${net_default_interface} 209 string
+# spell hostname funny else it collides with, I guess hostname
+net_get_dhcp_option hstnam ${net_default_interface} 12 string
+
+pxe=twist:8000
+tasks="tasks=ubuntu-desktop"
+ansibles="lc/playbook_repo=https://github.com/CarlFK/video-stack-deploy.git  lc/playbook_branch=master  lc/inventory_repo=https://github.com/CarlFK/video-stack-inventory.git  lc/inventory_branch=master"
+
+append="--- auto=true url=${pxe} DEBCONF_DEBUG=5 hostname=${hstnam} domain= ${appends} ${tasks} interface=${net_default_mac} hw-detect/load_firmware=false ${ansibles} rescue/enable=false"
+
+# defaul pxe item
+menuentry "Boot hd0" {
+insmod biosdisk
+set root=hd0
+chainloader +1
+}
+
+{% for sutie in debian_suites %}
+{% for arch in archs %}
+menuentry "{{suite}} h:${hstnam} ${appends}" {
+linux /debian/{{suite}}/{{arch}}/linux ${append}
+initrd /debian/{{suite}}/{{arch}}/initrd.gz
+}
+{% endfor %}
+{% endfor %}
+
+{% for sutie in ubuntu_suites %}
+{% for arch in archs %}
+menuentry "{{suite}} h:${hstnam} ${appends}" {
+linux /ubuntu/{{suite}}/{{arch}}/linux ${append}
+initrd /ubuntu/{{suite}}/{{arch}}/initrd.gz
+}
+{% endfor %}
+{% endfor %}
+
+
+menuentry "clonezilla" {
+set gfxpayload=keep
+linux util/cz/exper/live/vmlinuz boot=live union=aufs ocs_live_run="ocs-live-general" ocs_live_extra_param=""  ocs_lang="" ocs_live_keymap="NONE" nolocales netboot=nfs nfsroot=192.168.1.136:/srv/tftp/util/cz/exper/ locales= keyboard-layouts=
+initrd util/cz/exper/live/initrd.img
+}
+
+menuentry "ipxe" {
+   linux16 ipxe.lkrn
+}
+
+menuentry "sbm" {
+   linux16 syslinux/memdisk
+   initrd16 util/sbm/sbm.img
+}
+
+menuentry "exit" {
+exit
+}
+
+menuentry "reboot" {
+reboot
+}
+

@@ -1,0 +1,43 @@
+---
+- name: create installer boot image directories
+  file:
+    path: /srv/tftp/debian/{{suite}}/{{arch}}/{{filename}}
+    path: /srv/tftp/ubuntu/{{suite}}/{{arch}}/{{filename}}
+
+    path: /srv/tftp/{{dist}}/{{suite}}/{{arch}}/{{filename}}
+    state: directory
+    recurse: true
+    owner: root
+    group: root
+    mode: 0750
+  with_items:
+    dists: [ debian, ubuntu ]
+    suite: {{ubuntu_suites}}
+    arch: {{archs}}
+-
+- name: create other boot image directories
+  file:
+    path: /srv/tftp/{{item}}
+    state: directory
+    recurse: true
+    owner: root
+    group: root
+    mode: 0750
+  with_items:
+    - util/cz/exper/live
+
+- name: download ubuntu netboot images
+  get_url:
+    url: http://{{ubuntu_host}}/ubuntu/dists/{{suite}}-updates/main/installer-{{arch}}/current/images/{{filename}}
+    url: http://ftp.debian.org/debian/dists/{{suite}}/main/installer-{{arch}}/current/images/netboot/debian-installer/{{arch}}/{{filename}}
+    dest: /srv/tftp/ubuntu/{{suite}}/{{arch}}/{{filename}}
+  with_items:
+    suite: {{ubuntu_suites}}
+    arch: {{archs}}
+    filename: [ linux, initrd.gz ]
+
+- name: write preseed.cfg
+  template:
+    src: preseed.cfg.j2
+    dest: /srv/pxe/d-i/{{suite}}/preseed.cfg
+

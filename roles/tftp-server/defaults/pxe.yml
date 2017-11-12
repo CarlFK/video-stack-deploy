@@ -1,0 +1,13 @@
+---
+
+# pxe menu
+
+debian_suites: [stretch, sid]
+ubuntu_suites: [xenial, zesty, artful]
+archs: [amd64]
+
+others: []
+
+# boot image sources
+ubuntu_host: archive.ubuntu.com
+debian_host: ftp.debian.org
