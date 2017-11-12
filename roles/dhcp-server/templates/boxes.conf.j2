@@ -11,7 +11,7 @@ dhcp-option-force=209,"partman-auto/disk=/dev/{{default_install_dev}} grub-insta
 
 dhcp-host={{box.mac}},set:{{box.hostname}},{{box.hostname}}{% if box.ip is defined %},{{box.ip}}{% endif %}
 {% if box.ip is defined %}host-record={{box.hostname}},{{box.ip}}{% endif %}
-{% if box.disk is defined %} dhcp-option-force=tag:{{box.hostname}},209,"partman-auto/disk=/dev/{{box.disk}} grub-installer/bootdev={{box.disk}} tasks={{box.tasks}}" {% endif %}
+{% if box.disk is defined %}dhcp-option-force=tag:{{box.hostname}},209,"partman-auto/disk=/dev/{{box.disk}} grub-installer/bootdev={{box.disk}} tasks={{box.tasks|default()}}" {% endif %}
 {% if box.comment is defined %}# {{box.comment}}{% endif %}
 
 {% endfor %}
