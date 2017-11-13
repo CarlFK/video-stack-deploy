@@ -1,43 +1,61 @@
 ---
-- name: create installer boot image directories
-  file:
-    path: /srv/tftp/debian/{{suite}}/{{arch}}/{{filename}}
-    path: /srv/tftp/ubuntu/{{suite}}/{{arch}}/{{filename}}
-
-    path: /srv/tftp/{{dist}}/{{suite}}/{{arch}}/{{filename}}
-    state: directory
-    recurse: true
-    owner: root
-    group: root
-    mode: 0750
-  with_items:
-    dists: [ debian, ubuntu ]
-    suite: {{ubuntu_suites}}
-    arch: {{archs}}
--
-- name: create other boot image directories
+- name: create boot image directories
   file:
     path: /srv/tftp/{{item}}
     state: directory
     recurse: true
-    owner: root
-    group: root
     mode: 0750
   with_items:
+    - grub
+    - debian/stretch/amd64
+    - ubuntu
     - util/cz/exper/live
+  tags:
+      - testme
+
+- name: write grub.cfg
+  template:
+    src: grub.cfg.j2
+    dest: /srv/tftp/grub/grub.cfg
+  tags:
+      - testme
+
+- name: create utunbu suite dirs
+  file:
+      # path: /srv/tftp/ubuntu/{{suite}}/{{arch}}
+    path: /srv/tftp/ubuntu/{{ item[0] }}/{{ item[1] }}
+    state: directory
+    recurse: true
+    mode: 0750
+  with_nested:
+    - "{{ ubuntu_suites }}"
+    - "{{ archs }}"
+
+- name: download debian netboot images
+  get_url:
+    url: http://ftp.debian.org/debian/dists/{{item[0]}}/main/installer-{{item[1]}}/current/images/netboot/debian-installer/{{item[1]}}/{{item[2]}}
+    dest: /srv/tftp/debian/{{ item[0] }}/{{ item[1] }}/{{ item[2] }}
+  with_nested:
+    - ['stretch']
+    - "{{ archs }}"
+    - [ 'linux', 'initrd.gz' ]
 
 - name: download ubuntu netboot images
   get_url:
-    url: http://{{ubuntu_host}}/ubuntu/dists/{{suite}}-updates/main/installer-{{arch}}/current/images/{{filename}}
-    url: http://ftp.debian.org/debian/dists/{{suite}}/main/installer-{{arch}}/current/images/netboot/debian-installer/{{arch}}/{{filename}}
-    dest: /srv/tftp/ubuntu/{{suite}}/{{arch}}/{{filename}}
-  with_items:
-    suite: {{ubuntu_suites}}
-    arch: {{archs}}
-    filename: [ linux, initrd.gz ]
+    url: http://{{ubuntu_host}}/ubuntu/dists/{{item[0]}}/main/installer-{{item[1]}}/current/images/netboot/ubuntu-installer/{{item[1]}}/{{item[2]}}
+    dest: /srv/tftp/ubuntu/{{ item[0] }}/{{ item[1] }}/{{ item[2] }}
+  with_nested:
+    - "{{ ubuntu_suites }}"
+    - "{{ archs }}"
+    - [ 'linux', 'initrd.gz' ]
 
-- name: write preseed.cfg
-  template:
-    src: preseed.cfg.j2
-    dest: /srv/pxe/d-i/{{suite}}/preseed.cfg
+- name: download ubuntu updated netboot images
+  get_url:
+    url: http://{{ubuntu_host}}/ubuntu/dists/{{item[0]}}-updates/main/installer-{{item[1]}}/current/images/netboot/ubuntu-installer/{{item[1]}}/{{item[2]}}
+    dest: /srv/tftp/ubuntu/{{ item[0] }}/{{ item[1] }}/{{ item[2] }}
+  ignore_errors: true
+  with_nested:
+    - "{{ ubuntu_suites }}"
+    - "{{ archs }}"
+    - [ 'linux', 'initrd.gz' ]
 

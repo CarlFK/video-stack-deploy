@@ -21,22 +21,24 @@ set root=hd0
 chainloader +1
 }
 
-{% for sutie in debian_suites %}
+{% for suite in debian_suites %}
 {% for arch in archs %}
 menuentry "{{suite}} h:${hstnam} ${appends}" {
 linux /debian/{{suite}}/{{arch}}/linux ${append}
 initrd /debian/{{suite}}/{{arch}}/initrd.gz
 }
 {% endfor %}
+
 {% endfor %}
 
-{% for sutie in ubuntu_suites %}
+{% for suite in ubuntu_suites %}
 {% for arch in archs %}
 menuentry "{{suite}} h:${hstnam} ${appends}" {
 linux /ubuntu/{{suite}}/{{arch}}/linux ${append}
 initrd /ubuntu/{{suite}}/{{arch}}/initrd.gz
 }
 {% endfor %}
+
 {% endfor %}
 
 
