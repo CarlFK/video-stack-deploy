@@ -7,18 +7,24 @@
     mode: 0750
   with_items:
     - grub
-    - debian/stretch/amd64
     - ubuntu
     - util/cz/exper/live
-  tags:
-      - testme
 
 - name: write grub.cfg
   template:
     src: grub.cfg.j2
     dest: /srv/tftp/grub/grub.cfg
-  tags:
-      - testme
+
+- name: create debian suite dirs
+  file:
+    path: /srv/tftp/debian/{{ item[0] }}/{{ item[1] }}
+    state: directory
+    recurse: true
+    mode: 0750
+  with_nested:
+    - "{{ debian_suites }}"
+    - "{{ archs }}"
+
 
 - name: create utunbu suite dirs
   file:
@@ -36,7 +42,7 @@
     url: http://ftp.debian.org/debian/dists/{{item[0]}}/main/installer-{{item[1]}}/current/images/netboot/debian-installer/{{item[1]}}/{{item[2]}}
     dest: /srv/tftp/debian/{{ item[0] }}/{{ item[1] }}/{{ item[2] }}
   with_nested:
-    - ['stretch']
+    - "{{ debian_suites }}"
     - "{{ archs }}"
     - [ 'linux', 'initrd.gz' ]
 

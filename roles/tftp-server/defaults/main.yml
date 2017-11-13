@@ -25,7 +25,7 @@ playbook_branch: master
 
 debian_suites: [stretch, sid]
 ubuntu_suites: [xenial, zesty, artful]
-archs: [amd64]
+archs: [amd64, i386]
 
 others: []
 
