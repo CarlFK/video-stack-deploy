@@ -1,43 +1,14 @@
 ---
-- name: download TFTP boot image
-  get_url:
-    url: "{{ netboot_image }}"
-    dest: /srv/tftp/netboot.tar.gz
-
-- name: extract TFTP boot image
-  unarchive:
-    src: /srv/tftp/netboot.tar.gz
-    dest: /srv/tftp
-    remote_src: true
-    creates: /srv/tftp/pxelinux.0
-
-- name: inject preseed into menu (find files)
-  find:
-    paths: /srv/tftp
-    recurse: true
-    patterns: txt.cfg
-  register: menus
-
-- name: inject preseed into menu (do injection)
-  lineinfile:
-    dest: "{{ item.path }}"
-    regexp: (\s+append\s+.*\s+initrd=\S+)\s+(.*)(---.*)
-    backrefs: true
-    line: \1 auto=true interface=auto url={{ inventory_hostname }} netcfg/get_domain={{ domain }} preseed/early_command="anna-install eatmydata-udeb" \3
-  with_items: "{{ menus.files }}"
-
 - name: create d-i directory
   file:
-    path: /srv/pxe/d-i/{{ debian_version }}
+    path: /srv/pxe/
     state: directory
-    recurse: true
 
-- name: write preseed.cfg
-  template:
-    src: preseed.cfg.j2
-    dest: /srv/pxe/d-i/{{ debian_version }}/preseed.cfg
+- name: copy preseed and supporting files
+  copy:
+    src: files/{{ item }}
+    dest: /srv/pxe/
+  with_items:
+  - d-i
+  - ec
 
-- name: generate late_command.sh
-  template:
-    src: late_command.sh.j2
-    dest: /srv/pxe/d-i/late_command.sh
