@@ -45,13 +45,6 @@ initrd /ubuntu/{{suite}}/{{arch}}/initrd.gz
 
 {% endfor %}
 
-
-menuentry "clonezilla" {
-set gfxpayload=keep
-linux util/cz/exper/live/vmlinuz boot=live union=aufs ocs_live_run="ocs-live-general" ocs_live_extra_param=""  ocs_lang="" ocs_live_keymap="NONE" nolocales netboot=nfs nfsroot=${tftp}:/srv/tftp/util/cz/exper/ locales= keyboard-layouts=
-initrd util/cz/exper/live/initrd.img
-}
-
 menuentry "ipxe" {
    linux16 ipxe/ipxe.lkrn
 }
@@ -68,4 +61,17 @@ exit
 menuentry "reboot" {
 reboot
 }
+
+menuentry "clonezilla" {
+set gfxpayload=keep
+linux util/cz/exper/live/vmlinuz boot=live union=aufs ocs_live_run="ocs-live-general" ocs_live_extra_param=""  ocs_lang="" ocs_live_keymap="NONE" nolocales netboot=nfs nfsroot=${tftp}:/srv/tftp/util/cz/exper/ locales= keyboard-layouts=
+initrd util/cz/exper/live/initrd.img
+}
+
+{% for other in others %}
+menuentry "{{other.label}}" {
+{{other.loader}} /util/{{other.filename}}
+}
+
+{% endfor %}
 

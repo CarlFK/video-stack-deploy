@@ -97,3 +97,13 @@
     - ipxe.lkrn
     - ipxe.pxe
 
+- name: download other stuff
+  get_url:
+    url: "{{ item.url }}"
+    dest: /srv/tftp/util/{{ item.filename }}
+  with_items: "{{ others }}"
+  tags:
+      - testme
+
+
+

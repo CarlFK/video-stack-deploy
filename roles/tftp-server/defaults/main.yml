@@ -1,6 +1,4 @@
 ---
-netboot_image: https://deb.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/netboot.tar.gz
-
 time_zone: UTC
 domain: video.debconf.org
 
@@ -17,18 +15,29 @@ user_name: videoteam
 playbook_repo: https://anonscm.debian.org/cgit/debconf-video/ansible.git
 playbook_branch: master
 
-# To replace the stock inventory with your own, point at your own github repo
+# To replace the stock inventory with your own,
+#   point at your own github repo
 #inventory_repo: https://gitlab.com/yourname/ansible-inventory
 #inventory_branch: master
 
-# - include: pxe.yml
+
+# boot image sources
+debian_host: ftp.debian.org
+ubuntu_host: archive.ubuntu.com
 
 debian_suites: [stretch, sid]
 ubuntu_suites: [xenial, zesty, artful]
 archs: [amd64, i386]
 
-others: []
+others:
 
-# boot image sources
-ubuntu_host: archive.ubuntu.com
-debian_host: ftp.debian.org
+    - label: memtest86+
+      url: http://www.memtest.org/download/5.01/
+      filename: memtest86+-5.01.bin.gz
+      loader: linux16
+
+    - label: tomsrtbt
+      url: http://www.ibiblio.org/pub/Linux/system/recovery/
+      filename: tomsrtbt-2.0.103.tar.gz
+      loader: linux16
+
