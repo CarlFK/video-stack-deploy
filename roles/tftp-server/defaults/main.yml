@@ -27,7 +27,7 @@ ubuntu_host: archive.ubuntu.com
 
 debian_suites: [stretch, sid]
 ubuntu_suites: [xenial, zesty, artful]
-archs: [amd64, i386]
+archs: [amd64]
 
 others:
 
@@ -39,5 +39,5 @@ others:
     - label: tomsrtbt
       url: http://www.ibiblio.org/pub/Linux/system/recovery/
       filename: tomsrtbt-2.0.103.tar.gz
-      loader: linux16
+      loader: linux16 memdisk
 
