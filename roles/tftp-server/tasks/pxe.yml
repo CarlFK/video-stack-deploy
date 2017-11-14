@@ -1,26 +1,39 @@
 ---
+- name: install the tftp server
+  apt:
+    name: dnsmasq
+
+- name: enable tftp
+  copy:
+    src: files/tftp.conf
+    dest: /etc/dnsmasq.d
+
 - name: create boot image directories
   file:
     path: /srv/tftp/{{item}}
     state: directory
     recurse: true
-    mode: 0750
+    mode: 0755
   with_items:
-    - grub
-    - ubuntu
+    - ipxe
     - util/cz/exper/live
+
+- name: magicly build /srv/tftp/boot/grub
+  command: grub-mknetdir
 
 - name: write grub.cfg
   template:
     src: grub.cfg.j2
-    dest: /srv/tftp/grub/grub.cfg
+    dest: /srv/tftp/boot/grub/grub.cfg
+  tags:
+      - testme
 
 - name: create debian suite dirs
   file:
     path: /srv/tftp/debian/{{ item[0] }}/{{ item[1] }}
     state: directory
     recurse: true
-    mode: 0750
+    mode: 0755
   with_nested:
     - "{{ debian_suites }}"
     - "{{ archs }}"
@@ -32,7 +45,7 @@
     path: /srv/tftp/ubuntu/{{ item[0] }}/{{ item[1] }}
     state: directory
     recurse: true
-    mode: 0750
+    mode: 0755
   with_nested:
     - "{{ ubuntu_suites }}"
     - "{{ archs }}"
@@ -64,4 +77,23 @@
     - "{{ ubuntu_suites }}"
     - "{{ archs }}"
     - [ 'linux', 'initrd.gz' ]
+
+- name: download ubuntu eufi grubs
+  get_url:
+    url: http://{{ubuntu_host}}/ubuntu/dists/{{item[0]}}/main/uefi/grub2-{{item[1]}}/current/grubnetx64.efi.signed
+    dest: /srv/tftp/ubuntu/{{ item[0] }}/{{ item[1] }}/grubnetx64.efi.signed
+  with_nested:
+    - "{{ ubuntu_suites }}"
+    - [ 'amd64', ]
+
+- name: download ipxe boot loaders
+  get_url:
+    url: https://ipxe.org/{{item}}
+    dest: /srv/tftp/ipxe/{{ item }}
+  with_items:
+    - undionly.kpxe
+    - ipxe.efi
+    - ipxe.efi.signed
+    - ipxe.lkrn
+    - ipxe.pxe
 
