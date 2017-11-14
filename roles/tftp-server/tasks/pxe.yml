@@ -25,8 +25,6 @@
   template:
     src: grub.cfg.j2
     dest: /srv/tftp/boot/grub/grub.cfg
-  tags:
-      - testme
 
 - name: create debian suite dirs
   file:
@@ -88,22 +86,17 @@
 
 - name: download ipxe boot loaders
   get_url:
-    url: https://ipxe.org/{{item}}
+    url: https://boot.ipxe.org/{{item}}
     dest: /srv/tftp/ipxe/{{ item }}
   with_items:
     - undionly.kpxe
     - ipxe.efi
-    - ipxe.efi.signed
     - ipxe.lkrn
     - ipxe.pxe
+      # - ipxe.efi.signed
 
 - name: download other stuff
   get_url:
-    url: "{{ item.url }}"
+    url: "{{ item.url }}/{{ item.filename }}"
     dest: /srv/tftp/util/{{ item.filename }}
   with_items: "{{ others }}"
-  tags:
-      - testme
-
-
-
