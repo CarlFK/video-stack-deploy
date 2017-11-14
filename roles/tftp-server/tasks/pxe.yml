@@ -93,7 +93,8 @@
     - ipxe.efi
     - ipxe.lkrn
     - ipxe.pxe
-      # - ipxe.efi.signed
+  # - ipxe.efi.signed
+  # nope. see http://forum.ipxe.org/showthread.php?tid=7533
 
 - name: download other stuff
   get_url:
