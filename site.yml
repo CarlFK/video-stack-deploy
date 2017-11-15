@@ -13,7 +13,6 @@
   roles:
   - dhcp-server
   - squid-deb-proxy
-  - xorg
 
 - hosts: nfs-server
   roles:
