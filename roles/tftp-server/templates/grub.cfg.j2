@@ -13,10 +13,9 @@ tftp=${pxe_default_server}
 shaz=${tftp}
 # shaz=twist:8000
 tasks="tasks=ubuntu-desktop"
-ansibles="lc/playbook_repo=https://github.com/CarlFK/video-stack-deploy.git  lc/playbook_branch=master  lc/inventory_repo=https://github.com/CarlFK/video-stack-inventory.git  lc/inventory_branch=master"
+ansibles="lc/playbook_repo={{ playbook_repo }} lc/playbook_branch={{ playbook_branch }}  lc/inventory_repo={{ inventory_repo }}  lc/inventory_branch={{ inventory_branch }}"
 
 append="--- auto=true url=${shaz} DEBCONF_DEBUG=5 hostname=${hstnam} domain= ${appends} ${tasks} interface=${net_default_mac} hw-detect/load_firmware=false ${ansibles} rescue/enable=false"
-
 
 # defaul pxe item
 menuentry "Boot hd0" {
