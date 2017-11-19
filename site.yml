@@ -35,6 +35,11 @@
   - blackmagic
   - xorg
 
+- hosts: xorg
+  roles:
+  - xorg
+
+
   # everything on one box
   # secrets copied from ansible master
 - hosts: veyepar-basic
