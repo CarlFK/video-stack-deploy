@@ -37,7 +37,7 @@
     - "{{ archs }}"
 
 
-- name: create utunbu suite dirs
+- name: create ubuntu suite dirs
   file:
       # path: /srv/tftp/ubuntu/{{suite}}/{{arch}}
     path: /srv/tftp/ubuntu/{{ item[0] }}/{{ item[1] }}
@@ -50,7 +50,7 @@
 
 - name: download debian netboot images
   get_url:
-    url: http://ftp.debian.org/debian/dists/{{item[0]}}/main/installer-{{item[1]}}/current/images/netboot/debian-installer/{{item[1]}}/{{item[2]}}
+    url: http://{{debian_host}}/debian/dists/{{item[0]}}/main/installer-{{item[1]}}/current/images/netboot/debian-installer/{{item[1]}}/{{item[2]}}
     dest: /srv/tftp/debian/{{ item[0] }}/{{ item[1] }}/{{ item[2] }}
   with_nested:
     - "{{ debian_suites }}"

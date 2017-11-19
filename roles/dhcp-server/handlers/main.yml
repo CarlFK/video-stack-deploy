@@ -11,7 +11,6 @@
 - name: reboot
   when: ansible_connection != 'local'
   command: shutdown -r now "Reboot triggered by Ansible"
-  become: true
   async: 0
   poll: 0
   ignore_errors: true
@@ -24,4 +23,3 @@
     port: "{{ ansible_port | default(22) }}"
     delay: 1
     timeout: 300
-  become: false

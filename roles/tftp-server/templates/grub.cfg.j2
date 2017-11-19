@@ -19,16 +19,16 @@ append="--- auto=true url=${shaz} DEBCONF_DEBUG=5 hostname=${hstnam} domain= ${a
 
 # defaul pxe item
 menuentry "Boot hd0" {
-insmod biosdisk
-set root=hd0
-chainloader +1
+  insmod biosdisk
+  set root=hd0
+  chainloader +1
 }
 
 {% for suite in debian_suites %}
 {% for arch in archs %}
 menuentry "{{suite}} h:${hstnam} ${appends}" {
-linux /debian/{{suite}}/{{arch}}/linux ${append}
-initrd /debian/{{suite}}/{{arch}}/initrd.gz
+  linux /debian/{{suite}}/{{arch}}/linux ${append}
+  initrd /debian/{{suite}}/{{arch}}/initrd.gz
 }
 {% endfor %}
 
@@ -37,8 +37,8 @@ initrd /debian/{{suite}}/{{arch}}/initrd.gz
 {% for suite in ubuntu_suites %}
 {% for arch in archs %}
 menuentry "{{suite}} h:${hstnam} ${appends}" {
-linux /ubuntu/{{suite}}/{{arch}}/linux ${append}
-initrd /ubuntu/{{suite}}/{{arch}}/initrd.gz
+  linux /ubuntu/{{suite}}/{{arch}}/linux ${append}
+  initrd /ubuntu/{{suite}}/{{arch}}/initrd.gz
 }
 {% endfor %}
 
@@ -54,23 +54,22 @@ menuentry "sbm" {
 }
 
 menuentry "exit" {
-exit
+  exit
 }
 
 menuentry "reboot" {
-reboot
+  reboot
 }
 
 menuentry "clonezilla" {
-set gfxpayload=keep
-linux util/cz/exper/live/vmlinuz boot=live union=aufs ocs_live_run="ocs-live-general" ocs_live_extra_param=""  ocs_lang="" ocs_live_keymap="NONE" nolocales netboot=nfs nfsroot=${tftp}:/srv/tftp/util/cz/exper/ locales= keyboard-layouts=
-initrd util/cz/exper/live/initrd.img
+  set gfxpayload=keep
+  linux util/cz/exper/live/vmlinuz boot=live union=aufs ocs_live_run="ocs-live-general" ocs_live_extra_param=""  ocs_lang="" ocs_live_keymap="NONE" nolocales netboot=nfs nfsroot=${tftp}:/srv/tftp/util/cz/exper/ locales= keyboard-layouts=
+  initrd util/cz/exper/live/initrd.img
 }
 
 {% for other in others %}
-menuentry "{{other.label}}" {
-{{other.loader}} /util/{{other.filename}}
+  menuentry "{{other.label}}" {
+  {{other.loader}} /util/{{other.filename}}
 }
 
 {% endfor %}
-

@@ -14,4 +14,4 @@ irc:
 irc_room_channel: ""
 irc_nick: videoteam
 streaming:
-    method: none
+  method: none

@@ -39,8 +39,8 @@ if [ ! -z ${inventory_repo} ]; then
     fi
 fi
 
-app=/usr/local/sbin/ansible-up
-cat > $app <<EOF
+script=/usr/local/sbin/ansible-up
+cat > $script <<EOF
 #!/bin/sh
 
 set -euf
@@ -60,6 +60,6 @@ exec ansible-playbook \\
 	$PLAYBOOKS \\
 	"\$@"
 EOF
-chmod +x $app
-$app
+chmod +x $script
+$script
 
