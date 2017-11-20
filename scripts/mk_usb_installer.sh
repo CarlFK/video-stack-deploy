@@ -48,13 +48,13 @@ zcat hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
 pmount /dev/${dev}
 
 # append appends to append
-# tee so I can see what gets written out.
+# tee so we can see what gets written out.
 sed "\|^APPEND|s|$| fb=false ${appends}|" syslinux.cfg | tee /media/${dev}/syslinux.cfg
 
 # copy the preseed files in case of problems serving them over the net.
-# just fis the APPEND line and the early/late stuff and off you go.
+# just fix the kernel APPEND and the remove the early/late commands.
 # (good luck, it is hard.)
-cp -a d-i/${suite}/* /media/${dev}
+cp -a ../roles/tftp-server/files/d-i/${suite}/* /media/${dev}
 
 case $suite in
 

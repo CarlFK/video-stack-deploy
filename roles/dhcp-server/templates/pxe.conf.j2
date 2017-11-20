@@ -1,0 +1,25 @@
+# /etc/dnsmasq.d/pxe.conf
+# {{ ansible_managed }}
+
+# https://wiki.fogproject.org/wiki/index.php?title=BIOS_and_UEFI_Co-Existence#Using_ProxyDHCP_.28dnsmasq.29
+# http://forum.ipxe.org/showthread.php?tid=6077
+
+# Tag requests from ipxe client
+dhcp-match=set:ipxe,175 # iPXE sends a 175 option.
+
+# tag/respond to legacy bios
+dhcp-match=set:bios,60,PXEClient:Arch:00000
+dhcp-boot=tag:bios,ipxe/undionly.kpxe #,dc10b,192.168.1.4
+dhcp-boot=tag:bios,tag:ipxe,boot/grub/i386-pc/core.0 #,dc10b,192.168.1.4
+
+# tag to efi
+dhcp-match=set:efibc,60,PXEClient:Arch:00007
+
+# Chain load ipxe, then grubnetx64.efi
+# (doesn't work. grub doesn't request any files from tftp, like boot/grub.cfg so #out )
+# dhcp-boot=tag:efibc,ipxe.efi.signed,dc10b,192.168.1.4
+# dhcp-boot=tag:efibc,tag:ipxe,grubnetx64.efi.signed,dc10b,192.168.1.4
+
+# skip ipxe, run grubnetx64.efi on first go
+dhcp-boot=tag:efibc,ubuntu/zesty/amd64/grubnetx64.efi.signed #,dc10b,192.168.1.4
+

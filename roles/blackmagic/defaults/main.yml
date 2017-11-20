@@ -5,8 +5,18 @@
 # https://www.blackmagicdesign.com/support/family/capture-and-playback
 # Latest Downloads
 # (Linux)
-# Desktop Video 10.9.3 (July 16 2017)
-# Blackmagic_Desktop_Video_Linux_10.9.3.tar.gz
+# Desktop Video 10.9.7 (Sep 7 2017)
+# Linux
+# Bottom of the form is "Download Only"
+# Blackmagic_Desktop_Video_Linux_10.9.7.tar.gz
+# cd /srv/pxe/bm
+# tar xfv Blackmagic_Desktop_Video_Linux_10.9.7.tar.gz
+#
+# to find dkms_version
+# ls /usr/src/blackmagic*
+# blackmagic-10.9.7a2/    blackmagic-io-10.9.7a2/
+# I guess :p
+#
 blackmagic:
   #desktopvideo: http://example.net/desktopvideo.deb
   #desktopvideo_gui: http://example.net/desktopvideo-gui.deb

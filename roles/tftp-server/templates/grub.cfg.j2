@@ -1,0 +1,75 @@
+# /srv/tftp/grub/grub.cfg
+
+# {{ ansible_managed }}
+
+timeout=5
+
+# get extra appends from dhcp
+# allows per host config options
+net_get_dhcp_option appends ${net_default_interface} 209 string
+# spell hostname funny else it collides with, I guess hostname
+net_get_dhcp_option hstnam ${net_default_interface} 12 string
+
+tftp=${pxe_default_server}
+
+tasks="tasks=ubuntu-desktop"
+ansibles="lc/playbook_repo={{ playbook_repo }} lc/playbook_branch={{ playbook_branch }}  lc/inventory_repo={{ inventory_repo }}  lc/inventory_branch={{ inventory_branch }}"
+
+append="--- auto=true url=${tftp} DEBCONF_DEBUG=5 hostname=${hstnam} domain= ${appends} ${tasks} interface=${net_default_mac} hw-detect/load_firmware=false ${ansibles} rescue/enable=false"
+
+# defaul pxe item
+menuentry "Boot hd0" {
+  insmod biosdisk
+  set root=hd0
+  chainloader +1
+}
+
+{% for suite in debian_suites %}
+{% for arch in archs %}
+menuentry "{{suite}} h:${hstnam} ${appends}" {
+  linux /debian/{{suite}}/{{arch}}/linux ${append}
+  initrd /debian/{{suite}}/{{arch}}/initrd.gz
+}
+{% endfor %}
+
+{% endfor %}
+
+{% for suite in ubuntu_suites %}
+{% for arch in archs %}
+menuentry "{{suite}} h:${hstnam} ${appends}" {
+  linux /ubuntu/{{suite}}/{{arch}}/linux ${append}
+  initrd /ubuntu/{{suite}}/{{arch}}/initrd.gz
+}
+{% endfor %}
+
+{% endfor %}
+
+menuentry "ipxe" {
+   linux16 ipxe/ipxe.lkrn
+}
+
+menuentry "sbm" {
+   linux16 syslinux/memdisk
+   initrd16 util/sbm/sbm.img
+}
+
+menuentry "exit" {
+  exit
+}
+
+menuentry "reboot" {
+  reboot
+}
+
+menuentry "clonezilla" {
+  set gfxpayload=keep
+  linux util/cz/exper/live/vmlinuz boot=live union=aufs ocs_live_run="ocs-live-general" ocs_live_extra_param=""  ocs_lang="" ocs_live_keymap="NONE" nolocales netboot=nfs nfsroot=${tftp}:/srv/tftp/util/cz/exper/ locales= keyboard-layouts=
+  initrd util/cz/exper/live/initrd.img
+}
+
+{% for other in others %}
+  menuentry "{{other.label}}" {
+  {{other.loader}} /util/{{other.filename}}
+}
+
+{% endfor %}

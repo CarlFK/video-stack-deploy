@@ -52,11 +52,24 @@
   tags:
   - staticips
 
+- name: configure the dhcp server for pxe
+  template:
+    src: templates/pxe.conf.j2
+    dest: /etc/dnsmasq.d/pxe.conf
+  notify: restart dnsmasq
+
 - name: configure static hosts
   template:
     src: templates/machines.conf.j2
     dest: /etc/dnsmasq.d/machines.conf
-  when: staticips.hosts is defined
+  when: staticips is defined
   notify: restart dnsmasq
   tags:
   - staticips
+
+- name: boxes
+  template:
+    src: templates/boxes.conf.j2
+    dest: /etc/dnsmasq.d/boxes.conf
+  when: boxes is defined
+  notify: restart dnsmasq

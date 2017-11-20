@@ -1,0 +1,15 @@
+# /etc/dnsmasq.d/boxes.conf
+# {{ ansible_managed }}
+
+dhcp-option-force=209,"partman-auto/disk=/dev/{{default_install_dev}} grub-installer/bootdev=/dev/{{default_install_dev}}"
+
+{% for box in boxes %}
+{% if box.comment is defined %}# {{box.hostname}} {{box.comment}}{% endif %}
+
+dhcp-host={{box.mac}},set:{{box.hostname}},{{box.hostname}}{% if box.ip is defined %},{{box.ip}}{% endif %}
+{% if box.ip is defined %}host-record={{box.hostname}},{{box.ip}}{% endif %}
+
+{% if box.disk is defined %}dhcp-option-force=tag:{{box.hostname}},209,"partman-auto/disk=/dev/{{box.disk}} grub-installer/bootdev=/dev/{{box.disk}} tasks={{box.tasks|default()}}" {% endif %}
+
+{% endfor %}
+
