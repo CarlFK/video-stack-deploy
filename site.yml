@@ -10,7 +10,6 @@
   - dhcp-server
   - tftp-server
   - squid-deb-proxy
-  - xorg
 
 - hosts: nfs-server
   roles:
@@ -32,6 +31,11 @@
   - voctomix
   - blackmagic
   - xorg
+
+- hosts: xorg
+  roles:
+  - xorg
+
 
   # everything on one box
   # secrets copied from ansible master
