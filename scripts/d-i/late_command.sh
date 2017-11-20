@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eufx
+set -efx
 
 # This script setups ansible and runs it
 # It should be ran at the end of the basic installation of a machine
