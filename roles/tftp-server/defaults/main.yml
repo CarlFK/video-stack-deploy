@@ -25,7 +25,7 @@ playbook_branch: master
 debian_host: ftp.debian.org
 ubuntu_host: archive.ubuntu.com
 
-debian_suites: [stretch, sid]
+debian_suites: [stretch, buster]
 ubuntu_suites: [xenial, zesty, artful]
 archs: [amd64]
 
