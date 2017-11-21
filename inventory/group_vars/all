@@ -34,6 +34,9 @@ public_keys_root:
 public_keys_storage:
 - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIbH8htkhiJmW1vTdOXpn1D6Qa3qc9dgK73BcpnJAqa0AvpG9B9GKQZDhqr1qWevIOMUet2GrrLs+7XFEb1t9XBR/a6Oc31aCKaVHdjzees20ecNEW+8w+pYMOOOaVRFJJR4bgibkp+/C3uvVjZBIxiU+RM7LloVYre2URexdyEo/VEtSlgiwV969q1Rdu+f/uvglefNDAunPXD2FW3TUqyYqguHY1nncOE3CcLvNpioUWKiv+BTFVT41C1Pe6nEXATJpfG+oJOeL1rNWlIWgiZdAWH6b2uGEu60K32rsPVd2A4HLAfy2t8CWjzSN6JJtmWzNi7s79Rs82zX65uIDV ivo@debconf17
 
+# tftp_server also does http of the same data
+tftp_server: 10.18.0.3
+local_ip_gateway: 10.18.0.3
 
 eth_local_ip_address: 10.18.0.3
 eth_local_ip_netmask: 24
