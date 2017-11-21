@@ -13,9 +13,9 @@ net_get_dhcp_option hstnam ${net_default_interface} 12 string
 tftp=${pxe_default_server}
 
 tasks="tasks=ubuntu-desktop"
-ansibles="lc/playbook_repo={{ playbook_repo }} lc/playbook_branch={{ playbook_branch }}  lc/inventory_repo={{ inventory_repo }}  lc/inventory_branch={{ inventory_branch }}"
+ansibles="lc/playbook_repo={{ playbook_repo }} lc/playbook_branch={{ playbook_branch }}  lc/inventory_repo={{ inventory_repo|default("") }}  lc/inventory_branch={{ inventory_branch|default("") }}"
 
-append="--- auto=true url=${tftp} DEBCONF_DEBUG=5 hostname=${hstnam} domain= ${appends} ${tasks} interface=${net_default_mac} hw-detect/load_firmware=false ${ansibles} rescue/enable=false"
+append="--- auto=true url=${tftp} DEBCONF_DEBUG=5 domain= ${appends} ${tasks} interface=${net_default_mac} hw-detect/load_firmware=false ${ansibles} rescue/enable=false"
 
 # defaul pxe item
 menuentry "Boot hd0" {
