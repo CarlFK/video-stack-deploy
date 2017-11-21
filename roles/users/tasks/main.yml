@@ -45,6 +45,8 @@
 - name: configure timezone
   timezone:
     name: "{{ time_zone }}"
+  # fails in d-i
+  ignore_errors: true
 
 - name: ensure systemd wants directory exists
   file:
