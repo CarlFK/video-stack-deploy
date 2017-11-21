@@ -5,6 +5,28 @@ source-directory interfaces.d
 auto lo
 iface lo inet loopback
 
+# {{ inventory_hostname }}
+{% for ipinfo in staticips.hosts | selectattr("hostname","equalto",inventory_hostname) %}
+{% if loop.first %}
+# generated based on hostname lookup in staticips
+auto {{ ansible_default_ipv4.interface }}
+iface {{ ansible_default_ipv4.interface }} inet static
+	address {{ ipinfo["ip"] }}
+	netmask {{ ansible_default_ipv4.netmask }}
+{% if ansible_default_ipv4.gateway != "???" %}
+{# We don't know why this happens, and staticips.gateway is the best workaround we have #}
+	gateway {{ ansible_default_ipv4.gateway }}
+{% elif staticips.gateway is defined %}
+	gateway {{ staticips.gateway }}
+{% endif %}
+	dns-nameserver {{ ansible_dns.nameservers.0 }}
+{% else %}
+# hostname {{ inventory_hostname }} defined multiple times in staticips
+# only one of the definitions is used
+{% endif %}
+{% else %}
+# hostname {{ inventory_hostname }} not found in staticips
+# configured based on ip from dhcp during ansible run
 {# FIXME: This is hacky, just taking what we got from DHCP and making it static #}
 auto {{ ansible_default_ipv4.interface }}
 iface {{ ansible_default_ipv4.interface }} inet static
@@ -17,3 +39,5 @@ iface {{ ansible_default_ipv4.interface }} inet static
 	gateway {{ staticips.gateway }}
 {% endif %}
 	dns-nameserver {{ ansible_dns.nameservers.0 }}
+{% endfor %}
+
