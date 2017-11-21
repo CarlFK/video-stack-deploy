@@ -2,8 +2,8 @@
 
 set -efx
 
-# This script (late_command.sh) setups ansible and runs it.
-# It should be ran at the end of the basic installation of a machine.
+# This script setups ansible and runs it
+# It should be ran at the end of the basic installation of a machine
 
 # Here is where the parameters come from:
 
@@ -22,8 +22,9 @@ inventory_branch=$7
 
 apt install -y ansible git eatmydata
 
-# clone our ansible repository(s)
-# create and run a script to run ansible on the local box.
+# We clone our ansible repository and copy the ansible config files
+
+cd /home/$user
 
 git clone $playbook_repo /root/playbook-repo
 (cd /root/playbook-repo; git checkout $playbook_branch)
@@ -39,8 +40,7 @@ if [ ! -z ${inventory_repo} ]; then
     fi
 fi
 
-script=/usr/local/sbin/ansible-up
-cat > $script <<EOF
+cat > /usr/local/sbin/ansible-up <<EOF
 #!/bin/sh
 
 set -euf
@@ -60,6 +60,11 @@ exec ansible-playbook \\
 	$PLAYBOOKS \\
 	"\$@"
 EOF
-chmod +x $script
-$script
+chmod +x /usr/local/sbin/ansible-up
 
+eatmydata ansible-playbook \
+	-vvvv \
+	--inventory-file=$INVENTORY \
+	--connection=local \
+	--limit=$(hostname) \
+	$PLAYBOOKS

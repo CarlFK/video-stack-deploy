@@ -18,8 +18,3 @@ domain: video.debconf.org
 #staticips:
 #  hosts:
 #  - For the layout of the staticips.hosts variable, see the staticips role
-#
-
-default_install_dev: sda
-
-boxes: []

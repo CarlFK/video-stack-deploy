@@ -5,13 +5,10 @@
   - system-software
   - users
 
-- hosts: tftp-server
-  roles:
-  - tftp-server
-
 - hosts: dhcp-server
   roles:
   - dhcp-server
+  - tftp-server
   - squid-deb-proxy
 
 - hosts: nfs-server

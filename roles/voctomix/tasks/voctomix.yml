@@ -12,7 +12,7 @@
   apt:
     name: "{{ item }}"
     state: latest
-    # default_release: "unstable"
+    default_release: "unstable"
   with_items:
   - voctomix-outcasts
   when: ansible_distribution == 'Debian'

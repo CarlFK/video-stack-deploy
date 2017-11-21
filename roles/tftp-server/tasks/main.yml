@@ -1,4 +1,3 @@
 ---
 - include: webserver.yml
 - include: d-i.yml
-- include: pxe.yml
