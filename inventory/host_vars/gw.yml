@@ -1,0 +1,6 @@
+
+eth_local_ip_address: 10.18.0.3
+eth_local_ip_netmask: 24
+#eth_local_ip_gateway: 10.18.0.1
+eth_local_mac_address: 00:16:41:ee:f4:dc
+eth_uplink_mac_address: 8a:ce:4c:ff:ae:83
