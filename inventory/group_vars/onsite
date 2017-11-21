@@ -1,6 +1,6 @@
 ---
-debconf_number: 17
-debconf_town: Montreal
-debconf_country: Canada
+debconf_number: mini
+debconf_town: Cambridge
+debconf_country: UK
 
 nfs_server: noc1st0
