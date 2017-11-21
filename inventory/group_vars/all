@@ -35,8 +35,8 @@ public_keys_storage:
 - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIbH8htkhiJmW1vTdOXpn1D6Qa3qc9dgK73BcpnJAqa0AvpG9B9GKQZDhqr1qWevIOMUet2GrrLs+7XFEb1t9XBR/a6Oc31aCKaVHdjzees20ecNEW+8w+pYMOOOaVRFJJR4bgibkp+/C3uvVjZBIxiU+RM7LloVYre2URexdyEo/VEtSlgiwV969q1Rdu+f/uvglefNDAunPXD2FW3TUqyYqguHY1nncOE3CcLvNpioUWKiv+BTFVT41C1Pe6nEXATJpfG+oJOeL1rNWlIWgiZdAWH6b2uGEu60K32rsPVd2A4HLAfy2t8CWjzSN6JJtmWzNi7s79Rs82zX65uIDV ivo@debconf17
 
 # tftp_server also does http of the same data
-tftp_server: 10.18.0.3
-local_ip_gateway: 10.18.0.3
+tftp_server: 10.18.0.10
+local_ip_gateway: 10.18.0.10
 
 dhcp_range: 10.18.0.128,10.18.0.254,6h
 domain: video.dc17.debconf.org
@@ -100,15 +100,15 @@ enable_oldstable: true
 enable_sid: true
 
 blackmagic:
-  desktopvideo: http://10.18.0.3/blackmagic/Blackmagic_Desktop_Video_Linux_10.9.5a4/deb/amd64/desktopvideo_10.9.5a4_amd64.deb
-  desktopvideo_gui: http://10.18.0.3/blackmagic/Blackmagic_Desktop_Video_Linux_10.9.5a4/deb/amd64/desktopvideo-gui_10.9.5a4_amd64.deb
-  mediaexpress: http://10.18.0.3/blackmagic/Blackmagic_Desktop_Video_Linux_10.9.5a4/deb/amd64/mediaexpress_3.5.3a1_amd64.deb
+  desktopvideo: http://10.18.0.10/blackmagic/Blackmagic_Desktop_Video_Linux_10.9.5a4/deb/amd64/desktopvideo_10.9.5a4_amd64.deb
+  desktopvideo_gui: http://10.18.0.10/blackmagic/Blackmagic_Desktop_Video_Linux_10.9.5a4/deb/amd64/desktopvideo-gui_10.9.5a4_amd64.deb
+  mediaexpress: http://10.18.0.10/blackmagic/Blackmagic_Desktop_Video_Linux_10.9.5a4/deb/amd64/mediaexpress_3.5.3a1_amd64.deb
   dkms_version: 10.9.5a4
 
 voctomix:
   display_system: gl
   framerate: 30
-  loop_url: http://10.18.0.3/loop/dc17-simpleloop.tar.xz
+  loop_url: http://10.18.0.10/loop/dc17-simpleloop.tar.xz
 
 sources:
 - Cam1
