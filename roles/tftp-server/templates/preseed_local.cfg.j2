@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+
+d-i mirror/http/hostname string {{ item.value }}
+d-i passwd/username string {{ user_name }}
+d-i passwd/user-password-crypted password {{ user_password_crypted }}
+d-i time/zone string {{ time_zone }}
