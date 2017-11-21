@@ -37,8 +37,10 @@
     - authorized_keys
 
 - name: configure locale
-  command: update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
-  when: ansible_env.LANG != 'en_US.UTF-8'
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+  notify: update locale
 
 - name: ensure systemd wants directory exists
   file:
