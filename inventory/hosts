@@ -11,6 +11,9 @@
 [dhcp-server]
 gw
 
+[tftp-server]
+gw
+
 [offsite]
 fra1.video.debconf.org
 tor1.video.debconf.org
