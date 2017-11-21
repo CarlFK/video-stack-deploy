@@ -10,9 +10,11 @@
 
 [dhcp-server]
 gw
+voctomix1
 
 [tftp-server]
 gw
+voctomix1
 
 [offsite]
 fra1.video.debconf.org
