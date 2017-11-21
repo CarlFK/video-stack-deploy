@@ -42,6 +42,10 @@
     state: present
   notify: update locale
 
+- name: configure timezone
+  timezone:
+    name: "{{ time_zone }}"
+
 - name: ensure systemd wants directory exists
   file:
     state: directory
