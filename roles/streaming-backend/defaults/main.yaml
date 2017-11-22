@@ -3,6 +3,7 @@ debian_version: stretch
 streaming:
   backend:
     data_root: /srv/streaming
+    server_name: backend.video.debconf.org
   rooms:
   - buzz
   - rex
