@@ -10,6 +10,7 @@
   - vim-gtk3
   - mesa-utils
   - xul-ext-ublock-origin
+  - xfce4-fsguard-plugin
 
 - name: install useful video packages
   apt:
