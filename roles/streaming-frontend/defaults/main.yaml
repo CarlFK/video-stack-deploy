@@ -1,2 +1,6 @@
 ---
 debian_version: stretch
+streaming:
+  frontend:
+    data_root: /srv/streaming-frontend
+    server_name: video.debconf.org
