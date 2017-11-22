@@ -7,13 +7,17 @@ blackmagic_sources:
 - card: 0
   connection: SDI
   audio: true
-  # 720p59.94
-  # list of mode IDs: check 'gst-inspect-1.0 decklinkvideosrc'
-  mode: 18
+  # check the frequency setting on the camera
+  # make sure it matches what's the frequency of the local power
+  # use BlackmagicDesktopVideoSetup to see what the camera is sending
+  # 720p59.94 is 18
+  # 720p50 is 17
+  # list of all mode IDs: check 'gst-inspect-1.0 decklinkvideosrc'
+  mode: 17
 - card: 1
   connection: SDI
   audio: true
-  mode: 18
+  mode: 17
 
 voctolights:
 - camera: Cam2
