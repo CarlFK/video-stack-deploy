@@ -1,11 +1,9 @@
 ---
 eth_local_ip_address: 10.20.0.1
 eth_local_ip_netmask: 24
-# only makes sense if there is no uplink defined below
 #eth_local_ip_gateway: 10.20.0.2
 
 eth_local_mac_address: 00:00:00:00:00:01
-# if defined, this machine will act as a gateway and do masquerading
 #eth_uplink_mac_address: 00:00:00:00:00:02
 
 use_static_ip: false
@@ -17,4 +15,3 @@ domain: video.debconf.org
 
 #staticips:
 #  hosts:
-#  - For the layout of the staticips.hosts variable, see the staticips role
