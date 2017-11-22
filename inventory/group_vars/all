@@ -70,6 +70,14 @@ staticips:
 enable_oldstable: true
 enable_sid: true
 
+# check the frequency setting on the camera
+# make sure it matches what's the frequency of the local power
+# use BlackmagicDesktopVideoSetup to see what the camera is sending
+# 720p59.94 is 18
+# 720p50 is 17
+# list of all mode IDs: check 'gst-inspect-1.0 decklinkvideosrc'
+blackmagic_default_mode: 17
+
 blackmagic:
   desktopvideo: http://10.18.0.10/blackmagic/Blackmagic_Desktop_Video_Linux_10.9.5a4/deb/amd64/desktopvideo_10.9.5a4_amd64.deb
   desktopvideo_gui: http://10.18.0.10/blackmagic/Blackmagic_Desktop_Video_Linux_10.9.5a4/deb/amd64/desktopvideo-gui_10.9.5a4_amd64.deb
