@@ -149,6 +149,9 @@ def configure_fsguard(fsguard_id,fs):
     relative_path = Path('xfce4/panel/fsguard-%d.rc' % fsguard_id)
     user = Path('~/.config').expanduser() / relative_path
 
+    if not user.exists():
+        user.parent.mkdir(parents=True, exist_ok=True)
+
     with user.open('w') as f:
         f.write('''
 yellow=30
