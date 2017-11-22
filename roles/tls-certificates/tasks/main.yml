@@ -1,0 +1,117 @@
+---
+- name: install required dependencies
+  apt:
+    pkg: "{{ item }}"
+  with_items:
+    - openssl
+    - python-openssl
+  tags:
+    - tls-certificates
+
+- name: create base directory
+  file:
+    path: "{{ base_directory }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+    - tls-certificates
+
+- name: create certs directory
+  file:
+    path: "{{ base_directory }}/certs"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+    - tls-certificates
+
+- name: create private directory
+  file:
+    path: "{{ base_directory }}/private"
+    state: directory
+    owner: root
+    group: root
+    mode: 0700
+  tags:
+    - tls-certificates
+
+- name: create letsencrypt account key
+  openssl_privatekey:
+    state: present
+    path: "{{ letsencrypt_key_path }}"
+  tags:
+    - tls-certificates
+
+- name: generate private key
+  openssl_privatekey:
+    state: present
+    path: "{{ privatekey_path }}"
+  tags:
+    - tls-certificates
+
+- name: generate subjectaltname list
+  set_fact:
+    all_subject_alt_names: "['{{ common_name }}'] + {{ subject_alt_names }}"
+  tags:
+    - tls-certificates
+
+- name: generate certificate signing request
+  openssl_csr:
+    state: present
+    common_name: "{{ common_name }}"
+    subject_alt_name: "{{ all_subject_alt_names | map('regex_replace', '^(.*)$', 'DNS:\\1') | join(',') }}"
+    path: "{{ csr_path }}"
+    privatekey_path: "{{ privatekey_path }}"
+  tags:
+    - tls-certificates
+  register: csr_result
+
+- name: request letsencrypt signing
+  letsencrypt:
+    account_key: "{{ letsencrypt_key_path }}"
+    csr: "{{ csr_path }}"
+    dest: "{{ certificate_path }}"
+    challenge: dns-01
+    agreement: "{{ letsencrypt_agreement_url }}"
+  when: not self_sign
+  register: letsencrypt_challenge
+  tags:
+    - tls-certificates
+
+- name: update dns for the letsencrypt challenge
+  command: /bin/true
+  when:
+    - not self_sign
+    - letsencrypt_challenge|changed
+  tags:
+    - tls-certificates
+
+- name: finalize letsencrypt challenge
+  letsencrypt:
+    account_key: "{{ letsencrypt_key_path }}"
+    csr: "{{ csr_path }}"
+    dest: "{{ certificate_path }}"
+    data: "{{ letsencrypt_challenge }}"
+  when: not self_sign
+  tags:
+    - tls-certificates
+
+- name: self-sign certificate
+  command: openssl x509 -req -sha256 -days 365 -in {{ csr_path }} -signkey {{ privatekey_path }} -out {{ certificate_path }}
+  when:
+    - self_sign
+    - csr_result|changed
+  tags:
+    - tls-certificates
+  register: self_sign_result
+
+- name: generate full chain
+  shell: /bin/cat {{ certificate_path|quote }} > {{ fullchain_path|quote }}
+  when:
+    - self_sign
+    - self_sign_result|changed
+  tags:
+    - tls-certificates

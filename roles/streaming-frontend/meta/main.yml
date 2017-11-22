@@ -1,0 +1,6 @@
+---
+dependencies:
+  - role: tls-certificates
+    basename: streaming_frontend
+    common_name: "{{ inventory_hostname }}"
+    subject_alt_names: "{{ streaming.frontend.server_names }}"

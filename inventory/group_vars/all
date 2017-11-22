@@ -126,7 +126,6 @@ streaming:
     - 206.167.36.0/22
     - 206.167.40.0/21
   backend:
-    inventory_hostname: noc0stream1
     server_name: backend.live.debconf.org
     data_root: /srv/streaming
   frontend:

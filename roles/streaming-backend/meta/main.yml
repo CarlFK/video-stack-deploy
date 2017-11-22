@@ -1,0 +1,6 @@
+---
+dependencies:
+  - role: tls-certificates
+    basename: streaming_backend
+    common_name: "{{ streaming.backend.server_name }}"
+    subject_alt_names: []

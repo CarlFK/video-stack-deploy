@@ -48,8 +48,8 @@ server {
 {% endif %}
 
   listen 443 ssl;
-  ssl_certificate /etc/letsencrypt/live/{{ streaming.backend.server_name }}/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/{{ streaming.backend.server_name }}/privkey.pem;
+  ssl_certificate /etc/ssl/ansible/certs/streaming_backend.fullchain.pem;
+  ssl_certificate_key /etc/ssl/ansible/private/streaming_backend.key;
   ssl_session_cache shared:le_nginx_SSL:1m;
   ssl_session_timeout 1440m;
 

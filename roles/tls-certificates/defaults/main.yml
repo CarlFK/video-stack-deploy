@@ -1,0 +1,17 @@
+---
+basename: bogus
+common_name: bogus.example
+subject_alt_names: []
+
+base_directory: /etc/ssl/ansible
+
+letsencrypt_key_path: "{{ base_directory }}/private/letsencrypt_account.key"
+letsencrypt_account_email: olasd@debian.org
+letsencrypt_agreement_url: https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf
+letsencrypt_api_url: https://acme-staging.api.letsencrypt.org/directory
+self_sign: True
+
+csr_path: "{{ base_directory }}/certs/{{ basename }}.csr"
+certificate_path: "{{ base_directory }}/certs/{{ basename }}.pem"
+fullchain_path: "{{ base_directory }}/certs/{{ basename }}.fullchain.pem"
+privatekey_path: "{{ base_directory }}/private/{{ basename }}.key"
