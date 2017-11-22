@@ -1,6 +1,7 @@
 # nfs-client
 
-Installs and mount an NFS share, based on the config in the `nfs-server` role.
+Installs and mounts NFS shares in `/srv`, based on the config in the
+`nfs-server` role.
 
 ## Tasks
 
