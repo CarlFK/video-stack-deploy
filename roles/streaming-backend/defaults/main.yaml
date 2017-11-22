@@ -8,3 +8,4 @@ streaming:
   - buzz
   - rex
   - bo
+  dump: True

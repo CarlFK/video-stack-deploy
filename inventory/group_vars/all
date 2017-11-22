@@ -176,6 +176,7 @@ streaming:
         audio_bitrate: 32k
         extra_settings: -tune zerolatency -preset veryfast -crf 23
         width: 480
+  dump: True
 
 rsync_sshopts: "-i ~/.ssh/id_rsa_videodata"
 

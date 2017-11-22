@@ -17,6 +17,7 @@ rtmp {
     listen 1935;
 
     application stream {
+{% if streaming.dump %}
       record all;
 
       record_path {{ streaming.backend.data_root }}/dump;
@@ -27,6 +28,7 @@ rtmp {
       # default SIGKILL. Otherwise see nginx-rtmp wiki for a clean example.
       exec_kill_signal term;
       exec_record_done ffmpeg -y -i $path -codec copy -movflags +faststart $path.mp4;
+{% endif %}
 
       exec ffmpeg -i rtmp://localhost/$app/$name -async 1 -vsync -1
 {% for variant_name, variant in streaming.adaptive.variants.items() %}
