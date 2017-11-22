@@ -1,6 +1,6 @@
 ---
-debconf_number: mini
-debconf_town: Cambridge
-debconf_country: UK
+conference_name: Cambridge mini-DebConf
+conference_town: Cambridge
+conference_country: UK
 
 nfs_server: noc1st0

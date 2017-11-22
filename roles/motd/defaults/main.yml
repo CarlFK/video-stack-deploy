@@ -1,4 +1,4 @@
 ---
-debconf_number: XX
-debconf_town: Change me
-debconf_country: Change me
+conference_name: XX
+conference_town: Change me
+conference_country: Change me
