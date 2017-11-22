@@ -39,12 +39,6 @@
     line: "tmpfs {{ streaming.backend.data_root }}/hls tmpfs uid=www-data,gid=www-data,mode=0755 0 2"
     regexp: "\\s{{ streaming.backend.data_root }}/hls\\s"
   notify: mount all
-
-  with_items:
-  - "{{ streaming.backend.data_root }}"
-  - "{{ streaming.backend.data_root }}/www"
-  - "{{ streaming.backend.data_root }}/hls"
-  - "{{ streaming.backend.data_root }}/dump"
   tags:
     - streaming
 
