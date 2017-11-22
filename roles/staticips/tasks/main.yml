@@ -1,5 +1,6 @@
 ---
 - include: hosts.yml
+
 # We don't want to fight with the dhcp-server role
 - include: interfaces.yml
   when: eth_local_ip_address is undefined
