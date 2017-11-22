@@ -130,6 +130,8 @@ def panels():
         else:
             raise ValueError("Options must be a dict, list, or None")
 
+        return id_
+
     if plugins.find('property[@value="pulseaudio"]') is None:
         add_item(1, 'pulseaudio', {'enable-keyboard-shortcuts': True})
 
@@ -138,9 +140,26 @@ def panels():
         add_item(2, 'launcher', ['voctogui.desktop'])
         add_item(2, 'launcher', ['hexchat.desktop'])
         add_item(2, 'launcher', ['videoteam-cutlist.desktop'])
+        fsgid = add_item(2, 'fsguard')
+        configure_fsguard(fsgid,"/srv/video/")
 
     tree.write(str(conf_p))
 
+def configure_fsguard(fsguard_id,fs):
+    relative_path = Path('xfce4/panel/fsguard-%d.rc' % fsguard_id)
+    user = Path('~/.config').expanduser() / relative_path
+
+    with user.open('w') as f:
+        f.write('''
+yellow=30
+red=10
+lab_size_visible=true
+progress_bar_visible=true
+hide_button=false
+label=
+label_visible=false
+mnt=%s
+''' % fs)
 
 def disable_workspaces():
     relative_path = Path('xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml')
