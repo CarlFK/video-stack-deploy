@@ -1,0 +1,20 @@
+# name of the role
+
+Short description of what the role does. Maybe explanation of some quirks if the
+role has some.
+
+## Tasks
+
+Describe how your tasks are organised. If you've put everything in main.yml,
+use:
+
+Everything is in the `tasks/main.yml` file.
+
+## Available variables
+
+List of the role's variables. Please follow the following style:
+
+Main variables are :
+
+* `var1`: Desc1.
+* `var2`: Desc2.
