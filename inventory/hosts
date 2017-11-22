@@ -17,12 +17,10 @@ gw
 voctomix1
 
 [offsite]
-fra1.video.debconf.org
-tor1.video.debconf.org
-sgp1.video.debconf.org
-
-[onsite]
-noc0stream0
+backend.live.debconf.org
+fra1.live.debconf.org
+tor1.live.debconf.org
+sgp1.live.debconf.org
 
 [onsite:children]
 dhcp-server
@@ -56,14 +54,12 @@ encoder1
 encoder2
 
 [streaming-backends]
-noc0stream1
+backend.live.debconf.org
 
 [streaming-frontends]
-noc0stream0
-noc0stream1
-fra1.video.debconf.org
-tor1.video.debconf.org
-sgp1.video.debconf.org
+fra1.live.debconf.org
+tor1.live.debconf.org
+sgp1.live.debconf.org
 
 [review]
 review0

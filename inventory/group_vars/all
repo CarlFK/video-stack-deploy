@@ -127,19 +127,19 @@ streaming:
     - 206.167.40.0/21
   backend:
     inventory_hostname: noc0stream1
-    server_name: dc17-backend.video.debconf.org
+    server_name: backend.live.debconf.org
     data_root: /srv/streaming
   frontend:
     server_names:
-      - video.debconf.org
-      - local.video.debconf.org
-      - af.video.debconf.org
-      - an.video.debconf.org
-      - as.video.debconf.org
-      - eu.video.debconf.org
-      - na.video.debconf.org
-      - oc.video.debconf.org
-      - sa.video.debconf.org
+      - "{{ inventory_hostname }}"
+      - local.live.debconf.org
+      - af.live.debconf.org
+      - an.live.debconf.org
+      - as.live.debconf.org
+      - eu.live.debconf.org
+      - na.live.debconf.org
+      - oc.live.debconf.org
+      - sa.live.debconf.org
     data_root: /srv/streaming-frontend
   rooms:
     - buzz

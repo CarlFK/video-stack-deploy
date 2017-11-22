@@ -23,12 +23,12 @@ server {
   server_name {{ streaming.frontend.server_names|join(' ') }};
 
   if ($local) {
-    rewrite ^/redir/(.*) https://local.video.debconf.org/$1 redirect;
+    rewrite ^/redir/(.*) https://local.live.debconf.org/$1 redirect;
   }
   if ($geoip_city_continent_code) {
-    rewrite ^/redir/(.*) https://$geoip_city_continent_code.video.debconf.org/$1 redirect;
+    rewrite ^/redir/(.*) https://$geoip_city_continent_code.live.debconf.org/$1 redirect;
   }
-  rewrite ^/redir/(.*) https://eu.video.debconf.org/$1 redirect;
+  rewrite ^/redir/(.*) https://eu.live.debconf.org/$1 redirect;
 
   location /live {
     # From http://enable-cors.org/server_nginx.html
