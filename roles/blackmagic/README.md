@@ -21,8 +21,14 @@ Everything is in the `tasks/main.yml` file.
 
 Main variables are :
 
-* `blackmagic.desktopvideo`: The URL to the .deb for the main Blackmagic driver.
-* `blackmagic.desktopvideo_gui`: The URL to the .deb for the Blackmagic driver
-                                 GUI, useful for debugging the capture cards.
-* `blackmagic.mediaexpress`: The URL to the .deb for Blackmagic's Media Express.
-* `blackmagic.dkms_version`: Blackmagic's DKMS version to install.
+* `blackmagic.desktopvideo`:     URL to the Debian package for the main
+                                 Blackmagic driver.
+
+* `blackmagic.desktopvideo_gui`: URL to the Debian package for the Blackmagic
+                                 driver GUI, useful for debugging the capture
+                                 cards.
+
+* `blackmagic.mediaexpress`:     URL to the Debian package for Blackmagic's
+                                 Media Express.
+
+* `blackmagic.dkms_version`:     Blackmagic's DKMS version to install.

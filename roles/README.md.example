@@ -17,4 +17,5 @@ List of the role's variables. Please follow the following style:
 Main variables are :
 
 * `var1`: Desc1.
+
 * `var2`: Desc2.
