@@ -12,7 +12,7 @@
 
 - name: manage onsite ssh authorized_keys
   authorized_key:
-    user: "{{ user_name }}"
+    user: "{{ user_name }}"
     key: "{{ item }}"
   with_items: "{{public_keys_onsite}}"
   when: "'onsite' in group_names"
@@ -21,7 +21,7 @@
 
 - name: manage offsite ssh authorized_keys
   authorized_key:
-    user: "{{ user_name }}"
+    user: "{{ user_name }}"
     key: "{{ item }}"
   with_items: "{{public_keys_offsite}}"
   when: "'offsite' in group_names"
