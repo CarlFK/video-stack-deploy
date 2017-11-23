@@ -102,11 +102,10 @@ d-i netcfg/wireless_wep string
 # If you select ftp, the mirror/country string does not need to be set.
 #d-i mirror/protocol string ftp
 d-i mirror/country string manual
+d-i mirror/http/hostname string {{ debian_source | regex_replace('http://|/.+', '') }}
 {% if ansible_distribution == 'Debian' %}
-d-i mirror/http/hostname string {{ mirror | default('deb.debian.org') }}
 d-i mirror/http/directory string /debian
 {% elif ansible_distribution == 'Ubuntu' %}
-d-i mirror/http/hostname string {{ mirror | default('archive.ubuntu.com') }}
 d-i mirror/http/directory string /ubuntu
 {% endif %}
 {% if apt_proxy %}

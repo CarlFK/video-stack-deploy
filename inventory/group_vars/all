@@ -5,6 +5,8 @@ storage_username: videodata
 user_password_crypted: $6$8HM7EZ2Uf73ekI$dtCsm0VMP68M0uR5Kbf/9MoNhuXmoiVgOkcq0miFn64EFWqG79z6spWb1SKegu7ft937bHHe5SA9wYErUr60G0
 autologin: true
 
+debian_source: http://deb.debian.org/debian
+
 # tftp_server also does http of the same data
 tftp_server: 10.18.0.10
 local_ip_gateway: 10.18.0.10
