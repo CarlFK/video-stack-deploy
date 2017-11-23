@@ -148,7 +148,7 @@ streaming:
   method: rtmp
   rtmp:
     threads: vaapi
-    location: "rtmp://138.68.189.87:1935/stream/{{ room_name }} live=1"
+    location: "rtmp://backend.live.debconf.org:1935/stream/{{ room_name }} live=1"
   hq_config:
     hls_bandwidth: 2176000
     video_bitrate: 2000 # kbps
