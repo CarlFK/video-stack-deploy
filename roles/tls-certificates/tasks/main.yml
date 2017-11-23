@@ -72,9 +72,10 @@
 - name: request letsencrypt signing
   letsencrypt:
     account_key: "{{ letsencrypt_key_path }}"
+    acme_directory: "{{ letsencrypt_acme_directory }}"
     csr: "{{ csr_path }}"
     dest: "{{ certificate_path }}"
-    challenge: dns-01
+    challenge: http-01
     agreement: "{{ letsencrypt_agreement_url }}"
   when: not self_sign
   register: letsencrypt_challenge
