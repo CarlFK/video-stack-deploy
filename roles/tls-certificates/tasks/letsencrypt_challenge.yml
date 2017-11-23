@@ -33,5 +33,11 @@
     agreement: "{{ letsencrypt_agreement }}"
   register: letsencrypt_response
 
+- name: remove well-known data
+  file:
+    path: "{{ letsencrypt_well_known_dir }}/{{ item.value['http-01']['resource']|replace('.well-known/', '') }}"
+    state: absent
+  with_dict: "{{ letsencrypt_challenge['challenge_data'] }}"
+
 - name: cleanup nginx config
   include_tasks: letsencrypt_nginx_post.yml
