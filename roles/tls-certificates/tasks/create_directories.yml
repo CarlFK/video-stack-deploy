@@ -1,0 +1,24 @@
+---
+- name: create base directory
+  file:
+    path: "{{ base_directory }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: create certs directory
+  file:
+    path: "{{ base_directory }}/certs"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: create private directory
+  file:
+    path: "{{ base_directory }}/private"
+    state: directory
+    owner: root
+    group: root
+    mode: 0700

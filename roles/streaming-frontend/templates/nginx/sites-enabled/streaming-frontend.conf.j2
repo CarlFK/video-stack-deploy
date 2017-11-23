@@ -97,4 +97,6 @@ server {
   if ($scheme != "https") {
     return 301 https://$host$request_uri;
   }
+
+  include snippets/letsencrypt-streaming_frontend.conf;
 }

@@ -49,6 +49,25 @@
   tags:
     - streaming
 
+- name: check if nginx vhost exists
+  stat:
+    path: /etc/nginx/sites-enabled/streaming-frontend.conf
+  register: nginx_vhost
+  tags:
+    - streaming
+
+- name: generate tls certificate
+  include_role:
+    name: tls-certificates
+  vars:
+    basename: streaming_frontend
+    common_name: "{{ inventory_hostname }}"
+    subject_alt_names: "{{ streaming.frontend.server_names }}"
+    self_sign: False
+    letsencrypt_do_nginx_vhost: not nginx_vhost.stat.exists
+  tags:
+    - streaming
+
 - name: install nginx streaming frontend site configuration
   template:
     src: nginx/sites-enabled/streaming-frontend.conf.j2

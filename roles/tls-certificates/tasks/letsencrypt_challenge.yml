@@ -1,0 +1,37 @@
+---
+- name: create well-known directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ letsencrypt_well_known_dir }}"
+    - "{{ letsencrypt_well_known_dir }}/acme-challenge"
+
+- name: setup well-known data
+  copy:
+    dest: "{{ letsencrypt_well_known_dir }}/{{ item.value['http-01']['resource']|replace('.well-known/', '') }}"
+    content: "{{ item.value['http-01']['resource_value'] }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_dict: "{{ letsencrypt_challenge['challenge_data'] }}"
+
+- name: prepare nginx config for challenge
+  include_tasks: letsencrypt_nginx_pre.yml
+
+- name: finalize letsencrypt challenge
+  letsencrypt:
+    csr: "{{ csr_path }}"
+    dest: "{{ certificate_path }}"
+    data: "{{ letsencrypt_challenge }}"
+    account_key: "{{ letsencrypt_account_key }}"
+    account_email: "{{ letsencrypt_account_email }}"
+    acme_directory: "{{ letsencrypt_acme_directory }}"
+    agreement: "{{ letsencrypt_agreement }}"
+  register: letsencrypt_response
+
+- name: cleanup nginx config
+  include_tasks: letsencrypt_nginx_post.yml

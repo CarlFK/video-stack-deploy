@@ -79,6 +79,25 @@
   tags:
     - streaming
 
+- name: check if nginx vhost exists
+  stat:
+    path: /etc/nginx/sites-enabled/streaming-backend.conf
+  register: nginx_vhost
+  tags:
+    - streaming
+
+- name: generate tls certificate
+  include_role:
+    name: tls-certificates
+  vars:
+    basename: streaming_backend
+    common_name: "{{ streaming.backend.server_name }}"
+    subject_alt_names: []
+    self_sign: False
+    letsencrypt_do_nginx_vhost: not nginx_vhost.stat.exists
+  tags:
+    - streaming
+
 - name: install nginx streaming backend site configuration
   template:
     src: nginx/sites-enabled/streaming-backend.conf.j2

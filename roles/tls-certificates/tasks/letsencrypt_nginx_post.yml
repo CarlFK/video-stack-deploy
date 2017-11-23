@@ -1,0 +1,10 @@
+---
+- name: remove temporary nginx vhost for well-known data
+  file:
+    path: /etc/nginx/sites-enabled/tmp-letsencrypt-{{ basename }}.conf
+    state: absent
+  register: rm_temp_vhost
+
+- name: reload nginx after removing the nginx vhost
+  command: systemctl reload nginx
+  when: rm_temp_vhost|changed
