@@ -27,12 +27,14 @@ streaming:
 #   location: rtmp://a.rtmp.youtube.com/live2/x/SUPER_SECRET_KEY app=live2
 
 blackmagic_sources: []
-# Syntax:
 # - card: 0
 #   connection: SDI
 #   audio: true
-# Optional parameters:
-#   mode: 18
+#   mode: 18  # optional
+# - card: 1
+#   connection: SDI
+#   audio: false
+#   mode: 17  # optional
 
 rsync_excludes: []
 rsync_sshopts: ""
