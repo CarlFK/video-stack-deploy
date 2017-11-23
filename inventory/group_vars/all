@@ -180,6 +180,8 @@ streaming:
         width: 480
   dump: True
 
+letsencrypt_account_email`: olasd@debian.org
+
 rsync_sshopts: "-i ~/.ssh/id_rsa_videodata"
 
 public_keys_onsite:
