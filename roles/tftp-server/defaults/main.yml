@@ -5,7 +5,7 @@ time_zone: UTC
 domain: video.debconf.org
 
 apt_proxy: false
-debian_source: deb.debian.org
+debian_source: https://deb.debian.org/debian
 debian_version: stretch
 
 user_name: videoteam
