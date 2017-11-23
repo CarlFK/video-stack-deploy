@@ -2,6 +2,6 @@
 user_name: videoteam
 user_group: videoteam
 #user_password_crypted: changeme
-public_keys_onsite:
-public_keys_offsite:
-public_keys_root:
+public_keys_onsite: []
+public_keys_offsite: []
+public_keys_root: []
