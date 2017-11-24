@@ -20,8 +20,10 @@ blackmagic_sources:
   mode: "{{ blackmagic_default_mode }}"
 
 voctolights:
-- camera: Cam2
+- camera: Cam1
   port: /dev/ttyUSB0
+- camera: Cam2
+  port: /dev/ttyUSB1
 
 # needed when running as a gateway/dhcp/tftp
 eth_local_ip_address: 10.18.0.10
