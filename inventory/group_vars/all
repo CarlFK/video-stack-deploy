@@ -144,7 +144,7 @@ streaming:
       - sa.live.debconf.org
     data_root: /srv/streaming-frontend
   rooms:
-    - cambridge
+    - minidebconf
   method: rtmp
   rtmp:
     threads: vaapi

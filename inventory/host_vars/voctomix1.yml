@@ -1,7 +1,7 @@
 ---
 irc_room_channel: "#debconf-cambridge"
 irc_nick: videoteam_cambridge
-room_name: cambridge
+room_name: minidebconf
 
 blackmagic_sources:
 - card: 0
