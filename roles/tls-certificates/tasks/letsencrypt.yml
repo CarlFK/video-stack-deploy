@@ -19,12 +19,16 @@
   include_tasks: letsencrypt_challenge.yml
   when: letsencrypt_challenge|changed
 
-- name: copy certificate chain
-  copy:
-    src: files/letsencrypt.chain
-    dest: "{{ letsencrypt_chain_path }}"
-  register: copy_chain
+- name: download certificate chain
+  get_url:
+    url: "{{ letsencrypt_acme_directory|replace('/directory', '/acme') }}/issuer-cert"
+    dest: "{{ letsencrypt_chain_path }}.der"
+  register: download_chain
+
+- name: convert certificate chain
+  command: openssl x509 -inform der -in {{ letsencrypt_chain_path }}.der -outform pem -out {{ letsencrypt_chain_path }}
+  when: download_chain|changed
 
 - name: generate full chain
   shell: /bin/cat {{ certificate_path|quote }} {{ letsencrypt_chain_path }} > {{ fullchain_path|quote }}
-  when: letsencrypt_challenge|changed and letsencrypt_response|changed or copy_chain|changed
+  when: letsencrypt_challenge|changed and letsencrypt_response|changed or download_chain|changed
