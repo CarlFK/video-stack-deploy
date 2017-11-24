@@ -44,7 +44,7 @@ Main variables are :
 * `voctomix.framerate`:                  Integer. Number of frames per second to
                                          record at.
 
-* `voctomix.loop_url`:                   URL of the loop tarball to extract.
+* `voctomix.loop_url`:                   URL of the sponsor loop .ts file.
 
 * `streaming.method`:                    Streaming method used. At the moment,
                                          only `none` and `rtmp` values are

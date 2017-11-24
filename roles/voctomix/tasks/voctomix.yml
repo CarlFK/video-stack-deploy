@@ -52,17 +52,15 @@
 
 - name: Create loop directory
   file:
-    path: /var/cache/voctomix/loop
+    path: /var/cache/voctomix
     state: directory
     mode: 0775
-    recurse: true
 
-- name: Download the loop tarball
+- name: Download the loop
   get_url:
     url: "{{ voctomix.loop_url }}"
-    dest: /var/cache/voctomix/loop.tar
+    dest: /var/cache/voctomix/loop.ts
   when: voctomix.loop_url is defined
-  notify: Unpack the loop tarball
 
 - name: install voctomix recording systemd units
   template:

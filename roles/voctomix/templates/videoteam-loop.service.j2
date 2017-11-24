@@ -6,12 +6,12 @@ After=videoteam-voctocore.service
 Requires=videoteam-voctocore.service
 StartLimitIntervalSec=0
 Conflicts=xlogout.target
-ConditionPathExists=/var/cache/voctomix/loop
+ConditionPathExists=/var/cache/voctomix/loop.ts
 
 [Service]
 ExecStart=/usr/bin/voctomix-ingest \
-  --video-source png \
-  --video-attribs "location=/var/cache/voctomix/loop/dc17-simpleloop_%05d.png start-index=1 stop-index=720 loop=1" \
+  --video-source file \
+  --video-attribs "location=/var/cache/voctomix/loop.ts loop=1" \
   --port 17000
 Restart=always
 RestartSec=1s

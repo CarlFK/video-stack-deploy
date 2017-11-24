@@ -90,7 +90,7 @@ blackmagic:
 voctomix:
   display_system: gl
   framerate: 25
-  loop_url: http://10.18.0.10/loop/dc17-simpleloop.tar.xz
+  loop_url: http://10.18.0.10/loop/loop.ts
 
 sources:
 - Cam1
