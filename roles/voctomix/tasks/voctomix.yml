@@ -56,11 +56,17 @@
     state: directory
     mode: 0775
 
-- name: Download the loop
+- name: Download the sponsor loop
   get_url:
     url: "{{ voctomix.loop_url }}"
     dest: /var/cache/voctomix/loop.ts
   when: voctomix.loop_url is defined
+
+- name: Download the background loop
+  get_url:
+    url: "{{ voctomix.bgloop_url }}"
+    dest: /var/cache/voctomix/bgloop.ts
+  when: voctomix.bgloop_url is defined
 
 - name: install voctomix recording systemd units
   template:
@@ -70,6 +76,7 @@
   - cutlist
   - record
   - loop
+  - bgloop
   notify: reload-systemd
 
 - name: enable voctomix systemd units
@@ -84,3 +91,4 @@
   - record
   - voctocore
   - loop
+  - bgloop

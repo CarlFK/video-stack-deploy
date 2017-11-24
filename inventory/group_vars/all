@@ -91,6 +91,7 @@ voctomix:
   display_system: gl
   framerate: 25
   loop_url: http://10.18.0.10/loop/loop.ts
+  bgloop_url: http://10.18.0.10/loop/loop.ts
 
 sources:
 - Cam1

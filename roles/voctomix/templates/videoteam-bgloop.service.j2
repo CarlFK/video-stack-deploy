@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Voctomix Background Loop
+After=videoteam-voctocore.service
+Requires=videoteam-voctocore.service
+StartLimitIntervalSec=0
+Conflicts=xlogout.target
+ConditionPathExists=/var/cache/voctomix/bgloop.ts
+
+[Service]
+ExecStart=/usr/bin/voctomix-ingest \
+  --video-source file \
+  --video-attribs "location=/var/cache/voctomix/bgloop.ts loop=1" \
+  --port 16000
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=xlogin.target

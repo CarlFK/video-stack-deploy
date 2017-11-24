@@ -46,6 +46,8 @@ Main variables are :
 
 * `voctomix.loop_url`:                   URL of the sponsor loop .ts file.
 
+* `voctomix.bgloop_url`:                   URL of the background loop .ts file.
+
 * `streaming.method`:                    Streaming method used. At the moment,
                                          only `none` and `rtmp` values are
                                          supported.
