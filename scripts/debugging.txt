@@ -21,6 +21,6 @@ Use this inplace of git clone so you don't have to commit and push things to git
     # --reject "*.iso","*.gz",".*","*.swp","*.efi" \
     # --reject-regex "carl/.*" \
     # --default-page=.hideme \
-    # http://$server:8000/
+    # http://$server:8007/
 # #    --reject-regex ".*\.git/.*" \
 
