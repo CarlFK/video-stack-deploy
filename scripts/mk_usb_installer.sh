@@ -64,7 +64,7 @@ cp -a ../roles/tftp-server/files/d-i/${suite}/* /media/${dev}
 
 case $suite in
 
-    xenial|zenial)
+    trusty|xenial|zenial)
         # bail here becuase the ubuntu iso doen't fit
         # boot.img only has 782M of free space.
         # The .iso is too big and sometimes boot is an iso9660 fs so RO?!!
