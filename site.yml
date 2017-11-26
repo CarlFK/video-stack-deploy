@@ -86,3 +86,8 @@
   roles:
   - desktop-tweeks
   - rnd
+
+- hosts: voctotest
+  roles:
+  - voctotests
+  - xorg
