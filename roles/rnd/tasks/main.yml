@@ -79,6 +79,12 @@
   args:
     chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware #/scripts
 
+# scripts to dowload, install, build? firmware
+- name: download-env-root
+  shell: ./download-env-root.sh
+  args:
+    chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware/scripts
+
 - name: download-env
   shell: ./download-env.sh
   args:
