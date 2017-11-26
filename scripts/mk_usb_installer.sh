@@ -46,8 +46,9 @@ wget -N ${iso_loc}/${iso}
 curl -OJ ${iso_loc}/SHA256SUMS
 grep ${iso} SHA256SUMS > ${iso}.SHA256SUM
 sha256sum --check ${iso}.SHA256SUM
+)
 
-zcat ${cache}/hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
+### zcat ${cache}/hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
 # or good ol dd
 # zcat boot.img.gz|sudo dd of=/dev/${dev} conv=fdatasync
 
@@ -74,7 +75,7 @@ case $suite in
 
     *)
 
-        cp ${cache}/${iso} ${cache}/${iso}.SHA256SUM /media/${dev}
+        ### cp ${cache}/${iso} ${cache}/${iso}.SHA256SUM /media/${dev}
         cd /media/${dev}
         # check the iso image again, make sure it copied ok.
         sha256sum --check ${iso}.SHA256SUM
