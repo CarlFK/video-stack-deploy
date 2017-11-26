@@ -4,6 +4,7 @@
 # Origin: https://github.com/xfxf/video-scripts/blob/master/michael/youtube-live.sh
 
 exec gst-launch-1.0 \
+	audiomixer name=audiomix \
 	tcpclientsrc "host=localhost" port=15000 \
 	! matroskademux name=demux \
 	! queue \
@@ -15,6 +16,8 @@ exec gst-launch-1.0 \
 {% endif %}
 	! "video/x-h264,profile=main" \
 	! flvmux streamable=true name=mux \
-	! rtmpsink location="{{ streaming.rtmp.location }}" demux. \
-	! queue \
+	! rtmpsink location="{{ streaming.rtmp.location }}" \
+	demux. ! queue ! deinterleave name=d \
+	d.src_0 ! audiomix. \
+	d.src_1 ! audiomix. \
 	! audioconvert ! voaacenc bitrate={{ streaming.hq_config.audio_bitrate }} ! mux.
