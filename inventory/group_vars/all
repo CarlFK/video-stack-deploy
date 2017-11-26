@@ -37,9 +37,9 @@ public_keys_storage:
 
 eth_local_ip_address: 10.18.0.3
 eth_local_ip_netmask: 24
-eth_local_ip_gateway: 10.18.0.1
+#eth_local_ip_gateway: 10.18.0.1
 eth_local_mac_address: 00:16:41:ee:f4:dc
-#eth_uplink_mac_address: 8a:ce:4c:ff:ae:83
+eth_uplink_mac_address: 8a:ce:4c:ff:ae:83
 
 dhcp_range: 10.18.0.128,10.18.0.254,6h
 domain: video.dc17.debconf.org

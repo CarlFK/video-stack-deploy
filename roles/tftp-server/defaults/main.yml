@@ -3,8 +3,6 @@ time_zone: UTC
 domain: video.debconf.org
 
 apt_proxy: false
-# Defaults to deb.debian.org | archive.ubuntu.com
-#mirror: deb.debian.org
 debian_version: stretch
 
 user_name: videoteam
@@ -19,7 +17,6 @@ playbook_branch: master
 #   point at your own github repo
 #inventory_repo: https://gitlab.com/yourname/ansible-inventory
 #inventory_branch: master
-
 
 # boot image sources
 debian_host: ftp.debian.org
