@@ -61,5 +61,6 @@ exec ansible-playbook \\
 	"\$@"
 EOF
 chmod +x $script
-$script
+
+ANSIBLE_UNDER_DI=1 $script
 
