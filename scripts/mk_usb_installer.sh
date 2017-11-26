@@ -23,9 +23,10 @@ lc/playbook_repo=${playbook_repo} \\
 lc/playbook_branch=${playbook_branch} \\
 lc/inventory_repo=${inventory_repo} \\
 lc/inventory_branch=${inventory_branch} \\
+${more_appends} \\
 "
 
-appends="${preseed}  partman-auto/disk=${disk}  grub-installer/bootdev=${bootdev}  hostname=${hostname}  domain=${domain}  hw-detect/load_firmware=${load_firmware}  lc/playbook_repo=${playbook_repo}  lc/playbook_branch=${playbook_branch}  lc/inventory_repo=${inventory_repo}  lc/inventory_branch=${inventory_branch} "
+appends="${preseed}  partman-auto/disk=${disk}  grub-installer/bootdev=${bootdev}  hostname=${hostname}  domain=${domain}  hw-detect/load_firmware=${load_firmware}  lc/playbook_repo=${playbook_repo}  lc/playbook_branch=${playbook_branch}  lc/inventory_repo=${inventory_repo}  lc/inventory_branch=${inventory_branch} ${more_appends}"
 
 # get and veriy the boot image
 # (hd-media dir because that is bunred into the SHA256SUMS file)
@@ -41,7 +42,7 @@ curl -OJ ${iso_loc}/SHA256SUMS
 grep ${iso} SHA256SUMS > ${iso}.SHA256SUM
 sha256sum --check ${iso}.SHA256SUM
 
-zcat hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
+### zcat hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
 # or good ol dd
 # zcat boot.img.gz|sudo dd of=/dev/${dev} conv=fdatasync
 
@@ -68,7 +69,7 @@ case $suite in
 
     *)
 
-        cp ${iso} ${iso}.SHA256SUM /media/${dev}
+        ### cp ${iso} ${iso}.SHA256SUM /media/${dev}
         cd /media/${dev}
         # check the iso image again, make sure it copied ok.
         sha256sum --check ${iso}.SHA256SUM
