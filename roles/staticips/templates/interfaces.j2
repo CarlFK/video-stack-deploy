@@ -5,10 +5,16 @@ source-directory interfaces.d
 auto lo
 iface lo inet loopback
 
-{# FIXME: This is hacky, just taking what we got from DHCP and making it static #}
 auto {{ ansible_default_ipv4.interface }}
+
 iface {{ ansible_default_ipv4.interface }} inet static
+{% if static_ip is defined %}
+    {# FIXME: This is hacky, there are now 3 places to define static ip. #}
+	address {{ static_ip }}
+{% else %}
+    {# FIXME: This is hacky, just taking what we got from DHCP and making it static #}
 	address {{ ansible_default_ipv4.address }}
+{% endif %}
 	netmask {{ ansible_default_ipv4.netmask }}
 {% if ansible_default_ipv4.gateway != "???" %}
 {# We don't know why this happens, and staticips.gateway is the best workaround we have #}
