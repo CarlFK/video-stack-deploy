@@ -1,0 +1,6 @@
+---
+# location of secret Xilinx.lic on ansible master
+# Only makes sense when running from a dev machine that has the file
+# so do this:
+# --extra-vars="{'xilinx_lic':'/home/carl/src/tv/Xilinx.lic'}"
+# xilinx_lic: /home/carl/src/tv/Xilinx.lic

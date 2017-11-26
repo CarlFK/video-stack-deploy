@@ -1,0 +1,126 @@
+---
+
+- name: install R&D related packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - git
+  - vim
+  - vizzini-dkms
+  # for mode-switch:
+  - openocd
+  - flterm
+  # hwinfo --monitor shows   Model: "HDMI2USB-2"
+  - hwinfo
+    # help carl reimage
+  - grub-ipxe
+    # deps to build crelay
+  - libftdi1
+  - libftdi-dev
+  - libhidapi-libusb0
+  - libhidapi-dev
+  - libusb-1.0-0
+  - libusb-1.0-0-dev
+  # for testing
+  - mplayer
+
+# Blacklist the ftdi_sio driver module
+- kernel_blacklist:
+    name: ftdi_sio
+    state: present
+
+- name: Create ~/bin dir
+  file:
+    state: directory
+    path: /home/{{ user_name }}/bin
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+
+- name: install serial terminal
+  apt:
+    name: "{{ item }}"
+  with_items:
+      # - flterm
+  - minicom
+
+- name: configure minicom for hdmi2usb
+  copy:
+    src: files/minirc.dfl
+    dest: /home/{{ user_name }}/.minirc.dfl
+
+- name: git clone bunch of things
+  git:
+    repo: "https://github.com/{{ item[0] }}/{{ item[1] }}.git"
+    dest: "/home/{{ user_name }}/{{ item[1] }}"
+    depth: 1
+    force: yes
+  become: true
+  become_user: "{{ user_name }}"
+  with_list:
+  - [timvideos, HDMI2USB-mode-switch]
+  - [timvideos, HDMI2USB-litex-firmware]
+  - [timvideos, HDMI2USB-firmware-prebuilt]
+  - [CarlFK, clocky]
+  - [CarlFK, voctomix-outcasts]
+  - [ondrej1024, crelay] # turns usb relay's on and off
+
+- name: build mode-switch
+  shell: make conda
+  args:
+    chdir: /home/{{ user_name }}/HDMI2USB-mode-switch
+    # creates: /home/{{ user_name }}/crelay/src/crelay
+  become: true
+  become_user: "{{ user_name }}"
+
+
+# scripts to dowload, install, build? firmware
+- name: download-env-root
+  shell: ./scripts/download-env-root.sh
+  args:
+    chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware #/scripts
+
+- name: download-env
+  shell: ./download-env.sh
+  args:
+    chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware/scripts
+    creates: /home/{{ user_name }}/HDMI2USB-litex-firmware/build
+  become: true
+  become_user: "{{ user_name }}"
+
+- name: Create .Xilinx dir
+  file:
+    state: directory
+    path: /home/{{ user_name }}/.Xilinx
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+
+- name: copy Xilinx.lic
+  copy:
+    src: "{{ xilinx_lic }}"
+    dest: /home/{{ user_name }}/.Xilinx/Xilinx.lic
+  become: true
+  become_user:  "{{ user_name }}"
+  when: xilinx_lic is defined
+
+- name: udev rule for relay board
+  copy:
+    src: files/51-sainsmart-usb.rules
+    dest: /etc/udev/rules.d/51-sainsmart-usb.rules
+
+- name: build crelay
+  shell: make
+  args:
+    chdir: /home/{{ user_name }}/crelay/src
+    creates: /home/{{ user_name }}/crelay/src/crelay
+  become: true
+  become_user: "{{ user_name }}"
+
+- name: add crelay exe to path
+  file:
+    state: link
+    src: /home/{{ user_name }}/crelay/src/crelay
+    dest: /home/{{ user_name }}/bin/crelay
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+
+

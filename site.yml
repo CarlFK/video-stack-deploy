@@ -81,3 +81,8 @@
 - hosts: streaming-frontends
   roles:
   - streaming-frontend
+
+- hosts: rnd
+  roles:
+  - desktop-tweeks
+  - rnd

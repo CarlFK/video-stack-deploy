@@ -1,0 +1,53 @@
+---
+# disable screensaver,
+# blank screen on idle,
+# blank screen on lid close
+# (bunch of other UI tweeks)
+# https://wiki.gnome.org/action/show/Projects/dconf/SystemAdministrators
+# this might be better way?
+# gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults --type bool --set /apps/gnome-screensaver/idle_activation_enabled false
+
+- name: install dconf related packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - dconf-cli
+  - gstreamer1.0-plugins-base
+  - gstreamer1.0-plugins-bad
+  - gstreamer1.0-plugins-ugly
+  - gstreamer1.0-plugins-good
+  - gstreamer1.0-tools
+  - python-wxgtk3.0
+
+- name: Create dconf dirs
+  file:
+    state: directory
+    path: /etc/dconf/{{ item }}
+  with_items:
+  - db/site.d/locks
+  - profile
+
+- name: enable site profile
+  copy:
+    src: files/user
+    dest: /etc/dconf/profile
+
+- name: setup site settings
+  copy:
+    src: files/20-recording-mixer
+    dest: /etc/dconf/db/site.d/
+
+- name: update settings to dconf db
+  command: /usr/bin/dconf update
+
+- name: Create lightdm.conf.d
+  file:
+    state: directory
+    path: /etc/lightdm/lightdm.conf.d
+
+- name: auto-login
+  template:
+    src: templates/10-autologin.conf.j2
+    dest: /etc/lightdm/lightdm.conf.d/autologin.conf
+  notify: systemctl restart lightdm
+
