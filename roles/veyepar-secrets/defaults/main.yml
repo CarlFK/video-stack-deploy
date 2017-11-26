@@ -3,5 +3,11 @@
 user_name: videoteam
 
 # Dir that contains workin veyepar checkout with secrets in place
-# like on a developer's laptop
+# like on a developer's laptop,
+# best to pass this on the command line:
+# --extra-vars="{'veyepar_confs': '/home/carl/src/veyepar'}"
 # veyepar_confs: /home/carl/src/veyepar
+
+# Entity that produces and uploads, like DebConf Video Team, or NDV.
+# used for credits image and upload credentials
+publisher: dcvt
