@@ -1,0 +1,27 @@
+---
+- name: install voctomix & related packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - voctomix
+  - voctomix-outcasts
+  - gstreamer1.0-pulseaudio
+
+- name: create directorys
+  file:
+    state: directory
+    dest: "/home/{{ user_name }}/{{ item }}"
+    recurse: true
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+  with_items:
+      - "bin/voctotests"
+      - "Videos/voctotests"
+
+- name: install test scripts
+  copy:
+    src: files/
+    dest: "/home/{{ user_name }}/bin/voctotests"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+
