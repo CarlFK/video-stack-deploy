@@ -11,7 +11,6 @@ dhcp-host={{box.mac}},set:{{box.hostname}},{{box.hostname}}{% if box.ip is defin
 
 {% if box.disk is defined %}dhcp-option-force=tag:{{box.hostname}},209,"partman-auto/disk=/dev/{{box.disk}} grub-installer/bootdev=/dev/{{box.disk}} tasks={{box.tasks|default()}}" {% endif %}
 
-dhcp-option-force=209,"partman-auto/disk=/dev/{{default_install_dev}} grub-installer/bootdev=/dev/{{default_install_dev}} tasks={{default_install_tasks}}"
 
 {% endfor %}
 
