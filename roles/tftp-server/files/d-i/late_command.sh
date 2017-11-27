@@ -53,7 +53,7 @@ if [ "${inventory_repo}" != "" ]; then
   (cd inventory-repo; git pull)
 fi
 
-exec ansible-playbook \\
+ansible-playbook \\
 	--inventory-file=$INVENTORY \\
 	--connection=local \\
 	--limit=\$(hostname) \\
