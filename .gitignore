@@ -1,2 +1,5 @@
 /site.retry
 .*.swp
+roles/tftp-server/files/bm/
+roles/tftp-server/files/ec/ssh/
+scripts/cache/
