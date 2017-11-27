@@ -6,6 +6,13 @@
   notify: apt update
   when: ansible_distribution == 'Debian' and update_apt_sources
 
+- name: remove cdrom repo left behind by d-i
+  lineinfile:
+    dest: /etc/apt/sources.list
+    regexp: "^deb cdrom.*"
+    state: absent
+  when: not update_apt_sources
+
 - name: add sid to sources.list.d
   template:
     src: templates/sid.list.j2
