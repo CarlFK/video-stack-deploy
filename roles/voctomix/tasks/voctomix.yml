@@ -2,6 +2,7 @@
 - name: install voctomix & related packages
   apt:
     name: "{{ item }}"
+    install_recommends: True
   with_items:
   - voctomix
   - voctomix-outcasts
