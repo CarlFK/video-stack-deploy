@@ -58,6 +58,8 @@
   # avoids this error:
   #   in-target: E: The repository 'cdrom://[Debian GNU/Linux 9.2.1 _Stretch_ - Official amd64 NETINST 20171013-13:07] stretch Release' does not have a Release file.
   lineinfile:
-    path: /etc/apt/sources.list
+    # path: /etc/apt/sources.list
+    # Before 2.3 this option was only usable as dest
+    dest: /etc/apt/sources.list
     regexp: "^deb cdrom.*"
     state: absent
