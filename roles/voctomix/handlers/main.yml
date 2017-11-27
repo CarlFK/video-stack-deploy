@@ -2,6 +2,9 @@
 - name: reload-systemd
   command: systemctl daemon-reload
 
+- name: reload-procps
+  command: service procps reload
+
 - name: Unpack the loop tarball
   unarchive:
     src: /var/cache/voctomix/loop.tar
