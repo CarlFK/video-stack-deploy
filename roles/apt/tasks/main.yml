@@ -54,7 +54,7 @@
   notify: apt update
   when: ansible_distribution == 'Debian'
 
-- name: remove cdrom: repo
+- name: remove cdrom repo
   # avoids this error:
   #   in-target: E: The repository 'cdrom://[Debian GNU/Linux 9.2.1 _Stretch_ - Official amd64 NETINST 20171013-13:07] stretch Release' does not have a Release file.
   lineinfile:
