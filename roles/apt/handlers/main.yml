@@ -1,3 +1,4 @@
 ---
 - name: apt update
-  command: "/usr/bin/apt update"
+  apt:
+    update_cache: yes
