@@ -91,3 +91,5 @@
     src: 99-my-disable-ipv6.conf
     dest: /etc/sysctl.d/
   notify: reload-procps
+  when: False
+
