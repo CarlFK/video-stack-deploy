@@ -3,10 +3,13 @@
   apt:
     name: "{{ item }}"
     install_recommends: True
+    default_release: sid
     state: latest
   with_items:
-  - voctomix
-  - voctomix-outcasts
+    - voctomix
+    - voctomix-outcasts
+  tags:
+    - testme
 
 - name: create directorys
   file:
