@@ -34,5 +34,9 @@ enabled=false
 videocaps=video/x-raw,width=1024,height=576,framerate={{ voctomix.framerate }}/1
 
 [stream-blanker]
+{% if voctomix.loop_url is defined %}
 enabled=true
 sources=loop,nostream
+{% else %}
+enabled=false
+{% endif %}
