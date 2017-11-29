@@ -70,7 +70,7 @@
   with_items:
   - cutlist
   - record
-  - loop
+    ### - loop
   notify: reload-systemd
 
 - name: enable voctomix systemd units
@@ -84,7 +84,7 @@
   - cutlist
   - record
   - voctocore
-  - loop
+    ### - loop
 
 - name: disable ipv6
   copy:
@@ -92,4 +92,3 @@
     dest: /etc/sysctl.d/
   notify: reload-procps
   when: False
-
