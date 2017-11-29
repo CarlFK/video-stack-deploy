@@ -2,10 +2,11 @@
 - name: install voctomix & related packages
   apt:
     name: "{{ item }}"
+    install_recommends: True
+    state: latest
   with_items:
   - voctomix
   - voctomix-outcasts
-  - gstreamer1.0-pulseaudio
 
 - name: create directorys
   file:
@@ -17,6 +18,7 @@
   with_items:
       - "bin/voctotests"
       - "Videos/voctotests"
+      - "temp"
 
 - name: install test scripts
   copy:
