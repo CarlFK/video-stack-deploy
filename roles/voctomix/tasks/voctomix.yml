@@ -2,11 +2,12 @@
 - name: install voctomix & related packages
   apt:
     name: "{{ item }}"
+    default_release: stretch-backports
     install_recommends: True
   with_items:
   - voctomix
   - voctomix-outcasts
-  - gstreamer1.0-pulseaudio
+  # - gstreamer1.0-pulseaudio
 
 # we need 0.4.2-1, which is in unstable
 - name: install voctomix-outcasts from unstable for now
