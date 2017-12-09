@@ -3,6 +3,7 @@
   filesystem:
     fstype: ext4
     dev: "{{ video_disk }}"
+    force: yes
 
 - name: Create video partition mountpoint
   file:
