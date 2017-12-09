@@ -8,6 +8,6 @@ sleep 5
 voctogui &
 voctomix-ingest &
 sleep 1
-voctomix-ingest --port 10001 &
+voctomix-ingest --port 10001  --video-attribs "pattern=circular horizontal-speed=2" &
 voctomix-record-timestamp &
 voctomix-generate-cut-list

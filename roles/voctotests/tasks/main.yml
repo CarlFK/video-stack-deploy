@@ -8,6 +8,7 @@
   with_items:
     - voctomix
     - voctomix-outcasts
+    - gstreamer1.0-pulseaudio
 
 - name: create directorys
   file:
@@ -17,14 +18,15 @@
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   with_items:
-      - "bin/voctotests"
+      - "voctotests"
       - "Videos/voctotests"
       - "temp"
 
 - name: install test scripts
   copy:
     src: files/
-    dest: "/home/{{ user_name }}/bin/voctotests"
+    dest: "/home/{{ user_name }}/voctotests"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
+    mode: u+x
 
