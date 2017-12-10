@@ -1,4 +1,19 @@
 ---
+- name: get barf
+  uri:
+    url: "https://veyepar.nextdayvideo.com/main/C/chicagolug/S/dec_2017/barf.xlsx?field=title_svg"
+    return_content: yes
+  register: title_svg
+
+- name: mk  bling dir
+  file:
+    state: directory
+    path: "/home/{{ user_name }}/veyepar/{{ item }}"
+  become: true
+  become_user:  "{{ user_name }}"
+  with_items:
+  - dj/scripts/bling/{{ title_svg.content | dirname }}
+
 - name: copy local secret files
   copy:
     src: "{{ veyepar_confs }}/{{ item }}"
@@ -11,7 +26,9 @@
   - dj/dj/local_settings.py # db pw, smtp
   - dj/scripts/pw.py # conf site, twitter, swift ...
   - dj/scripts/client_secrets.json # youtube app keys (for veyepar?)
-  - dj/scripts/bling/{{ org }}/ # secret title.svg :p
+  - dj/scripts/bling/{{ title_svg.content }} # secret title.svg :p
   - dj/scripts/bling/{{ publisher }}-169.png # credits slide
   - dj/scripts/oauth2-{{ publisher }}.json # youtube credentials
   when: veyepar_confs is defined
+  tags:
+    - testme
