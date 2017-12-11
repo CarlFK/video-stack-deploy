@@ -11,3 +11,11 @@ user_name: videoteam
 # Entity that produces and uploads, like DebConf Video Team, or NDV.
 # used for credits image and upload credentials
 publisher: dcvt
+
+org: debian
+show: dcX
+
+# URL of veyepar website
+# used to get data from the db, like:
+# https://veyepar.nextdayvideo.com/main/C/chicagolug/S/dec_2017/asset_names.json
+veyepar_url: https://veyepar.nextdayvideo.com
