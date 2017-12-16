@@ -2,15 +2,14 @@
 
 # build a usb installer: debian, preseed, ansible
 # expects networking in order to get:
-#   preseed, deb repos, late_command, ansible
+#   preseed, deb repos, late_command, ansible, blobs
 
 # $1 - dev of usb stick to clobber (like sdc, no /dev/ prefex)
-# $2 - filename of parameters
+# $2 - optional filename of parameters
 
 dev=$1
-
 if [ ! -b "/dev/${dev}" ]; then
-      echo "/dev/${dev} is not a block device."
+      echo "error: /dev/${dev} is not a block device."
       exit
 fi
 
