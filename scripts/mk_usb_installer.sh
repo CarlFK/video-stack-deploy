@@ -5,12 +5,45 @@
 #   preseed, deb repos, late_command, ansible
 
 # $1 - dev of usb stick to clobber (like sdc, no /dev/ prefex)
+# $2 - filename of parameters
+
 dev=$1
 
-# $2 - filename of parameters
-cfg_name=${2:-mk_usb_installer.cfg}
+if [ ! -b "/dev/${dev}" ]; then
+      echo "/dev/${dev} is not a block device."
+      exit
+fi
 
-source $cfg_name
+# default parameters that can be over ridden by passed file
+
+preseed="url=$(hostname):8007"
+
+disk=/dev/sda
+bootdev=/dev/sda
+
+hostname=testme
+# domain=netme
+load_firmware=false
+
+playbook_repo=https://anonscm.debian.org/cgit/debconf-video/ansible.git
+playbook_branch=master
+inventory_repo=
+inventory_branch=
+
+# Anything else you want to append to the kernel.
+more_appends=
+
+# where to get installer binaries:
+
+suite=stretch
+bootimg_loc=http://ftp.debian.org/debian/dists/${suite}/main/installer-amd64/current/images
+iso=debian-9.3.0-amd64-netinst.iso
+iso_loc=https://cdimage.debian.org/debian-cd/current/amd64/iso-cd
+
+# end of default parameters.
+
+(( $# >= 2 )) && source "$2"
+
 
 appends="
 ${preseed} \\
@@ -48,20 +81,17 @@ grep ${iso} SHA256SUMS > ${iso}.SHA256SUM
 sha256sum --check ${iso}.SHA256SUM
 )
 
-zcat ${cache}/hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
-# or good ol dd
-# zcat boot.img.gz|sudo dd of=/dev/${dev} conv=fdatasync
+### zcat ${cache}/hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
 
-pmount /dev/${dev}
+# mount the installer media
+pmount /dev/${dev} ${dev}
 
-# append appends to append
+# append $appends to APPEND line
 # tee so we can see what gets written out.
 sed "\|^APPEND|s|$| fb=false ${appends}|" syslinux.cfg | tee /media/${dev}/syslinux.cfg
 
-# copy the preseed files in case of problems serving them over the net.
-# just fix the kernel APPEND and the remove the early/late commands.
-# (good luck, it is hard.)
-cp -a ../roles/tftp-server/files/d-i/${suite}/* /media/${dev}
+# the preseed files that somehow will be served over the net.
+ls ../roles/tftp-server/files/d-i/${suite}/*
 
 case $suite in
 
@@ -75,7 +105,7 @@ case $suite in
 
     *)
 
-        cp ${cache}/${iso} ${cache}/${iso}.SHA256SUM /media/${dev}
+        ### cp ${cache}/${iso} ${cache}/${iso}.SHA256SUM /media/${dev}
         cd /media/${dev}
         # check the iso image again, make sure it copied ok.
         sha256sum --check ${iso}.SHA256SUM
