@@ -15,8 +15,8 @@
 
 - name: configure lightdm autologin
   template:
-    src: templates/autologin.conf.j2
-    dest: /etc/lightdm/lightdm.conf.d/autologin.conf
+    src: templates/10-autologin.conf.j2
+    dest: /etc/lightdm/lightdm.conf.d/10-autologin.conf
   when: autologin
   notify: systemctl restart lightdm
 
