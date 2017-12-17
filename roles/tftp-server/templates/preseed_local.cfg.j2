@@ -9,12 +9,3 @@ d-i mirror/http/proxy string http://{{ inventory_hostname }}:8000/
 {% else %}
 d-i mirror/http/proxy string
 {% endif %}
-
-# big hammer: not sure which of these is needed to force it to overwrite previous volume name
-d-i partman/confirm_write_new_label boolean true
-d-i partman-auto/method string lvm
-d-i partman-lvm/device_remove_lvm boolean true
-d-i partman-lvm/device_remove_lvm_span boolean true
-d-i partman-auto/purge_lvm_from_device  boolean true
-d-i partman-auto-lvm/new_vg_name string system
-
