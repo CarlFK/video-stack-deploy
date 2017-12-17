@@ -73,10 +73,3 @@
     dest: /etc/dnsmasq.d/boxes.conf
   when: boxes is defined
   notify: restart dnsmasq
-
-- name: boxes
-  template:
-    src: templates/boxes.conf.j2
-    dest: /etc/dnsmasq.d/boxes.conf
-  when: boxes is defined
-  notify: restart dnsmasq
