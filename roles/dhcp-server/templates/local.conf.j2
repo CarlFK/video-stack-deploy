@@ -17,3 +17,6 @@ dhcp-option=option:router,{{ eth_local_ip_address }}
 # set eth_local_ip_gateway / eth_uplink_mac_address,eth_local_ip_address
 # in ansible variables
 {% endif %}
+
+no-hosts
+host-record={{ inventory_hostname }},{{ eth_local_ip }}
