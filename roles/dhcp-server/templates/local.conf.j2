@@ -19,4 +19,4 @@ dhcp-option=option:router,{{ eth_local_ip_address }}
 {% endif %}
 
 no-hosts
-host-record={{ inventory_hostname }},{{ eth_local_ip }}
+host-record={{ inventory_hostname }},{{ eth_local_ip_address }}
