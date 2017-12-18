@@ -1,7 +1,9 @@
 ## {{ ansible_managed }}
 
 interface=eth-local
+{% if domain %}
 domain={{ domain }}
+{% endif %}
 
 dhcp-range={{ dhcp_range }}
 dhcp-authoritative
