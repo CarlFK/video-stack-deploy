@@ -100,7 +100,7 @@ zcat ${cache}/hd-media/boot.img.gz|sudo dcfldd of=/dev/${dev}
 pmount /dev/${dev} ${dev}
 
 # append $appends to APPEND line
-sed --in-place "\|^APPEND|s|$| fb=false ${appends}|" /media/${dev}/syslinux.cfg
+sed "\|^APPEND|s|$| fb=false ${appends}|" syslinux.cfg | tee /media/${dev}/syslinux.cfg
 
 # skip over pesky ubuntu builds that don't play well
 case $suite in
