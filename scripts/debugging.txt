@@ -24,3 +24,4 @@ Use this inplace of git clone so you don't have to commit and push things to git
     # http://$server:8007/
 # #    --reject-regex ".*\.git/.*" \
 
+# for d in a b c; do for p in 1 2 3 4 ''; do sudo dd if=/dev/zero of=/dev/sd${d}${p} count=100; done; done;

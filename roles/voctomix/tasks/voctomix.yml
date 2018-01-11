@@ -2,7 +2,7 @@
 - name: install voctomix & related packages
   apt:
     name: "{{ item }}"
-    default_release: stretch-backports
+    # default_release: stretch-backports
     # default_release: buster
     install_recommends: True
   with_items:
