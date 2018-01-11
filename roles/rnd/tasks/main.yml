@@ -62,7 +62,7 @@
     # - [timvideos, HDMI2USB-firmware-prebuilt]
   - [CarlFK, clocky]
   - [CarlFK, voctomix-outcasts]
-    # - [ondrej1024, crelay] # turns usb relay's on and off
+  - [ondrej1024, crelay] # turns usb relay's on and off
 
 - name: build mode-switch
   shell: make conda
