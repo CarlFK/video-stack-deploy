@@ -47,6 +47,8 @@
   copy:
     src: files/minirc.dfl
     dest: /home/{{ user_name }}/.minirc.dfl
+  become: true
+  become_user: "{{ user_name }}"
 
 - name: git clone bunch of things
   git:
@@ -78,12 +80,16 @@
   shell: ./scripts/download-env-root.sh
   args:
     chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware #/scripts
+  become: true
+  become_user: "{{ user_name }}"
 
 # scripts to dowload, install, build? firmware
 - name: download-env-root
   shell: ./download-env-root.sh
   args:
     chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware/scripts
+  become: true
+  become_user: "{{ user_name }}"
 
 - name: download-env
   shell: ./download-env.sh
