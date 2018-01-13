@@ -68,7 +68,7 @@
   shell: make conda
   args:
     chdir: /home/{{ user_name }}/HDMI2USB-mode-switch
-    # creates: /home/{{ user_name }}/crelay/src/crelay
+    creates: /home/{{ user_name }}/HDMI2USB-mode-switch/conda/bin/hdmi2usb-mode-switch
   become: true
   become_user: "{{ user_name }}"
 
