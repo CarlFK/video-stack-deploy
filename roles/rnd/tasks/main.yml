@@ -74,22 +74,11 @@
   become: true
   become_user: "{{ user_name }}"
 
-
-# scripts to dowload, install, build? firmware
-- name: download-env-root
-  shell: ./scripts/download-env-root.sh
-  args:
-    chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware #/scripts
-  become: true
-  become_user: "{{ user_name }}"
-
 # scripts to dowload, install, build? firmware
 - name: download-env-root
   shell: ./download-env-root.sh
   args:
     chdir: /home/{{ user_name }}/HDMI2USB-litex-firmware/scripts
-  become: true
-  become_user: "{{ user_name }}"
 
 - name: download-env
   shell: ./download-env.sh
