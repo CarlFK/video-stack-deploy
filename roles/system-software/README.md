@@ -12,4 +12,6 @@ Tasks are separated in two different parts:
 
 ## Available variables
 
-There are no variables for this role.
+Main variables are:
+
+* `firmware_packages`: A list of firmware packages to install.

@@ -32,3 +32,8 @@
   - tree
   - vim-nox
   - vnstat
+
+- name: install firmware packages
+  apt:
+    name: "{{ item }}"
+  with_items: "{{ firmware_packages }}"
