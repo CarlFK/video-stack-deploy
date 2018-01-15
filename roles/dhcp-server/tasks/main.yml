@@ -13,6 +13,11 @@
   tags:
   - staticips
 
+- name: Install WiFi client (wpasupplicant)
+  apt:
+    name: wpasupplicant
+  when: eth_local_wifi_ssid is defined
+
 - name: configure network interfaces (static)
   template:
     src: templates/interfaces-static.j2

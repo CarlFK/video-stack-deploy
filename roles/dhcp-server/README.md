@@ -33,6 +33,10 @@ Main variables are :
 * `eth_uplink_static_ip_gateway`: Static uplink IP gateway. Requires `use_static_ip`
                                   set to true.
 
+* `eth_uplink_wifi_ssid`:         SSID to connect to, when the uplink is WiFi.
+
+* `eth_uplink_wifi_psk`:          WiFi password.
+
 * `dhcp_range`:                   Allowed IP range for the DHCP server. Syntax:
                                   `$start-addr,$end-addr,$netmask,$broadcast,$lease time`.
 

@@ -22,3 +22,11 @@ iface eth-uplink inet dhcp
      up iptables -t nat -A POSTROUTING -o $IFACE -j MASQUERADE
      down iptables -t nat -D POSTROUTING -o $IFACE -j MASQUERADE
 {% endif %}
+{% if eth_uplink_wifi_ssid is defined %}
+     wpa-ssid {{ eth_uplink_wifi_ssid }}
+{% if eth_uplink_wifi_psk is defined %}
+     wpa-psk {{ eth_uplink_wifi_psk }}
+{% else %}
+     wpa-key-mgmt NONE
+{% endif %}
+{% endif %}
