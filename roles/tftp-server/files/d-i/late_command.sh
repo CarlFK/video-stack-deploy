@@ -2,8 +2,8 @@
 
 set -efx
 
-# This script setups ansible and runs it
-# It should be ran at the end of the basic installation of a machine
+# This script (late_command.sh) sets up ansible and runs it.
+# It should be ran at the end of the basic installation of a machine.
 
 # Here is where the parameters come from:
 
@@ -20,11 +20,23 @@ playbook_branch=$5
 inventory_repo=$6
 inventory_branch=$7
 
-apt install -y ansible git eatmydata
+apt-get install -y git eatmydata
+# Ansible >= 2.4
+case $suite in
+	stable|stretch)
+		apt-get install -y ansible/stretch-backports
+		;;
+	xenial|zesty|artful)
+		apt-add-repository --yes --update ppa:ansible/ansible
+		apt-get install -y ansible
+		;;
+	*)
+		apt-get install -y ansible
+		;;
+esac
 
-# We clone our ansible repository and copy the ansible config files
-
-cd /home/$user
+# clone our ansible repository(s)
+# create and run a script to run ansible on the local box.
 
 git clone $playbook_repo /root/playbook-repo
 (cd /root/playbook-repo; git checkout $playbook_branch)
@@ -32,15 +44,16 @@ INVENTORY=/root/playbook-repo/inventory/hosts
 PLAYBOOKS=/root/playbook-repo/site.yml
 
 if [ ! -z ${inventory_repo} ]; then
-    git clone $inventory_repo /root/inventory-repo
-    (cd /root/inventory-repo; git checkout $inventory_branch)
-    INVENTORY=/root/inventory-repo/inventory/hosts
-    if [ -e /root/inventory-repo/site.yml ]; then
-        PLAYBOOKS="$PLAYBOOKS /root/inventory-repo/site.yml"
-    fi
+	git clone $inventory_repo /root/inventory-repo
+	(cd /root/inventory-repo; git checkout $inventory_branch)
+	INVENTORY=/root/inventory-repo/inventory/hosts
+	if [ -e /root/inventory-repo/site.yml ]; then
+		PLAYBOOKS="$PLAYBOOKS /root/inventory-repo/site.yml"
+	fi
 fi
 
-cat > /usr/local/sbin/ansible-up <<EOF
+script=/usr/local/sbin/ansible-up
+cat > $script <<EOF
 #!/bin/sh
 
 set -euf
@@ -50,21 +63,16 @@ cd /root/
 (cd playbook-repo; git pull)
 
 if [ "${inventory_repo}" != "" ]; then
-  (cd inventory-repo; git pull)
+	(cd inventory-repo; git pull)
 fi
 
-exec ansible-playbook \\
+ansible-playbook \\
 	--inventory-file=$INVENTORY \\
 	--connection=local \\
 	--limit=\$(hostname) \\
 	$PLAYBOOKS \\
 	"\$@"
 EOF
-chmod +x /usr/local/sbin/ansible-up
+chmod +x $script
 
-eatmydata ansible-playbook \
-	-vvvv \
-	--inventory-file=$INVENTORY \
-	--connection=local \
-	--limit=$(hostname) \
-	$PLAYBOOKS
+ANSIBLE_UNDER_DI=1 $script

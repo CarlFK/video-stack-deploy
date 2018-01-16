@@ -13,5 +13,9 @@ eth_uplink_static_ip_gateway: 192.0.2.1
 dhcp_range: 10.20.0.128,10.20.0.254,6h
 domain: video.debconf.org
 
+default_install_disk: /dev/sda
+
 staticips:
-#  hosts:
+  write_interfaces: false
+  write_hosts: false
+  hosts: []

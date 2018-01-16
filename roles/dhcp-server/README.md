@@ -37,6 +37,8 @@ Main variables are :
 
 * `eth_uplink_wifi_psk`:          WiFi password.
 
+* `eth_uplink_dns_server`:        Upstream DNS server to use. (Default: DHCP)
+
 * `dhcp_range`:                   Allowed IP range for the DHCP server. Syntax:
                                   `$start-addr,$end-addr,$netmask,$broadcast,$lease time`.
 
@@ -44,3 +46,5 @@ Main variables are :
 
 * `staticips.hosts`:              For the layout of the `staticips.hosts`
                                   variable, see the staticips role.
+
+* `default_install_disk`:         Default PXE install target disk.

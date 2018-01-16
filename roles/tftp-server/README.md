@@ -14,8 +14,6 @@ Tasks are separated in two different parts:
 
 Main variables are :
 
-* `netboot_image`:         URL of the `.tar.gz` netboot file for the PXE.
-
 * `time_zone`:             The timezone of your machine.
 
 * `domain`:                The DHCP domain.
@@ -23,7 +21,15 @@ Main variables are :
 * `apt_proxy`:             Boolean. If true, d-i will use the configured apt
                            proxy for the installation.
 
-* `debian_source`:         The Debian source you want to use.
+* `debian_host`:           Hostname of the Debian mirror.
+
+* `debian_suites`:         List of Debian suites to offer for install.
+
+* `ubuntu_host`:           Hostname of the Ubuntu mirror.
+
+* `ubuntu_suites`:         List of Ubuntu suites to offer for install.
+
+* `archs`:                 List of archs to offer for install.
 
 * `debian_version`:        The codename of the version of Debian you want to use.
 

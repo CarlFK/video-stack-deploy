@@ -1,21 +1,25 @@
 ---
-netboot_image: https://deb.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/netboot.tar.gz
-
 time_zone: UTC
 domain: video.debconf.org
 
 apt_proxy: false
-debian_source: https://deb.debian.org/debian
 debian_version: stretch
 
 user_name: videoteam
 # Defaults to not setting a password
 #user_password_crypted: changeme
 
-# Git repos:
-playbook_repo: https://anonscm.debian.org/cgit/debconf-video/ansible.git
+playbook_repo: https://salsa.debian.org/debconf-video-team/ansible
 playbook_branch: master
 
 # To replace the stock inventory with your own, point at your own github repo
 #inventory_repo: https://gitlab.com/yourname/ansible-inventory
 #inventory_branch: master
+
+# boot image sources
+debian_host: deb.debian.org
+ubuntu_host: archive.ubuntu.com
+
+debian_suites: [stretch]
+ubuntu_suites: []
+archs: [amd64]

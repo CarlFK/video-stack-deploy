@@ -55,8 +55,9 @@
   when: not apt_proxy
 
 - name: add Debian Backports repository
-  template:
-    src: templates/backports.j2
-    dest: /etc/apt/sources.list.d/backports.list
+  lineinfile:
+    dest: /etc/apt/sources.list
+    regexp: "^deb .*-backports "
+    line: "deb {{ debian_source }} {{ debian_version }}-backports main"
   notify: apt update
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and not update_apt_sources

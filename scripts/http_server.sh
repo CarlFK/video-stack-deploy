@@ -1,5 +1,6 @@
 #!/bin/bash -ex
 
-# serves preseed and late_command
+# serves d-i/foo/preseed, ec/early_command.sh and d-i/late_command.sh
 
-python -m SimpleHTTPServer
+cd ../roles/tftp-server/files/
+python -m SimpleHTTPServer 8007

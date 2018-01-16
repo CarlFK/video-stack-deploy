@@ -1,20 +1,20 @@
 mk_usb_installer.sh
 
-Make a usb installer:  
+Make a usb installer:
   debian that loads a preseed and runs ansible
 
-note: not self contained.  
+note: not self contained.
 It expects networking to get preseed, deb repos, late_command, ansible
 
 ./mk_usb_installer.sh usb-device [config-filename]
 
 usb-device: dev of usb stick to clobber (like sdc, no /dev/ prefex)
 
-config-filename: settings to build the machine and run ansible  
-  - distro/suite, where to get it, proxy  
-  - where to get preseed file  
-  - drive to install to (sda, nvme0n1...)  
-  - nonfree firmware setting that I am affraid to hardcode  
+config-filename: settings to build the machine and run ansible
+  - distro/suite, where to get it, proxy
+  - where to get preseed file
+  - drive to install to (sda, nvme0n1...)
+  - nonfree firmware setting that I am affraid to hardcode
   - ansible playbook and inventory repos
 
 ## How to use:
@@ -28,11 +28,11 @@ config-filename: settings to build the machine and run ansible
    - and consider the other 10 settings
 6. ./mk_usb_installer.sh sdb mybox.cfg
 
-mk_usb_installer.sh script will:  
+mk_usb_installer.sh script will:
   * setup bootable usb stick
   * run a web server to serve up the preseed, early, late_command.sh
 
-Boot target machine from the usb stick.  
+Boot target machine from the usb stick.
 It will do this:
   * install the OS using values from mybox.cfg and preseed.cfg
   * wget/run late_command.sh
@@ -43,25 +43,25 @@ It will do this:
 
 preseed - how the installer gets the file (defaults to http from this box)
 
-Easy: leave this as is.  
-it will use the server run at the end of this script.  
-preseed="url=$(hostname):8000"
+Easy: leave this as is.
+it will use the server run at the end of this script.
+preseed="url=$(hostname):8007"
 
-no local dns:  
-preseed="url=$(hostname).local:8000"  
-preseed="url=10.100.7.247:8000"
+no local dns:
+preseed="url=$(hostname).local:8007"
+preseed="url=10.100.7.247:8007"
 
-Host the file on some other server hostname dc10b.  
- your problem to setup the server, hostname whatever you want.  
+Host the file on some other server hostname dc10b.
+ your problem to setup the server, hostname whatever you want.
  preseed="url=dc10b"
 
-Use the file on the usb stick  
-early and late_command use $url, so do something about it.  
+Use the file on the usb stick
+early and late_command use $url, so do something about it.
 preseed="file=preseed.cfg"
 
-Per box changes can be done by passing parameter to the kernel  
-from the syslinux on the usb stick: 
-example: to install to an SSD that doesn't come up as /dev/sda: 
+Per box changes can be done by passing parameter to the kernel
+from the syslinux on the usb stick:
+example: to install to an SSD that doesn't come up as /dev/sda:
 
 Where to get what:
 ```

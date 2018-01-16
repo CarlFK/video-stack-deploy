@@ -2,7 +2,9 @@
 127.0.0.1 localhost
 
 {% for host in staticips.hosts %}
+{% if host.ip is defined %}
 {{ host.ip }} {{ host.hostname }}.{{ domain }} {{ host.hostname }}
+{% endif %}
 {% endfor %}
 
 # The following lines are desirable for IPv6 capable hosts

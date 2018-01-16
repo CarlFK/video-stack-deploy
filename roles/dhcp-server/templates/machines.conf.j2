@@ -1,6 +1,13 @@
 # {{ ansible_managed }}
+dhcp-option-force=209,"partman-auto/disk={{ default_install_disk }} grub-installer/bootdev={{ default_install_disk }}"
+
 {% for host in staticips.hosts %}
-{% if host.mac is defined %}
-dhcp-host={{ host.mac }},{{ host.ip }},{{ host.hostname }}
-{% endif %}
+{% if host.comment is defined %}# {{ host.hostname }}: {{ host.comment }}{% endif %}
+
+dhcp-host={{ host.mac }},set:host-{{ host.hostname }},{{ host.hostname }}{% if host.ip is defined %},{{ host.ip }}{% endif %}
+
+{% if host.ip is defined %}host-record={{ host.hostname }},{{ host.ip }}{% endif %}
+
+dhcp-option-force=tag:host-{{ host.hostname }},209,"partman-auto/disk={{ host.disk|default(default_install_disk) }} grub-installer/bootdev={{ host.disk|default(default_install_disk) }}{% if host.tasks is defined %} tasks={{ host.tasks|join(',') }}{% endif %}"
+
 {% endfor %}

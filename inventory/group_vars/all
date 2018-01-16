@@ -68,6 +68,8 @@ staticips:
   - hostname: encoder2
     ip: 10.18.0.92
     mac: 00:24:7e:0a:c9:76
+  write_hosts: true
+  write_interfaces: true
 
 enable_oldstable: true
 enable_sid: true

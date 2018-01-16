@@ -10,12 +10,10 @@
 # we need 0.4.2-1, which is in unstable
 - name: install voctomix-outcasts from unstable for now
   apt:
-    name: "{{ item }}"
+    name: voctomix-outcasts
     state: latest
     default_release: "unstable"
-  with_items:
-  - voctomix-outcasts
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and enable_sid
 
 - name: create voctomix config dir
   file:
