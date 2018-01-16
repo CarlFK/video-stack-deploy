@@ -6,10 +6,17 @@ related tools.
 Note that since the Blackmagic drivers are not free software, they can't be
 freely redistributed.
 
-If you want to use this role, you will have to host them yourself. Drivers can
-be found [here][].
+If you want to use this role, you will have to host them yourself.
+Drivers can be found [here][].
+Scroll down to "Latest Downloads", and select the most recent Linux
+release of "Desktop Video".
+Extract it in e.g. `/srv/pxe/bm` on your DHCP server (as that is served
+by nginx), and set the URLs to the `.deb`s as global variables.
 
-Latest version tested: 10.9.5 -- 2017-07-20
+The DKMS version is visible in the filenames in `/usr/src/blackmagic-*`
+in the `desktopvideo` package (e.g. `dpkg-deb -c desktopvideo.deb`).
+
+Latest version tested: 10.9.5 -- 2017-09-07
 
 [here]: https://www.blackmagicdesign.com/support/family/capture-and-playback
 
