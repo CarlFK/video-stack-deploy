@@ -4,10 +4,16 @@
     name: squid-deb-proxy
   notify: disable squid
 
-- name: allow squid-deb-proxy to hit PPAs
+- name: allow squid-deb-proxy to hit PPAs, github, etc.
   copy:
     src: files/20-ppa
     dest: /etc/squid-deb-proxy/mirror-dstdomain.acl.d/20-ppa
+  notify: restart squid-deb-proxy
+
+- name: allow squid-deb-proxy to hit itself
+  copy:
+    content: "{{ inventory_hostname }}"
+    dest: /etc/squid-deb-proxy/mirror-dstdomain.acl.d/40-{{ inventory_hostname }}
   notify: restart squid-deb-proxy
 
 # This hangs forever, and makes restarting dnsmasq a pain
