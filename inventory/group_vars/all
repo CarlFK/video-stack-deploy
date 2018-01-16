@@ -9,7 +9,7 @@ debian_source: http://deb.debian.org/debian
 
 # tftp_server also does http of the same data
 tftp_server: 10.18.0.10
-local_ip_gateway: 10.18.0.10
+eth_local_ip_gateway: 10.18.0.10
 
 dhcp_range: 10.18.0.128,10.18.0.254,6h
 domain: video.dc17.debconf.org

@@ -8,12 +8,12 @@ dhcp-boot=pxelinux.0
 dhcp-authoritative
 enable-tftp
 tftp-root=/srv/tftp
-{% if local_ip_gateway is defined %}
-dhcp-option=option:router,{{ local_ip_gateway }}
+{% if eth_local_ip_gateway is defined %}
+dhcp-option=option:router,{{ eth_local_ip_gateway }}
 {% elif eth_uplink_mac_address is defined %}
 dhcp-option=option:router,{{ eth_local_ip_address }}
 {% else %}
 # No default gateway defined. Machines on this network won't have access to the internet
-# set local_ip_gateway / eth_uplink_mac_address,eth_local_ip_address
+# set eth_local_ip_gateway / eth_uplink_mac_address,eth_local_ip_address
 # in ansible variables
 {% endif %}
