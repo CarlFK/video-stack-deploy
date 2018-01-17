@@ -30,3 +30,5 @@ Main variables are :
 * `alsa_device`:     ALSA device used for USB audio capture.
 
 * `audio_delay`:     Delay in ms for the audio capture.
+
+* `video_delay`:     Delay in ms for the video capture.
