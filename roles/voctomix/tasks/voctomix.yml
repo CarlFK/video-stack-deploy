@@ -8,7 +8,7 @@
   - gstreamer1.0-pulseaudio
 
 # sane sponsor loops require voctomix-outcasts >= 0.4.2-1
-- name: install voctomix-outcasts from unstable for now
+- name: install voctomix-outcasts from backports
   apt:
     name: "{{ item }}"
     state: latest
