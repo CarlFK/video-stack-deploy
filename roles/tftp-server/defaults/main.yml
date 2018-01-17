@@ -23,3 +23,6 @@ ubuntu_host: archive.ubuntu.com
 debian_suites: [stretch]
 ubuntu_suites: []
 archs: [amd64]
+
+# Wait forever
+pxe_timeout: -1

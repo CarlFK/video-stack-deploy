@@ -46,3 +46,6 @@ Main variables are :
 * `inventory_repo`:        Full URL of the ansible inventory to use.
 
 * `inventory_branch`:      Branch of said git repository to use.
+
+* `pxe_timeout`:           Seconds to wait on the PXE boot menu (see
+                           Grub docs for details).
