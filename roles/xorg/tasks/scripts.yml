@@ -13,4 +13,4 @@
     src: templates/videoteam-show-streams.j2
     dest: /usr/local/bin/videoteam-show-streams
     mode: 0755
-  when: streaming.method == 'rtmp'
+  when: streaming.method == 'rtmp' and streaming.frontend is defined

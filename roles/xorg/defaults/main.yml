@@ -3,6 +3,8 @@ user_name: videoteam
 autologin: false
 
 room_name: change-me
+streaming:
+  method: null
 
 irc:
   network: oftc
