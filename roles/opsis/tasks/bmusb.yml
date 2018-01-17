@@ -1,0 +1,5 @@
+---
+- name: install bmweb udev nules
+  copy:
+    src: files/60-bmweb.rules
+    dest: /lib/udev/rules.d/60-bmweb.rules

@@ -2,6 +2,9 @@
 
 Configures a machine as an Opsis capture PC.
 
+Also supports Black Magic Web Presenter devices, that present a similar
+v4l USB device.
+
 ## Tasks
 
 Tasks are separated in two different parts:
