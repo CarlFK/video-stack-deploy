@@ -7,13 +7,18 @@
   - voctomix-outcasts
   - gstreamer1.0-pulseaudio
 
-# we need 0.4.2-1, which is in unstable
+# sane sponsor loops require voctomix-outcasts >= 0.4.2-1
 - name: install voctomix-outcasts from unstable for now
   apt:
-    name: voctomix-outcasts
+    name: "{{ item }}"
     state: latest
-    default_release: "unstable"
-  when: ansible_distribution == 'Debian' and enable_sid
+    default_release: "{{ debian_version}}-backports"
+  with_items:
+  - voctomix
+  - voctomix-core
+  - voctomix-gui
+  - voctomix-outcasts
+  when: ansible_distribution == 'Debian'
 
 - name: create voctomix config dir
   file:
