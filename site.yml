@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: '*'
   roles:
   - apt
   - system-software
