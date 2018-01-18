@@ -28,6 +28,17 @@
   tags:
     - authorized_keys
 
+- name: manage ssh private_key
+  copy:
+    content: "{{ ssh_private_key }}"
+    dest: "/home/{{ user_name }}/.ssh/id_ed25519"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: 0600
+  when: ssh_private_key is defined
+  tags:
+    - authorized_keys
+
 - name: manage root ssh authorized_keys
   authorized_key:
     user: root
