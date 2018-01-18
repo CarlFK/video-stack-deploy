@@ -1,5 +1,5 @@
 ---
 nfs_server: storage
-username: videoteam
+user_name: videoteam
 storage_username: videodata
 storage_userid: 990

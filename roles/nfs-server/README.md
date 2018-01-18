@@ -13,7 +13,7 @@ Main variables are :
 * `nfs_sever`:           Name of your NFS mount. This variable is used in the
                          NFS mount path.
 
-* `username`:            Username of the user who owns the NFS mount used for
+* `user_name`:           Username of the user who owns the NFS mount used for
                          reviewing.
 
 * `storage_username`:    Username of the user who owns the NFS mount used for
