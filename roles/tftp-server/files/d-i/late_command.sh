@@ -7,9 +7,9 @@ set -efx
 
 # Here is where the parameters come from:
 
-# linux /debian/stretch/amd64/linux gfxpayload=800x600x16,800x600 --- auto=true url=dc10b DEBCONF_DEBUG=5 tasks="" hw-detect/load_firmware=false hostname= domain= interface=${net_default_mac} ${appends} lc/playbook_repo=carlfk lc/playbook_branch=master lc/inventory_repo=xfxf lc/inventory_branch=master
+# linux /debian/stretch/amd64/linux gfxpayload=800x600x16,800x600 --- auto=true url=dc10b DEBCONF_DEBUG=5 tasks="" hw-detect/load_firmware=false hostname= domain= interface=${net_default_mac} ${appends} lc/playbook_repo=carlfk lc/playbook_branch=master lc/inventory_repo=xfxf lc/inventory_branch=master lc/vault_pw=hunter2
 
-# d-i preseed/late_command string cd /target/tmp && wget http://$url/d-i/late_command.sh && chmod u+x late_command.sh && ANSIBLE_UNDER_DI=1 in-target /tmp/late_command.sh $url $(debconf-get mirror/suite) $(debconf-get passwd/username) $(debconf-get lc/playbook_repo) $(debconf-get lc/playbook_branch) $(debconf-get lc/inventory_repo) $(debconf-get lc/inventory_branch)
+# d-i preseed/late_command string cd /target/tmp && wget http://$url/d-i/late_command.sh && chmod u+x late_command.sh && ANSIBLE_UNDER_DI=1 in-target /tmp/late_command.sh $url $(debconf-get mirror/suite) $(debconf-get passwd/username) $(debconf-get lc/playbook_repo) $(debconf-get lc/playbook_branch) $(debconf-get lc/inventory_repo) $(debconf-get lc/inventory_branch) $(debconf-get lc/vault_pw)
 
 server=$1
 suite=$2
@@ -19,6 +19,8 @@ playbook_repo=$4
 playbook_branch=$5
 inventory_repo=$6
 inventory_branch=$7
+
+vault_pw=$8
 
 apt-get install -y git eatmydata
 # Ansible >= 2.4
@@ -52,6 +54,9 @@ if [ ! -z ${inventory_repo} ]; then
 	fi
 fi
 
+echo "$vault_pw" > /root/.ansible-vault
+chmod 600 /root/.ansible-vault
+
 script=/usr/local/sbin/ansible-up
 cat > $script <<EOF
 #!/bin/sh
@@ -68,6 +73,7 @@ fi
 
 ansible-playbook \\
 	--inventory-file=$INVENTORY \\
+	--vault-password-file=/root/.ansible-vault \\
 	--connection=local \\
 	--limit=\$(hostname) \\
 	$PLAYBOOKS \\

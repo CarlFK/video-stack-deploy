@@ -43,6 +43,8 @@ playbook_repo=https://salsa.debian.org/debconf-video-team/ansible
 playbook_branch=master
 inventory_repo=
 inventory_branch=
+# ansible vault password, if necessary
+vault_pw=
 
 # don't ask about firmware  (may be needed for network device)
 load_firmware=false
@@ -71,6 +73,7 @@ lc/playbook_repo=${playbook_repo}
 lc/playbook_branch=${playbook_branch}
 lc/inventory_repo=${inventory_repo}
 lc/inventory_branch=${inventory_branch}
+lc/vault_pw=${vault_pw}
 preseed/early_command=\"anna-install eatmydata-udeb\"
 ${more_appends}
 " | tr '\n' ' ')

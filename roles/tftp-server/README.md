@@ -49,3 +49,4 @@ Main variables are :
 
 * `pxe_timeout`:           Seconds to wait on the PXE boot menu (see
                            Grub docs for details).
+* `vault_pw`:              Ansible vault password (if necessary).

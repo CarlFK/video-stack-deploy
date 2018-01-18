@@ -11,7 +11,7 @@ net_get_dhcp_option dhcp_hostname ${net_default_interface} 12 string
 
 tftp=${pxe_default_server}
 
-ansibles="lc/playbook_repo={{ playbook_repo }} lc/playbook_branch={{ playbook_branch }}  lc/inventory_repo={{ inventory_repo }}  lc/inventory_branch={{ inventory_branch }}"
+ansibles="lc/playbook_repo={{ playbook_repo }} lc/playbook_branch={{ playbook_branch }}  lc/inventory_repo={{ inventory_repo }}  lc/inventory_branch={{ inventory_branch }} lc/vault_pw={{ vault_pw|default("") }}"
 
 append="--- auto=true url=${tftp} DEBCONF_DEBUG=5 domain={{ domain }} ${appends} interface=${net_default_mac} hw-detect/load_firmware=false ${ansibles} rescue/enable=false"
 
