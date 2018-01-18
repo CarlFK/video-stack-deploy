@@ -28,6 +28,9 @@ Main variables are :
   - `disk`:                   Path to the primary install disk.
                               (Defaults to the `default_install_disk`
                                variable)
+  - `noipxe`:                 Disable chain load the iPXE client.
+                              DebConf videos' HP laptops don't seem to
+                              like it.
 * `staticips.write_hosts`:    Boolean. Write the contents of
                               `staticips.hosts` into `/etc/hosts`.
 * `staticips.write_interfaces: Boolean. Write the machine's details into
