@@ -1,4 +1,5 @@
 ---
+eth_local_ip_netmask: 24
 nfs_server: storage
 user_name: videoteam
 storage_username: videodata
