@@ -44,7 +44,7 @@ playbook_branch=master
 inventory_repo=
 inventory_branch=
 
-# don't ask about firmwae  (may be needed for network device)
+# don't ask about firmware  (may be needed for network device)
 load_firmware=false
 
 # Anything else you want to append to the kernel.
