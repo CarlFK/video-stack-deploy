@@ -2,8 +2,8 @@
 - name: systemctl daemon-reload
   command: systemctl daemon-reload
 
-- name: systemctl enable videoteam-ingest
-  command: systemctl enable videoteam-ingest
+- name: systemctl enable videoteam-ingest.path
+  command: systemctl enable videoteam-ingest.path
 
 - name: systemctl enable hdmi2usbd
   command: systemctl enable hdmi2usbd

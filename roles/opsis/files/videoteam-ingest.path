@@ -1,2 +1,5 @@
 [Path]
 PathExists=/dev/hdmi2usb/by-num/all0/video
+
+[Install]
+WantedBy=paths.target

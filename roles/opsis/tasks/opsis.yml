@@ -30,7 +30,6 @@
     dest: /etc/systemd/system/videoteam-ingest.service
   notify:
   - systemctl daemon-reload
-  - systemctl enable videoteam-ingest
 
 - name: push systemd videoteam-ingest.path
   copy:
@@ -38,7 +37,7 @@
     dest: /etc/systemd/system/videoteam-ingest.path
   notify:
   - systemctl daemon-reload
-  - systemctl enable videoteam-ingest
+  - systemctl enable videoteam-ingest.path
 
 - name: configure minicom for hdmi2usb
   copy:
