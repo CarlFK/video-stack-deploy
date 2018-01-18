@@ -10,6 +10,13 @@
     dest: /etc/squid-deb-proxy/mirror-dstdomain.acl.d/20-ppa
   notify: restart squid-deb-proxy
 
+- name: allow a Debian squid-deb-proxy to hit Ubuntu mirrors
+  copy:
+    src: files/30-ubuntu
+    dest: /etc/squid-deb-proxy/mirror-dstdomain.acl.d/30-ubuntu
+  notify: restart squid-deb-proxy
+  when: ansible_distribution == 'Debian'
+
 - name: allow squid-deb-proxy to hit itself
   copy:
     content: "{{ inventory_hostname }}"
