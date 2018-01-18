@@ -6,6 +6,7 @@
   with_items:
   - gstreamer1.0-vaapi
   - i965-va-driver
+  - intel-gpu-tools
   - vainfo
   when: streaming.rtmp.threads == 'vaapi'
 
