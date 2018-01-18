@@ -24,15 +24,20 @@ menuentry "Boot hd0" {
 
 {% for suite in debian_suites + ubuntu_suites %}
 {% for arch in archs %}
+{% if suite in debian_suites %}
+{% set distro='debian' %}
+{% else %}
+{% set distro='ubuntu' %}
+{% endif %}
 if [ -n "${dhcp_hostname}" ]; then
   menuentry "{{ suite }} h:${dhcp_hostname} ${appends}" {
-    linux /debian/{{ suite }}/{{ arch }}/linux hostname=${dhcp_hostname} ${append}
-    initrd /debian/{{ suite }}/{{ arch }}/initrd.gz
+    linux /{{ distro }}/{{ suite }}/{{ arch }}/linux hostname=${dhcp_hostname} ${append}
+    initrd /{{ distro }}/{{ suite }}/{{ arch }}/initrd.gz
   }
 else
   menuentry "{{ suite }} HOSTNAME PROMPT ${appends}" {
-    linux /debian/{{ suite }}/{{ arch }}/linux ${append}
-    initrd /debian/{{ suite }}/{{ arch }}/initrd.gz
+    linux /{{ distro }}/{{ suite }}/{{ arch }}/linux ${append}
+    initrd /{{ distro }}/{{ suite }}/{{ arch }}/initrd.gz
   }
 fi
 {% endfor %}
