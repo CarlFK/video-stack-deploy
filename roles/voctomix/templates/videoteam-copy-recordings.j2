@@ -2,11 +2,38 @@
 
 set -euf
 
+help () {
+	echo "$(basename $0) [options...]"
+	cat <<EOF
+Copy recordings to the central server.
+
+Options:
+  --nice   Run with idle ionice, and nice of 10.
+  --live   Try to be safe for syncing during recording.
+           Ignore recently modified files (within 1 minute).
+           Implies --nice.
+  --pause  Stop recording before copying, then start again.
+EOF
+}
+
+live=0
+nice=0
 pause=0
 while [ $# -gt 0 ]; do
 	case $1 in
+	--nice)
+		nice=1
+		;;
+	--live)
+		nice=1
+		live=1
+		;;
 	--pause)
 		pause=1
+		;;
+	--help)
+		help
+		exit
 		;;
 	*)
 		echo "Unknown argument $1"
@@ -21,12 +48,28 @@ if [ $pause = 1 ]; then
 	trap "systemctl --user start videoteam-record.service" EXIT
 fi
 
-rsync --archive --progress --partial --stats \
+prefix=
+options="--archive --progress --partial --stats"
+source="/srv/video/{{ org }}/{{ show }}/dv/{{ room_name }}/"
+dest="{{ storage_username }}@{{ nfs_server }}:/srv/{{ nfs_server }}/video/{{ org }}/{{ show }}/dv/{{ room_name }}/"
+
 {% for item in rsync_excludes %}
-	--exclude '{{ item }}' \
+	options="$options --exclude '{{ item }}'"
 {% endfor %}
-	/srv/video/{{ org }}/{{ show }}/dv/{{ room_name }}/ \
 {% if rsync_sshopts %}
-	-e "ssh {{rsync_sshopts}}" \
+	options="$options -e 'ssh {{rsync_sshopts}}'"
 {% endif %}
-	{{ storage_username }}@{{ nfs_server }}:/srv/{{ nfs_server }}/video/{{ org }}/{{ show }}/dv/{{ room_name }}/
+
+cd "$source"
+
+if [ $live = 1 ]; then
+	options="$options $(find . -mmin 1 | sed -e 's/^\./--exclude=/')"
+	options="$options --bwlimit=20m"
+fi
+if [ $nice = 1 ]; then
+	prefix="nice ionice -c 3"
+fi
+
+echo Running: $prefix rsync $options ./ "$dest"
+
+$prefix rsync $options ./ "$dest"
