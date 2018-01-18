@@ -1,3 +1,6 @@
 ---
 - name: systemctl restart nginx
   command: systemctl restart nginx
+
+- name: restart dnsmasq
+  command: systemctl restart dnsmasq.service

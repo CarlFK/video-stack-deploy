@@ -7,6 +7,13 @@
   copy:
     src: files/tftp.conf
     dest: /etc/dnsmasq.d
+  notify: restart dnsmasq
+
+- name: configure dnsmasq for PXE
+  copy:
+    src: files/pxe.conf
+    dest: /etc/dnsmasq.d/
+  notify: restart dnsmasq
 
 - name: create boot image directories
   file:
