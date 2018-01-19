@@ -1,9 +1,12 @@
 ---
-- name: create d-i directory
+- name: create pxe & d-i directories
   file:
-    path: /srv/pxe/d-i/
+    path: "{{ item }}"
     state: directory
-    recurse: true
+  with_items:
+  - /srv/pxe
+  - /srv/pxe/d-i
+  - /srv/pxe/scripts
 
 - name: create late_command.sh
   copy:
