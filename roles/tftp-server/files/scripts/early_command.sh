@@ -2,12 +2,5 @@
 
 set -eufx
 
-# hook - if ec.sh exists on the server, get it and run it.
-# This allows local debugging hacks to be in a file that isn't clobbered by
-# ansible, but is locally hackable.
-
-if wget -O - ${url}/scripts/ | grep "ec.sh"; then
-    wget $url/scripts/ec.sh
-    chmod u+x ec.sh
-    ./ec.sh
-fi
+# You can customise this script, to do things early in the d-i run, for
+# debugging. Ansible will create this file once but never update it.

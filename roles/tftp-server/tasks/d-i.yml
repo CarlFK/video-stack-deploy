@@ -4,10 +4,21 @@
     path: /srv/pxe/d-i/
     state: directory
 
-- name: copy d-i supporting files
+- name: create late_command.sh
   copy:
-    src: files/scripts
-    dest: /srv/pxe/
+    src: files/scripts/late_command.sh
+    dest: /srv/pxe/scripts/late_command.sh
+
+- name: check if early_command.sh exists
+  stat:
+    path: /srv/pxe/scripts/early_command.sh
+  register: early_command
+
+- name: create a skeleton early_command.sh
+  copy:
+    src: files/scripts/early_command.sh
+    dest: /srv/pxe/scripts/early_command.sh
+  when: not early_command.stat.exists
 
 - name: copy static preseeds
   copy:
