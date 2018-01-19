@@ -1,16 +1,19 @@
 ---
 - name: create d-i directory
   file:
-    path: /srv/pxe/
+    path: /srv/pxe/d-i/
     state: directory
 
-- name: copy preseed and supporting files
+- name: copy d-i supporting files
   copy:
-    src: files/{{ item }}
+    src: files/scripts
     dest: /srv/pxe/
-  with_items:
-  - d-i
-  - ec
+
+- name: copy static preseeds
+  copy:
+    src: files/d-i/{{ item }}
+    dest: /srv/pxe/d-i/
+  with_items: "{{ debian_suites + ubuntu_suites }}"
 
 - name: write preseed_local_flavor.cfg
   template:

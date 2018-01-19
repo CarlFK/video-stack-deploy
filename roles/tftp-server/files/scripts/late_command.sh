@@ -9,7 +9,7 @@ set -efx
 
 # linux /debian/stretch/amd64/linux gfxpayload=800x600x16,800x600 --- auto=true url=dc10b DEBCONF_DEBUG=5 tasks="" hw-detect/load_firmware=false hostname= domain= interface=${net_default_mac} ${appends} lc/playbook_repo=carlfk lc/playbook_branch=master lc/inventory_repo=xfxf lc/inventory_branch=master lc/vault_pw=hunter2
 
-# d-i preseed/late_command string cd /target/tmp && wget http://$url/d-i/late_command.sh && chmod u+x late_command.sh && ANSIBLE_UNDER_DI=1 in-target /tmp/late_command.sh $url $(debconf-get mirror/suite) $(debconf-get passwd/username) $(debconf-get lc/playbook_repo) $(debconf-get lc/playbook_branch) $(debconf-get lc/inventory_repo) $(debconf-get lc/inventory_branch) $(debconf-get lc/vault_pw)
+# d-i preseed/late_command string cd /target/tmp && wget http://$url/scripts/late_command.sh && chmod u+x late_command.sh && ANSIBLE_UNDER_DI=1 in-target /tmp/late_command.sh $url $(debconf-get mirror/suite) $(debconf-get passwd/username) $(debconf-get lc/playbook_repo) $(debconf-get lc/playbook_branch) $(debconf-get lc/inventory_repo) $(debconf-get lc/inventory_branch) $(debconf-get lc/vault_pw)
 
 server=$1
 suite=$2

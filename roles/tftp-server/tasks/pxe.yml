@@ -24,6 +24,8 @@
 
 - name: magically build /srv/tftp/boot/grub
   command: grub-mknetdir
+  args:
+    creates: /srv/tftp/boot/grub/i386-pc/core.0
 
 - name: write grub.cfg
   template:
