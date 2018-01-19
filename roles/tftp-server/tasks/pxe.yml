@@ -82,12 +82,12 @@
     - "{{ archs }}"
     - [linux, initrd.gz]
 
-# Grabbing from zesty, rather than whatever releases we're targetting because
+# Grabbing from xenial, rather than whatever releases we're targetting because
 # the older releases (and Debian) don't have this working yet.
 # (Also, we can only get this from one release)
 - name: download ubuntu UEFI signed grub
   get_url:
-    url: http://archive.ubuntu.com/ubuntu/dists/zesty/main/uefi/grub2-amd64/current/grubnetx64.efi.signed
+    url: http://archive.ubuntu.com/ubuntu/dists/xenial/main/uefi/grub2-amd64/current/grubnetx64.efi.signed
     dest: /srv/tftp/boot/grubnetx64.efi.signed
 
 # Haven't figured out how to give UEFI grub a prefix, yet.

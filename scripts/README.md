@@ -72,7 +72,6 @@ iso_loc=https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/
 
  Ubuntu:
  suite=xenial  tested, put the iso on a 2nd usb stick.
- suite=zesty  not tested
  suite=artful  enough testing to make a machine boot
  bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}/main/installer-amd64/current/images/
  bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}-updates/main/installer-amd64/current/images/

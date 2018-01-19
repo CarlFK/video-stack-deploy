@@ -18,7 +18,7 @@ case $suite in
 	stretch)
 		apt-get install -y ansible/stretch-backports
 		;;
-	xenial|zesty|artful)
+	xenial|artful)
 		apt-add-repository --yes --update ppa:ansible/ansible
 		apt-get install -y ansible
 		;;
