@@ -15,7 +15,14 @@
     src: files/30-ubuntu
     dest: /etc/squid-deb-proxy/mirror-dstdomain.acl.d/30-ubuntu
   notify: restart squid-deb-proxy
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution != 'Ubuntu'
+
+- name: allow a Ubuntu squid-deb-proxy to hit Debian mirrors
+  copy:
+    src: files/30-debian
+    dest: /etc/squid-deb-proxy/mirror-dstdomain.acl.d/30-debian
+  notify: restart squid-deb-proxy
+  when: ansible_distribution != 'Debian'
 
 - name: allow squid-deb-proxy to hit itself
   copy:
