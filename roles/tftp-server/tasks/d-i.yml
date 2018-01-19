@@ -3,6 +3,7 @@
   file:
     path: /srv/pxe/d-i/
     state: directory
+    recurse: true
 
 - name: create late_command.sh
   copy:
