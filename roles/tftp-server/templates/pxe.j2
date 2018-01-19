@@ -10,6 +10,9 @@ server {
 
 	location / {
 		fancyindex on;
+
+		# D-I requests may come through squid-deb-proxy
+		add_header Cache-Control no-cache;
 	}
 
 	access_log /var/log/nginx/pxe-access.log;
