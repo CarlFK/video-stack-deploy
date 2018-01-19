@@ -14,7 +14,7 @@ config-filename: settings to build the machine and run ansible
   - distro/suite, where to get it, proxy
   - where to get preseed file
   - drive to install to (sda, nvme0n1...)
-  - nonfree firmware setting that I am affraid to hardcode
+  - non-free firmware setting that I am afraid to hardcode
   - ansible playbook and inventory repos
 
 ## How to use:
@@ -22,11 +22,11 @@ config-filename: settings to build the machine and run ansible
 1. sudo apt install git pmount dcfldd
 2. fork and clone the inventory repo
 3. adjust ansible inventory file, commit and push back to your public repo
-4. cp mk_usb_installer.cfg mybox.cfg
-5. vim mybox.cfg
+4. cp scripts/configs/xenial.cfg scripts/configs/mybox.cfg
+5. vim scripts/configs/mybox.cfg
    - set inventory_repo to your public repo
-   - and consider the other 10 settings
-6. ./mk_usb_installer.sh sdb mybox.cfg
+   - and consider the other settings
+6. scripts/mk_usb_installer.sh sdb scripts/configs/mybox.cfg
 
 mk_usb_installer.sh script will:
   * setup bootable usb stick

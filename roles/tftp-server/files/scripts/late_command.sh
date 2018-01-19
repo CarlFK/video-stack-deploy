@@ -1,31 +1,21 @@
 #!/bin/sh
 
-set -efx
+set -efux
 
 # This script (late_command.sh) sets up ansible and runs it.
 # It should be ran at the end of the basic installation of a machine.
-
-# Here is where the parameters come from:
-
-# linux /debian/stretch/amd64/linux gfxpayload=800x600x16,800x600 --- auto=true url=dc10b DEBCONF_DEBUG=5 tasks="" hw-detect/load_firmware=false hostname= domain= interface=${net_default_mac} ${appends} lc/playbook_repo=carlfk lc/playbook_branch=master lc/inventory_repo=xfxf lc/inventory_branch=master lc/vault_pw=hunter2
-
-# d-i preseed/late_command string cd /target/tmp && wget http://$url/scripts/late_command.sh && chmod u+x late_command.sh && ANSIBLE_UNDER_DI=1 in-target /tmp/late_command.sh $url $(debconf-get mirror/suite) $(debconf-get passwd/username) $(debconf-get lc/playbook_repo) $(debconf-get lc/playbook_branch) $(debconf-get lc/inventory_repo) $(debconf-get lc/inventory_branch) $(debconf-get lc/vault_pw)
+# It takes one parameter, the base url that was passed to d-i. This should be a
+# bare hostname of the PXE server.
 
 server=$1
-suite=$2
-user=$3
-
-playbook_repo=$4
-playbook_branch=$5
-inventory_repo=$6
-inventory_branch=$7
-
-vault_pw=$8
+wget http://$server/scripts/late_command.cfg -O /tmp/late_command.cfg
+. /tmp/late_command.cfg
 
 apt-get install -y git eatmydata
 # Ansible >= 2.4
+suite=$(lsb_release -cs)
 case $suite in
-	stable|stretch)
+	stretch)
 		apt-get install -y ansible/stretch-backports
 		;;
 	xenial|zesty|artful)
@@ -45,7 +35,7 @@ git clone $playbook_repo /root/playbook-repo
 INVENTORY=/root/playbook-repo/inventory/hosts
 PLAYBOOKS=/root/playbook-repo/site.yml
 
-if [ ! -z ${inventory_repo} ]; then
+if [ "${inventory_repo}" != "" ]; then
 	git clone $inventory_repo /root/inventory-repo
 	(cd /root/inventory-repo; git checkout $inventory_branch)
 	INVENTORY=/root/inventory-repo/inventory/hosts
@@ -54,7 +44,7 @@ if [ ! -z ${inventory_repo} ]; then
 	fi
 fi
 
-echo "$vault_pw" > /root/.ansible-vault
+echo "$vault_pw" | base64 -d > /root/.ansible-vault
 chmod 600 /root/.ansible-vault
 
 script=/usr/local/sbin/ansible-up

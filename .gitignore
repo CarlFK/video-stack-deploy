@@ -1,2 +1,5 @@
-/site.retry
 .*.swp
+/cache/
+/roles/tftp-server/files/d-i/preseed_local_*.cfg
+/roles/tftp-server/files/scripts/late_command.sh
+/site.retry

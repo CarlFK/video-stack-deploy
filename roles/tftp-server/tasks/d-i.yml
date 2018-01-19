@@ -9,6 +9,11 @@
     src: files/scripts/late_command.sh
     dest: /srv/pxe/scripts/late_command.sh
 
+- name: write late_command.cfg
+  template:
+    src: templates/late_command.cfg.j2
+    dest: /srv/pxe/scripts/late_command.cfg
+
 - name: check if early_command.sh exists
   stat:
     path: /srv/pxe/scripts/early_command.sh
