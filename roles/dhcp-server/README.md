@@ -30,6 +30,9 @@ Main variables are :
 * `eth_uplink_static_ip_address`: Static uplink IP address. Requires `use_static_ip`
                                   true.
 
+* `eth_uplink_static_ip_netmask`: Static uplink net mask. Requires `use_static_ip`
+                                  true.
+
 * `eth_uplink_static_ip_gateway`: Static uplink IP gateway. Requires `use_static_ip`
                                   set to true.
 
