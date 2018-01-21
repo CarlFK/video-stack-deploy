@@ -64,7 +64,7 @@ cd "$source"
 
 if [ $live = 1 ]; then
 	options="$options $(find . -mmin 1 | sed -e 's/^\./--exclude=/')"
-	options="$options --bwlimit=20m"
+	options="$options --bwlimit=10m"
 fi
 if [ $nice = 1 ]; then
 	prefix="nice ionice -c 3"
