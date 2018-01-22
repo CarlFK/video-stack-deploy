@@ -61,9 +61,12 @@ Main variables are :
 * `streaming.hq_config.keyframe_period`: Integer. Seconds between the creation
                                          of key frames.
 
-* `rtmp.threads`:                        TODO
+* `streaming.rtmp.location`:             RTMP URL to the streaming endpoint.
+                                         For YouTube, this would be:
+                                         `rtmp://a.rtmp.youtube.com/live2/x/SUPER_SECRET_KEY app=live2`
 
-* `rtmp.location`:                       RTMP URL to the streaming endpoint.
+* `streaming.rtmp.vaapi`:                Boolean. Use HW-accelerated x264
+                                         encoder.
 
 * `blackmagic_sources.*`:                Array. Uses the `card`, `connection`,
                                          `audio` and `mode` parameters as

@@ -150,7 +150,7 @@ streaming:
     - minidebconf
   method: rtmp
   rtmp:
-    threads: vaapi
+    vaapi: true
     location: "rtmp://backend.live.debconf.org:1935/stream/{{ room_name }} live=1"
   hq_config:
     hls_bandwidth: 2176000

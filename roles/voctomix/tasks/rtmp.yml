@@ -8,7 +8,7 @@
   - i965-va-driver
   - intel-gpu-tools
   - vainfo
-  when: streaming.rtmp.threads == 'vaapi'
+  when: streaming.rtmp.vaapi
 
 - name: RTMP streaming script
   template:
