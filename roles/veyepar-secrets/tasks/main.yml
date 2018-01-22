@@ -1,17 +1,44 @@
 ---
+- name: get asset file names
+  uri:
+    url: "{{ veyepar_url }}/main/C/{{ org }}/S/{{ show }}/asset_names.json"
+    return_content: yes
+    body_format: json
+  register: asset_names
+
+- name: make asset dirs
+  file:
+    state: directory
+    path: "/home/{{ user_name }}/Videos/veyepar/{{ org }}/{{ show }}/assets/{{ item }}"
+    recurse: true
+  become: true
+  become_user:  "{{ user_name }}"
+  with_items:
+  - titles/{{ asset_names.json.title_svg | dirname }}
+  - credits/{{ asset_names.json.credits | dirname }}
+  - mlt/{{ asset_names.json.template_mlt | dirname }}
+
 - name: copy local secret files
   copy:
     src: "{{ veyepar_confs }}/{{ item }}"
     dest: "/home/{{ user_name }}/veyepar/{{ item }}"
   become: true
   become_user:  "{{ user_name }}"
-  # owner:  "{{ user_name }}"
-  # group:  "{{ user_name }}"
   with_items:
   - dj/dj/local_settings.py # db pw, smtp
   - dj/scripts/pw.py # conf site, twitter, swift ...
-  - dj/scripts/client_secrets.json # youtube
-    # - dj/scripts/oauth2-{{ org }}.json # youtube (not really needed?)
-  - dj/scripts/bling/{{ org }}/ # secret title.svg :p
-  - dj/scripts/bling/ndv-169.png
+  - dj/scripts/client_secrets.json # youtube app keys (for veyepar?)
+  - dj/scripts/oauth2-{{ publisher }}.json # youtube credentials
   when: veyepar_confs is defined
+
+- name: copy local asset files
+  copy:
+    src: "{{ veyepar_confs }}/dj/scripts/assets/{{ item }}"
+    dest: "/home/{{ user_name }}/Videos/veyepar/{{ org }}/{{ show }}/assets/{{ item }}"
+  become: true
+  become_user:  "{{ user_name }}"
+  when: veyepar_confs is defined
+  with_items:
+  - credits/{{ asset_names.json.credits }}
+  - titles/{{ asset_names.json.title_svg }}
+  - mlt/{{ asset_names.json.template_mlt }}
