@@ -54,7 +54,7 @@ source="/srv/video/{{ org }}/{{ show }}/dv/{{ room_name }}/"
 dest="{{ storage_username }}@{{ nfs_server }}:/srv/{{ nfs_server }}/video/{{ org }}/{{ show }}/dv/{{ room_name }}/"
 
 {% for item in rsync_excludes %}
-	options="$options --exclude '{{ item }}'"
+	options="$options --exclude {{ item }}"
 {% endfor %}
 {% if rsync_sshopts %}
 	options="$options -e 'ssh {{rsync_sshopts}}'"
