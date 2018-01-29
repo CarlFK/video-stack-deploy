@@ -1,28 +1,22 @@
 == setup and testing the setup ==
 
 There are a few setup workflows that try to share common files.
-there are different preseed and late_comand.sh files for
-Debian/Ubuntu and usb/pxe.
-they are all very similar, maybe they can be merged later.
+There are different preseed and late_comand.sh files for Debian/Ubuntu and
+USB/PXE, they are all very similar, maybe they can be merged later.
 
-1. clone repo to your local machine.
-2. edit inventory/hosts
-3. decide where the files will be hosted.
-Choices:
-a. local machine using http server
-b. some other machine using http, either local or the cloud
-c. copy to usb stick (only makes sense for usb stick install)
-d. copy to pxe server (only make sense for pxe installs)
+1. Clone repo to your local machine.
+2. Edit inventory/hosts
+3. Decide where the files will be hosted.
+   Choices:
+    a. Local machine using http server
+    b. Some other machine using http, either local or the cloud
+    c. Copy to USB stick (only makes sense for USB stick install)
+    d. Copy to PXE server (only make sense for PXE installs)
 
 4. Debian Stretch or Ubuntu LTS.
+5. Make a USB stick. Even if you are going to do PXE installs, you need to build
+   the PXE server using a USB.
+6. Boot a target machine from USB stick. The installer will ask for a hostname.
+   That will install OS and run Ansible for that $hostname.
 
-5. Make a usb stick
-Even if you are going to do pxe installs, you need to build the pxe server.
-
-6. Boot a target machine from usb stick.
-The installer will ask for a hostname.
-
-That will install OS and run ansible for that $hostname.
-Result is a machine ready to be used in production.
-
-
+The result is a machine ready to be used in production.
