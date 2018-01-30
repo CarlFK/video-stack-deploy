@@ -8,7 +8,7 @@ Everything is in the `tasks/main.yml` file.
 
 ## Available variables
 
-Main variables are :
+Main variables are:
 
 * `eth_local_ip_address`:         Local IP address for the DHCP server.
 
@@ -18,11 +18,14 @@ Main variables are :
                                   define thiscif you are not defining the uplink
                                   variables.
 
-* `eth_local_mac_address`:        Local MAC address for the DHCP server.
+* `eth_local_mac_address`:        Local MAC address for the DHCP server. It is
+                                  required to rename the interface using udev
+                                  rules
 
 * `eth_uplink_mac_address`:       Uplink MAC address for the DHCP server. If
                                   defined, this machine will act as a gateway
-                                  and does masquerading.
+                                  and does masquerading. It is required to
+                                  rename the interface using udev rules.
 
 * `use_static_ip`:                Boolean value. If false, the DHCP server uses
                                   DHCP to get an IP from the uplink.
