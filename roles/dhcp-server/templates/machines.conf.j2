@@ -4,7 +4,9 @@ dhcp-option-force=209,"partman-auto/disk={{ default_install_disk }} grub-install
 {% for host in staticips.hosts %}
 {% if host.comment is defined %}# {{ host.hostname }}: {{ host.comment }}{% endif %}
 
+{% if host.mac is defined %}
 dhcp-host={{ host.mac }},set:host-{{ host.hostname }}{% if host.noipxe|default(false) %},set:noipxe{% endif %}{% if host.ip is defined %},{{ host.ip }}{% endif %},{{ host.hostname }}
+{% endif %}
 
 {% if host.ip is defined %}host-record={{ host.hostname }},{{ host.ip }}{% endif %}
 
