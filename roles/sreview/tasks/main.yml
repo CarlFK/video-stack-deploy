@@ -22,7 +22,7 @@
   become_user: videoteam
   git:
     repo: https://github.com/yoe/sreview
-    dest: /home/videoteam/sreview 
+    dest: /home/videoteam/sreview
 
 - name: create working directory
   file:
