@@ -2,6 +2,6 @@ image: debian:sid
 
 lint:
   script:
-  - apt install ansible-lint
+  - apt-get update && apt-get install ansible-lint
   only:
   - master
