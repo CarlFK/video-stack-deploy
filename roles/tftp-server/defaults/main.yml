@@ -16,6 +16,8 @@ playbook_branch: master
 #inventory_repo: https://gitlab.com/yourname/ansible-inventory
 #inventory_branch: master
 
+vault_pw: ''
+
 # boot image sources
 debian_host: deb.debian.org
 ubuntu_host: archive.ubuntu.com
