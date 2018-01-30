@@ -1,83 +1,150 @@
-mk_usb_installer.sh
+# Scripts
 
-Make a usb installer:
-  debian that loads a preseed and runs ansible
+The scripts in this directory accomplish various tasks to do with setting up
+the initial USB installer and testing the setup using QEMU.
 
-note: not self contained.
-It expects networking to get preseed, deb repos, late_command, ansible
+## `mk_usb_installer.sh`
 
-./mk_usb_installer.sh usb-device [config-filename]
+Makes a USB installer that loads a pressed and runs ansible. Currently supports
+Debian. It is not self contained. It expects networking to get the preseed, deb
+repos, `late_command` and ansible.
 
-usb-device: dev of usb stick to clobber (like sdc, no /dev/ prefex)
+    ./mk_usb_installer.sh usb-device [config-filename]
 
-config-filename: settings to build the machine and run ansible
+`usb-device`: dev of usb stick to clobber with no `/dev/` prefix (for example
+sdc).
+
+`config-filename`: settings to build the machine and run ansible:
   - distro/suite, where to get it, proxy
   - where to get preseed file
   - drive to install to (sda, nvme0n1...)
   - non-free firmware setting that I am afraid to hardcode
   - ansible playbook and inventory repos
 
-## How to use:
+### How to use
 
-1. sudo apt install git pmount dcfldd
+1. `sudo apt install curl git pmount dcfldd`
 2. fork and clone the inventory repo
-3. adjust ansible inventory file, commit and push back to your public repo
-4. cp scripts/configs/xenial.cfg scripts/configs/mybox.cfg
-5. vim scripts/configs/mybox.cfg
-   - set inventory_repo to your public repo
+3. adjust ansible inventory file, host and group vars, commit and push back to
+   your public repo
+4. `cp scripts/configs/xenial.cfg scripts/configs/mybox.cfg`
+5. `vim scripts/configs/mybox.cfg`
+   - set `inventory_repo` to your public repo
+   - set `inventory_branch` to your public repo's branch
+   - set `hostname` to the target's hostname
    - and consider the other settings
-6. scripts/mk_usb_installer.sh sdb scripts/configs/mybox.cfg
+6. `scripts/mk_usb_installer.sh sdb scripts/configs/mybox.cfg`
 
-mk_usb_installer.sh script will:
+`mk_usb_installer.sh` script will:
   * setup bootable usb stick
-  * run a web server to serve up the preseed, early, late_command.sh
+  * run a web server to serve up the preseed, early, `late_command.sh`
 
 Boot target machine from the usb stick.
 It will do this:
-  * install the OS using values from mybox.cfg and preseed.cfg
-  * wget/run late_command.sh
-  * late_command.sh will clone the repos
-  * and run something like: ansible --local --limit=$(hostname)
+  * install the OS using values from `mybox.cfg` and `preseed.cfg`
+  * `wget/run late_command.sh`
+  * `late_command.sh` will clone the repos
+  * and run something like: `ansible --local --limit=$(hostname)`
 
-## cfg file settings:
+### Configuration File:
 
-preseed - how the installer gets the file (defaults to http from this box)
+**suit** - distro suite to use (stretch)
 
-Easy: leave this as is.
-it will use the server run at the end of this script.
-preseed="url=$(hostname):8007"
+**arch** - architecture of the target machine (amd64)
 
-no local dns:
-preseed="url=$(hostname).local:8007"
-preseed="url=10.100.7.247:8007"
+**booting\_loc** - location of the boot images with the `SA256SUMS` and
+`hd-media/boot.img.gz` files (http://deb.debian.org/debian/dists/${suite}/main/installer-${arch}/current/images)
 
-Host the file on some other server hostname dc10b.
- your problem to setup the server, hostname whatever you want.
- preseed="url=dc10b"
+**iso** - the ISO name to download (debian-9.3.0-${arch}-netinst.iso)
 
-Use the file on the usb stick
-early and late_command use $url, so do something about it.
-preseed="file=preseed.cfg"
+**iso\_loc** - the URL to the directory containing the ISO. (https://cdimage.debian.org/debian-cd/current/${arch}/iso-cd)
 
-Per box changes can be done by passing parameter to the kernel
-from the syslinux on the usb stick:
-example: to install to an SSD that doesn't come up as /dev/sda:
+**preseed** - how the installer gets the file (defaults to http from this box).
+There are several different options for this.
 
-Where to get what:
-```
-suite=stretch
-bootimg_loc=http://ftp.debian.org/debian/dists/${suite}/main/installer-amd64/current/images
-iso=debian-9.0.0-amd64-netinst.iso
-iso_loc=https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/
+Easy:
 
- Ubuntu:
- suite=xenial  tested, put the iso on a 2nd usb stick.
- suite=artful  enough testing to make a machine boot
- bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}/main/installer-amd64/current/images/
- bootimg_loc=http://archive.ubuntu.com/ubuntu/dists/${suite}-updates/main/installer-amd64/current/images/
- iso=ubuntu-16.04.2-server-amd64.iso
- iso_loc=http://releases.ubuntu.com/${suite}
- http://cdimage.ubuntu.com/ubuntu-server/daily/current/artful-server-amd64.iso
- iso=artful-server-amd64.iso
- iso_loc=http://cdimage.ubuntu.com/ubuntu-server/daily/current
-```
+Leave this as is. It will use the server run at the end of this script.
+
+    preseed="url=$(hostname):8007"
+
+No local DNS:
+
+    preseed="url=$(hostname).local:8007"
+    preseed="url=10.100.7.247:8007"
+
+Host the file on some other server hostname dc10b:
+
+Set the other server up and point the configuration to its hostname.
+
+    preseed="url=dc10b"
+
+Use the file on the USB stick:
+
+`early_command` and `late_command` use `$url`, so they will changing in the
+script.
+
+    preseed="file=preseed.cfg"
+
+**disk** - the device on the target machine to install onto (/dev/sda)
+
+**bootdev** - the device on the target machine to boot from (/dev/sda)
+
+**playbook\_repo** - the repo containing the playbooks for setting up the target
+machine (https://salsa.debian.org/debconf-video-team/ansible)
+
+**playbook\_branch** - the git branch in the playbook repo to use (master)
+
+**inventory\_repo** - the repo containing the inventory/hosts file to use. If
+it is blank, the playbook repo is used.
+
+**inventory\_branch** - the git branch in the inventory repo to use. If it is
+blank, the playbook repo branch is used.
+
+**vault\_pw** - the password for ansible vault encoded in base64
+
+**load\_firmware** - prompt about firmware in the installer (false)
+
+**more\_appends** - additional configuration to be appended to the kernel
+
+### Supported Distributions
+
+#### Debian
+
+This is the default configuration and does not require a configuration file if
+none of the defaults need to be changed
+
+#### Ubuntu
+
+The default Xenial configuration is in `configs/xenial.cfg`. This can be
+used for Artful by changing the suite. Unfortunately the Xenial ISO is too big
+to fit, as `boot.img` only has 782M of free space. Thus `mk_usb_installer.sh`
+will be unable to create a USB for Xenial. The config is kept here for when we
+find a way of fixing this bug.
+
+## `http_server.sh`
+
+This runs an HTTP server so that the USB installer can pull the configuration
+into the install. The configuration is written to the
+[../roles/tftp-server/files/](../roles/tftp-server/files) directory by the
+`mk_usb_installer.sh` script.
+
+## `test_pxe.sh`
+
+This tests the PXE booting environment by booting it in a qemu x86\_64 system.
+
+    $ ./test_pxe.sh
+
+It requires qemu and brctl
+
+    $ sudo apt install qemu brctl
+
+## `test_thumb.sh`
+
+This tests the USB stick by booting it in a qemu x86\_64 system. It takes one
+argument - the device, without the preceding `/dev/`. If the USB is `/dev/sdb`:
+
+    $ ./test_thumb.sh sdb
+
+It requires qemu:
+    $ sudo apt install qemu
