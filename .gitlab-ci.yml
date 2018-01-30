@@ -1,8 +1,7 @@
-image: alpine
+image: debian:sid
 
 lint:
   script:
-  - apk --no-cache add py2-pip
-  - pip install ansible-lint
+  - apt install ansible-lint
   only:
   - master
