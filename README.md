@@ -8,12 +8,11 @@ In Debian Stretch, this is available in backports.
 
 1. Clone repo to your local machine.
 2. Edit `inventory/hosts` and `inventory/{group,host}_vars`
-3. Decide where the files will be hosted.
-   Choices:
-    a. Local machine using http server
-    b. Some other machine using http, either local or the cloud
-    c. Copy to USB stick (only makes sense for USB stick install)
-    d. Copy to PXE server (only make sense for PXE installs)
+3. Decide where the files will be hosted. The choices are:
+     a. Local machine using http server
+     b. Some other machine using http, either local or the cloud
+     c. Copy to USB stick (only makes sense for USB stick install)
+     d. Copy to PXE server (only make sense for PXE installs)
 
 4. Make a USB stick. Even if you are going to do PXE installs, you need to build
    the PXE server using a USB. Details on how to create the USB stick can be
