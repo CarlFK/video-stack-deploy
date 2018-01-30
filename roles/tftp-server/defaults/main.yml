@@ -13,8 +13,8 @@ playbook_repo: https://salsa.debian.org/debconf-video-team/ansible
 playbook_branch: master
 
 # To replace the stock inventory with your own, point at your own github repo
-#inventory_repo: https://gitlab.com/yourname/ansible-inventory
-#inventory_branch: master
+inventory_repo: ''
+inventory_branch: master
 
 vault_pw: ''
 
