@@ -7,7 +7,7 @@ playbooks defined in this repo require ansible version 2.4 or greater to run.
 In Debian Stretch, this is available in backports.
 
 1. Clone repo to your local machine.
-2. Edit `inventory/hosts` and `inventory/{group,host}\_vars`
+2. Edit `inventory/hosts` and `inventory/{group,host}_vars`
 3. Decide where the files will be hosted.
    Choices:
     a. Local machine using http server
