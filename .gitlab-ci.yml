@@ -12,3 +12,8 @@ apt:
   - touch /etc/apt/apt.conf.d/30apt-proxy
   - ansible-playbook tests/apt.yml
   - apt-get update && apt-get -y install rolldice
+
+bash:
+  script:
+  - ansible-playbook tests/bash.yml
+  - bash -c "compgen -c unam |grep -q uname && exit || exit 1"
