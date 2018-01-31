@@ -8,5 +8,7 @@ lint:
 
 apt:
   script:
+  - echo "deb cdrom:[foobar test]/ stretch main" >> /etc/apt/sources.list
+  - touch /etc/apt/apt.conf.d/30apt-proxy
   - ansible-playbook tests/apt.yml
   - apt-get update && apt-get -y install rolldice
