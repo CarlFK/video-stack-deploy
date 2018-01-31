@@ -1,6 +1,8 @@
 # dhcp-server
 
-Configure and manage a DHCP server.
+Configure and manage a DHCP server. If the either the uplink or local interface
+use the wifi interface, this should be set up on the node before the role is
+run.
 
 ## Tasks
 
