@@ -2,7 +2,6 @@
 - name: install nginx packages
   apt:
     pkg: "{{ item }}"
-    state: latest
     default_release: "{{ debian_version }}-backports"
   with_items:
     - nginx-extras
@@ -13,7 +12,6 @@
 - name: install geoip from contrib
   apt:
     pkg: "{{ item }}"
-    state: latest
     default_release: "{{ debian_version }}-backports"
   with_items:
     - geoip-database-contrib

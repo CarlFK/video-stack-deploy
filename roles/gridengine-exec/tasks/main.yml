@@ -1,6 +1,6 @@
 ---
 - name: install gridengine-exec package
-  apt: pkg={{ item }} state=latest
+  apt: pkg={{ item }}
   with_items:
   - gridengine-exec
 
