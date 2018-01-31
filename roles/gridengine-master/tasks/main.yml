@@ -1,6 +1,6 @@
 ---
 - name: install packages
-  apt: pkg={{ item }} state=latest
+  apt: pkg={{ item }}
   with_items:
   - gridengine-master
   - libjson-perl

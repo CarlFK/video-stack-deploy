@@ -2,7 +2,6 @@
 - name: install nginx packages
   apt:
     pkg: "{{ item }}"
-    state: latest
     default_release: "{{ debian_version }}-backports"
   with_items:
     - nginx-extras
