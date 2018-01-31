@@ -137,8 +137,8 @@ letsencrypt_account_email: user@example.org
 rsync_sshopts: "-i ~/.ssh/id_rsa_videodata"
 
 # Include your SSH keys here
-public_keys_onsite:
+public_keys_onsite: []
 
-public_keys_root:
+public_keys_root: []
 
-public_keys_storage:
+public_keys_storage: []
