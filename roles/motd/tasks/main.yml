@@ -16,6 +16,6 @@
 - name: install motd system stats dependencies
   apt:
     name: "{{ item }}"
-  with-items:
-    - lsb-release
-    - procps
+  with_items:
+  - lsb-release
+  - procps
