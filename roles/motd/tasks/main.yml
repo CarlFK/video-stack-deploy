@@ -13,3 +13,6 @@
     - showrelease.sh
     - uptime.sh
 
+- name: install lsb-release package
+  apt:
+    name: lsb-release
