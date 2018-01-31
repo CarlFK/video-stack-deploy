@@ -61,13 +61,17 @@ if [ "${inventory_repo}" != "" ]; then
 	(cd inventory-repo; git pull)
 fi
 
+if [ "$vault_pw" != "" ]; then
+    vault_pw_arg="--vault-password-file=/root/.ansible-vault"
+fi
+
 ansible-playbook \\
-	--inventory-file=$INVENTORY \\
-	--vault-password-file=/root/.ansible-vault \\
-	--connection=local \\
-	--limit=\$(hostname) \\
-	$PLAYBOOKS \\
-	"\$@"
+    --inventory-file=$INVENTORY \\
+    ${vault_pw_arg} \\
+    --connection=local \\
+    --limit=\$(hostname) \\
+    $PLAYBOOKS \\
+    "\$@"
 EOF
 chmod +x $script
 
