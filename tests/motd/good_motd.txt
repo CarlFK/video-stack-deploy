@@ -1,0 +1,10 @@
+This machine is configured with ansible. Please refrain from modifing files
+locally if you can.
+
+
+       .''`.           Seo Oden Prize Award infrastructure machine
+      : :`  :
+      `. `'`           Ieu Eun, A-Io
+        `-
+
+--
