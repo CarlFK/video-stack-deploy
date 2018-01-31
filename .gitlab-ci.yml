@@ -17,3 +17,12 @@ bash:
   script:
   - ansible-playbook tests/bash.yml
   - bash -c "compgen -c unam |grep -q uname && exit || exit 1"
+
+motd:
+  script:
+  - cat /etc/motd
+  - ansible-playbook tests/motd.yml
+  - cat /etc/motd
+  - sh /etc/profile.d/showcpu.sh
+  - sh /etc/profile.d/showrelease.sh
+  - sh /etc/profile.d/uptime.sh
