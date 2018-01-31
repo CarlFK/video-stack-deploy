@@ -13,6 +13,9 @@
     - showrelease.sh
     - uptime.sh
 
-- name: install lsb-release package
+- name: install motd system stats dependencies
   apt:
-    name: lsb-release
+    name: "{{ item }}"
+  with-items:
+    - lsb-release
+    - procps
