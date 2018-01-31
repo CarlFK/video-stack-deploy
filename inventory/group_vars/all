@@ -13,33 +13,21 @@ tftp_server: 10.18.0.10
 eth_local_ip_gateway: 10.18.0.10
 
 dhcp_range: 10.18.0.128,10.18.0.254,6h
-domain: video.example.debconf.org
+domain: video.example.org
 
 time_zone: Europe/London
 
 # Change the MAC addresses to match your setup
 staticips:
   hosts:
-  - hostname: noc0gw0
-    ip: 10.18.0.2
   - hostname: gw
     ip: 10.18.0.3
-  - hostname: noc1st0
-    ip: 206.167.36.195
-  - hostname: noc0stream0
-    ip: 206.167.36.197
   - hostname: voctomix1
     ip: 10.18.0.10
     mac: 00:24:7e:0a:ae:27
   - hostname: opsis1
     ip: 10.18.0.11
     mac: 00:24:7e:0a:c9:6d
-  - hostname: review0
-    ip: 10.18.0.80
-    mac: 00:24:7e:0a:ad:63
-  - hostname: encoder0
-    ip: 10.18.0.90
-    mac: 00:16:41:3c:eb:a6
   write_hosts: true
   write_interfaces: true
 
@@ -71,68 +59,7 @@ sources:
 - Cam1
 - Grabber
 
-ge:
-  master:
-    noc1st0.video.dc17.debconf.org
-  exechosts:
-    - noc1st0.video.example.debconf.org
-    - encoder0.video.example.debconf.org
-
-sreview:
-  wwwhostname:
-    sreview.example.debconf.org
-
 room_name: change-me
-
-streaming:
-  rtmp_publishers:
-    - 0.0.0.0/0
-  local_hosts:
-    - 10.0.0.0/8
-  backend:
-    server_name: backend.example.debconf.org
-    data_root: /srv/streaming
-  frontend:
-    server_names:
-      - "{{ inventory_hostname }}"
-      - local.example.debconf.org
-    data_root: /srv/streaming-frontend
-  rooms:
-    - room1
-  method: rtmp
-  rtmp:
-    vaapi: true
-    location: "rtmp://backend.live.debconf.org:1935/stream/{{ room_name }} live=1"
-  hq_config:
-    hls_bandwidth: 2176000
-    video_bitrate: 2000 # kbps
-    audio_bitrate: 128000 # bps
-    keyframe_period: 60 # seconds
-  adaptive:
-    video_codec: libx264
-    audio_codec: aac
-    variants:
-      high:
-        hls_bandwidth: 1152000
-        video_bitrate: 1024k
-        audio_bitrate: 128k
-        extra_settings: -tune zerolatency -preset veryfast -crf 23
-        width: 900
-      mid:
-        hls_bandwidth: 448000
-        video_bitrate: 768k
-        audio_bitrate: 96k
-        extra_settings: -tune zerolatency -preset veryfast -crf 23
-        width: 720
-      low:
-        hls_bandwidth: 288000
-        video_bitrate: 256k
-        audio_bitrate: 48k
-        extra_settings: -tune zerolatency -preset veryfast -crf 23
-        width: 480
-  dump: True
-
-letsencrypt_account_email: user@example.org
 
 rsync_sshopts: "-i ~/.ssh/id_rsa_videodata"
 
