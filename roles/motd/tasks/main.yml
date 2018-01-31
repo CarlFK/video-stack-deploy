@@ -13,3 +13,9 @@
     - showrelease.sh
     - uptime.sh
 
+- name: install motd system stats dependencies
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - lsb-release
+  - procps

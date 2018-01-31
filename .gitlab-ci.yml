@@ -17,3 +17,10 @@ bash:
   script:
   - ansible-playbook tests/bash.yml
   - bash -c "compgen -c unam |grep -q uname && exit || exit 1"
+
+motd:
+  script:
+  - >
+    ansible-playbook tests/motd.yml --extra-vars "conference_name='Seo Oden Prize Award'
+    conference_town='Ieu Eun' conference_country=A-Io"
+  - sh tests/motd/unit_test.sh
