@@ -10,11 +10,6 @@
 
 [dhcp-server]
 gw
-voctomix1
-
-[tftp-server]
-gw
-voctomix1
 
 [offsite]
 backend.live.debconf.org
@@ -32,15 +27,9 @@ voctomix
 
 [opsis]
 opsis1
-opsis2
-opsis3
-voctomix4
 
 [voctomix]
 voctomix1
-voctomix2
-voctomix3
-voctomix4
 
 [nfs-server]
 noc1st0
@@ -50,16 +39,12 @@ noc1st0
 
 [encoder]
 encoder0
-encoder1
-encoder2
 
 [streaming-backends]
-backend.live.debconf.org
+backend.example.debconf.org
 
 [streaming-frontends]
-fra1.live.debconf.org
-tor1.live.debconf.org
-sgp1.live.debconf.org
+fra1.example.debconf.org
 
 [review]
 review0
