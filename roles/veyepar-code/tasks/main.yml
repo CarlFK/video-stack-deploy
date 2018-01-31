@@ -6,3 +6,5 @@
     depth: 1
   become: true
   become_user: "{{ user_name }}"
+  tags:
+    - skip_ansible_lint

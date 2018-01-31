@@ -23,6 +23,8 @@
   git:
     repo: https://github.com/yoe/sreview
     dest: /home/videoteam/sreview
+  tags:
+    - skip_ansible_lint
 
 - name: create working directory
   file:

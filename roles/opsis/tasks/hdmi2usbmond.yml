@@ -4,6 +4,8 @@
     repo: https://github.com/xfxf/hdmi2usbmon.git
     dest: /usr/local/hdmi2usbmon
     recursive: no
+    tags:
+      - skip_ansible_lint
 
 - name: Create a hdmi2usbmond user
   user:
