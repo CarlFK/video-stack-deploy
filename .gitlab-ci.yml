@@ -8,5 +8,5 @@ lint:
 
 apt:
   script:
-  - ansible-playbook roles/apt/tasks/main.yml --connection=local -l localhost
+  - ansible-playbook tests/apt.yml
   - apt-get update && apt-get -y install rolldice
