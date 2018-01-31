@@ -1,0 +1,10 @@
+exclude_paths:
+  - roles/gridengine-config
+  - roles/gridengine-exec
+  - roles/gridengine-master
+parseable: true
+quiet: true
+rulesdir:
+  - ./rule/directory/
+skip_list:
+  - ANSIBLE006
