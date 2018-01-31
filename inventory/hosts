@@ -11,17 +11,8 @@
 [dhcp-server]
 gw
 
-[offsite]
-backend.live.debconf.org
-fra1.live.debconf.org
-tor1.live.debconf.org
-sgp1.live.debconf.org
-
 [onsite:children]
 dhcp-server
-encoder
-ge-master
-nfs-server
 opsis
 voctomix
 
@@ -30,21 +21,3 @@ opsis1
 
 [voctomix]
 voctomix1
-
-[nfs-server]
-noc1st0
-
-[ge-master]
-noc1st0
-
-[encoder]
-encoder0
-
-[streaming-backends]
-backend.example.debconf.org
-
-[streaming-frontends]
-fra1.example.debconf.org
-
-[review]
-review0
