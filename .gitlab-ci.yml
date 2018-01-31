@@ -5,3 +5,8 @@ lint:
   - apt-get update && apt-get -y install python-pip
   - pip install ansible-lint
   - ansible-lint site.yml
+
+apt:
+  script:
+  - ansible-playbook roles/apt/tasks/main.yml --connection=local -l localhost
+  - apt-get update && apt-get -y install rolldice
