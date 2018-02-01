@@ -42,7 +42,7 @@ users:
 
 pages:
   script:
-  - apk --no-cache add py-sphinx python3 make
+  - apt-get update && apt-get -y install py-sphinx python3 make
   - cd docs
   - make html
   - mv _build/html/ ../public/
