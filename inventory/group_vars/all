@@ -13,19 +13,6 @@ domain: video.example.org
 
 time_zone: Europe/London
 
-# Add MAC addresses to avoid hostname prompts during Debian Installer when PXE
-# booting.
-staticips:
-  hosts:
-  - hostname: gw
-    ip: 10.18.0.1
-  - hostname: voctomix1
-    ip: 10.18.0.10
-  - hostname: opsis1
-    ip: 10.18.0.11
-  write_hosts: false
-  write_interfaces: false
-
 enable_oldstable: true
 
 # check the frequency setting on the camera
@@ -55,8 +42,6 @@ sources:
 - Grabber
 
 room_name: change-me
-
-rsync_sshopts: "-i ~/.ssh/id_rsa_videodata"
 
 # Include your SSH keys here
 public_keys_onsite: []
