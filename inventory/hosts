@@ -8,11 +8,11 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
-[dhcp-server]
+[tftp-dhcp-server]
 gw
 
 [onsite:children]
-dhcp-server
+tftp-dhcp-server
 opsis
 voctomix
 
