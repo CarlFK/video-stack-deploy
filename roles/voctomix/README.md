@@ -26,6 +26,8 @@ Main variables are :
 
 * `storage_username`:                    Storage user username.
 
+* `debian_version`:                      Version of Debian, when using Debian.
+
 * `org`:                                 Name of your organisation. Used in
                                          video files path.
 

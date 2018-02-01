@@ -8,10 +8,6 @@ autologin: true
 
 debian_source: http://deb.debian.org/debian
 
-# tftp_server also does http of the same data
-tftp_server: 10.18.0.10
-eth_local_ip_gateway: 10.18.0.10
-
 dhcp_range: 10.18.0.128,10.18.0.254,6h
 domain: video.example.org
 
@@ -21,7 +17,7 @@ time_zone: Europe/London
 staticips:
   hosts:
   - hostname: gw
-    ip: 10.18.0.3
+    ip: 10.18.0.1
   - hostname: voctomix1
     ip: 10.18.0.10
   - hostname: opsis1
