@@ -47,6 +47,11 @@ fi
 echo "$vault_pw" | base64 -d > /root/.ansible-vault
 chmod 600 /root/.ansible-vault
 
+vault_pw_arg=
+if [ "$vault_pw" != "" ]; then
+    vault_pw_arg="--vault-password-file=/root/.ansible-vault"
+fi
+
 script=/usr/local/sbin/ansible-up
 cat > $script <<EOF
 #!/bin/sh
@@ -59,11 +64,6 @@ cd /root/
 
 if [ "${inventory_repo}" != "" ]; then
 	(cd inventory-repo; git pull)
-fi
-
-vault_pw_arg=
-if [ "$vault_pw" != "" ]; then
-    vault_pw_arg="--vault-password-file=/root/.ansible-vault"
 fi
 
 ansible-playbook \\
