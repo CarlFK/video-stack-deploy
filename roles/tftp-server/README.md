@@ -31,8 +31,6 @@ Main variables are :
 
 * `archs`:                 List of archs to offer for install.
 
-* `debian_version`:        The codename of the version of Debian you want to use.
-
 * `user_name`:             The username d-i will use during the installation.
 
 * `user_password_crypted`: The user's password d-i will use during the

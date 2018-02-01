@@ -3,7 +3,6 @@ time_zone: UTC
 domain: video.debconf.org
 
 apt_proxy: false
-debian_version: stretch
 
 user_name: videoteam
 # Defaults to not setting a password
