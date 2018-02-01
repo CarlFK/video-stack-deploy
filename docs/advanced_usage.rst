@@ -14,4 +14,8 @@ example of how to set this up. It requires setting ``inventory_repo`` and
 ``inventory/group_vars/all``. ``inventory_branch`` defaults to master, but this
 can also be set.
 
+``staticips.hosts`` can include a MAC address for each host. This will
+automatically assign the machine a hostname when PXE booting and will ensure
+that it has a static IP from the gateway.
+
 .. _`our config repo`: https://salsa.debian.org/debconf-video-team/ansible-inventory
