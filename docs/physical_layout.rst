@@ -20,8 +20,9 @@ The Ansible configuration sets up 9 groups of machines:
   encode the recorded talks for review and upload.
 * Streaming Backend - this receives the RTMP streams from the rooms, saves
   these to disk and presents this over HTTP using DASH in a variety of formats.
-* Streaming Frontend - these machines serve the streams to geographically
-  close clients.
+* Streaming Frontend - These machines are caching proxies in front of the
+  streaming backend, geographically distributed around the world. Users probably
+  connect to these, not the backend, when they exist.
 * Review - the machines that will host and manage `SReview`_, which is our
   review system for talks after they are recorded.
 
