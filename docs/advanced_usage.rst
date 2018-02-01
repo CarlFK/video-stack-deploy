@@ -10,7 +10,7 @@ need to be added to the ``staticips.hosts`` dictionary in
 
 For large setups, using PXE booting to configure machines, you should create a
 git repository with your copy of ``inventory/``. See `our config repo`_ for an
-example of how to set this up. It requires setting ``inventory_repo`` and
+example of how to set this up. It requires setting ``inventory_repo`` in
 ``inventory/group_vars/all``. ``inventory_branch`` defaults to master, but this
 can also be set.
 
@@ -32,6 +32,6 @@ Static IPs and MAC addresses can be specified using the following dictionary in
       write_interfaces: false
 
 This will automatically assign the machine a hostname when PXE booting and will
-ensure that it has a static IP from the gateway.  
+ensure that it has a static IP from the gateway.
 
 .. _`our config repo`: https://salsa.debian.org/debconf-video-team/ansible-inventory
