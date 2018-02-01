@@ -3,7 +3,7 @@ Getting Started
 
 Welcome to the DebConf videoteam Ansible documentation. The goal of this
 website is to step you through using our Ansible configuration in a conference
-setting. The Ansible roles are stored on `Salsa`_.
+setting. The Ansible roles are stored in a git repository on `Salsa`_.
 
 If you are part of Debian and plan to organise an event you intent to record,
 please `contact us`_! Maybe a member of our team can attend it and help you with

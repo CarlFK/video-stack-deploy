@@ -2,21 +2,19 @@ Adding a Gateway
 ================
 
 Adding additional machines to the Voctomix setup usually requires a dedicated
-network. This is because the Opsis capture stream uses the hostname of the
-Voctomix machine (``voctomix1`` in our example). If the provided network does
-hostname DNS resolution correctly, a gateway and dedicated network are not
-needed. In this case you can skip this step and `setup the Opsis machine`_
-instead.
+network. This is because the Opsis capture stream is directed to the hostname of
+the Voctomix machine (``voctomix1`` in our example). If the ``voctomix1``
+hostname is available in the local DNS (e.g. from its DHCP lease), then this
+should work and you can skip this step and setup the `Opsis machine`_ instead.
+If not, we would recommend using out gateway and a dedicated network.
 
 If it does not, then you must configure a gateway to provide the DNS resolution
 to a dedicated network. For more complex setups this is recommended, as the
 gateway also provides PXE booting and the ability to automatically configure
 machines on initial boot.
 
-1. Install Debian Stable on another machine. Make the hostname ``gw``. If
-   you are using a netinstall image, only install the base system and,
-   optionally, the SSH server. Do not install Xorg or a desktop environment as
-   these are installed by Ansible.
+1. Install Debian Stable on another machine in the same manner you installed
+   the `Voctomix`_ machine. Make the hostname ``gw``.
 
 2. If your gateway is to a wireless network, make sure this is configured and
    working
@@ -53,4 +51,5 @@ machines on initial boot.
 
 6. Wire your network.
 
-.. _`setup the Opsis machine`: opsis.html
+.. _`Opsis machine`: opsis.html
+.. _`Voctomix`: voctomix.html

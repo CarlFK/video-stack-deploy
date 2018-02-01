@@ -3,20 +3,18 @@ Adding an Opsis Machine
 
 The next step is to add a Numato Opsis board and capture PC for capturing
 presentations. The hardware setup for this can be found `here`_. The basic
-layout is the presenter's laptop is connected to the Opsis HDMI input, the Opsis
-HDMI output is connected to the projector and the Opsis USB capture is connected
-to a machine sitting next to it. This is connected to the Voctomix machine over
-a wired network.
+layout is that the presenter's laptop is connected to the Opsis HDMI input, the
+Opsis HDMI output is connected to the projector and the Opsis USB capture is
+connected to a machine sitting next to it. This is connected to the Voctomix
+machine over a gigabit ethernet network.
 
-Communicating with the Opsis board happens over USB serial. Flashing an Opsis
-with new firmware is described in the `official documentation`. For details
-about how to access the Opsis board to troubleshoot or change its setup, look
-at our `general documentation` on the subject.
+The Opsis is configured through a USB serial console. Flashing an Opsis with new
+firmware is described in the `official documentation`. For details on accessing
+the Opsis board to troubleshoot or change its setup, look at our
+`general documentation` on the subject.
 
-1. Install Debian Stable on another machine. Make the hostname ``opsis1``. If
-   you are using a netinstall image, only install the base system and,
-   optionally, the SSH server. Do not install Xorg or a desktop environment as
-   these are installed by Ansible.
+1. Install Debian Stable on another machine in the same manner you installed
+   the `Voctomix`_ machine. Make the hostname ``opsis1``.
 
 2. Once it is installed, as root, run::
 
@@ -46,3 +44,4 @@ at our `general documentation` on the subject.
 .. _`here`: https://debconf-video-team.pages.debian.net/docs/hardware.html#laptop-output-capture
 .. _`official documentation`: https://hdmi2usb.tv/firmware/#flashing-prebuilt-firmware
 .. _`general documentation`: https://debconf-video-team.pages.debian.net/docs/opsis.html
+.. _`Voctomix`: voctomix.html

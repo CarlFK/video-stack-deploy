@@ -4,10 +4,9 @@ Standalone Voctomix Machine
 The simplest setup that is able to record a talk is a camera connected to a PC
 running Voctomix. This can be done as follows:
 
-1. Install Debian Stable on a machine. Make the hostname ``voctomix1``. If you
-   are using a netinstall image, only install the base system and, optionally,
-   the SSH server. Do not install Xorg or a desktop environment as these are
-   installed by Ansible.
+1. Install Debian Stable on another machine. Make the hostname ``voctomix1``. We
+   recommend a minimal install: onlly the base system and optionally, an SSH
+   server. The netinstall image is good for this.
 
 2. Once it is installed, as root, run::
 
@@ -38,7 +37,7 @@ Notes
 -----
 
 Ansible can be run from a laptop or other external source. This makes testing
-changes much faster. this require a network that resolves hostnames to IP
+changes much faster. You will require a network that resolves hostnames to IP
 addresses correctly. It also requires your SSH key to be present in the
 ``authorized_keys`` file for root (this will be the case if your key is in the
 ``public_keys_root`` list and you have run ansible before). In this case run::

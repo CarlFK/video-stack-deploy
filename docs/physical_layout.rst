@@ -10,8 +10,8 @@ The Ansible configuration sets up 9 groups of machines:
   configuring them using Ansible automatically.
 * Opsis - these are the PCs that are connected to the Numato Opsis
   boards and capture the presenter's laptop output for streaming to Voctomix.
-* Voctomix - these are the PCs that mix the camera and presenter inputs and
-  streams the talk out.
+* Voctomix - These are the PCs that live mix the video from the cameras and
+  opsis capture for recording to disk and live streaming to the internet.
 * NFS Server - this provides an NFS share for SReview, as it requires a common
   file system between nodes.
 * Grid Engine Master - this is the master node controlling the grid engine
