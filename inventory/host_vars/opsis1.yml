@@ -1,7 +1,7 @@
 ---
 voctomix:
   host: voctomix1
-  port: 10002
+  port: 10001
 
 irc_room_channel: "#debconf-room1"
 irc_nick: videoteam_room1_front
