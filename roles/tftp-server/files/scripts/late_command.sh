@@ -61,6 +61,7 @@ if [ "${inventory_repo}" != "" ]; then
 	(cd inventory-repo; git pull)
 fi
 
+vault_pw_arg=
 if [ "$vault_pw" != "" ]; then
     vault_pw_arg="--vault-password-file=/root/.ansible-vault"
 fi
