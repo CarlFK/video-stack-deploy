@@ -9,4 +9,5 @@ Ansible Documentation
    voctomix.rst
    gateway.rst
    opsis.rst
+   advanced_usage.rst
    contact.rst

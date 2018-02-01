@@ -21,7 +21,7 @@ machines on initial boot.
 2. If your gateway is to a wireless network, make sure this is configured and
    working
 
-3. Once it is installed, as root, run ::
+3. Once it is installed, as root, run::
 
     $ echo "deb http://ftp.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/stretch-backports.list
     $ apt update
@@ -30,7 +30,7 @@ machines on initial boot.
     $ git clone https://salsa.debian.org/debconf-video-team/ansible
     $ cd ansible
 
-4. Edit ``inventory/group_vars/all`` and change the following: ::
+4. Edit ``inventory/group_vars/all`` and change the following::
 
     public_keys_onsite: [
       <Place your SSH public key here>
@@ -40,13 +40,13 @@ machines on initial boot.
       <Place your SSH public key here>
     ]
 
-5. Edit ``inventory/host_vars/gw.yml`` and change the following: ::
+5. Edit ``inventory/host_vars/gw.yml`` and change the following::
 
     eth_local_mac_address: <Your wired local network MAC address>
     eth_uplink_mac_address: <Your uplink MAC address>
-    
-6. Run ::
-     
+
+6. Run::
+
     $ ansible-playbook --inventory inventory/hosts --connection local -l gw site.yml
 
 5. When it completes successfully, restart the machine.

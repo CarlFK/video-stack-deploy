@@ -17,7 +17,8 @@ at our `general documentation` on the subject.
    you are using a netinstall image, only install the base system and,
    optionally, the SSH server. Do not install Xorg or a desktop environment as
    these are installed by Ansible.
-2. Once it is installed, as root, run ::
+
+2. Once it is installed, as root, run::
 
     $ echo "deb http://ftp.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/stretch-backports.list
     $ apt update
@@ -26,7 +27,7 @@ at our `general documentation` on the subject.
     $ git clone https://salsa.debian.org/debconf-video-team/ansible
     $ cd ansible
 
-3. Edit ``inventory/group_vars/all`` and change the following: ::
+3. Edit ``inventory/group_vars/all`` and change the following::
 
     public_keys_onsite: [
       <Place your SSH public key here>
@@ -36,8 +37,8 @@ at our `general documentation` on the subject.
       <Place your SSH public key here>
     ]
 
-4. Run ::
-     
+4. Run::
+
     $ ansible-playbook --inventory inventory/hosts --connection local -l opsis1 site.yml
 
 5. When it completes successfully, restart the machine.
