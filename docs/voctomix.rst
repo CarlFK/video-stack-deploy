@@ -37,6 +37,14 @@ running Voctomix. This can be done as follows:
 Notes
 -----
 
+Ansible can be run from a laptop or other external source. This makes testing
+changes much faster. this require a network that resolves hostnames to IP
+addresses correctly. It also requires your SSH key to be present in the
+``authorized_keys`` file for root (this will be the case if your key is in the
+``public_keys_root`` list and you have run ansible before). In this case run::
+
+    $ ansible-playbook --inventory inventory/hosts -l voctomix1 site.yml
+
 In inventory/group_vars/all there are two sets of settings that may be of
 interest, namely Blackmagic drivers and Voctomix loops. The Blackmagic drivers
 are the proprietary drivers for the HDMI/SDI PCI capture cards that we use. If
@@ -50,8 +58,10 @@ to the corresponding package files. ::
       dkms_version: 10.9.5a4
 
 The Voctomix loops are shown on the stream when there is no talk happening. In
-Voctomix they are enabled by the Stream Loop button. If you have loops to use,
-put the URL for them here::
+Voctomix the ``loop_url`` is downloaded and used for the Stream Loop button
+when the stream is blanked. ``bgloop_url`` is downloaded and used as the
+background for Picture-In-Picture mode when the sources do not cover the entire
+frame. If you have loops to use, put the URL for them here::
 
     voctomix:
       loop_url: http://example.org/loop/loop.ts
