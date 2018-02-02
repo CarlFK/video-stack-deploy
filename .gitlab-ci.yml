@@ -27,4 +27,5 @@ motd:
 
 opsis:
   script:
+  - apt-get update && apt-get -y install systemd
   - ansible-playbook tests/opsis.yml
