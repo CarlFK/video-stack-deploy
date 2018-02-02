@@ -5,3 +5,4 @@ user_group: videoteam
 public_keys_onsite: []
 public_keys_offsite: []
 public_keys_root: []
+time_zone: America/New_York

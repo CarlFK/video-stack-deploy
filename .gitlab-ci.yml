@@ -24,3 +24,18 @@ motd:
     ansible-playbook tests/motd.yml --extra-vars "conference_name='Seo Oden Prize Award'
     conference_town='Ieu Eun' conference_country=A-Io"
   - sh tests/motd/unit_test.sh
+
+opsis:
+  script:
+  - ansible-playbook tests/opsis.yml --skip-tags="no_unit_test"
+
+system-software:
+  script:
+  - ansible-playbook tests/system-software.yml --skip-tags="no_unit_test"
+
+users:
+  script:
+  - apt-get update && apt-get -y install locales
+  - >
+    ansible-playbook tests/users.yml --skip-tags="no_unit_test"
+    --extra-vars "user_password_crypted=$6$xTGL7UF9T$XKcP/7PwBnKP2xC16T7gFOAhYr3zbIDL2Zu0.G6G88ljBYNHC3xtsKxFXv8RcGLHBI50i2gZChLXEdmU1e6aM1"

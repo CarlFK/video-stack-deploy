@@ -11,6 +11,9 @@ Tasks are separated in two different parts:
 
 * `tasks/opsis.yml` manages the tools to setup up and connect to the opsis.
 
+* `tasks/bmusb.yml` installs a udev rule to grant permissions to Blackmagic Web
+   Presenter USB device.
+
 * `tasks/hdmi2usbmond.yml` manages the HDMI2USB monitoring tools.
 
 ## Available variables

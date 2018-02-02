@@ -1,17 +1,17 @@
 ---
-- include: video_disk.yml
+- include_tasks: video_disk.yml
   when: video_disk is defined
 
-- include: voctomix.yml
+- include_tasks: voctomix.yml
 
-- include: blackmagic.yml
+- include_tasks: blackmagic.yml
 
-- include: scripts.yml
+- include_tasks: scripts.yml
 
-- include: rtmp.yml
+- include_tasks: rtmp.yml
   when: streaming and streaming.method == 'rtmp'
 
-- include: tallylight.yml
+- include_tasks: tallylight.yml
   when: voctolights is defined
   tags:
   - voctolight

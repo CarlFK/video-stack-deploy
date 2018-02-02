@@ -1,4 +1,4 @@
 ---
-- include: packages.yml
+- include_tasks: packages.yml
 
-- include: systemd.yml
+- include_tasks: systemd.yml

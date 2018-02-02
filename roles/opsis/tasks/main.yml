@@ -1,6 +1,6 @@
 ---
-- include: opsis.yml
-- include: bmusb.yml
+- include_tasks: opsis.yml
+- include_tasks: bmusb.yml
 
-- include: hdmi2usbmond.yml
+- include_tasks: hdmi2usbmond.yml
   when: "'hdmi2usbd' in serial_terminal"

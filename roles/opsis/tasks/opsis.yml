@@ -30,6 +30,8 @@
     dest: /etc/systemd/system/videoteam-ingest.service
   notify:
   - systemctl daemon-reload
+  tags:
+  - no_unit_test
 
 - name: push systemd videoteam-ingest.path
   copy:
@@ -38,6 +40,8 @@
   notify:
   - systemctl daemon-reload
   - systemctl enable videoteam-ingest.path
+  tags:
+  - no_unit_test
 
 - name: configure minicom for hdmi2usb
   copy:
@@ -53,6 +57,8 @@
   - systemctl daemon-reload
   - systemctl enable hdmi2usbd
   when: "'hdmi2usbd' in serial_terminal"
+  tags:
+  - no_unit_test
 
 - name: push systemd hdmi2usbd.path
   copy:
@@ -62,3 +68,5 @@
   - systemctl daemon-reload
   - systemctl enable hdmi2usbd
   when: "'hdmi2usbd' in serial_terminal"
+  tags:
+  - no_unit_test
