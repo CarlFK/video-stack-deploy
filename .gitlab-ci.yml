@@ -27,5 +27,4 @@ motd:
 
 opsis:
   script:
-  - apt-get update && apt-get -y install systemd
-  - ansible-playbook tests/opsis.yml
+  - ansible-playbook tests/opsis.yml --skip-tags="no_unit_test"
