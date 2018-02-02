@@ -16,24 +16,15 @@ and the ability to automatically configure machines on initial boot.
 2. If your gateway is to a wireless network, make sure this is configured and
    working
 
-3. Once it is installed, run the following as root::
+3. Once it is installed, run the following as root:
 
-    $ echo "deb http://ftp.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/stretch-backports.list
-    $ apt update
-    $ apt install git
-    $ apt -t stretch-backports install ansible
-    $ git clone https://salsa.debian.org/debconf-video-team/ansible
-    $ cd ansible
+   .. include:: initial_setup.txt
+       :code:
 
-4. Edit ``inventory/group_vars/all`` and change the following::
+4. Edit ``inventory/group_vars/all`` and change the following:
 
-    public_keys_onsite: [
-      <Place your SSH public key here>
-    ]
-
-    public_keys_root: [
-      <Place your SSH public key here>
-    ]
+   .. include:: all_variables.txt
+       :code:
 
 5. Edit ``inventory/host_vars/gw.yml`` and change the following::
 

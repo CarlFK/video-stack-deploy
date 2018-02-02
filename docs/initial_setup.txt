@@ -1,0 +1,6 @@
+$ echo "deb http://ftp.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/stretch-backports.list
+$ apt update
+$ apt install git
+$ apt -t stretch-backports install ansible
+$ git clone https://salsa.debian.org/debconf-video-team/ansible
+$ cd ansible
