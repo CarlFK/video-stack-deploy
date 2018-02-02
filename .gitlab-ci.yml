@@ -35,4 +35,5 @@ system-software:
 
 users:
   script:
+  - apt-get update && apt-get -y install locales
   - ansible-playbook tests/users.yml --skip-tags="no_unit_test"
