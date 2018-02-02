@@ -1,6 +1,6 @@
 ---
-- include: hosts.yml
+- include_tasks: hosts.yml
 
 # We don't want to fight with the dhcp-server role
-- include: interfaces.yml
+- include_tasks: interfaces.yml
   when: eth_local_ip_address is undefined

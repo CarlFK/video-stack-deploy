@@ -1,7 +1,7 @@
 ---
-- include: lightdm.yml
-- include: xfce4.yml
-- include: hexchat.yml
-- include: packages.yml
-- include: xorg.yml
-- include: scripts.yml
+- include_tasks: lightdm.yml
+- include_tasks: xfce4.yml
+- include_tasks: hexchat.yml
+- include_tasks: packages.yml
+- include_tasks: xorg.yml
+- include_tasks: scripts.yml

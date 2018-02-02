@@ -1,4 +1,4 @@
 ---
-- include: webserver.yml
-- include: d-i.yml
-- include: pxe.yml
+- include_tasks: webserver.yml
+- include_tasks: d-i.yml
+- include_tasks: pxe.yml
