@@ -6,12 +6,9 @@ network. This is because the Opsis capture stream is directed to the hostname of
 the Voctomix machine (``voctomix1`` in our example). If the ``voctomix1``
 hostname is available in the local DNS (e.g. from its DHCP lease), then this
 should work and you can skip this step and setup the `Opsis machine`_ instead.
-If not, we would recommend using out gateway and a dedicated network.
-
-If it does not, then you must configure a gateway to provide the DNS resolution
-to a dedicated network. For more complex setups this is recommended, as the
-gateway also provides PXE booting and the ability to automatically configure
-machines on initial boot.
+If not, we would recommend using a gateway and a dedicated network. This is
+recommended for more complex setups, as the gateway also provides PXE booting
+and the ability to automatically configure machines on initial boot.
 
 1. Install Debian Stable on another machine in the same manner you installed
    the `Voctomix`_ machine. Make the hostname ``gw``.
@@ -19,7 +16,7 @@ machines on initial boot.
 2. If your gateway is to a wireless network, make sure this is configured and
    working
 
-3. Once it is installed, as root, run::
+3. Once it is installed, run the following as root::
 
     $ echo "deb http://ftp.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/stretch-backports.list
     $ apt update
@@ -47,9 +44,10 @@ machines on initial boot.
 
     $ ansible-playbook --inventory inventory/hosts --connection local -l gw site.yml
 
-5. When it completes successfully, restart the machine.
+7. When it completes successfully, restart the machine.
 
-6. Wire your network.
+8. Connect the gateway to the Voctomix machine over a gigabit network and
+   restart the Voctomix machine.
 
 .. _`Opsis machine`: opsis.html
 .. _`Voctomix`: voctomix.html

@@ -3,7 +3,7 @@ Advanced Usage
 
 This basic setup will work for a small conference. It is possible to add more
 rooms by including more Voctomix and Opsis machines in their respective groups.
-These machines need corresponding ``inventory/host_vars/`` files. These need to
+These machines need corresponding ``inventory/host_vars/`` files, which need to
 be changed to reflect the details of the room each machine is in. Entries also
 need to be added to the ``staticips.hosts`` dictionary in
 ``inventory/group_vars/all``.

@@ -3,20 +3,23 @@ Adding an Opsis Machine
 
 The next step is to add a Numato Opsis board and capture PC for capturing
 presentations. The hardware setup for this can be found `here`_. The basic
-layout is that the presenter's laptop is connected to the Opsis HDMI input, the
-Opsis HDMI output is connected to the projector and the Opsis USB capture is
-connected to a machine sitting next to it. This is connected to the Voctomix
-machine over a gigabit ethernet network.
+layout is:
+
+* The presenter's laptop connects to the Opsis HDMI input
+* The Opsis HDMI output connects to the projector
+* The Opsis USB capture connects to a capture PC sitting next to it.
+* The capture PC is connected to the Voctomix machine over a gigabit ethernet
+  network.
 
 The Opsis is configured through a USB serial console. Flashing an Opsis with new
-firmware is described in the `official documentation`. For details on accessing
+firmware is described in the `official documentation`_. For details on accessing
 the Opsis board to troubleshoot or change its setup, look at our
-`general documentation` on the subject.
+`general documentation`_ on the subject.
 
 1. Install Debian Stable on another machine in the same manner you installed
    the `Voctomix`_ machine. Make the hostname ``opsis1``.
 
-2. Once it is installed, as root, run::
+2. Once it is installed, run the following as root::
 
     $ echo "deb http://ftp.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/stretch-backports.list
     $ apt update
