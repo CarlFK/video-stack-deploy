@@ -5,3 +5,5 @@
     regexp: (^|#\s*)Storage=
     line: Storage=persistent
   notify: restart systemd-journald
+  tags:
+  - no_unit_test

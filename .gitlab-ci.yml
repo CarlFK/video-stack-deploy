@@ -28,3 +28,7 @@ motd:
 opsis:
   script:
   - ansible-playbook tests/opsis.yml --skip-tags="no_unit_test"
+
+system-software:
+  script:
+  - ansible-playbook tests/system-software.yml --skip-tags="no_unit_test"
