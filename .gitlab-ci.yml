@@ -36,4 +36,6 @@ system-software:
 users:
   script:
   - apt-get update && apt-get -y install locales
-  - ansible-playbook tests/users.yml --skip-tags="no_unit_test"
+  - >
+    ansible-playbook tests/users.yml --skip-tags="no_unit_test"
+    --extra-vars "user_password_crypted=$6$xTGL7UF9T$XKcP/7PwBnKP2xC16T7gFOAhYr3zbIDL2Zu0.G6G88ljBYNHC3xtsKxFXv8RcGLHBI50i2gZChLXEdmU1e6aM1"
