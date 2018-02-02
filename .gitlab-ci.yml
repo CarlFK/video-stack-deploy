@@ -24,3 +24,7 @@ motd:
     ansible-playbook tests/motd.yml --extra-vars "conference_name='Seo Oden Prize Award'
     conference_town='Ieu Eun' conference_country=A-Io"
   - sh tests/motd/unit_test.sh
+
+opsis:
+  script:
+  - ansible-playbook tests/opsis.yml
