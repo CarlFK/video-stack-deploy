@@ -1,6 +1,4 @@
 ---
-conference_name: Cambridge mini-DebConf
-conference_town: Cambridge
-conference_country: UK
-
-nfs_server: noc1st0
+conference_name: Example Conference
+conference_town: Example Town
+conference_country: Example Country

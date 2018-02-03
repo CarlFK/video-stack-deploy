@@ -8,58 +8,16 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
-[dhcp-server]
+[tftp-dhcp-server]
 gw
-voctomix1
-
-[tftp-server]
-gw
-voctomix1
-
-[offsite]
-backend.live.debconf.org
-fra1.live.debconf.org
-tor1.live.debconf.org
-sgp1.live.debconf.org
 
 [onsite:children]
-dhcp-server
-encoder
-ge-master
-nfs-server
+tftp-dhcp-server
 opsis
 voctomix
 
 [opsis]
 opsis1
-opsis2
-opsis3
-voctomix4
 
 [voctomix]
 voctomix1
-voctomix2
-voctomix3
-voctomix4
-
-[nfs-server]
-noc1st0
-
-[ge-master]
-noc1st0
-
-[encoder]
-encoder0
-encoder1
-encoder2
-
-[streaming-backends]
-backend.live.debconf.org
-
-[streaming-frontends]
-fra1.live.debconf.org
-tor1.live.debconf.org
-sgp1.live.debconf.org
-
-[review]
-review0

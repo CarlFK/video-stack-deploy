@@ -36,7 +36,7 @@ bootdev=/dev/sda
 playbook_repo=https://salsa.debian.org/debconf-video-team/ansible
 playbook_branch=master
 inventory_repo=
-inventory_branch=
+inventory_branch=master
 
 # ansible vault password (base64ed), if necessary
 vault_pw=

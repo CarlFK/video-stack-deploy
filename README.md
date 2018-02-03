@@ -6,6 +6,9 @@ USB/PXE, they are all very similar, maybe they can be merged later. The
 playbooks defined in this repo require ansible version 2.4 or greater to run.
 In Debian Stretch, this is available in backports.
 
+Detailed instruction on how to use this repo are
+[available](https://debconf-video-team.pages.debian.net/ansible)
+
 1. Clone repo to your local machine.
 2. Edit `inventory/hosts` and `inventory/{group,host}_vars`
 3. Decide where the files will be hosted. The choices are:

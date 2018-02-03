@@ -5,7 +5,7 @@
   - system-software
   - users
 
-- hosts: dhcp-server
+- hosts: tftp-dhcp-server
   roles:
   - dhcp-server
   - tftp-server

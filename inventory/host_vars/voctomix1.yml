@@ -1,7 +1,7 @@
 ---
-irc_room_channel: "#debconf-cambridge"
-irc_nick: videoteam_cambridge
-room_name: minidebconf
+irc_room_channel: "#debconf-room1"
+irc_nick: videoteam_room1
+room_name: room1
 
 blackmagic_sources:
 - card: 0
@@ -14,22 +14,7 @@ blackmagic_sources:
   # 720p50 is 17
   # list of all mode IDs: check 'gst-inspect-1.0 decklinkvideosrc'
   mode: "{{ blackmagic_default_mode }}"
-- card: 1
-  connection: SDI
-  audio: true
-  mode: "{{ blackmagic_default_mode }}"
 
 voctolights:
 - camera: Cam1
   port: /dev/ttyUSB0
-- camera: Cam2
-  port: /dev/ttyUSB1
-
-# needed when running as a gateway/dhcp/tftp
-eth_local_ip_address: 10.18.0.10
-eth_local_ip_netmask: 24
-#eth_local_ip_gateway: 10.18.0.1
-# these are the mac addresses of the videoteam encodercube
-eth_local_mac_address: 38:d5:47:19:09:d0
-eth_uplink_mac_address: a8:f7:e0:0f:57:53
-
