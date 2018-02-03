@@ -41,8 +41,9 @@ users:
     --extra-vars "user_password_crypted=$6$xTGL7UF9T$XKcP/7PwBnKP2xC16T7gFOAhYr3zbIDL2Zu0.G6G88ljBYNHC3xtsKxFXv8RcGLHBI50i2gZChLXEdmU1e6aM1"
 
 pages:
+  image: alpine
   script:
-  - apt-get update && apt-get -y install python3-sphinx python3 make
+  - apk --no-cache add py-sphinx python3 make
   - cd docs
   - make html
   - mv _build/html/ ../public/
