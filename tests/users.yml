@@ -1,5 +1,16 @@
 ---
 - hosts: 'localhost'
   connection: 'local'
+  vars:
+    user_password_crypted: $6$xTGL7UF9T$XKcP/7PwBnKP2xC16T7gFOAhYr3zbIDL2Zu0.G6G88ljBYNHC3xtsKxFXv8RcGLHBI50i2gZChLXEdmU1e6aM1
+    public_keys_root: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGdQbnqjLlTV7Zt5Mi46x5ViTiOKB401LNuQlQ9sei6j user@unit_test
+    ssh_private_key: >
+      -----BEGIN OPENSSH PRIVATE KEY-----
+      b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+      QyNTUxOQAAACBnUG56oy5U1e2beTIuOseVYk4jigeNNSzbkJUPbHouowAAAJjw40GQ8ONB
+      kAAAAAtzc2gtZWQyNTUxOQAAACBnUG56oy5U1e2beTIuOseVYk4jigeNNSzbkJUPbHouow
+      AAAECJggV63n7aaBQ/ufdgXsRYJfy0ZwldZdRn53OpKeLammdQbnqjLlTV7Zt5Mi46x5Vi
+      TiOKB401LNuQlQ9sei6jAAAAD2VtaWxpYW5vQHphcGF0YQECAwQFBg==
+      -----END OPENSSH PRIVATE KEY-----
   roles:
   - { role: roles/users }
