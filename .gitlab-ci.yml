@@ -35,7 +35,7 @@ test:role:system-software:
 
 test:role:users:
   script:
-  - apt-get update && apt-get -y install locales
+  - apt-get update && apt-get -y install locales openssh-client
   - ansible-playbook tests/users.yml --skip-tags="no_unit_test"
   - ssh root@localhost
 
