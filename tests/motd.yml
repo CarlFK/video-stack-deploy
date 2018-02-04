@@ -1,5 +1,9 @@
 ---
 - hosts: 'localhost'
   connection: 'local'
+  vars:
+    conference_name: Seo Oden Prize Award
+    conference_town: Ieu Eun
+    conference_country: A-Io
   roles:
   - { role: roles/motd }

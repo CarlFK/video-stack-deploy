@@ -20,10 +20,7 @@ test:role:bash:
 
 test:role:motd:
   script:
-  - >
-    ansible-playbook tests/motd.yml --skip-tags="no_unit_test"
-    --extra-vars "conference_name='Seo Oden Prize Award'
-    conference_town='Ieu Eun' conference_country=A-Io"
+  - ansible-playbook tests/motd.yml --skip-tags="no_unit_test"
   - sh tests/motd/unit_test.sh
 
 test:role:opsis:
