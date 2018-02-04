@@ -10,18 +10,19 @@ test:role:apt:
   script:
   - echo "deb cdrom:[foobar test]/ stretch main" >> /etc/apt/sources.list
   - touch /etc/apt/apt.conf.d/30apt-proxy
-  - ansible-playbook tests/apt.yml
+  - ansible-playbook tests/apt.yml --skip-tags="no_unit_test"
   - apt-get update && apt-get -y install rolldice
 
 test:role:bash:
   script:
-  - ansible-playbook tests/bash.yml
+  - ansible-playbook tests/bash.yml --skip-tags="no_unit_test"
   - bash -c "compgen -c unam |grep -q uname && exit || exit 1"
 
 test:role:motd:
   script:
   - >
-    ansible-playbook tests/motd.yml --extra-vars "conference_name='Seo Oden Prize Award'
+    ansible-playbook tests/motd.yml --skip-tags="no_unit_test"
+    --extra-vars "conference_name='Seo Oden Prize Award'
     conference_town='Ieu Eun' conference_country=A-Io"
   - sh tests/motd/unit_test.sh
 
