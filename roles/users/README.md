@@ -24,6 +24,6 @@ Main variables are :
 
 * `public_keys_root`:      List. Authorized SSH keys for root everywhere.
 
-* `ssh_private_key`:       SSH private key to install for the main user.
+* `ssh_private_key`:       ed25519 SSH private key to install for the main user.
 
 * `time_zone`:             Timezone using the tzdata format.
