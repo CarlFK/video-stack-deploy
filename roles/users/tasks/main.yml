@@ -6,6 +6,13 @@
     password: "{{ user_password_crypted }}"
   when: user_password_crypted is defined
 
+- name: ensure ~/.ssh directory for our main user
+  file:
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    path: "/home/{{ user_name }}/.ssh"
+
 - name: install sudo
   apt:
     name: sudo
