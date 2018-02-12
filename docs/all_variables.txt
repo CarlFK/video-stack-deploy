@@ -1,7 +1,7 @@
 public_keys_onsite: [
-  <Place your SSH public key here>
+  <Place your ED25519 SSH public key here>
 ]
 
 public_keys_root: [
-  <Place your SSH public key here>
+  <Place your ED25519 SSH public key here>
 ]
