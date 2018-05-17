@@ -1,7 +1,7 @@
 ---
 - include_tasks: lightdm.yml
 - include_tasks: xfce4.yml
-- include_tasks: empathy.yml
+- include_tasks: konversation.yml
 - include_tasks: packages.yml
 - include_tasks: xorg.yml
 - include_tasks: scripts.yml

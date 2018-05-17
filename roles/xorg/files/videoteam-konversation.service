@@ -1,0 +1,9 @@
+[Unit]
+Description=Konversation IRC Client
+Conflicts=xlogout.target
+
+[Service]
+ExecStart=/usr/bin/konversation
+
+[Install]
+WantedBy=xlogin.target

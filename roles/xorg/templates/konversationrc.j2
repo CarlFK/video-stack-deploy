@@ -1,0 +1,54 @@
+{% for channel in irc.global_channels -%}
+[Channel {{ loop.index0 }}]
+Name={{ channel }}
+Password=
+{% endfor %}
+
+[Identity 0]
+AuthType=nickserv
+AutomaticAway=false
+AutomaticUnaway=false
+AwayInactivity=10
+AwayMessage=
+AwayNick=
+AwayReason=Gone away for now
+Bot=nickserv
+Codec=UTF-8
+Ident={{ irc_nick }}
+InsertRememberLineOnAway=false
+KickReason=User terminated!
+Name=Default Identity
+Nicknames={{ irc_nick}},{{ irc_nick}}_,{{ irc_nick}}__
+NickservCommand=identify
+PartReason=Konversation terminated!
+Password=
+PemClientCertFile=
+PreShellCommand=
+QuitReason=Konversation terminated!
+Realname={{ irc_nick }}
+ReturnMessage=
+SaslAccount=
+ShowAwayMessage=false
+
+[MainWindow]
+State=AAAA/wAAAAD9AAAAAAAAAoAAAAG3AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgAAAAAA/////wAAAAAAAAAA
+ToolBarsMovable=Disabled
+
+[Server 0]
+BypassProxy=false
+Password=
+Port={{ irc.ssl_port }}
+SSLEnabled=true
+Server={{ irc.server }}
+
+[ServerGroup 0]
+AutoConnect=true
+AutoJoinChannels=Channel 0,Channel 1, Channel 2, Channel 3, Channel 4, Channel 5
+ChannelHistory=
+ConnectCommands=
+EnableNotifications=false
+Expanded=false
+Identity=Default Identity
+Name={{ irc.network }}
+NotifyList=
+ServerList=Server 0

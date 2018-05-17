@@ -6,7 +6,7 @@ Manage the X server and other related GUI applications, like IRC.
 
 The tasks are divided this way:
 
-* `tasks/'hexchat.yml`: Manages IRC connection via HexChat.
+* `tasks/'konversation.yml`: Manages IRC connection via Konversation.
 
 * `tasks/'lightdm.yml:` Manages LightDM.
 
