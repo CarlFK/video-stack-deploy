@@ -1,14 +1,21 @@
 #!/bin/sh
 # {{ ansible_managed }}
 
+if [ -e /dev/hdmi2usb/by-num/all0/tty ]; then
+	# hdmi2usb-udev < 0.0.1
+	port=/dev/hdmi2usb/by-num/all0/tty
+else
+	port=/dev/hdmi2usb/by-num/all0/tty0
+fi
+
 {% if serial_terminal[0] == 'cu' %}
-exec cu -l /dev/hdmi2usb/by-num/all0/tty -s 115200
+exec cu -l $port -s 115200
 {% elif serial_terminal[0] == 'flterm' %}
-exec flterm --port /dev/hdmi2usb/by-num/all0/tty --speed 115200
+exec flterm --port $port --speed 115200
 {% elif serial_terminal[0] == 'hdmi2usbd' %}
 exec nc localhost 8501
 {% elif serial_terminal[0] == 'minicom' %}
 exec minicom
 {% elif serial_terminal[0] == 'tio' %}
-exec tio /dev/hdmi2usb/by-num/all0/tty
+exec tio $port
 {% endif %}
