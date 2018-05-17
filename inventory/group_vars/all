@@ -11,7 +11,7 @@ debian_source: http://deb.debian.org/debian
 dhcp_range: 10.18.0.128,10.18.0.254,6h
 domain: video.example.org
 
-time_zone: Europe/London
+time_zone: Europe/Brussels
 
 enable_oldstable: true
 
