@@ -9,6 +9,8 @@
     owner: root
     group: root
     mode: 0644
+  tags:
+    - tls-certificates
 
 - name: add temporary nginx vhost for well-known data
   copy:
@@ -26,6 +28,10 @@
     group: root
     mode: 0644
   when: letsencrypt_do_nginx_vhost
+  tags:
+    - tls-certificates
 
 - name: reload nginx after well-known stuff
   command: systemctl reload nginx
+  tags:
+    - tls-certificates

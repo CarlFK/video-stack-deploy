@@ -9,6 +9,8 @@
   with_items:
     - "{{ letsencrypt_well_known_dir }}"
     - "{{ letsencrypt_well_known_dir }}/acme-challenge"
+  tags:
+    - tls-certificates
 
 - name: setup well-known data
   copy:
@@ -18,9 +20,13 @@
     group: root
     mode: 0644
   with_dict: "{{ letsencrypt_challenge['challenge_data'] }}"
+  tags:
+    - tls-certificates
 
 - name: prepare nginx config for challenge
   include_tasks: letsencrypt_nginx_pre.yml
+  tags:
+    - tls-certificates
 
 - name: finalize letsencrypt challenge
   letsencrypt:
@@ -32,12 +38,18 @@
     acme_directory: "{{ letsencrypt_acme_directory }}"
     agreement: "{{ letsencrypt_agreement }}"
   register: letsencrypt_response
+  tags:
+    - tls-certificates
 
 - name: remove well-known data
   file:
     path: "{{ letsencrypt_well_known_dir }}/{{ item.value['http-01']['resource']|replace('.well-known/', '') }}"
     state: absent
   with_dict: "{{ letsencrypt_challenge['challenge_data'] }}"
+  tags:
+    - tls-certificates
 
 - name: cleanup nginx config
   include_tasks: letsencrypt_nginx_post.yml
+  tags:
+    - tls-certificates

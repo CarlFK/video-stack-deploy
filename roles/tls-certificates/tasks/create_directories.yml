@@ -6,6 +6,8 @@
     owner: root
     group: root
     mode: 0755
+  tags:
+    - tls-certificates
 
 - name: create certs directory
   file:
@@ -14,6 +16,8 @@
     owner: root
     group: root
     mode: 0755
+  tags:
+    - tls-certificates
 
 - name: create private directory
   file:
@@ -22,3 +26,5 @@
     owner: root
     group: root
     mode: 0700
+  tags:
+    - tls-certificates

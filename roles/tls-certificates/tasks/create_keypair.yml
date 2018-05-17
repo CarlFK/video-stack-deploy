@@ -3,10 +3,14 @@
   openssl_privatekey:
     state: present
     path: "{{ privatekey_path }}"
+  tags:
+    - tls-certificates
 
 - name: generate subjectaltname list
   set_fact:
     all_subject_alt_names: "['{{ common_name }}'] + {{ subject_alt_names }}"
+  tags:
+    - tls-certificates
 
 - name: generate certificate signing request
   openssl_csr:
@@ -16,3 +20,5 @@
     path: "{{ csr_path }}"
     privatekey_path: "{{ privatekey_path }}"
   register: csr_result
+  tags:
+    - tls-certificates

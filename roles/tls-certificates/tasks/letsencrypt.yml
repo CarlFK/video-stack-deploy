@@ -3,6 +3,8 @@
   openssl_privatekey:
     state: present
     path: "{{ letsencrypt_account_key }}"
+  tags:
+    - tls-certificates
 
 - name: request letsencrypt signing
   letsencrypt:
@@ -14,21 +16,31 @@
     acme_directory: "{{ letsencrypt_acme_directory }}"
     agreement: "{{ letsencrypt_agreement }}"
   register: letsencrypt_challenge
+  tags:
+    - tls-certificates
 
 - name: answer letsencrypt challenge
   include_tasks: letsencrypt_challenge.yml
   when: letsencrypt_challenge|changed
+  tags:
+    - tls-certificates
 
 - name: download certificate chain
   get_url:
     url: "{{ letsencrypt_acme_directory|replace('/directory', '/acme') }}/issuer-cert"
     dest: "{{ letsencrypt_chain_path }}.der"
   register: download_chain
+  tags:
+    - tls-certificates
 
 - name: convert certificate chain
   command: openssl x509 -inform der -in {{ letsencrypt_chain_path }}.der -outform pem -out {{ letsencrypt_chain_path }}
   when: download_chain|changed
+  tags:
+    - tls-certificates
 
 - name: generate full chain
   shell: /bin/cat {{ certificate_path|quote }} {{ letsencrypt_chain_path }} > {{ fullchain_path|quote }}
   when: letsencrypt_challenge|changed and letsencrypt_response|changed or download_chain|changed
+  tags:
+    - tls-certificates
