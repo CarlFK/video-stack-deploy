@@ -12,16 +12,9 @@
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
 
-- name: install konversation systemd unit
+- name: Autostart konversation
   copy:
-    src: files/videoteam-konversation.service
-    dest: /etc/systemd/user/videoteam-konversation.service
-  notify: reload-systemd
-
-- name: enable konversation systemd unit
-  file:
-    state: link
-    src: /etc/systemd/user/videoteam-konversation.service
-    dest: "/home/{{ user_name }}/.config/systemd/user/xlogin.target.wants/videoteam-konversation.service"
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
+    src: files/org.kde.konversation.desktop
+    dest: /etc/xdg/autostart/org.kde.konversation.desktop
+    owner: root
+    group: root
