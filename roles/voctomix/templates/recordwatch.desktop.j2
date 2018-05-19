@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+
+[Desktop Entry]
+Version=1.0
+Name=Record Watch
+Exec=watch -d 'ls -lt /srv/video/{{ org }}/{{ show }}/dv/{{ room_name }}'
+Icon=gtk-system-search
+Type=Application
+Terminal=true
+Categories=AudioVideo;
