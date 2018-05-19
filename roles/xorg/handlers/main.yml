@@ -6,5 +6,5 @@
 - name: systemctl restart lightdm
   command: systemctl restart lightdm
 
-- name: systemctl daemon-reload
+- name: reload-systemd
   command: systemctl daemon-reload

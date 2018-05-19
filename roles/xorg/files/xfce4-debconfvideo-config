@@ -138,7 +138,7 @@ def panels():
         # There's no good way to detect these
         add_item(2, 'separator')
         add_item(2, 'launcher', ['voctogui.desktop'])
-        add_item(2, 'launcher', ['hexchat.desktop'])
+        add_item(2, 'launcher', ['org.kde.konversation.desktop'])
         add_item(2, 'launcher', ['videoteam-cutlist.desktop'])
         fsgid = add_item(2, 'fsguard')
         configure_fsguard(fsgid,"/srv/video/")
