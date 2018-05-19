@@ -5,6 +5,7 @@
   with_items:
   - ack-grep
   - alsa-utils
+  - autossh
   - curl
   - emacs-nox
   - etckeeper

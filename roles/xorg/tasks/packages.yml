@@ -32,3 +32,5 @@
   - gobby
   # for videoteam-show-streams
   - libx11-protocol-perl
+  - x11vnc
+  - arandr
