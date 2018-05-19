@@ -94,3 +94,9 @@
   - voctocore
   - loop
   - bgloop
+
+- name: Autostart voctogui
+  file:
+    src: /usr/share/applications/voctogui.desktop
+    dest: /etc/xdg/autostart/voctogui.desktop
+    state: link
