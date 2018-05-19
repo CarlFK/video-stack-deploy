@@ -45,3 +45,11 @@
   - blackmagic
   - blackmagic-io
   when: blackmagic.desktopvideo is defined and ansible_env.ANSIBLE_UNDER_DI is undefined
+
+- name: Stop blackmagic GUI from being annoying
+  file:
+    path: "/etc/xdg/autostart/{{ item }}.desktop"
+    state: absent
+  with_items:
+    - DesktopVideoUpdaterAutoStart
+    - BlackmagicFirmwareUpdaterGuiAutoStart
