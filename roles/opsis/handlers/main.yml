@@ -1,7 +1,4 @@
 ---
-- name: systemctl daemon-reload
-  command: systemctl daemon-reload
-
 - name: enable videoteam-ingest.path
   service:
     name: videoteam-ingest.path

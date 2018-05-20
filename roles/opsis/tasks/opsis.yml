@@ -29,7 +29,6 @@
     src: files/videoteam-ingest.service
     dest: /etc/systemd/system/videoteam-ingest.service
   notify:
-  - systemctl daemon-reload
   tags:
   - no_unit_test
 
@@ -38,7 +37,6 @@
     src: files/videoteam-ingest.path
     dest: /etc/systemd/system/videoteam-ingest.path
   notify:
-  - systemctl daemon-reload
   - enable videoteam-ingest.path
   tags:
   - no_unit_test
@@ -54,7 +52,7 @@
     src: files/hdmi2usbd.service
     dest: /etc/systemd/system/hdmi2usbd.service
   notify:
-  - systemctl daemon-reload
+
   - enable hdmi2usbd
   when: "'hdmi2usbd' in serial_terminal"
   tags:
@@ -65,7 +63,6 @@
     src: files/hdmi2usbd.path
     dest: /etc/systemd/system/hdmi2usbd.path
   notify:
-  - systemctl daemon-reload
   - enable hdmi2usbd
   when: "'hdmi2usbd' in serial_terminal"
   tags:
