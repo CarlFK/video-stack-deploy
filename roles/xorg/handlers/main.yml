@@ -3,5 +3,7 @@
   become: true
   become_user: "{{ user_name }}"
 
-- name: systemctl restart lightdm
-  command: systemctl restart lightdm
+- name: restart lightdm
+  service:
+    name: lightdm
+    state: restarted
