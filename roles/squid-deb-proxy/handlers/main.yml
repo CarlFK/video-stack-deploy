@@ -1,6 +1,10 @@
 ---
 - name: restart squid-deb-proxy
-  command: systemctl restart squid-deb-proxy.service
+  service:
+    name: squid-deb-proxy
+    state: restarted
 
 - name: disable squid
-  command: systemctl disable squid
+  service:
+    name: squid
+    state: disabled
