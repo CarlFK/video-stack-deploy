@@ -8,3 +8,6 @@
   service:
     name: dnsmasq
     state: restarted
+
+- name: reload-systemd
+  command: systemctl daemon-reload
