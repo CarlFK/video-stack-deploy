@@ -7,17 +7,17 @@
   file:
     path: /etc/nginx/sites-available/default
     state: absent
-  notify: systemctl restart nginx
+  notify: reload nginx
 
 - name: place pxe nginx vhost
   template:
     src: templates/pxe.j2
     dest: /etc/nginx/sites-available/pxe
-  notify: systemctl restart nginx
+  notify: reload nginx
 
 - name: enable pxe nginx vhost
   file:
     state: link
     src: /etc/nginx/sites-available/pxe
     dest: /etc/nginx/sites-enabled/pxe
-  notify: systemctl restart nginx
+  notify: reload nginx
