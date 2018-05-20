@@ -27,4 +27,4 @@
     dest: /etc/systemd/system/hdmi2usbmond.service
   notify:
   - systemctl daemon-reload
-  - systemctl enable hdmi2usbmond
+  - enable hdmi2usbmond
