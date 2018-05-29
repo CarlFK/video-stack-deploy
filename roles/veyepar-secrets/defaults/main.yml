@@ -5,3 +5,7 @@ user_name: videoteam
 # Dir that contains workin veyepar checkout with secrets in place
 # like on a developer's laptop
 # veyepar_confs: /home/carl/src/veyepar
+
+# url to get asset file names from:
+# {{ veyepar_url }}/main/C/{{ org }}/S/{{ show }}/asset_names.json
+veyepar_url: http://veyepar.nextdayvideo.com

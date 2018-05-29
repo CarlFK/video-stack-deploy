@@ -78,3 +78,8 @@
 - hosts: streaming-frontends
   roles:
   - streaming-frontend
+
+- hosts: tftp-server
+  roles:
+  - tftp-server
+

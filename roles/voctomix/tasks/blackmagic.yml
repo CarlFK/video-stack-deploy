@@ -14,3 +14,5 @@
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   with_indexed_items: "{{ blackmagic_sources }}"
+  tags:
+      bm

@@ -33,7 +33,7 @@
 
 - name: copy local asset files
   copy:
-    src: "{{ veyepar_confs }}/dj/scripts/assets/{{ item }}"
+    src: "~/Videos/veyepar/{{ org }}/{{ show }}/assets/{{ item }}"
     dest: "/home/{{ user_name }}/Videos/veyepar/{{ org }}/{{ show }}/assets/{{ item }}"
   become: true
   become_user:  "{{ user_name }}"

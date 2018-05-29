@@ -14,9 +14,11 @@ Extract it in e.g. `/srv/pxe/bm` on your DHCP server (as that is served
 by nginx), and set the URLs to the `.deb`s as global variables.
 
 The DKMS version is visible in the filenames in `/usr/src/blackmagic-*`
-in the `desktopvideo` package (e.g. `dpkg-deb -c desktopvideo.deb`).
+in the `desktopvideo` package (e.g. `dpkg-deb -c desktopvideo_*.deb|grep`).
 
 Latest version tested: 10.9.5 -- 2017-09-07
+May 11, 2018 testing at Teardown
+Blackmagic_Desktop_Video_Linux_10.9.12.tar.gz
 
 [here]: https://www.blackmagicdesign.com/support/family/capture-and-playback
 

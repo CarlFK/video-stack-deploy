@@ -15,6 +15,8 @@
     src: templates/videoteam-stream.j2
     dest: /usr/local/bin/videoteam-stream
     mode: 0755
+  tags:
+      stream
 
 - name: RTMP streaming systemd service
   copy:

@@ -3,6 +3,9 @@
   filesystem:
     fstype: ext4
     dev: "{{ video_disk }}"
+  failed_when: false
+  # failed_when: ''is already used' not in results"
+  #   "msg": "'/dev/sdb1' is already used as ext2, use force=yes to overwrite",
 
 - name: Create video partition mountpoint
   file:
@@ -21,6 +24,9 @@
     dump: '0'
     passno: '2'
     state: mounted
+  failed_when: false
+ # "msg": "Error mounting /srv/video: mount: /dev/sdb1 is already mounted or /srv/video busy\n       /dev/sdb1 is already mounted on /boot\n"
+ #
 
 - name: Configure video partition root ownership
   file:

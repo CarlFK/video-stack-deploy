@@ -45,3 +45,4 @@
   - blackmagic
   - blackmagic-io
   when: blackmagic.desktopvideo is defined and ansible_env.ANSIBLE_UNDER_DI is undefined
+  tags: bm
