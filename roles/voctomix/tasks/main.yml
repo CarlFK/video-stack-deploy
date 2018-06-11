@@ -5,6 +5,7 @@
 - include_tasks: voctomix.yml
 
 - include_tasks: blackmagic.yml
+  when: blackmagic_sources is defined
 
 - include_tasks: scripts.yml
 
