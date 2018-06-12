@@ -14,7 +14,9 @@ Main variables are :
 
 * `user_group`:            Main user group.
 
-* `user_password_crypted`: Main user password in a SHA512 format.
+* `user_password_crypted`: Main user password in a SHA512 format. To generate,
+                           you can use `mkpasswd -m sha-512` from the `whois`
+                           package.
 
 * `public_keys_onsite`:    List. Authorized SSH keys for the main user for
                            machines in the onsite group.
