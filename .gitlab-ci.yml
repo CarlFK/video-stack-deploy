@@ -37,14 +37,16 @@ test:role:users:
   - ansible-playbook tests/users.yml --skip-tags="no_unit_test"
 
 build:pages:
-  image: alpine
+  image: debian:sid
   script:
-  - apk --no-cache add py-sphinx python3 make
+  - apt-get update
+  - apt-get -y install python3-sphinx make
   - cd docs
   - make html
   - mv _build/html/ ../public/
   artifacts:
     paths:
     - public
+    expire_in: 1 hour
   only:
   - master

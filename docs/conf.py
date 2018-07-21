@@ -11,6 +11,7 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
 ]
 
@@ -73,3 +74,7 @@ html_last_updated_fmt = '%b %d, %Y'
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'DebConfVideoteamAnsibleDocumentationdoc'
+
+intersphinx_mapping = {
+    'dcvideo': ('https://debconf-video-team.pages.debian.net/docs/', None),
+}
