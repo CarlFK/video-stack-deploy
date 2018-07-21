@@ -36,7 +36,7 @@ test:role:users:
   - apt-get update && apt-get -y install locales
   - ansible-playbook tests/users.yml --skip-tags="no_unit_test"
 
-build:pages:
+pages:
   image: debian:sid
   script:
   - apt-get update
