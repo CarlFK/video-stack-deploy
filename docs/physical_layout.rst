@@ -1,7 +1,8 @@
 The Physical Layout
 ===================
 
-The hardware we use is described in our `general documentation`_.
+The hardware we use is described in our :ref:`general documentation
+<dcvideo:hardware>`.
 
 The Ansible configuration sets up 9 groups of machines:
 
@@ -40,8 +41,8 @@ Streaming Front-end
     these, not the back-end, when they exist.
 
 Review
-    The machines that will host and manage `SReview`_, which is our review
-    system for talks after they are recorded.
+    The machines that will host and manage :ref:`SReview <dcvideo:review>`,
+    which is our review system for talks after they are recorded.
 
 Using all 9 groups in a full-blown conference gets complicated very quickly.
 For this reason, we will go through two much simpler streaming and recording
@@ -49,6 +50,3 @@ examples here:
 
 1. A single Voctomix machine that stands alone.
 2. Voctomix and Opsis machines with a gateway to the outside world.
-
-.. _`general documentation`: https://debconf-video-team.pages.debian.net/docs/hardware.html
-.. _SReview: https://debconf-video-team.pages.debian.net/docs/review.html

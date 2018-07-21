@@ -1,3 +1,5 @@
+.. _voctomix:
+
 Standalone Voctomix Machine
 ===========================
 
