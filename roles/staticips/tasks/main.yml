@@ -3,4 +3,4 @@
 
 # We don't want to fight with the dhcp-server role
 - include_tasks: interfaces.yml
-  when: eth_local_ip_address is undefined
+  when: eth_local_address is undefined

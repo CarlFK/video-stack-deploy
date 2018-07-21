@@ -1,9 +1,9 @@
 # {{ ansible_managed }}
 # fsid=X is needed for XFS filesystems with 64bit inodes
-{% if eth_local_ip_address is defined %}
-/srv/{{ nfs_server }}/veyepar {{ eth_local_ip_address }}/{{ eth_local_ip_netmask }}(ro,sync,no_subtree_check,fsid=0)
-/srv/{{ nfs_server }}/video {{ eth_local_ip_address }}/{{ eth_local_ip_netmask }}(ro,sync,no_subtree_check,fsid=1)
-/srv/{{ nfs_server }}/sreview {{ eth_local_ip_address }}/{{eth_local_ip_netmask }}(rw,sync,no_subtree_check,fsid=2)
+{% if eth_local_address is defined %}
+/srv/{{ nfs_server }}/veyepar {{ eth_local_address }}/{{ eth_local_netmask }}(ro,sync,no_subtree_check,fsid=0)
+/srv/{{ nfs_server }}/video {{ eth_local_address }}/{{ eth_local_netmask }}(ro,sync,no_subtree_check,fsid=1)
+/srv/{{ nfs_server }}/sreview {{ eth_local_address }}/{{eth_local_netmask }}(rw,sync,no_subtree_check,fsid=2)
 {% else %}
 /srv/{{ nfs_server }}/veyepar {{ ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask }}(ro,sync,no_subtree_check,fsid=0)
 /srv/{{ nfs_server }}/video {{ ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask }}(ro,sync,no_subtree_check,fsid=1)
