@@ -1,7 +1,13 @@
 
-eth_local_ip_address: 10.18.0.3
-eth_local_ip_netmask: 24
-#eth_local_ip_gateway: 10.18.0.1
+eth_local_address: 10.18.0.3
+eth_local_netmask: 24
+eth_local_gateway:
 # Change to reflect the MAC addresses of your gateway
 eth_local_mac_address: 00:16:41:ee:f4:dc
 eth_uplink_mac_address: 8a:ce:4c:ff:ae:83
+
+# If you want to use a static IP for the uplink
+eth_uplink_static: true
+eth_uplink_static_address: 42.1.2.3
+eth_uplink_static_netmask: 24
+eth_uplink_static_gateway: 42.1.2.254
