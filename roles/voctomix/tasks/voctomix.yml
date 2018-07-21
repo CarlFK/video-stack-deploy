@@ -11,7 +11,8 @@
 - name: install voctomix-outcasts from backports
   apt:
     name: "{{ item }}"
-    default_release: "{{ debian_version}}-backports"
+    default_release: "{{ debian_version }}-backports"
+    state: latest
   with_items:
   - voctomix
   - voctomix-core
