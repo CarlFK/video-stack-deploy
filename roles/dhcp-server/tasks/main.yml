@@ -48,6 +48,7 @@
   file:
     path: /srv/tftp
     state: directory
+    mode: '0755'
 
 - name: configure the dhcp server
   template:
