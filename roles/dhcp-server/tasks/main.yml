@@ -22,7 +22,7 @@
   template:
     src: templates/interfaces-static.j2
     dest: /etc/network/interfaces
-  when: use_static_ip
+  when: eth_uplink_static
   notify: restart networking
   tags:
   - staticips
@@ -31,7 +31,7 @@
   template:
     src: templates/interfaces-dhcp.j2
     dest: /etc/network/interfaces
-  when: not use_static_ip
+  when: not eth_uplink_static
   notify: restart networking
   tags:
   - staticips

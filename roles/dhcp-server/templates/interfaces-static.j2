@@ -8,17 +8,17 @@ iface lo inet loopback
 
 auto eth-local
 iface eth-local inet static
-     address {{ eth_local_ip_address }}/{{ eth_local_ip_netmask }}
+     address {{ eth_local_address }}/{{ eth_local_netmask }}
      pre-up ethtool -K $IFACE gso off gro off tso off || true
-{% if eth_local_ip_gateway is defined %}
-     gateway {{ eth_local_ip_gateway }}
+{% if eth_local_gateway %}
+     gateway {{ eth_local_gateway }}
 {% endif %}
 
 {% if eth_uplink_mac_address is defined %}
 
 auto eth-uplink
 iface eth-uplink inet static
-     address {{ eth_uplink_static_ip_address }}
+     address {{ eth_uplink_static_address }}
      netmask {{ eth_uplink_static_netmask }}
      gateway {{ eth_uplink_static_gateway }}
      pre-up ethtool -K $IFACE gso off gro off tso off || true

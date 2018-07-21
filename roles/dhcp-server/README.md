@@ -12,33 +12,33 @@ Everything is in the `tasks/main.yml` file.
 
 Main variables are:
 
-* `eth_local_ip_address`:         Local IP address for the DHCP server.
-
-* `eth_local_ip_netmask`:         Local netmask for the DHCP server.
-
-* `eth_local_ip_gateway`:         Local IP gateway for the DHCP server. Only
-                                  define thiscif you are not defining the uplink
-                                  variables.
-
 * `eth_local_mac_address`:        Local MAC address for the DHCP server. It is
                                   required to rename the interface using udev
                                   rules
+
+* `eth_local_address`:            Local IP address for the DHCP server.
+
+* `eth_local_netmask`:            Local netmask for the DHCP server.
+
+* `eth_local_gateway`:            Local IP gateway for the DHCP server. Only
+                                  define this if you are not defining the uplink
+                                  variables.
 
 * `eth_uplink_mac_address`:       Uplink MAC address for the DHCP server. If
                                   defined, this machine will act as a gateway
                                   and does masquerading. It is required to
                                   rename the interface using udev rules.
 
-* `use_static_ip`:                Boolean value. If false, the DHCP server uses
+* `eth_uplink_static`:            Boolean value. If false, the DHCP server uses
                                   DHCP to get an IP from the uplink.
 
-* `eth_uplink_static_ip_address`: Static uplink IP address. Requires `use_static_ip`
+* `eth_uplink_static_address`:    Static uplink IP address. Requires `eth_uplink_static`
                                   true.
 
-* `eth_uplink_static_ip_netmask`: Static uplink net mask. Requires `use_static_ip`
+* `eth_uplink_static_netmask`:    Static uplink net mask. Requires `eth_uplink_static`
                                   true.
 
-* `eth_uplink_static_ip_gateway`: Static uplink IP gateway. Requires `use_static_ip`
+* `eth_uplink_static_gateway`:    Static uplink IP gateway. Requires `eth_uplink_static`
                                   set to true.
 
 * `eth_uplink_wifi_ssid`:         SSID to connect to, when the uplink is WiFi.
