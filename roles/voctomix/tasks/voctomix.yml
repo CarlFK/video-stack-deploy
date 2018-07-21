@@ -95,3 +95,15 @@
   - voctocore
   - loop
   - bgloop
+
+- name: Autostart voctogui
+  file:
+    src: /usr/share/applications/voctogui.desktop
+    dest: /etc/xdg/autostart/voctogui.desktop
+    state: link
+
+- name: Autostart record watch
+  template:
+    src: templates/recordwatch.desktop.j2
+    dest: /etc/xdg/autostart/recordwatch.desktop
+    mode: 0755
