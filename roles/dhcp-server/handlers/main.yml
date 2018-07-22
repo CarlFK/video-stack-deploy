@@ -4,6 +4,16 @@
     name: NetworkManager
     state: restarted
 
+- name: restart networking
+  service:
+    name: networking
+    state: restarted
+
+- name: restart dnsmasq
+  service:
+    name: dnsmasq
+    state: restarted
+
 - name: reboot
   when: ansible_connection != 'local'
   command: shutdown -r now "Reboot triggered by Ansible"

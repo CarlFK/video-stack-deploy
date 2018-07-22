@@ -3,3 +3,13 @@
 - name: kill lingering dhclients
   command: killall dhclient
   ignore_errors: yes
+
+- name: restart networking
+  service:
+    name: networking
+    state: restarted
+
+- name: restart dnsmasq
+  service:
+    name: dnsmasq
+    state: restarted
