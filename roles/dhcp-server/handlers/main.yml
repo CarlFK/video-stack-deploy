@@ -1,12 +1,18 @@
 ---
+- name: restart network-manager
+  service:
+    name: NetworkManager
+    state: restarted
+
 - name: restart networking
-  command: "/bin/systemctl restart networking.service"
+  service:
+    name: networking
+    state: restarted
 
 - name: restart dnsmasq
-  command: "/bin/systemctl restart dnsmasq.service"
-
-- name: restart network-manager
-  command: "/bin/systemctl restart NetworkManager.service"
+  service:
+    name: dnsmasq
+    state: restarted
 
 - name: reboot
   when: ansible_connection != 'local'

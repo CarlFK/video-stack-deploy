@@ -18,7 +18,7 @@
     src: templates/autologin.conf.j2
     dest: /etc/lightdm/lightdm.conf.d/autologin.conf
   when: autologin
-  notify: systemctl restart lightdm
+  notify: restart lightdm
 
 - name: Create xlogin|out.target
   copy:
@@ -39,4 +39,4 @@
   copy:
     src: files/xlogin.conf
     dest: /etc/lightdm/lightdm.conf.d/xlogin.conf
-  notify: systemctl restart lightdm
+  notify: restart lightdm

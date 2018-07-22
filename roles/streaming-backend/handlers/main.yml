@@ -1,9 +1,15 @@
 ---
-- name: reload nginx
-  service: name=nginx state=reloaded
-
-- name: restart nginx
-  service: name=nginx state=restarted
-
 - name: mount all
   command: mount -a
+  args:
+    warn: no
+
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted

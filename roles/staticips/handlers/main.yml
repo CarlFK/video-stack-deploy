@@ -3,9 +3,13 @@
 - name: kill lingering dhclients
   command: killall dhclient
   ignore_errors: yes
+
 - name: restart networking
-  command: systemctl restart networking
-- name: systemctl restart dnsmasq
-  command: systemctl restart dnsmasq
-  # Don't worry about this on machines without dnsmasq. TODO: don't just ignore errors
-  ignore_errors: yes
+  service:
+    name: networking
+    state: restarted
+
+- name: restart dnsmasq
+  service:
+    name: dnsmasq
+    state: restarted
