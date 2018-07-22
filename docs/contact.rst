@@ -3,7 +3,7 @@
 Contact us
 ==========
 
-If you have any questions, you can contact us via:
+If you have any questions, please contact us via:
 
 * our mailing list: debconf-video@lists.debian.org
 * our IRC channel: `#debconf-video`_ on irc.oftc.net

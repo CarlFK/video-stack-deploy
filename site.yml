@@ -28,9 +28,9 @@
 
 - hosts: voctomix
   roles:
+  - xorg
   - voctomix
   - blackmagic
-  - xorg
 
 - hosts: xorg
   roles:
