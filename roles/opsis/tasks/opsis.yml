@@ -28,15 +28,11 @@
   copy:
     src: files/videoteam-ingest.service
     dest: /etc/systemd/system/videoteam-ingest.service
-  tags:
-  - no_unit_test
 
 - name: push systemd videoteam-ingest.path
   copy:
     src: files/videoteam-ingest.path
     dest: /etc/systemd/system/videoteam-ingest.path
-  tags:
-  - no_unit_test
 
 - name: enable videoteam-ingest.path
   service:
@@ -56,8 +52,6 @@
     src: files/hdmi2usbd.service
     dest: /etc/systemd/system/hdmi2usbd.service
   when: "'hdmi2usbd' in serial_terminal"
-  tags:
-  - no_unit_test
 
 - name: enable hdmi2usbd
   service:
@@ -72,8 +66,6 @@
     src: files/hdmi2usbd.path
     dest: /etc/systemd/system/hdmi2usbd.path
   when: "'hdmi2usbd' in serial_terminal"
-  tags:
-  - no_unit_test
 
 - name: enable hdmi2usbd.path
   service:
