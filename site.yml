@@ -24,7 +24,6 @@
 - hosts: opsis
   roles:
   - opsis
-  - xorg
 
 - hosts: voctomix
   roles:
