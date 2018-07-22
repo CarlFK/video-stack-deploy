@@ -2,14 +2,14 @@
 - name: enable videoteam-ingest.path
   service:
     name: videoteam-ingest.path
-    state: enabled
+    enabled: yes
 
 - name: enable hdmi2usbd
   service:
     name: hdmi2usbd
-    state: enabled
+    enabled: yes
 
 - name: enable hdmi2usbmond
   service:
     name: hdmi2usbmond
-    state: enabled
+    enabled: yes
