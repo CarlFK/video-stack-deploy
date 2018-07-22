@@ -4,6 +4,7 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+import datetime
 
 # -- General configuration ------------------------------------------------
 
@@ -32,7 +33,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'DebConf Videoteam Ansible'
-copyright = '2017, DebConf Videoteam'
+_year = datetime.datetime.now().year
+copyright = '2017–{}, DebConf Videoteam'.format(_year)
 author = 'DebConf Videoteam'
 
 # List of patterns, relative to source directory, that match files and
