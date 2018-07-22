@@ -4,7 +4,7 @@ set -ex
 
 lan_dev=p3p1
 
-# sudo apt install qemu brctl
+# sudo apt install qemu qemu-system-x86 brctl
 
 qemu-img create -f vmdk cache/testpxe.vmdk 10
 

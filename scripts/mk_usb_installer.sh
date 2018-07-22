@@ -20,8 +20,11 @@ fi
 # where to get what installer binaries:
 suite=stretch
 arch=amd64
+ver=9.5.0
 bootimg_loc=http://deb.debian.org/debian/dists/${suite}/main/installer-${arch}/current/images
-iso=debian-9.4.0-${arch}-netinst.iso
+# iso=debian-9.4.0-${arch}-netinst.iso
+# iso=debian-9.5.0-amd64-netinst.iso
+iso=debian-${ver}-${arch}-netinst.iso
 iso_loc=https://cdimage.debian.org/debian-cd/current/${arch}/iso-cd
 
 # where to get the preseed file for the installer
@@ -35,8 +38,8 @@ bootdev=/dev/sda
 # hostname of target (should be listed in ansible inventory/hosts)
 hostname=testme
 
-# this will come from dhcp, i think?
-# domain=netme
+# if blank does't work, try local.
+domain=
 
 # where to get ansible playbooks and inventory
 playbook_repo=https://salsa.debian.org/debconf-video-team/ansible

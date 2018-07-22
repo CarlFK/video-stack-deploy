@@ -5,7 +5,7 @@
 # (need to logout/in for this to take affect.)
 # or do some other trick that I don't think will let the script run :p
 
-# def of usb stick
+# dev of usb stick (just sdc, not /dev/sdc)
 dev=$1
 
 # blank disk to install to
