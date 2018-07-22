@@ -25,5 +25,8 @@
   copy:
     src: files/hdmi2usbmond.service
     dest: /etc/systemd/system/hdmi2usbmond.service
-  notify:
-  - enable hdmi2usbmond
+
+- name: enable hdmi2usbmond
+  service:
+    name: hdmi2usbmond
+    enabled: yes

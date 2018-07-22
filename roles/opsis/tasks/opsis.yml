@@ -35,8 +35,13 @@
   copy:
     src: files/videoteam-ingest.path
     dest: /etc/systemd/system/videoteam-ingest.path
-  notify:
-  - enable videoteam-ingest.path
+  tags:
+  - no_unit_test
+
+- name: enable videoteam-ingest.path
+  service:
+    name: videoteam-ingest.path
+    enabled: yes
   tags:
   - no_unit_test
 
@@ -50,8 +55,14 @@
   copy:
     src: files/hdmi2usbd.service
     dest: /etc/systemd/system/hdmi2usbd.service
-  notify:
-  - enable hdmi2usbd
+  when: "'hdmi2usbd' in serial_terminal"
+  tags:
+  - no_unit_test
+
+- name: enable hdmi2usbd
+  service:
+    name: hdmi2usbd
+    enabled: yes
   when: "'hdmi2usbd' in serial_terminal"
   tags:
   - no_unit_test
@@ -60,8 +71,14 @@
   copy:
     src: files/hdmi2usbd.path
     dest: /etc/systemd/system/hdmi2usbd.path
-  notify:
-  - enable hdmi2usbd
+  when: "'hdmi2usbd' in serial_terminal"
+  tags:
+  - no_unit_test
+
+- name: enable hdmi2usbd.path
+  service:
+    name: hdmi2usbd.path
+    enabled: yes
   when: "'hdmi2usbd' in serial_terminal"
   tags:
   - no_unit_test
