@@ -8,6 +8,18 @@
   - hdmi2usb-udev
   - voctomix-outcasts
 
+- name: install opsis related packages from backports
+  apt:
+    name: "{{ item }}"
+    default_release: "{{ debian_version }}-backports"
+    state: latest
+  with_items:
+  - hdmi2usb-mode-switch
+  - openocd
+  - hdmi2usb-udev
+  - voctomix-outcasts
+  when: ansible_distribution == 'Debian'
+
 - name: install serial terminal
   apt:
     name: "{{ item }}"
