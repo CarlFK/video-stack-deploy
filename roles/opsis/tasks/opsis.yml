@@ -4,6 +4,7 @@
     name: "{{ item }}"
   with_items:
   - hdmi2usb-mode-switch
+  - openocd
   - hdmi2usb-udev
   - voctomix-outcasts
 
