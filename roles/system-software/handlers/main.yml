@@ -3,3 +3,4 @@
   service:
     name: systemd-journald
     state: restarted
+  when: ansible_env.ANSIBLE_UNDER_DI is undefined
