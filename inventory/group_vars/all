@@ -2,7 +2,7 @@
 user_name: videoteam
 storage_username: videodata
 # crypt(3)ed password. e.g. echo -e changeme | mkpasswd -s -m SHA-512
-# mkpasswd is part of the wois package on Debian
+# mkpasswd is part of the whois package on Debian
 user_password_crypted: $6$XQpHonFCApiFLfBJ$jlZu.ywm0Tfeiv87gG8nDUPyChyJjYRO3.O/VEK7w2Ywqqc5lKf1vDKN0UEs1b5Co6SnCaOXcc/jXNCuOk0EH/
 autologin: true
 
