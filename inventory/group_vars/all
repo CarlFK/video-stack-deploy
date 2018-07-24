@@ -15,6 +15,9 @@ time_zone: Europe/Brussels
 
 enable_oldstable: true
 
+# Local frequency setting, in Hz
+# This can be either 50 or 60Hz
+frequency: 50
 
 # To enable proprietary drivers, provide a URL to them.
 #blackmagic:
@@ -25,7 +28,6 @@ enable_oldstable: true
 
 voctomix:
   display_system: gl
-  framerate: 25
 #  loop_url: http://10.18.0.1/loop/loop.ts
 #  bgloop_url: http://10.18.0.1/loop/bgloop.ts
 
