@@ -15,14 +15,6 @@ time_zone: Europe/Brussels
 
 enable_oldstable: true
 
-# check the frequency setting on the camera
-# make sure it matches what's the frequency of the local power
-# use BlackmagicDesktopVideoSetup to see what the camera is sending
-# 720p59.94 is 18
-# 720p50 is 17
-# also change voctomix framerate below to match
-# list of all mode IDs: check 'gst-inspect-1.0 decklinkvideosrc'
-blackmagic_default_mode: 17
 
 # To enable proprietary drivers, provide a URL to them.
 #blackmagic:

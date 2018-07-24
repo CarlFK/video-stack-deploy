@@ -16,9 +16,7 @@ ExecStart=/usr/bin/voctomix-ingest -v \
 {% elif item.1.connection == 'SDI' -%}
     connection=1 \
 {% endif -%}
-{% if item.1.mode is defined -%}
-    mode={{ item.1.mode }} \
-{% endif -%}
+    mode={{ item.1.mode | default(blackmagic_default_mode) }} \
     ' \
 {% if item.1.audio -%}
   --audio-source blackmagic \
