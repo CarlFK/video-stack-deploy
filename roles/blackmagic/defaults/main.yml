@@ -1,6 +1,8 @@
 ---
 blackmagic:
-  #desktopvideo: http://example.net/desktopvideo.deb
-  #desktopvideo_gui: http://example.net/desktopvideo-gui.deb
-  #mediaexpress: http://example.net/mediaexpress.deb
+  urls:
+    #desktopvideo: http://example.net/desktopvideo.deb
+    #desktopvideo_gui: http://example.net/desktopvideo-gui.deb
+    #mediaexpress: http://example.net/mediaexpress.deb
+
   #dkms_version: 10.8.4a4

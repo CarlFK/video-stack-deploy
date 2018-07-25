@@ -94,9 +94,10 @@ you are also using them, uncomment the following and change the URLs to point
 to the corresponding package files. ::
 
     blackmagic:
-      desktopvideo: http://example.org/desktopvideo_10.9.5a4_amd64.deb
-      desktopvideo_gui: http://example.org/desktopvideo-gui_10.9.5a4_amd64.deb
-      mediaexpress: http://example.org/mediaexpress_3.5.3a1_amd64.deb
+      urls:
+        desktopvideo: http://example.org/desktopvideo_10.9.5a4_amd64.deb
+        desktopvideo_gui: http://example.org/desktopvideo-gui_10.9.5a4_amd64.deb
+        mediaexpress: http://example.org/mediaexpress_3.5.3a1_amd64.deb
       dkms_version: 10.9.5a4
 
 The Voctomix loops are shown on the stream when there is no talk happening. In

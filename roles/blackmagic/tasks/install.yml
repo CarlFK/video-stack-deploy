@@ -4,38 +4,20 @@
     path: /var/cache/debconf-video-blackmagic
     state: directory
 
-- name: Download Blackmagic Destkop Video package
+- name: Download packages
   get_url:
-    dest: /var/cache/debconf-video-blackmagic/desktopvideo.deb
-    url: "{{ blackmagic.desktopvideo }}"
-  when: blackmagic.desktopvideo is defined
+    dest: /var/cache/debconf-video-blackmagic/{{ item.key }}.deb
+    url: "{{ item.value }}"
+  with_dict: "{{ blackmagic.urls }}"
+  loop_control:
+    label: "{{ item.key }}"
 
-- name: Install desktopvideo
+- name: Install packages
   apt:
-    deb: /var/cache/debconf-video-blackmagic/desktopvideo.deb
-  when: blackmagic.desktopvideo is defined
-
-- name: Download Blackmagic Destkop Video GUI package
-  get_url:
-    dest: /var/cache/debconf-video-blackmagic/desktopvideo-gui.deb
-    url: "{{ blackmagic.desktopvideo_gui }}"
-  when: blackmagic.desktopvideo_gui is defined
-
-- name: Install desktopvideo-gui
-  apt:
-    deb: /var/cache/debconf-video-blackmagic/desktopvideo-gui.deb
-  when: blackmagic.desktopvideo_gui is defined
-
-- name: Download Blackmagic Media Express package
-  get_url:
-    dest: /var/cache/debconf-video-blackmagic/mediaexpress.deb
-    url: "{{ blackmagic.desktopvideo }}"
-  when: blackmagic.mediaexpress is defined
-
-- name: Install mediaexpress
-  apt:
-    deb: /var/cache/debconf-video-blackmagic/mediaexpress.deb
-  when: blackmagic.mediaexpress is defined
+    deb: /var/cache/debconf-video-blackmagic/{{ item.key }}.deb
+  with_dict: "{{ blackmagic.urls }}"
+  loop_control:
+    label: "{{ item.key }}"
 
 - name: Install blackmagic DKMS driver
   command: dkms install {{ item }}/{{ blackmagic.dkms_version }}
@@ -44,7 +26,9 @@
   with_items:
   - blackmagic
   - blackmagic-io
-  when: blackmagic.desktopvideo is defined and ansible_env.ANSIBLE_UNDER_DI is undefined
+  when: >
+    blackmagic.urls.desktopvideo is defined and
+    ansible_env.ANSIBLE_UNDER_DI is undefined
 
 - name: Stop blackmagic GUI from being annoying
   file:
