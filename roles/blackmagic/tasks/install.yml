@@ -8,12 +8,16 @@
   get_url:
     dest: /var/cache/debconf-video-blackmagic/{{ item.key }}.deb
     url: "{{ item.value }}"
-  with_dict: blackmagic.urls
+  with_dict: "{{ blackmagic.urls }}"
+  loop_control:
+    label: "{{ item.key }}"
 
 - name: Install packages
   apt:
     deb: /var/cache/debconf-video-blackmagic/{{ item.key }}.deb
-  with_dict: blackmagic.urls
+  with_dict: "{{ blackmagic.urls }}"
+  loop_control:
+    label: "{{ item.key }}"
 
 - name: Install blackmagic DKMS driver
   command: dkms install {{ item }}/{{ blackmagic.dkms_version }}
