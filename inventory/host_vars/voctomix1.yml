@@ -13,7 +13,6 @@ blackmagic_sources:
   # 720p59.94 is 18
   # 720p50 is 17
   # list of all mode IDs: check 'gst-inspect-1.0 decklinkvideosrc'
-  mode: "{{ blackmagic_default_mode }}"
 
 voctolights:
 - camera: Cam1

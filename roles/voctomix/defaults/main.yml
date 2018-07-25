@@ -14,7 +14,7 @@ sources:
 
 voctomix:
   display_system: gl
-  framerate: 25
+  framerate: "{{ frequency / 2 }}"
   # loop_url: http://example.net/loop.tar.xz
 
 streaming:
@@ -43,3 +43,16 @@ rsync_sshopts: ""
 # - camera: Cam1
 #   port: /dev/ttyUSB0
 #   host: localhost
+
+# check the frequency setting on the camera
+# make sure it matches what's the frequency of the local power
+# use BlackmagicDesktopVideoSetup to see what the camera is sending
+# list of all mode IDs: check 'gst-inspect-1.0 decklinkvideosrc'
+frequency_parameters:
+  50:
+    mode: 17  # 720p50
+
+  60:
+    mode: 18  # 720p59.94
+
+blackmagic_default_mode: "{{ framerate_parameters[frequency].mode }}"

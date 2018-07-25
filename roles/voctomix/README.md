@@ -37,6 +37,9 @@ Main variables are :
 * `room_name`:                           Name of the room where you are
                                          recording. Used in the video file path.
 
+* `frequency`:                           The local frequency setting (50 or 60Hz).
+                                         Used to derive sensible defaults.
+
 * `sources`:                             List. Name of the different sources you
                                          want voctomix to use.
 
@@ -44,7 +47,7 @@ Main variables are :
                                          use.
 
 * `voctomix.framerate`:                  Integer. Number of frames per second to
-                                         record at.
+                                         record at.  Defaults to `frequency/2`
 
 * `voctomix.loop_url`:                   URL of the sponsor loop .ts file.
 
@@ -70,6 +73,9 @@ Main variables are :
 * `streaming.rtmp.vaapi`:                Boolean. Use HW-accelerated x264
                                          encoder.
 
+* `blackmagic_default_mode`:             Default value for `blackmagic_sources.*.mode`,
+                                         computed from `framerate`.
+
 * `blackmagic_sources.*`:                Array. Uses the `card`, `connection`,
                                          `audio` and `mode` parameters as
                                          described below. The exact syntax is
@@ -87,6 +93,7 @@ Main variables are :
                                          card. You can get a list of the
                                          different modes by running
                                          `gst-inspect-1.0 decklinkvideosrc`.
+                                         Defaults to `blackmagic_default_mode`.
 
 * `rsync_excludes`:                      List. Paths to exclude during the rsync
                                          copy of the video files.
