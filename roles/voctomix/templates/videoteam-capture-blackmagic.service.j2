@@ -11,10 +11,8 @@ Conflicts=xlogout.target
 ExecStart=/usr/bin/voctomix-ingest -v \
   --video-source blackmagic \
   --video-attribs 'device-number={{ item.1.card }} \
-{% if item.1.connection == 'HDMI' -%}
-    connection=2 \
-{% elif item.1.connection == 'SDI' -%}
-    connection=1 \
+{% if item.1.connection is defined -%}
+    connection={{ item.1.connection }} \
 {% endif -%}
 {% if item.1.mode is defined -%}
     mode={{ item.1.mode }} \
@@ -22,7 +20,7 @@ ExecStart=/usr/bin/voctomix-ingest -v \
     ' \
 {% if item.1.audio -%}
   --audio-source blackmagic \
-  --audio-attribs 'device-number={{ item.1.card }} connection=1' \
+  --audio-attribs 'device-number={{ item.1.card }}' \
 {% endif -%}
   --port {{ 10000 + item.0 }}
 Restart=always
