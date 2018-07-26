@@ -1,7 +1,7 @@
 ---
 - name: install packages
-  apt: pkg=sreview-encoder
-  with_items:
+  apt:
+    pkg: sreview-encoder
 
 - name: create working directory
   file:
