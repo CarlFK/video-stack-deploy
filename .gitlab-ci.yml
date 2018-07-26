@@ -25,7 +25,7 @@ test:role:motd:
 
 test:role:opsis:
   script:
-  - ansible-playbook tests/opsis.yml --skip-tags="no_unit_test"
+  - ansible-playbook --inventory inventory/hosts -l opsis1 tests/opsis.yml --skip-tags="no_unit_test"
 
 test:role:system-software:
   script:
