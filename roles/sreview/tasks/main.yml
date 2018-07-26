@@ -1,44 +1,32 @@
 ---
 - name: install packages
-  apt: pkg={{ item }}
+  apt: pkg=sreview-encoder
   with_items:
-  - git
-  - ffmpeg
-  - libmojolicious-perl
-  - libdbd-pg-perl
-  - libglib-perl
-  - gir1.2-gstreamer-1.0
-  - libglib-object-introspection-perl
-  - gir1.2-gst-plugins-base-1.0
-  - gstreamer1.0-plugins-base
-  - gstreamer1.0-plugins-bad
-  - gstreamer1.0-plugins-ugly
-  - gstreamer1.0-plugins-good
-  - bs1770gain
-  - inkscape
-
-- name: clone git repository
-  become: true
-  become_user: videoteam
-  git:
-    repo: https://github.com/yoe/sreview
-    dest: /home/videoteam/sreview
-  tags:
-    - skip_ansible_lint
 
 - name: create working directory
   file:
-    path: /home/videoteam/tmp
+    path: /var/lib/sreview/tmp
     state: directory
-    owner: videoteam
-    group: videoteam
+    owner: sreview
+    group: sreview
 
 - name: write config file
-  when: sreviewdbpw is defined
+  when: sreview.dbpw is defined
   template:
-    dest: /home/videoteam/sreview/scripts/config.pl
-    owner: videoteam
-    group: videoteam
-    mode: 0600
-    src: config.pl.j2
+    dest: /etc/sreview/config.pm
+    owner: root
+    group: sreview
+    mode: 0640
+    src: config.pm.j2
     force: no
+
+- name: copy pre/postroll files
+  copy:
+    src: "{{ item.file }}"
+    dest: "/var/lib/sreview/{{ item.name }}.svg"
+    owner: sreview
+    group: sreview
+    mode: 0644
+  with_items:
+  - { file: "{{ sreview.preroll }}", name: "preroll" }
+  - { file: "{{ sreview.postroll }}", name: "postroll" }
