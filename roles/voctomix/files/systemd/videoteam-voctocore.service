@@ -6,6 +6,7 @@ Conflicts=xlogout.target
 ExecStart=/usr/bin/voctocore -v
 Restart=always
 RestartSec=1s
+Nice=0
 
 [Install]
 WantedBy=xlogin.target
