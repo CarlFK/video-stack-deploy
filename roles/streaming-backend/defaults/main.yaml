@@ -1,5 +1,6 @@
 ---
 debian_version: stretch
+conference_name: Example Conference
 streaming:
   backend:
     data_root: /srv/streaming

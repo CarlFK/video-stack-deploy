@@ -1,9 +1,9 @@
 <html>
 <head>
-<title>DebConf17 streaming frontend on {{ inventory_hostname }}</title>
+<title>{{ conference_name }} streaming frontend on {{ inventory_hostname }}</title>
 </head>
 <body>
-  <p>Hello, I'm {{ inventory_hostname }}, a streaming frontend for DebConf17.</p>
+  <p>Hello, I'm {{ inventory_hostname }}, a streaming frontend for {{ conference_name }}.</p>
   <p>I know of the following rooms:
     <ul>
       {% for room in streaming.rooms %}
