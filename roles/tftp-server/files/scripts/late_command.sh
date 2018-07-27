@@ -67,7 +67,7 @@ if [ "${inventory_repo}" != "" ]; then
 fi
 
 ansible-playbook \\
-    --inventory-file=$INVENTORY \\
+    --diff --inventory-file=$INVENTORY \\
     ${vault_pw_arg} \\
     --connection=local \\
     --limit=\$(hostname) \\

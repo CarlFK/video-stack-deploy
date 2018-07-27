@@ -116,3 +116,7 @@ Main variables are :
 
 * `voctolights.host`:                    Hostname of the machine where the tally
                                          light is on.
+
+* `audiosource`:                         Name of the source that has audio. Undefined
+                                         by default since voctomix attributes
+                                         this to the first camera by default.
