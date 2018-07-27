@@ -27,11 +27,12 @@ audiosource={{ audiosource }}
 
 [previews]
 ; disable if ui & server run on the same computer and can exchange uncompressed video frames
-enabled=false
+enabled=true
+deinterlace=false
 
 ; default to mix-videocaps, only applicable if enabled=true
 ; you can change the framerate and the width/height, but nothing else
-videocaps=video/x-raw,width=1024,height=576,framerate={{ voctomix.framerate }}/1
+videocaps=video/x-raw,width=480,height=320,framerate={{ voctomix.framerate }}/1
 
 [stream-blanker]
 enabled=true
