@@ -20,9 +20,9 @@
     src: config.pm.j2
     force: no
 
-- name: copy pre/postroll files
-  copy:
-    src: "{{ item.file }}"
+- name: download pre/postroll images
+  get_url:
+    url: "{{ item.file }}"
     dest: "/var/lib/sreview/{{ item.name }}.svg"
     owner: sreview
     group: sreview
