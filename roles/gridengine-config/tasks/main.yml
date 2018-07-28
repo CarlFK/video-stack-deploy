@@ -7,8 +7,14 @@
 # dynamically generated from somewhere. My ansible-fu is not advanced enough
 # for that though.
 - name: create hostgroup
-  script: create_hgrp.sh debconf
+  script: create_hgrp.sh {{ ge.master }}
   when: ansible_local.gridengine.hgrp.allhosts is undefined
+  register: allhosts_created
+
+- name: add hosts to hostgroup
+  script: add_to_hostgroup.sh "{{ item }}"
+  when: ( "{{ item }}" not in ansible_local.gridengine.hgrp.allhosts ) or allhosts_created.changed
+  with_items: "{{ ge.exechosts }}"
 
 - name: create queue lowprio.q
   script: create_queue.sh lowprio.q {{ ansible_processor_count }}
