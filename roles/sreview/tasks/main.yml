@@ -18,7 +18,6 @@
     group: sreview
     mode: 0640
     src: config.pm.j2
-    force: no
 
 - name: download pre/postroll images
   get_url:
