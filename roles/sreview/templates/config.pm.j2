@@ -29,7 +29,7 @@ $event = '{{ conference_name }}';
 $input_profile = 'DebConf';
 
 # A filename pattern (glob) that tells SReview where to find new files
-$inputglob = '/srv/sreview/incoming/{{ conference_name }}/*/*';
+$inputglob = '/srv/{{nfs_server}}/video/debian/debconf/dv//*/*/*';
 
 # An array of things to do when notifying. Can contain one or more of: email, command.
 #$notify_actions = [];
