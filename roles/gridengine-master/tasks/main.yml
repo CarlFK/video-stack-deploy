@@ -20,10 +20,3 @@
     dest: /etc/ansible/facts.d/gridengine.fact
     src: gridengine.fact
     mode: 0755
-
-- name: create sreview srv directory
-  file:
-    path: "/srv/{{ nfs_server }}/sreview"
-    state: directory
-    owner: videoteam
-    group: videoteam
