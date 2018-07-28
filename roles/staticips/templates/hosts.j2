@@ -3,7 +3,11 @@
 
 {% for host in staticips.hosts %}
 {% if host.ip is defined %}
+{% if host.fqdn is defined %}
+{{ host.ip }} {{ host.fqdn }} {{ host.hostname }}
+{% else %}
 {{ host.ip }} {{ host.hostname }}.{{ domain }} {{ host.hostname }}
+{% endif %}
 {% endif %}
 {% endfor %}
 
