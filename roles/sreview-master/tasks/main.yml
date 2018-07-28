@@ -1,0 +1,27 @@
+---
+- name: install the necessary packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - sreview-master
+  - sreview-detect
+  - postgresql-client
+
+- name: ensure sreview-dispatch runs
+  systemd: sreview-dispatch
+  enabled: true
+  state: started
+
+- name: ensure sreview-detect runs
+  systemd: sreview-detect
+  enabled: true
+  state: started
+
+- name: create pubdir
+  file: 
+    name: /srv/{{nfs_server}}/sreview/web/public
+    state: directory
+    owner: sreview
+    group: sreview
+    mode: 0755
+
