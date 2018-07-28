@@ -13,7 +13,7 @@
 
 - name: add hosts to hostgroup
   script: add_to_hostgroup.sh "{{ item }}"
-  when: ( "{{ item }}" not in ansible_local.gridengine.hgrp.allhosts ) or allhosts_created.changed
+  when: ( item not in ansible_local.gridengine.hgrp.allhosts ) or ( allhosts_created.changed and item != ge.master )
   with_items: "{{ ge.exechosts }}"
 
 - name: create queue lowprio.q
