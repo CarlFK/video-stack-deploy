@@ -13,12 +13,6 @@
     enabled: true
     state: started
 
-- name: ensure sreview-detect runs
-  systemd:
-    name: sreview-detect
-    enabled: true
-    state: started
-
 - name: create pubdir
   file: 
     name: /srv/{{nfs_server}}/sreview/web/public
