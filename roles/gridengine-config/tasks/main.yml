@@ -7,7 +7,7 @@
 # dynamically generated from somewhere. My ansible-fu is not advanced enough
 # for that though.
 - name: create hostgroup
-  script: create_hgrp.sh {{ domain }} debconf
+  script: create_hgrp.sh debconf
   when: ansible_local.gridengine.hgrp.allhosts is undefined
 
 - name: create queue lowprio.q
