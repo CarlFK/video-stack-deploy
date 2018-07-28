@@ -10,7 +10,7 @@ NOTE: this task has not been tested in production.
 
 ## Available variables
 
-* `sreview.dbpw`: password to the SReview database. Should be stored in a
+* `sreviewdbpw`: password to the SReview database. Should be stored in a
   vault, or passed at initial installation using `ansible-playbook -e
   sreviewdbpw=$VALUE` (ansible role does not write the SReview config
   file unless this variable is defined)

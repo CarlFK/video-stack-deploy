@@ -11,7 +11,7 @@
     group: sreview
 
 - name: write config file
-  when: sreview.dbpw is defined
+  when: sreviewdbpw is defined
   template:
     dest: /etc/sreview/config.pm
     owner: root
