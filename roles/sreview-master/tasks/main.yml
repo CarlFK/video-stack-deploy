@@ -8,14 +8,16 @@
   - postgresql-client
 
 - name: ensure sreview-dispatch runs
-  systemd: sreview-dispatch
-  enabled: true
-  state: started
+  systemd:
+    name: sreview-dispatch
+    enabled: true
+    state: started
 
 - name: ensure sreview-detect runs
-  systemd: sreview-detect
-  enabled: true
-  state: started
+  systemd:
+    name: sreview-detect
+    enabled: true
+    state: started
 
 - name: create pubdir
   file: 
