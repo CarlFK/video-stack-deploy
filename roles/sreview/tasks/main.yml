@@ -1,7 +1,10 @@
 ---
 - name: install packages
   apt:
-    pkg: sreview-encoder
+    pkg: "{{ item }}"
+  with_items:
+  - sreview-encoder
+  - bs1770gain
 
 - name: create working directory
   file:
