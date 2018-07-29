@@ -23,4 +23,4 @@
   - hiprio.q
 
 - name: set hiprio slot overrides
-  command: qconf -mattr queue subordinate_queues slots={{ ansible_processor_cores * ansible_processor_count }}(lowprio.q:0:sr) hiprio.q@{{ansible_hostname}}
+  command: qconf -mattr queue subordinate_list slots={{ ansible_processor_cores * ansible_processor_count }}(lowprio.q:0:sr) hiprio.q@{{ansible_hostname}}
