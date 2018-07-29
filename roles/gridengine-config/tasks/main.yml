@@ -40,3 +40,9 @@
   ignore_errors: yes
   with_items:
   - "{{ ge.exechosts }}"
+
+- name: create submit hosts
+  command: qconf -as {{ item }}
+  ignore_errors: yes
+  with_items:
+  - "{{ ge.exechosts }}"
