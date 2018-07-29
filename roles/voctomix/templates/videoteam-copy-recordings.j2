@@ -47,13 +47,15 @@ def main():
     cmd += ['./', DEST]
 
     if args.pause:
+        print('Pausing recording')
         subprocess.check_call(
             ('systemctl', '--user', 'stop', 'videoteam-record.service'))
     try:
-        print("Running", cmd)
+        print('Running', cmd)
         subprocess.check_call(cmd, cwd=SOURCE)
     finally:
         if args.pause:
+            print('Resuming recording')
             subprocess.check_call(
                 ('systemctl', '--user', 'start', 'videoteam-record.service'))
 
