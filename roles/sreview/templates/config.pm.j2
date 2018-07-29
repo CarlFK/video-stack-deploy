@@ -92,7 +92,7 @@ $state_actions = {
   'cutting' => 'qsub -cwd -V -q hiprio.q -e <%== $output_dir %> -o <%== $output_dir %> -b y -N cut_<%== $talkid %> sreview-cut <%== $talkid %>',
   'generating_previews' => 'qsub -cwd -V -q hiprio.q -e <%== $output_dir %> -o <%== $output_dir %> -b y -N prv_<%== $talkid %> sreview-previews <%== $talkid %>',
   'notification' => undef,
-  'transcoding' => 'qsub -cwd -V -q all.q -e <%== $output_dir %> -o <%== $output_dir %> -b y -N trn_<%== $talkid %> sreview-transcode <%== $talkid %>',
+  'transcoding' => 'qsub -cwd -V -q lowprio.q -e <%== $output_dir %> -o <%== $output_dir %> -b y -N trn_<%== $talkid %> sreview-transcode <%== $talkid %>',
   'uploading' => undef,
 };
 
