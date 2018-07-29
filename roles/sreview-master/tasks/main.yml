@@ -14,10 +14,9 @@
     state: started
 
 - name: create pubdir
-  file: 
+  file:
     name: /srv/{{nfs_server}}/sreview/web/public
     state: directory
     owner: sreview
     group: sreview
     mode: 0755
-
