@@ -1,75 +1,71 @@
-#!/bin/sh
+#!/usr/bin/python3
 
-set -euf
+import argparse
+import os
+import pathlib
+import subprocess
+import time
 
-help () {
-	echo "$(basename $0) [options...]"
-	cat <<EOF
-Copy recordings to the central server.
 
-Options:
-  --nice   Run with idle ionice, and nice of 10.
-  --live   Try to be safe for syncing during recording.
-           Ignore recently modified files (within 1 minute).
-           Implies --nice.
-  --pause  Stop recording before copying, then start again.
-EOF
-}
-
-live=0
-nice=0
-pause=0
-while [ $# -gt 0 ]; do
-	case $1 in
-	--nice)
-		nice=1
-		;;
-	--live)
-		nice=1
-		live=1
-		;;
-	--pause)
-		pause=1
-		;;
-	--help)
-		help
-		exit
-		;;
-	*)
-		echo "Unknown argument $1"
-		exit 1
-		;;
-	esac
-	shift
-done
-
-if [ $pause = 1 ]; then
-	systemctl --user stop videoteam-record.service
-	trap "systemctl --user start videoteam-record.service" EXIT
-fi
-
-prefix=
-options="--archive --progress --partial --stats"
-source="/srv/video/{{ org }}/{{ show }}/dv/{{ room_name }}/"
-dest="{{ storage_username }}@{{ nfs_server }}:/srv/{{ nfs_server }}/video/{{ org }}/{{ show }}/dv/{{ room_name }}/"
-
+SOURCE = '/srv/video/{{ org }}/{{ show }}/dv/{{ room_name }}/'
+DEST = (
+    '{{ storage_username }}@{{ nfs_server }}:/srv/{{ nfs_server }}/video/'
+    '{{ org }}/{{ show }}/dv/{{ room_name }}/')
+OPTIONS = ['--archive', '--progress', '--partial', '--stats']
 {% for item in rsync_excludes %}
-	options="$options --exclude {{ item }}"
+OPTIONS += ['--exclude', '{{ item }}']
 {% endfor %}
 {% if rsync_sshopts %}
-	options="$options -e 'ssh {{rsync_sshopts}}'"
+OPTIONS += ['-e', 'ssh {{rsync_sshopts}}']
 {% endif %}
 
-cd "$source"
 
-if [ $live = 1 ]; then
-	options="$options $(find . -mmin 1 | sed -e 's/^\./--exclude=/')"
-	options="$options --bwlimit=10m"
-fi
-if [ $nice = 1 ]; then
-	prefix="nice ionice -c 3"
-fi
+def main():
+    p = argparse.ArgumentParser('Copy recordings to the central server')
+    p.add_argument('--nice', action='store_true',
+                   help='Run with idle ionice, and nice of 10.')
+    p.add_argument(
+        '--live', action='store_true',
+        help='Try to be safe for syncing during recording. '
+             'Ignore recently modified files (within 1 minute). '
+             'Implies --nice.')
+    p.add_argument(
+        '--pause', action='store_true',
+        help='Stop recording before copying, then start again.')
 
-echo Running: $prefix rsync $options ./ "$dest"
+    args = p.parse_args()
+    if args.live:
+        args.nice = True
 
-$prefix rsync $options ./ "$dest"
+    cmd = []
+    if args.nice:
+        cmd += ['nice', 'ionice', '-c', '3']
+    cmd += ['rsync'] + OPTIONS
+    if args.live:
+        cmd += ['--exclude={}'.format(name) for name in find_current(SOURCE)]
+        cmd += ['--bwlimit=10m']
+    cmd += ['./', DEST]
+
+    if args.pause:
+        subprocess.check_call(
+            ('systemctl', '--user', 'stop', 'videoteam-record.service'))
+    try:
+        print("Running", cmd)
+        subprocess.check_call(cmd, cwd=SOURCE)
+    finally:
+        if args.pause:
+            subprocess.check_call(
+                ('systemctl', '--user', 'start', 'videoteam-record.service'))
+
+
+def find_current(dir_):
+    now = time.time()
+    for dirpath, dirnames, filenames in os.walk(dir_):
+        for filename in filenames:
+            path = pathlib.Path(dirpath) / filename
+            if now - path.stat().st_mtime < 60:
+                yield filename
+
+
+if __name__ == '__main__':
+    main()
