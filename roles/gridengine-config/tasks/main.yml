@@ -3,9 +3,6 @@
   script: create_pe.sh
   when: ansible_local.gridengine.pes.smp is undefined
 
-# TODO: replace the hardcoded list of encoder nodes below by something that is
-# dynamically generated from somewhere. My ansible-fu is not advanced enough
-# for that though.
 - name: create hostgroup
   script: create_hgrp.sh {{ ge.master }}
   when: ansible_local.gridengine.hgrp.allhosts is undefined
