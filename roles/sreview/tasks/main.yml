@@ -32,3 +32,9 @@
   with_items:
   - { file: "{{ sreview.preroll }}", name: "preroll" }
   - { file: "{{ sreview.postroll }}", name: "postroll" }
+
+- name: install fonts packages
+  apt:
+    pkg: "{{ item }}"
+  with_items: "{{ sreview.fontpackages }}"
+  when: sreview.fontpackages is defined

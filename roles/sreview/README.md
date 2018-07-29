@@ -21,5 +21,7 @@ NOTE: this task has not been tested in production.
   configuration parameter for details.
 * sreview.preroll: filename of an SVG file containing preroll credits
 * sreview.postroll: filename of an SVG file containing postroll credits
+* `sreview.fontpackages`: Any fonts needed for the preroll/postroll SVG
+  templates
 * `nfs_server`: the server on which the common state for SReview will be
   stored. That server should have the `nfs-server` role enabled.
