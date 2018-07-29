@@ -65,11 +65,23 @@
     dest: /var/cache/voctomix/loop.ts
   when: voctomix.loop_url is defined
 
+- name: Remove the sponsor loop
+  file:
+    path: /var/cache/voctomix/loop.ts
+    state: absent
+  when: voctomix.loop_url is undefined
+
 - name: Download the background loop
   get_url:
     url: "{{ voctomix.bgloop_url }}"
     dest: /var/cache/voctomix/bgloop.ts
   when: voctomix.bgloop_url is defined
+
+- name: Remove the background loop
+  file:
+    path: /var/cache/voctomix/bgloop.ts
+    state: absent
+  when: voctomix.bgloop_url is undefined
 
 - name: install voctomix recording systemd units
   template:
