@@ -17,7 +17,7 @@
   when: act_qmaster.changed
 
 - name: set slots value for queues
-  command: qconf -mattr queue slots {{ ansible_processor_cores }} {{ item }}@{{ ansible_hostname }}
+  command: qconf -mattr queue slots {{ ansible_processor_cores * ansible_processor_count }} {{ item }}@{{ ansible_hostname }}
   with_items:
   - lowprio.q
   - hiprio.q
