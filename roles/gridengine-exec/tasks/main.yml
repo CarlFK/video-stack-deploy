@@ -15,3 +15,12 @@
     name: gridengine-exec
     state: restarted
   when: act_qmaster.changed
+
+- name: set slots value for queues
+  command: qconf -mattr queue slots {{ ansible_processor_cores }} {{ item }}@{{ ansible_hostname }}
+  with_items:
+  - lowprio.q
+  - hiprio.q
+
+- name: set hiprio slot overrides
+  command: qconf -mattr queue subordinate_slots slots={{ansible_processor_cores}}(lowprio.q:0:sr) hiprio.q@{{ansible_hostname}}
