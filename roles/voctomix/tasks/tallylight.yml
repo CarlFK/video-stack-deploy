@@ -4,12 +4,16 @@
     src: files/voctolight_async_io.py
     dest: /usr/local/bin/voctolight
     mode: 0755
+  tags:
+  - voctolight
 
 - name: Write tally light config
   template:
     src: templates/voctolight.ini.j2
     dest: /etc/voctomix/voctolight-{{ item.camera|lower }}.ini
   with_items: "{{ voctolights }}"
+  tags:
+  - voctolight
 
 - name: Write tally light systemd units
   template:
@@ -17,6 +21,8 @@
     dest: /etc/systemd/user/videoteam-voctolight-{{ item.camera|lower }}.service
   with_items: "{{ voctolights }}"
   notify: reload-systemd
+  tags:
+  - voctolight
 
 - name: Enable tally light systemd units
   file:
@@ -26,3 +32,5 @@
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   with_items: "{{ voctolights }}"
+  tags:
+  - voctolight
