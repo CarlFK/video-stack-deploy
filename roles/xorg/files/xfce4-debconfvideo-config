@@ -145,6 +145,25 @@ def panels():
 
     tree.write(str(conf_p))
 
+
+def session():
+    conf_p = initialise_xfconf('xfce4-session.xml')
+
+    tree = ET.parse(str(conf_p))
+    root = tree.getroot()
+    general = root.find('property[@name="general"]')
+
+    if general.find('property[@name="SaveOnExit"]') is None:
+        norestore = ET.Element('property', {
+            'name': 'SaveOnExit',
+            'type': 'bool',
+            'value': 'false',
+        })
+        general.append(norestore)
+
+    tree.write(str(conf_p))
+
+
 def configure_fsguard(fsguard_id,fs):
     relative_path = Path('xfce4/panel/fsguard-%d.rc' % fsguard_id)
     user = Path('~/.config').expanduser() / relative_path
@@ -193,4 +212,5 @@ def disable_workspaces():
 if __name__ == '__main__':
     keyboard_shortcuts()
     panels()
+    session()
     disable_workspaces()
