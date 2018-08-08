@@ -48,7 +48,7 @@
     dest: /etc/systemd/system/videoteam-ingest.path
 
 - name: enable videoteam-ingest.path
-  service:
+  systemd:
     name: videoteam-ingest.path
     enabled: yes
   tags:
