@@ -1,0 +1,26 @@
+# /lib/systemd/system/ansible_on_next_boot.service
+
+# DI installs the OS,
+# late_command installs ansible, playbooks and inventory files,
+# and this serivce.
+# installer finises and reboots.
+# this service runs, ansible deploys apps and services
+# then this service disables itself.
+
+# pollo: I guess I'd use ConditionPathNotExists=
+
+[Unit]
+Description=2nd state of box build process
+After=multi-user.target
+
+
+[Service]
+# Type=idle
+Type=oneshot
+ExecStart=/usr/local/sbin/ansible-up; \
+    /bin/systemctl disable ansible_on_next_boot
+
+
+
+[Install]
+WantedBy=multi-user.target
