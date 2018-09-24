@@ -12,6 +12,10 @@ sources:
 - Cam2
 - Grabber
 
+# Local frequency setting, in Hz
+# This can be either 50 or 60Hz
+frequency: 50
+
 voctomix:
   display_system: gl
   framerate: "{{ frequency / 2 }}"
