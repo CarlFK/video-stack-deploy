@@ -59,4 +59,4 @@ frequency_parameters:
   60:
     mode: 18  # 720p59.94
 
-blackmagic_default_mode: "{{ framerate_parameters[frequency].mode }}"
+blackmagic_default_mode: "{{ frequency_parameters[frequency].mode }}"
