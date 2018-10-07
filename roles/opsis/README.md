@@ -35,3 +35,5 @@ Main variables are :
 * `audio_delay`:     Delay in ms for the audio capture.
 
 * `video_delay`:     Delay in ms for the video capture.
+
+* `debian_version`:  Version of Debian, when using Debian.
