@@ -26,6 +26,8 @@ Main variables are :
 
 * `autologin`:           Boolean. If false, the LightDM autologin is turned off.
 
+* `irc.autostart`:       Start the IRC client on login.
+
 * `irc.network`:         Name of the IRC server to connect to.
 
 * `irc.server`:          Domain name of the IRC server to connect to.

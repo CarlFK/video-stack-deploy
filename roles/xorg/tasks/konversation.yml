@@ -18,3 +18,10 @@
     dest: /etc/xdg/autostart/org.kde.konversation.desktop
     owner: root
     group: root
+  when: irc.autostart
+
+- name: Diasable konversation autostart
+  file:
+    path: /etc/xdg/autostart/org.kde.konversation.desktop
+    state: absent
+  when: not irc.autostart
