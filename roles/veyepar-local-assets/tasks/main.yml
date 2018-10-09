@@ -11,5 +11,6 @@
     path: "/home/{{ user_name }}/Videos/veyepar/{{ org }}/{{ show }}"
     state: directory
     recurse: true
+    follow: false
     owner:  "{{ user_name }}"
     group:  "{{ user_name }}"
