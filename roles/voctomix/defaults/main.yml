@@ -23,6 +23,7 @@ voctomix:
 
 streaming:
   method: none
+  mix_channels: false
   hq_config:
     video_bitrate: 2000 # kbps
     audio_bitrate: 128000 # bps

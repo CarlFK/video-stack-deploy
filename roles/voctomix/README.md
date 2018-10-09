@@ -73,6 +73,9 @@ Main variables are :
 * `streaming.rtmp.vaapi`:                Boolean. Use HW-accelerated x264
                                          encoder.
 
+* `streaming.mix_channels`:              Boolean. When true, equally merge the two channels.
+                                         When false, strip the right channel.
+
 * `blackmagic_default_mode`:             Default value for `blackmagic_sources.*.mode`,
                                          computed from `framerate`.
 

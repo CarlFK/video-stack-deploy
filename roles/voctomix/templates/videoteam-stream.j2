@@ -17,6 +17,9 @@ exec gst-launch-1.0 \
 	! flvmux streamable=true name=mux \
 	! rtmpsink location="{{ streaming.rtmp.location }}" demux. \
 	! queue \
+{% if not streaming.mix_channels %}
+	! audiochannelmix right-to-right=0 left-to-right=1 \
+{% endif %}
 	! audioconvert \
 	! "audio/x-raw,channels=1" \
 	! voaacenc bitrate={{ streaming.hq_config.audio_bitrate }} ! mux.
