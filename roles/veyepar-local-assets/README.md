@@ -20,4 +20,4 @@ Main variables are:
 * `show`:                                Name of the event. Used in the video
                                          files path.
 * `room_name`:                           Name of the room that veyepar
-                                         should be restricted to.
+                                         should be restricted to. Optional.

@@ -1,4 +1,6 @@
 [global]
 client={{ org }}
 show={{ show }}
+{% if room_name is defined %}
 room={{ room_name }}
+{% endif %}
