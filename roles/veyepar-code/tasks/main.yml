@@ -4,6 +4,7 @@
     repo: https://github.com/CarlFK/veyepar.git
     dest: "/home/{{ user_name }}/veyepar"
     depth: 1
+    update: false
   become: true
   become_user: "{{ user_name }}"
   tags:
