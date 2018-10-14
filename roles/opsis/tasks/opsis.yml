@@ -19,6 +19,8 @@
   - hdmi2usb-udev
   - voctomix-outcasts
   when: ansible_distribution == 'Debian'
+  tags:
+  - skip_ansible_lint  # using latest to upgrade to backports
 
 - name: install serial terminal
   apt:
