@@ -4,3 +4,5 @@
 /roles/tftp-server/files/scripts/late_command.cfg
 /site.retry
 /docs/_build
+/scripts/configs/
+/scripts/cache/
