@@ -19,6 +19,8 @@
   - voctomix-gui
   - voctomix-outcasts
   when: ansible_distribution == 'Debian'
+  tags:
+  - skip_ansible_lint  # using latest to upgrade to backports
 
 - name: create voctomix config dir
   file:
