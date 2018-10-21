@@ -27,13 +27,14 @@ sdc).
 2. fork and clone the inventory repo
 3. adjust ansible inventory file, host and group vars, commit and push back to
    your public repo
-4. `cp scripts/configs/xenial.cfg scripts/configs/mybox.cfg`
-5. `vim scripts/configs/mybox.cfg`
+4. `cd usbinst`
+5. `cp configs/blank.cfg configs/mybox.cfg`
+6. `vim configs/mybox.cfg`
    - set `inventory_repo` to your public repo
    - set `inventory_branch` to your public repo's branch
    - set `hostname` to the target's hostname
-   - and consider the other settings
-6. `scripts/mk_usb_installer.sh sdb scripts/configs/mybox.cfg`
+   - and consider the other settings.
+7. `./mk_usb_installer.sh sdb configs/mybox.cfg`
 
 `mk_usb_installer.sh` script will:
   * setup bootable usb stick
@@ -48,6 +49,9 @@ It will do this:
 
 ### Configuration File:
 
+
+**hostname** - what the hostame will be.  used by ansible (see above.) udefaults to voctotest, which will bring up a simple vocto box.  To make the installer prompt, add a "?" to syslinux.cfg like this: hostname?=
+
 **suit** - distro suite to use (stretch)
 
 **arch** - architecture of the target machine (amd64)
@@ -55,7 +59,8 @@ It will do this:
 **booting\_loc** - location of the boot images with the `SA256SUMS` and
 `hd-media/boot.img.gz` files (http://deb.debian.org/debian/dists/${suite}/main/installer-${arch}/current/images)
 
-**iso** - the ISO name to download (debian-9.3.0-${arch}-netinst.iso)
+**debian_ver** - debian version, currently 9.5.0.
+**iso** - the ISO name to download (debian-${debian_ver}-${arch}-netinst.iso)
 
 **iso\_loc** - the URL to the directory containing the ISO. (https://cdimage.debian.org/debian-cd/current/${arch}/iso-cd)
 
