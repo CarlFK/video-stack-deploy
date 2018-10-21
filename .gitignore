@@ -1,6 +1,8 @@
 .*.swp
-/cache/
 /roles/tftp-server/files/d-i/preseed_local_*.cfg
 /roles/tftp-server/files/scripts/late_command.cfg
 /site.retry
 /docs/_build
+/usbinst/cache/
+/usbinst/configs/
+/usbinst/disk.cow
