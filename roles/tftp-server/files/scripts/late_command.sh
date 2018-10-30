@@ -32,15 +32,14 @@ esac
 
 git clone $playbook_repo /root/playbook-repo
 (cd /root/playbook-repo; git checkout $playbook_branch)
-INVENTORY=/root/playbook-repo/inventory/hosts
+INVENTORY=/root/playbook-repo/$inventory_dir/hosts
 PLAYBOOKS=/root/playbook-repo/site.yml
 
 if [ "${inventory_repo}" != "" ]; then
 	git clone $inventory_repo /root/inventory-repo
-	(cd /root/inventory-repo; git checkout $inventory_branch)
-	INVENTORY=/root/inventory-repo/inventory/hosts
-	if [ -e /root/inventory-repo/site.yml ]; then
-		PLAYBOOKS="$PLAYBOOKS /root/inventory-repo/site.yml"
+	INVENTORY=/root/inventory-repo/$inventory_dir/hosts
+	if [ -e /root/inventory-repo/$inventory_dir/site.yml ]; then
+		PLAYBOOKS="$PLAYBOOKS /root/inventory-repo/$inventory_dir/site.yml"
 	fi
 fi
 
@@ -57,6 +56,11 @@ cat > $script <<EOF
 #!/bin/sh
 
 set -euf
+
+# playbook_repo="${playbook_repo}"
+# playbook_branch="${playbook_branch}"
+# inventory_repo="${inventory_repo}"
+# inventory_dir="${inventory_dir}"
 
 cd /root/
 

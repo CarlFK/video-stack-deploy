@@ -11,8 +11,9 @@ need to be added to the ``staticips.hosts`` dictionary in
 For large setups, using PXE booting to configure machines, you should create a
 git repository with your copy of ``inventory/``. See `our config repo`_ for an
 example of how to set this up. It requires setting ``inventory_repo`` in
-``inventory/group_vars/all``. ``inventory_branch`` defaults to master, but this
-can also be set.
+``inventory/group_vars/all``.  ``inventory_dir``  names the directory within
+this repo containing the inventory, this defaults to ``inventory/``.
+
 
 Static IPs and MAC addresses can be specified using the following dictionary in
 ``inventory/group_vars/all``::
