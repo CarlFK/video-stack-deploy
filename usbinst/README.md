@@ -31,7 +31,7 @@ sdc).
 5. `cp configs/blank.cfg configs/mybox.cfg`
 6. `vim configs/mybox.cfg`
    - set `inventory_repo` to your public repo
-   - set `inventory_branch` to your public repo's branch
+   - set `inventory_dir` to a dir in your public repo, defaults to inventory/.
    - set `hostname` to the target's hostname
    - and consider the other settings.
 7. `./mk_usb_installer.sh sdb configs/mybox.cfg`
