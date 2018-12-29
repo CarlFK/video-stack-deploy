@@ -2,7 +2,8 @@
 - name: install blackmagic capture systemd units
   template:
     src: templates/videoteam-capture-blackmagic.service.j2
-    dest: /etc/systemd/user/videoteam-capture-blackmagic-{{ item.0 }}.service
+    dest: "/etc/systemd/user/\
+      videoteam-capture-blackmagic-{{ item.0 }}.service"
   with_indexed_items: "{{ blackmagic_sources }}"
   notify: reload-systemd
 
@@ -10,7 +11,8 @@
   file:
     state: link
     src: /etc/systemd/user/videoteam-capture-blackmagic-{{ item.0 }}.service
-    dest: /home/{{ user_name }}/.config/systemd/user/xlogin.target.wants/videoteam-capture-blackmagic-{{ item.0 }}.service
+    dest: "/home/{{ user_name }}/.config/systemd/user/xlogin.target.wants/\
+      videoteam-capture-blackmagic-{{ item.0 }}.service"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   with_indexed_items: "{{ blackmagic_sources }}"
