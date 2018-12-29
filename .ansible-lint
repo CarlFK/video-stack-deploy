@@ -2,3 +2,5 @@ exclude_paths:
   - roles/gridengine-config
   - roles/gridengine-exec
   - roles/gridengine-master
+skip_list:
+  - '405'
