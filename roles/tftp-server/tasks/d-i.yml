@@ -38,7 +38,7 @@
 - name: write preseed_local_flavor.cfg
   template:
     src: preseed_local.cfg.j2
-    dest: /srv/pxe/d-i/preseed_local_{{item.key}}.cfg
+    dest: /srv/pxe/d-i/preseed_local_{{ item.key }}.cfg
   with_dict:
     debian: "{{ debian_host }}"
     ubuntu: "{{ ubuntu_host }}"

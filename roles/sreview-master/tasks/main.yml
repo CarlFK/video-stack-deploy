@@ -15,7 +15,7 @@
 
 - name: create pubdir
   file:
-    name: /srv/{{nfs_server}}/sreview/web/public
+    name: /srv/{{ nfs_server }}/sreview/web/public
     state: directory
     owner: sreview
     group: sreview

@@ -23,10 +23,10 @@
 
 - name: wait for reboot
   when: ansible_connection != 'local'
-  local_action:
-    module: wait_for
+  wait_for:
     host: "{{ inventory_hostname }}"
     port: "{{ ansible_port | default(22) }}"
     delay: 1
     timeout: 300
+  delegate_to: localhost
   become: false

@@ -10,7 +10,7 @@
 
 - name: manage storage ssh authorized_keys
   authorized_key:
-    user: "{{ storage_username }}"
+    user: "{{ storage_username }}"
     key: "{{ item }}"
   with_items: "{{ public_keys_storage }}"
   tags:

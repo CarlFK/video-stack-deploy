@@ -28,7 +28,8 @@
   file:
     state: link
     src: "/etc/systemd/user/videoteam-voctolight-{{ item.camera|lower }}.service"
-    dest: "/home/{{ user_name }}/.config/systemd/user/xlogin.target.wants/videoteam-voctolight-{{ item.camera|lower }}.service"
+    dest: "/home/{{ user_name }}/.config/systemd/user/xlogin.target.wants/\
+      videoteam-voctolight-{{ item.camera|lower }}.service"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   with_items: "{{ voctolights }}"
