@@ -22,6 +22,10 @@
     recurse: true
     mode: 0755
 
+- name: install grub i386-pc, even if we are a UEFI install
+  apt:
+    name: grub-pc-bin
+
 - name: magically build /srv/tftp/boot/grub
   command: grub-mknetdir
   args:
