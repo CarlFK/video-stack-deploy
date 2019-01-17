@@ -40,7 +40,7 @@ bootdev=/dev/sda
 playbook_repo=https://salsa.debian.org/debconf-video-team/ansible
 playbook_branch=master
 inventory_repo=
-inventory_dir=inventory
+inventory_repo_dir=inventory
 
 # ansible vault password (base64ed), if necessary
 vault_pw=
@@ -64,7 +64,7 @@ cat > ../roles/tftp-server/files/scripts/late_command.cfg <<EOF
 playbook_repo="$playbook_repo"
 playbook_branch="$playbook_branch"
 inventory_repo="$inventory_repo"
-inventory_dir="$inventory_dir"
+inventory_repo_dir="$inventory_repo_dir"
 vault_pw="$vault_pw"
 EOF
 

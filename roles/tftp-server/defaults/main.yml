@@ -13,7 +13,7 @@ playbook_branch: master
 
 # To replace the stock inventory with your own, point at your own github repo
 inventory_repo: ''
-inventory_dir: inventory
+inventory_repo_dir: inventory
 
 vault_pw: ''
 
